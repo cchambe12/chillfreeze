@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//papers/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setkeys{Gin}{width=0.8\textwidth}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.015cm   
+\evensidemargin -0.015cm
+\textwidth 16cm
+\textheight 21cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{2}
+\parindent 20pt
+\usepackage{indentfirst} 
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+\begin{document}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Experiment Breakdown}
+
+Experiment Part 1 - Recieved bare root seedlings from Cold Stream Farm. Potted on Monday, 26 November 2018. Three cohorts for chilling lengths. I have two growth chambers, both at 4 $^\circ^$C. I will rotate seedlings every two weeks. After 4 weeks, I will remove the first cohort and move into the greenhouse. I will remove the second cohort at 6 weeks and final cohort at 8 weeks. Experiment Part 2 - I will monitor the phenology for the each plant. I will observe budburst (BBCH 09) until leafout (BBCH 15) for each plant and note floral development. Experiment Part 3 - once at least 50\% of the buds have reached BBCH 9, I will put the seedling in a growth chamber and ramp the temperature from the greenhouse temperature down to -3$^\circ^$C and then ramp up again after 2 hours at -3 for a 24 hour cycle. I will then move the seedlings back into the greenhouse to monitor percent budburst and record damage.
+
+\begin{center}
+\captionof{table}{List of species being used in experiment. 10 species, 16 per chilling treatment and 8 per false spring treatment per chilling treatment.}\label{tab:exp1} 
+\footnotesize
+\begin{tabular}{|c | c | c | c |}
+\hline
+\textbf{Species}& \textbf{No. of Individs} \\
+\hline
+FAGGRA & 48  \\
+\hline
+BETPAP & 48 \\
+\hline
+BETPOP & 48 \\
+\hline
+SORAME & 48 \\
+\hline
+ALNRUG & 48 \\
+\hline
+NYSSYL & 48 \\
+\hline
+ACESAC & 48 \\
+\hline
+VIBDEN & 48 \\
+\hline
+SALPUR & 48 \\
+\hline
+CORRAC & 48 \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
