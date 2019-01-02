@@ -22,3 +22,14 @@ Greenhouse conditions:
 	15 C day temps
 	10 C night temps
 	ambient humidity
+
+Growth Chamber:
+	8am-6pm: 10C
+	6pm: 7C
+	8pm: 3C
+	10pm: 0C
+	12am: -3C
+	3am: 0C
+	4am: 3C
+	6am: 7C
+	8am: 10C
