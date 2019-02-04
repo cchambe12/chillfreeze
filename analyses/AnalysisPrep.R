@@ -54,6 +54,8 @@ obs$chill <- ifelse(obs$start=="2018-12-24", 1, obs$chill)
 obs$chill <- ifelse(obs$start=="2019-01-07", 2, obs$chill)
 obs$chill <- ifelse(obs$start=="2019-01-21", 3, obs$chill)
 
+obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
+
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht"))
 
 
@@ -69,7 +71,9 @@ chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst
 
 fit.dvr <- brm(dvr ~ tx*chill1 + (1|species), data = chill.stan)
-#fit.ht <- lm(lo.ht ~ dvr, data = chill.stan) # simple curiosity!
+fit.bb <- brm(budburst ~ chill1 + species, data=chill.stan)
+fit.lo <- brm(leafout ~ chill1 + tx + species, data=chill.stan)
+fit.ht <- lm(dvr ~ lo.ht, data = chill.stan) # simple curiosity!
 
 
 
