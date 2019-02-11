@@ -70,10 +70,10 @@ chill.stan <- na.omit(chill.stan)
 chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst
 
-fit.dvr <- brm(dvr ~ tx*chill1 + (1|species), data = chill.stan)
-fit.bb <- brm(budburst ~ chill1 + species, data=chill.stan)
-fit.lo <- brm(leafout ~ chill1 + tx + species, data=chill.stan)
-fit.ht <- lm(dvr ~ lo.ht, data = chill.stan) # simple curiosity!
+fit.dvr <- brm(dvr ~ tx*species + chill1 + chill2, data = chill.stan)
+fit.bb <- brm(budburst ~ chill1 + chill2 + species, data=chill.stan)
+fit.lo <- brm(leafout ~ chill1 + chill2 + tx + species, data=chill.stan)
+fit.ht <- lm(dvr ~ lo.ht + species, data = chill.stan) # simple curiosity!
 
 
 
