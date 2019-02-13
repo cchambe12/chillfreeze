@@ -56,7 +56,7 @@ obs$chill <- ifelse(obs$start=="2019-01-21", 3, obs$chill)
 
 obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
-chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht"))
+chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "onemonth.ht", "ChlAvg"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -64,17 +64,21 @@ chill.stan$chill2 = ifelse(chill.stan$chill == 3, 1, 0)
 
 with(chill.stan, table(chill1, chill2))
 
-chill.stan <- na.omit(chill.stan)
-
-### just a quick lm model to see relationships
 chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst
+chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht
 
+chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
+
+### just a quick lm model to see relationships
 fit.dvr <- brm(dvr ~ tx*species + chill1 + chill2, data = chill.stan)
 fit.bb <- brm(budburst ~ chill1 + chill2 + species, data=chill.stan)
 fit.lo <- brm(leafout ~ chill1 + chill2 + tx + species, data=chill.stan)
 fit.ht <- lm(dvr ~ lo.ht + species, data = chill.stan) # simple curiosity!
 
+
+fit.ht.diff <- lm(ht.diff ~ tx, data=chill.stan)
+fit.chl <- lm(ChlAvg ~ tx, data=chill.stan)
 
 
 
