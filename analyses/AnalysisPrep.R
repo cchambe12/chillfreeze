@@ -58,6 +58,7 @@ obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## Breakdown treatments and experiment - 19 February 2019 issues with greenhouse!
+if(FALSE){
 howfaralong <- obs
 howfaralong$chilltx <- NA
 howfaralong$chilltx <- ifelse(howfaralong$chill==1, "4wks", howfaralong$chilltx)
@@ -66,10 +67,15 @@ howfaralong$chilltx <- ifelse(howfaralong$chill==3, "8wks", howfaralong$chilltx)
 
 howfaralong$chilltx <- paste(howfaralong$chilltx, howfaralong$tx, sep="_")
 
-howfaralong.leafout <- howfaralong[!is.na(howfaralong$leafout),]
+howfaralong.leafout <- howfaralong[!is.na(howfaralong$lo),]
 table(howfaralong.leafout$chilltx)
 
+howfaralong.budburst <- howfaralong[is.na(howfaralong$lo) & !is.na(howfaralong$bb),]
+table(howfaralong.budburst$chilltx)
 
+howfaralong.budburst.frz <- howfaralong.budburst[(howfaralong.budburst$tx ==1 & howfaralong.budburst$frz!=""),]
+table(howfaralong.budburst.frz$chilltx)
+}
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 
@@ -90,6 +96,11 @@ chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
+totspp <- c("ALNRUG", "BETPAP", "BETPOP", "CORRAC", "SALPUR")
+chill.complete <- subset(chill.stan, chill.stan$tx <=2)
+chill.complete <- chill.complete[(chill.complete$species %in% totspp),]
+
+fit.dvr.tot <- brm(dvr ~ tx*species + tx*chill1 + chill1*species, data=chill.complete)
 
 ### just a quick lm model to see relationships
 fit.dvr <- brm(dvr ~ tx*species + chill1 + chill2, data = chill.stan)
