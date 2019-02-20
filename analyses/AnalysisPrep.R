@@ -56,6 +56,26 @@ obs$chill <- ifelse(obs$start=="2019-01-21", 3, obs$chill)
 
 obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
+## Breakdown treatments and experiment - 19 February 2019 issues with greenhouse!
+howfaralong <- obs
+howfaralong$chilltx <- NA
+howfaralong$chilltx <- ifelse(howfaralong$chill==1, "4wks", howfaralong$chilltx)
+howfaralong$chilltx <- ifelse(howfaralong$chill==2, "6wks", howfaralong$chilltx)
+howfaralong$chilltx <- ifelse(howfaralong$chill==3, "8wks", howfaralong$chilltx)
+
+howfaralong$chilltx <- paste(howfaralong$chilltx, howfaralong$tx, sep="_")
+
+howfaralong.leafout <- howfaralong[!is.na(howfaralong$leafout),]
+table(howfaralong.leafout$chilltx)
+
+
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
+
+
+
+
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "onemonth.ht", "ChlAvg"))
 
 
@@ -69,6 +89,7 @@ chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst
 chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
+
 
 ### just a quick lm model to see relationships
 fit.dvr <- brm(dvr ~ tx*species + chill1 + chill2, data = chill.stan)
