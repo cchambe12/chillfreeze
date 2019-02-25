@@ -103,7 +103,7 @@ chill.complete <- chill.complete[(chill.complete$species %in% totspp),]
 fit.dvr.tot <- brm(dvr ~ tx*species + tx*chill1 + chill1*species, data=chill.complete)
 
 ### just a quick lm model to see relationships
-fit.dvr <- brm(dvr ~ tx*species + chill1 + chill2, data = chill.stan)
+fit.dvr <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data = chill.stan)
 fit.bb <- brm(budburst ~ chill1 + chill2 + species, data=chill.stan)
 fit.lo <- brm(leafout ~ chill1 + chill2 + tx + species, data=chill.stan)
 fit.ht <- lm(dvr ~ lo.ht + species, data = chill.stan) # simple curiosity!
