@@ -56,6 +56,8 @@ obs$chill <- ifelse(obs$start=="2019-01-21", 3, obs$chill)
 
 obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
+obs$ht.mid <- as.Date(obs$leafout + 60, origin = obs$start)
+
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## Breakdown treatments and experiment - 19 February 2019 issues with greenhouse!
 if(FALSE){
@@ -73,8 +75,8 @@ table(howfaralong.leafout$chilltx)
 howfaralong.budburst <- howfaralong[is.na(howfaralong$lo) & !is.na(howfaralong$bb),]
 table(howfaralong.budburst$chilltx)
 
-howfaralong.budburst.frz <- howfaralong.budburst[(howfaralong.budburst$tx ==1 & howfaralong.budburst$frz!=""),]
-table(howfaralong.budburst.frz$chilltx)
+howfaralong.frz <- howfaralong[(howfaralong$tx ==1 & howfaralong$frz!=""),]
+table(howfaralong.frz$chilltx)
 }
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
