@@ -106,13 +106,13 @@ fit.dvr.tot <- brm(dvr ~ tx*species + tx*chill1 + chill1*species, data=chill.com
 
 ### just a quick lm model to see relationships
 fit.dvr <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data = chill.stan)
-fit.bb <- brm(budburst ~ chill1 + chill2 + species, data=chill.stan)
-fit.lo <- brm(leafout ~ chill1 + chill2 + tx + species, data=chill.stan)
-fit.ht <- lm(dvr ~ lo.ht + species, data = chill.stan) # simple curiosity!
+fit.bb <- brm(budburst ~ chill1 + chill2 + (1|species), data=chill.stan)
+fit.lo <- brm(leafout ~ tx*chill1 + tx*chill2 + (1|species), data=chill.stan)
+#fit.ht <- lm(dvr ~ lo.ht + species, data = chill.stan) # simple curiosity!
 
 
-fit.ht.diff <- lm(ht.diff ~ tx, data=chill.stan)
-fit.chl <- lm(ChlAvg ~ tx, data=chill.stan)
+#fit.ht.diff <- lm(ht.diff ~ tx, data=chill.stan)
+#fit.chl <- lm(ChlAvg ~ tx, data=chill.stan)
 
 
 
