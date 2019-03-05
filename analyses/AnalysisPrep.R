@@ -9,11 +9,9 @@ options(stringsAsFactors = FALSE)
 # Load libraries
 library(dplyr)
 library(lubridate)
-library(chillR)
 library(tidyr)
 library(brms) ## just for initial glances during experiment!
 library(rstan)
-library(rstanarm)
 
 
 # Setting working directory
@@ -93,8 +91,8 @@ chill.stan$chill2 = ifelse(chill.stan$chill == 3, 1, 0)
 with(chill.stan, table(chill1, chill2))
 
 chill.stan$species <- substr(chill.stan$id, 0, 6)
-chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst
-chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht
+chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst ### Using this point of code for "drought" effect test
+chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht 
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
