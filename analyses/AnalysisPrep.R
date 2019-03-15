@@ -56,6 +56,10 @@ obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
 obs$ht.mid <- as.Date(obs$leafout + 60, origin = obs$start)
 
+whentomeasure <- subset(obs, select=c("id", "ht.mid"))
+whentomeasure <- whentomeasure[!duplicated(whentomeasure),]
+write.csv(whentomeasure, file="~/Desktop/whentomeasureheights.csv", row.names = FALSE)
+
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## Breakdown treatments and experiment - 19 February 2019 issues with greenhouse!
 if(FALSE){
