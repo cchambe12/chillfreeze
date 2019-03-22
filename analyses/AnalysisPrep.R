@@ -100,11 +100,30 @@ chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
-totspp <- c("ALNRUG", "BETPAP", "BETPOP", "CORRAC", "SALPUR")
-chill.complete <- subset(chill.stan, chill.stan$tx <=2)
-chill.complete <- chill.complete[(chill.complete$species %in% totspp),]
+totspp <- c("ACESAC", "ALNRUG", "BETPAP", "BETPOP", "CORRAC", "SALPUR", "SORAME", "VIBDEN")
+#chill.complete <- subset(chill.stan, chill.stan$tx <=2)
+chill.complete <- chill.stan[(chill.stan$species %in% totspp),]
 
-fit.dvr.tot <- brm(dvr ~ tx*species + tx*chill1 + chill1*species, data=chill.complete)
+
+##### Add in "Drought" treatment
+### "Drought" treatment
+fourdoy <- yday(as.Date("2019-02-19", origin = obs$start)) + 6
+sixdoy <- yday(as.Date("2019-02-19", origin = obs$start)) - 7
+eightdoy <- yday(as.Date("2019-02-19", origin = obs$start)) - 21
+
+chill.complete$drought <- ifelse(chill.complete$leafout >= fourdoy & chill.complete$chill==1, 1, 0)
+chill.complete$drought <- ifelse(chill.complete$leafout >= sixdoy & chill.complete$chill==2, 1, 0)
+chill.complete$drought <- ifelse(chill.complete$leafout >= eightdoy & chill.complete$chill==3, 1, 0)
+
+chill.complete$drought <- ifelse(chill.complete$budburst <= fourdoy & chill.complete$leafout >= fourdoy & chill.complete$chill==1, 2, chill.complete$drought)
+chill.complete$drought <- ifelse(chill.complete$budburst <= sixdoy & chill.complete$leafout >= sixdoy & chill.complete$chill==2, 2, chill.complete$drought)
+chill.complete$drought <- ifelse(chill.complete$budburst <= eightdoy & chill.complete$leafout >= eightdoy & chill.complete$chill==3, 2, chill.complete$drought)
+
+chill.complete$drought1 = ifelse(chill.complete$drought == 1, 1, 0) 
+chill.complete$drought2 = ifelse(chill.complete$drought == 2, 1, 0) 
+
+fit.dvr.all.drought <- brm(dvr ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2 + (1|species), data = chill.complete)
+fit.dvr.all <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data = chill.complete)
 
 ### just a quick lm model to see relationships
 fit.dvr <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data = chill.stan)
