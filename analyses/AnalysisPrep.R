@@ -10,6 +10,8 @@ options(stringsAsFactors = FALSE)
 library(dplyr)
 library(lubridate)
 library(tidyr)
+library(RColorBrewer)
+library(egg)
 library(brms) ## just for initial glances during experiment!
 library(rstan)
 
@@ -86,7 +88,8 @@ table(howfaralong.frz$chilltx)
 
 
 
-chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "onemonth.ht", "ChlAvg"))
+chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "X60dayheight", "chl1", "chl2",
+                                   "chl3", "chl4", "mg.cm2"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -96,7 +99,12 @@ with(chill.stan, table(chill1, chill2))
 
 chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst ### Using this point of code for "drought" effect test
-chill.stan$ht.diff <- chill.stan$onemonth.ht - chill.stan$lo.ht 
+chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht 
+chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
+
+#write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
+
+#### Below code is just for quick checks with data coming in, to delete when experiment is over!!
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
