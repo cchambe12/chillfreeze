@@ -15,40 +15,49 @@ setwd("~/Documents/git/chillfreeze/analyses/output")
 
 chill.stan <- read.csv("clean_dvr_60dayoutput.csv", header=TRUE)
 
-labs <- c("ACESAC"=expression(paste(italic("Acer saccharinum"))),
-          "ALNRUG"=expression(paste(italic("Alnus incana"))),
+labs <- c("SALPUR"=expression(paste(italic("Salix purpurea"))),
+          "CORRAC"=expression(paste(italic("Cornus racemosa"))),
           "BETPAP"=expression(paste(italic("Betula papyrifera"))),
           "BETPOP"=expression(paste(italic("Betula populifolia"))),
-          "CORRAC"=expression(paste(italic("Cornus racemosa"))),
-          "FAGGRA"=expression(paste(italic("Fagus grandifolia"))),
-          "NYSSYL"=expression(paste(italic("Nyssa sylvatica"))),
-          "SALPUR"=expression(paste(italic("Salix purpurea"))),
+          "ALNRUG"=expression(paste(italic("Alnus incana"))),
           "SORAME"=expression(paste(italic("Sorbus americana"))),
-          "VIBDEN"=expression(paste(italic("Viburnum dentatum")))) 
+          "ACESAC"=expression(paste(italic("Acer saccharinum"))),
+          "VIBDEN"=expression(paste(italic("Viburnum dentatum"))),
+          "FAGGRA"=expression(paste(italic("Fagus grandifolia"))),
+          "NYSSYL"=expression(paste(italic("Nyssa sylvatica")))) 
 
+cols <- colorRampPalette(brewer.pal(10,"Paired"))(10)
+
+# to use for now until all species leafout
+values <- c( "SALPUR"="#A6CEE3", "CORRAC"="#1F78B4", "BETPAP"="#B2DF8A", "BETPOP"="#33A02C", 
+             "ALNRUG"="#FB9A99", "SORAME"="#E31A1C", "ACESAC"="#FDBF6F", 
+           "VIBDEN"="#FF7F00", "FAGGRA"="#CAB2D6", "NYSSYL"="#6A3D9A")
+
+species_order <- c("SALPUR", "CORRAC", "BETPAP", "BETPOP", "ALNRUG", "SORAME", "ACESAC", "VIBDEN", "FAGGRA", "NYSSYL")
 
 fourweeks <- subset(chill.stan, chill.stan$chill==1)
 fourweeks <- fourweeks[!is.na(fourweeks$ht.diff),]
-cols <- colorRampPalette(brewer.pal(8,"Set2"))(8)
-height<- ggplot(fourweeks, aes(x=species, y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+#cols <- colorRampPalette(brewer.pal(8,"Set2"))(8)
+height<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"),
-        axis.title.x = element_blank()) + # top, right, bottom, left
+        axis.title.x = element_blank(),
+        legend.position = "none") + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   ylab("Height Difference (cm)") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_fill_manual(name="Species", values=cols,
+  scale_fill_manual(name="Species", values=values,
                     labels=labs) + 
-  scale_color_manual(name="Species", values=cols,
+  scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
-chlorophyll<- ggplot(fourweeks, aes(x=species, y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+chlorophyll<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -57,37 +66,38 @@ chlorophyll<- ggplot(fourweeks, aes(x=species, y=mg.cm2, alpha=tx)) + geom_boxpl
         legend.key = element_rect(colour = "transparent", fill = "white"),
         axis.title.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
-  ylab("Chlorophyll Content (mg/cm2)") +
+  ylab("Chlorophyll Content\n (mg/cm2)") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_fill_manual(name="Species", values=cols,
+  scale_fill_manual(name="Species", values=values,
                     labels=labs) + 
-  scale_color_manual(name="Species", values=cols,
+  scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 sixweeks <- subset(chill.stan, chill.stan$chill==2)
 sixweeks <- sixweeks[!is.na(sixweeks$ht.diff),]
 
-height.six<- ggplot(sixweeks, aes(x=species, y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+height.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order), y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"),
-        axis.title.x = element_blank()) + # top, right, bottom, left
+        axis.title.x = element_blank(),
+        legend.position = "none") + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   ylab("Height Difference (cm)") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_fill_manual(name="Species", values=cols,
+  scale_fill_manual(name="Species", values=values,
                     labels=labs) + 
-  scale_color_manual(name="Species", values=cols,
+  scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
-chlorophyll.six<- ggplot(sixweeks, aes(x=species, y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+chlorophyll.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order), y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -96,12 +106,12 @@ chlorophyll.six<- ggplot(sixweeks, aes(x=species, y=mg.cm2, alpha=tx)) + geom_bo
         legend.key = element_rect(colour = "transparent", fill = "white"),
         axis.title.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
-  ylab("Chlorophyll Content (mg/cm2)") +
+  ylab("Chlorophyll Content\n (mg/cm2)") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_fill_manual(name="Species", values=cols,
+  scale_fill_manual(name="Species", values=values,
                     labels=labs) + 
-  scale_color_manual(name="Species", values=cols,
+  scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
@@ -114,37 +124,87 @@ ggarrange(height, chlorophyll, height.six, chlorophyll.six, ncol=2)
 
 #### More plots on DVR
 fourweeks.dvr <- subset(chill.stan, chill.stan$chill==1)
-fourweeks.dvr <- fourweeks.dvr[!is.na(fourweeks.dvr$dvr),]
 
-species_order <- c("SALPUR", "CORRAC", "BETPAP", "BETPOP", "ALNRUG", "SORAME", "ACESAC", "VIBDEN", "FAGGRA", "NYSSYL")
 
-dvr<- ggplot(fourweeks.dvr, aes(x=level_order, y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+dvr<- ggplot(fourweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
+  theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), axis.line = element_line(colour = "black"), 
+        text=element_text(family="Helvetica"),
+        legend.text.align = 0, 
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.x = element_blank(), 
+        legend.position = "none") + # top, right, bottom, left
+  scale_y_continuous(expand = c(0, 0)) +
+  coord_cartesian(ylim=c(0, 50)) +
+  ylab("Duration of \nVegetative Risk") +
+  scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_fill_manual(name="Species", values=values,
+                    labels=labs) + 
+  scale_color_manual(name="Species", values=values,
+                     labels=labs) + scale_x_discrete(labels=labs) +
+  guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
+
+sixweeks.dvr <- subset(chill.stan, chill.stan$chill==2)
+dvr.six<- ggplot(sixweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
+  theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), axis.line = element_line(colour = "black"), 
+        text=element_text(family="Helvetica"),
+        legend.text.align = 0,
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.x = element_blank()) + # top, right, bottom, left
+  scale_y_continuous(expand = c(0, 0)) +
+  coord_cartesian(ylim=c(0, 50)) +
+  ylab("Duration of \nVegetative Risk") +
+  scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_fill_manual(name="Species", values=values,
+                    labels=labs) + 
+  scale_color_manual(name="Species", values=values,
+                     labels=labs) + scale_x_discrete(labels=labs) +
+  guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
+
+
+eightweeks.dvr <- subset(chill.stan, chill.stan$chill==3)
+dvr.eight<- ggplot(eightweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"),
-        axis.title.x = element_blank()) + # top, right, bottom, left
+        axis.title.x = element_blank(),
+        legend.position = "none") + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
-  ylab("Duration of Vegetative Risk") +
+  coord_cartesian(ylim=c(0, 50)) +
+  ylab("Duration of \nVegetative Risk") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_fill_manual(name="Species", values=cols,
+  scale_fill_manual(name="Species", values=values,
                     labels=labs) + 
-  scale_color_manual(name="Species", values=cols,
+  scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
-quartz()
-dvr
 
-colz <- colorRampPalette(brewer.pal(11,"Set3"))(10)
-ggplot(fourweeks.dvr, aes(x=budburst, y=dvr)) + geom_point(aes(alpha=as.factor(tx))) +
-  theme_classic() + geom_smooth(aes(col=as.factor(tx)), method="lm") +
+
+
+
+
+
+quartz()
+ggarrange(dvr, dvr.six, dvr.eight, nrow=3)
+
+
+ggplot(fourweeks.dvr, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx))) +
+  theme_classic() + geom_smooth(aes(col=as.factor(tx), fill=as.factor(tx)), method="lm") +
   scale_y_continuous(expand = c(0, 0)) +
   ylab("Duration of Vegetative Risk") + xlab("Day of Budburst") +
   scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
                      labels=c("0"="Control", "1"="False Spring")) +
-  scale_color_manual(name="Treatment", values=c("grey", "black"),
-                     labels=c("0"="Control", "1"="False Spring"))
+  scale_color_manual(name="Treatment", values=c("grey", "royalblue"),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_fill_manual(name="Treatment", values=c("grey", "royalblue"),
+                   labels=c("0"="Control", "1"="False Spring"))
 
