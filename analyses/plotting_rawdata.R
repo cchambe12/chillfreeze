@@ -36,9 +36,9 @@ values <- c( "SALPUR"="#A6CEE3", "CORRAC"="#1F78B4", "BETPAP"="#B2DF8A", "BETPOP
 species_order <- c("SALPUR", "CORRAC", "BETPAP", "BETPOP", "ALNRUG", "SORAME", "ACESAC", "VIBDEN", "FAGGRA", "NYSSYL")
 
 fourweeks <- subset(chill.stan, chill.stan$chill==1)
-fourweeks <- fourweeks[!is.na(fourweeks$ht.diff),]
+fourweeks.meas <- fourweeks[!is.na(fourweeks$ht.diff),]
 #cols <- colorRampPalette(brewer.pal(8,"Set2"))(8)
-height<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+height<- ggplot(fourweeks.meas, aes(x=factor(species, levels = species_order), y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -57,7 +57,7 @@ height<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=ht.d
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
-chlorophyll<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+chlorophyll<- ggplot(fourweeks.meas, aes(x=factor(species, levels = species_order), y=mg.cm2, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -76,7 +76,7 @@ chlorophyll<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 sixweeks <- subset(chill.stan, chill.stan$chill==2)
-sixweeks <- sixweeks[!is.na(sixweeks$ht.diff),]
+#sixweeks <- sixweeks[!is.na(sixweeks$ht.diff),]
 
 height.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order), y=ht.diff, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
@@ -119,14 +119,14 @@ chlorophyll.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order)
 
 
 quartz()
-ggarrange(height, chlorophyll, height.six, chlorophyll.six, ncol=2)
+ggarrange(height, chlorophyll, ncol=2)
 
 
 #### More plots on DVR
-fourweeks.dvr <- subset(chill.stan, chill.stan$chill==1)
+#fourweeks.dvr <- subset(chill.stan, chill.stan$chill==1)
 
 
-dvr<- ggplot(fourweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
+dvr<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -146,8 +146,8 @@ dvr<- ggplot(fourweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr
                      labels=labs) + scale_x_discrete(labels=labs) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
-sixweeks.dvr <- subset(chill.stan, chill.stan$chill==2)
-dvr.six<- ggplot(sixweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
+#sixweeks.dvr <- subset(chill.stan, chill.stan$chill==2)
+dvr.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -167,8 +167,8 @@ dvr.six<- ggplot(sixweeks.dvr, aes(x=factor(species, levels = species_order), y=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
-eightweeks.dvr <- subset(chill.stan, chill.stan$chill==3)
-dvr.eight<- ggplot(eightweeks.dvr, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
+eightweeks <- subset(chill.stan, chill.stan$chill==3)
+dvr.eight<- ggplot(eightweeks, aes(x=factor(species, levels = species_order), y=dvr, alpha=tx)) + geom_boxplot(aes(alpha=as.factor(tx), fill=as.factor(species), col=as.factor(species))) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -197,7 +197,31 @@ quartz()
 ggarrange(dvr, dvr.six, dvr.eight, nrow=3)
 
 
-ggplot(fourweeks.dvr, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx))) +
+scatter <- ggplot(fourweeks, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx))) +
+  theme_classic() + geom_smooth(aes(col=as.factor(tx), fill=as.factor(tx)), method="lm") +
+  scale_y_continuous(expand = c(0, 0)) + theme(legend.position = "none") +
+  ylab("Duration of Vegetative Risk") + xlab("Day of Budburst") +
+  scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_color_manual(name="Treatment", values=c("grey", "royalblue"),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_fill_manual(name="Treatment", values=c("grey", "royalblue"),
+                   labels=c("0"="Control", "1"="False Spring")) +
+  coord_cartesian(xlim=c(0,80), ylim=c(0, 60), expand=c(0,0)) 
+
+scatter.six <- ggplot(sixweeks, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx))) +
+  theme_classic() + geom_smooth(aes(col=as.factor(tx), fill=as.factor(tx)), method="lm") +
+  scale_y_continuous(expand = c(0, 0)) + theme(legend.position = "none") +
+  ylab("Duration of Vegetative Risk") + xlab("Day of Budburst") +
+  scale_alpha_manual(name="Treatment", values=c(0.2, 0.7),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_color_manual(name="Treatment", values=c("grey", "royalblue"),
+                     labels=c("0"="Control", "1"="False Spring")) +
+  scale_fill_manual(name="Treatment", values=c("grey", "royalblue"),
+                    labels=c("0"="Control", "1"="False Spring"))+
+  coord_cartesian(xlim=c(0,80), ylim=c(0, 60), expand=c(0,0)) 
+
+scatter.eight <- ggplot(eightweeks, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx))) +
   theme_classic() + geom_smooth(aes(col=as.factor(tx), fill=as.factor(tx)), method="lm") +
   scale_y_continuous(expand = c(0, 0)) +
   ylab("Duration of Vegetative Risk") + xlab("Day of Budburst") +
@@ -206,5 +230,8 @@ ggplot(fourweeks.dvr, aes(x=budburst, y=dvr)) + geom_point(aes(col=as.factor(tx)
   scale_color_manual(name="Treatment", values=c("grey", "royalblue"),
                      labels=c("0"="Control", "1"="False Spring")) +
   scale_fill_manual(name="Treatment", values=c("grey", "royalblue"),
-                   labels=c("0"="Control", "1"="False Spring"))
+                    labels=c("0"="Control", "1"="False Spring"))+
+  coord_cartesian(xlim=c(0,80), ylim=c(0, 60), expand=c(0,0)) 
 
+quartz()
+ggarrange(scatter, scatter.six, scatter.eight, ncol=3)
