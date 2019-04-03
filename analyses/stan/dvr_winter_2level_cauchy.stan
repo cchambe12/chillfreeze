@@ -101,3 +101,10 @@ generated quantities{
 
 }
 
+generated quantities {
+  vector[N] log_lik;
+  for (n in 1:N) {
+    log_lik[n] = normal_rng(y[n], sigma_y);
+    
+  }
+}

@@ -96,6 +96,7 @@ model {
 
 }
 
+/*
 generated quantities{
    real y_ppc[N];
    for (n in 1:N)
@@ -108,5 +109,14 @@ generated quantities{
     for (n in 1:N)
       y_ppc[n] = normal_rng(y_ppc[n], sigma_y);
 
+}
+*/
+
+generated quantities {
+  vector[N] log_lik;
+  for (n in 1:N) {
+    log_lik[n] = normal_rng(y[n], sigma_y);
+    
+  }
 }
 

@@ -108,10 +108,10 @@ chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
-totspp <- c("ACESAC", "ALNRUG", "BETPAP", "BETPOP", "CORRAC", "SALPUR", "SORAME", "VIBDEN")
+#totspp <- c("ACESAC", "ALNRUG", "BETPAP", "BETPOP", "CORRAC", "SALPUR", "SORAME", "VIBDEN")
 #chill.complete <- subset(chill.stan, chill.stan$tx <=2)
 chill.complete <- chill.stan[(chill.stan$species %in% totspp),]
-
+#chill.complete <- chill.stan
 
 ##### Add in "Drought" treatment
 ### "Drought" treatment
@@ -129,6 +129,8 @@ chill.complete$drought <- ifelse(chill.complete$budburst <= eightdoy & chill.com
 
 chill.complete$drought1 = ifelse(chill.complete$drought == 1, 1, 0) 
 chill.complete$drought2 = ifelse(chill.complete$drought == 2, 1, 0) 
+
+#write.csv(chill.complete, file="output/clean_dvr_drought.csv", row.names=FALSE)
 
 fit.dvr.all.drought <- brm(dvr ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2 + (1|species), data = chill.complete)
 fit.dvr.all <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data = chill.complete)

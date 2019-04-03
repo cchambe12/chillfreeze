@@ -6,14 +6,14 @@
 # with COLORS for each species #
 
 muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg2){
-spnum <- length(unique(chill.complete$species))
+spnum <- length(unique(chill.stan$species))
 pdf(file.path(figpath, paste("", nameforfig, figpathmore, ".pdf", sep="")),
     width = width, height = height)
 par(xpd=FALSE)
 par(mar=c(5,7,3,10))
 plot(x=NULL,y=NULL, xlim=xlim, yaxt='n', ylim=ylim,
      xlab="Model estimate change in DVR", ylab="", main=nameforfig)
-axis(2, at=1:5, labels=rev(c("Treatment", "Chilling (6 weeks)", "Chilling  (8 weeks)", "Treatment x \nChilling (6 weeks)", "Treatment x \nChilling (8 weeks)")), las=1)
+axis(2, at=1:5, labels=rev(c("Treatment", "Chilling \n(6 weeks)", "Chilling  \n(8 weeks)", "Treatment x \nChilling \n(6 weeks)", "Treatment x \nChilling \n(8 weeks)")), las=1)
 abline(v=0, lty=2, col="darkgrey")
 rownameshere <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_chill2_sp", "mu_b_txchill1_sp", "mu_b_txchill2_sp")
 ppeffects <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_chill2_sp", "mu_b_txchill1_sp", "mu_b_txchill2_sp") # or 1:4 here...
@@ -29,14 +29,14 @@ for(spsi in 1:spnum){
   pos.x.sps.i<-summary(modelhere)$summary[pos.sps.i[i],"mean"]
   lines(summary(modelhere)$summary[pos.sps.i[i],c("25%","75%")],rep(pos.y.sps.i,2),
       col=alpha(my.pal[spsi], alphahere))
-  points(pos.x.sps.i,pos.y.sps.i,cex=0.8, pch=my.pch[spsi], col=alpha(my.pal[spsi], alphahere))
+  points(pos.x.sps.i,pos.y.sps.i,cex=0.8, col=alpha(my.pal[spsi], alphahere))
   
 }
 }
 par(xpd=TRUE) # so I can plot legend outside
-legend(leg1, leg2, sort(unique(gsub("_", " ", chill.complete$species))), pch=my.pch[1:spnum],
+legend(leg1, leg2, sort(unique(gsub("_", " ", chill.stan$species.name))), pch=19,
    col=alpha(my.pal[1:spnum], alphahere),
-   cex=0.75, bty="n", text.font=3)
+   cex=1, bty="n", text.font=3)
 dev.off()
 
 }

@@ -144,6 +144,7 @@ dvr<- ggplot(fourweeks, aes(x=factor(species, levels = species_order), y=dvr, al
                     labels=labs) + 
   scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
+  annotate("text", x = 8, y = 47, label = "4 Weeks of Chilling", family="Helvetica", size=3, fontface="bold") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 #sixweeks.dvr <- subset(chill.stan, chill.stan$chill==2)
@@ -164,6 +165,7 @@ dvr.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order), y=dvr,
                     labels=labs) + 
   scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
+  annotate("text", x = 8, y = 47, label = "6 Weeks of Chilling", family="Helvetica", size=3, fontface="bold") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
@@ -186,6 +188,7 @@ dvr.eight<- ggplot(eightweeks, aes(x=factor(species, levels = species_order), y=
                     labels=labs) + 
   scale_color_manual(name="Species", values=values,
                      labels=labs) + scale_x_discrete(labels=labs) +
+  annotate("text", x = 8, y = 47, label = "8 Weeks of Chilling", family="Helvetica", size=3, fontface="bold") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
