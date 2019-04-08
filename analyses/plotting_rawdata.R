@@ -120,6 +120,7 @@ chlorophyll.six<- ggplot(sixweeks, aes(x=factor(species, levels = species_order)
 
 quartz()
 ggarrange(height, chlorophyll, ncol=2)
+ggarrange(height.six, chlorophyll.six, ncol=2)
 
 
 #### More plots on DVR
