@@ -9,7 +9,7 @@ options(stringsAsFactors = FALSE)
 library(bayesplot) ## for plotting
 library(egg) ## for plotting
 library(shinystan)
-library(brms)
+library(rstanarm)
 library(rstan)
 
 rstan_options(auto_write = TRUE)
@@ -26,7 +26,11 @@ chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 #nospp <- c("NYSSYL", "FAGGRA") # species to exclude for now because not enough data
 #chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
 
-chill.stan <- subset(chill.stan, select=c("dvr", "tx", "chill1", "chill2", "species"))
+chill.stan <- subset(chill.stan, select=c("ht.diff", "tx", "chill1", "chill2", "species"))
+chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
+
+ht.arm.twochill <- brm(ht.diff~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=chill.stan)
+save(ht.arm.twochill, file="stan/ht.brm.twochill.Rda")
 
 if(FALSE){
 datalist.chill <- with(testdat, 
@@ -42,10 +46,10 @@ datalist.chill <- with(testdat,
 }
 
 datalist.chill <- with(chill.stan, 
-                       list(y = dvr, 
+                       list(y = ht.diff, 
                             tx = tx, 
                             chill1 = chill1, 
-                            chill2 = chill2,
+                            #chill2 = chill2,
                             sp = as.numeric(as.factor(species)),
                             N = nrow(chill.stan),
                             n_sp = length(unique(chill.stan$species))
@@ -63,7 +67,7 @@ dvr.inter.normal = stan('stan/dvr_winter_2level.stan', data = datalist.chill,
 #dvr.inter.cauchy = stan('stan/dvr_winter_2level_cauchy.stan', data = datalist.chill,
  #                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ### 
  
-dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+ht.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
                                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
 
 #dvr.rstanarm <- stan_glmer(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat) # Not as good!!
@@ -71,11 +75,11 @@ dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
 #dvr.brms.student <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat, family = student())
 
 
-check_all_diagnostics(dvr.inter)
+check_all_diagnostics(ht.inter.ncp)
 
 
-y <- as.vector(testdat$dvr)
-yrep <- extract(dvr.inter.normal)
+y <- as.vector(chill.stan$ht.diff)
+yrep <- extract(ht.inter.ncp)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)
 ppc.max <- ppc_stat(y, yrep, stat = "max")
