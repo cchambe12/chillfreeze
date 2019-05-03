@@ -11,6 +11,7 @@ library(egg) ## for plotting
 library(shinystan)
 library(rstanarm)
 library(rstan)
+library(brms)
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -22,14 +23,16 @@ source('source/stan_utility.R')
 
 chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #testdat <- read.csv("output/fakedata.csv", header=TRUE)
-chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
+#chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 #nospp <- c("NYSSYL", "FAGGRA") # species to exclude for now because not enough data
 #chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
 
-chill.stan <- subset(chill.stan, select=c("ht.diff", "tx", "chill1", "chill2", "species"))
-chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
+chill.stan <- subset(chill.stan, select=c("ht.diff", "tx", "chill1", "chill2", "species", "chlavg"))
+ht.chill1 <- chill.stan[!is.na(chill.stan$ht.diff),]
 
-ht.arm.twochill <- brm(ht.diff~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=chill.stan)
+ht.arm.twochill <- brm(ht.diff~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=ht.chill1)
+
+output <- tidy(ht.arm.twochill, prob=0.5, robus=TRUE)
 save(ht.arm.twochill, file="stan/ht.brm.twochill.Rda")
 
 if(FALSE){
