@@ -12,7 +12,7 @@ pdf(file.path(figpath, paste("", nameforfig, figpathmore, ".pdf", sep="")),
 par(xpd=FALSE)
 par(mar=c(5,7,3,10))
 plot(x=NULL,y=NULL, xlim=xlim, yaxt='n', ylim=ylim,
-     xlab="Model estimate change in DVR", ylab="", main=nameforfig)
+     xlab="Model estimate change \nin relative growth rate", ylab="", main=nameforfig)
 axis(2, at=1:5, labels=rev(c("Treatment", "Chilling \n(6 weeks)", "Chilling  \n(8 weeks)", "Treatment x \nChilling \n(6 weeks)", "Treatment x \nChilling \n(8 weeks)")), las=1)
 abline(v=0, lty=2, col="darkgrey")
 rownameshere <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_chill2_sp", "mu_b_txchill1_sp", "mu_b_txchill2_sp")

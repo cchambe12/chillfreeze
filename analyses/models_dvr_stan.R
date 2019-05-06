@@ -27,12 +27,18 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #nospp <- c("NYSSYL", "FAGGRA") # species to exclude for now because not enough data
 #chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
 
-chill.stan <- subset(chill.stan, select=c("ht.diff", "tx", "chill1", "chill2", "species", "chlavg"))
-ht.chill1 <- chill.stan[!is.na(chill.stan$ht.diff),]
+chill.stan$ht.rate <- ((chill.stan$X60dayheight - chill.stan$lo.ht)/chill.stan$lo.ht) * 100
+chill.stan$ht.rgr <- log(chill.stan$X60dayheight/chill.stan$lo.ht)*100
+chill.stan$ht.perc <- (chill.stan$X60dayheight/chill.stan$lo.ht)*100
+chill.stan$RGR.stand <- (chill.stan$X60dayheight - log(chill.stan$lo.ht))
 
-ht.arm.twochill <- brm(ht.diff~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=ht.chill1)
 
-output <- tidy(ht.arm.twochill, prob=0.5, robus=TRUE)
+chill.stan <- subset(chill.stan, select=c("RGR.stand", "tx", "chill1", "chill2", "species", "ht.diff", "id"))
+ht.chill1 <- chill.stan[!is.na(chill.stan$RGR.stand),]
+
+ht.arm.twochill <- brm(RGR.stand~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=ht.chill1)
+
+output <- tidy(ht.arm.twochill, prob=0.5, robust=TRUE)
 save(ht.arm.twochill, file="stan/ht.brm.twochill.Rda")
 
 if(FALSE){
@@ -40,7 +46,7 @@ datalist.chill <- with(testdat,
                      list(y = dvr, 
                           tx = tx, 
                           chill1 = chill1, 
-                          chill2 = chill2,
+                          #chill2 = chill2,
                           sp = as.numeric(as.factor(species)),
                           N = nrow(testdat),
                           n_sp = length(unique(testdat$species))
@@ -48,14 +54,18 @@ datalist.chill <- with(testdat,
 )
 }
 
-datalist.chill <- with(chill.stan, 
-                       list(y = ht.diff, 
+rmspp <- c("NYSSYL", "FAGGRA")
+check <- ht.chill1[(ht.chill1$id!="SALPUR_128"),]
+check <- check[(check$species%in%rmspp),]
+
+datalist.chill <- with(check, 
+                       list(y = RGR.stand, 
                             tx = tx, 
                             chill1 = chill1, 
-                            #chill2 = chill2,
+                            chill2 = chill2,
                             sp = as.numeric(as.factor(species)),
-                            N = nrow(chill.stan),
-                            n_sp = length(unique(chill.stan$species))
+                            N = nrow(check),
+                            n_sp = length(unique(check$species))
                        )
 )
 
@@ -70,15 +80,18 @@ dvr.inter.normal = stan('stan/dvr_winter_2level.stan', data = datalist.chill,
 #dvr.inter.cauchy = stan('stan/dvr_winter_2level_cauchy.stan', data = datalist.chill,
  #                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ### 
  
-ht.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+rgrstand.rmspp.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
                                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
+
+chl.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+                          iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99))
 
 #dvr.rstanarm <- stan_glmer(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat) # Not as good!!
 #dvr.brms <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat)
 #dvr.brms.student <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat, family = student())
 
 
-check_all_diagnostics(ht.inter.ncp)
+check_all_diagnostics(htdiff.inter.ncp)
 
 
 y <- as.vector(chill.stan$ht.diff)
