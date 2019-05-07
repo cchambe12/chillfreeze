@@ -28,17 +28,36 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
 
 chill.stan$ht.rate <- ((chill.stan$X60dayheight - chill.stan$lo.ht)/chill.stan$lo.ht) * 100
-chill.stan$ht.rgr <- log(chill.stan$X60dayheight/chill.stan$lo.ht)*100
+chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 chill.stan$ht.perc <- (chill.stan$X60dayheight/chill.stan$lo.ht)*100
 chill.stan$RGR.stand <- (chill.stan$X60dayheight - log(chill.stan$lo.ht))
+chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 
 
-chill.stan <- subset(chill.stan, select=c("RGR.stand", "tx", "chill1", "chill2", "species", "ht.diff", "id"))
-ht.chill1 <- chill.stan[!is.na(chill.stan$RGR.stand),]
+chill.stan <- subset(chill.stan, select=c("thickness", "tx", "chill1", "chill2", "species", "ht.rgr", "id", "chlavg", "ht.perc"))
+leaf.chill <- chill.stan[!is.na(chill.stan$thickness),]
+rgr.chill <- chill.stan[!is.na(chill.stan$ht.rgr),]
+leaf.chill <- leaf.chill[(leaf.chill$chill1==1),]
+chl.chill <- chill.stan[!is.na(chill.stan$chlavg),]
+ht.chill <- chill.stan[!is.na(chill.stan$ht.rate),]
 
-ht.arm.twochill <- brm(RGR.stand~tx*chill1 + tx*chill2 +(tx*chill1 + tx*chill2|species), data=ht.chill1)
+ht.chill1$mu_thickness <- ht.chill1$thickness
+leaf.chill$mu_tx <- leaf.chill$tx
 
-output <- tidy(ht.arm.twochill, prob=0.5, robust=TRUE)
+thick.tx1 <- stan_glmer(thickness ~ tx + (tx|species), data=leaf.chill)
+
+rgr.tx1 <- stan_glmer(ht.rgr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=rgr.chill)
+chl.tx1 <- stan_glmer(chlavg ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chl.chill) ## Actually interesting!!! Woohoo!!!
+ht.tx1 <- stan_glmer(ht.rate ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=ht.chill)
+
+
+df <- as.data.frame(summary(chl.tx1))
+row.names(df) <- c("mu_a", "mu_tx", "a_sp[1]", "mu_tx[1]", "a_sp[2]", "mu_tx[2]", "a_sp[3]", "mu_tx[3]", "a_sp[4]", "mu_tx[4]",
+                  "a_sp[5]", "mu_tx[5]", "a_sp[6]", "mu_tx[6]", "a_sp[7]", "mu_tx[7]", "a_sp[8]", "mu_tx[8]", 
+                  "sigma", "sigma_mu_a", "sigma_mu_a_tx", "sigma_mu_tx", "mean_PPD", "log-posterior")
+
+
+output <- tidy(thick.tx1, prob=0.5, robust=TRUE)
 save(ht.arm.twochill, file="stan/ht.brm.twochill.Rda")
 
 if(FALSE){
@@ -58,14 +77,14 @@ rmspp <- c("NYSSYL", "FAGGRA")
 check <- ht.chill1[(ht.chill1$id!="SALPUR_128"),]
 check <- check[(check$species%in%rmspp),]
 
-datalist.chill <- with(check, 
-                       list(y = RGR.stand, 
+datalist.chill <- with(ht.chill1, 
+                       list(y = ht.rgr, 
                             tx = tx, 
                             chill1 = chill1, 
                             chill2 = chill2,
                             sp = as.numeric(as.factor(species)),
-                            N = nrow(check),
-                            n_sp = length(unique(check$species))
+                            N = nrow(ht.chill1),
+                            n_sp = length(unique(ht.chill1$species))
                        )
 )
 
@@ -80,7 +99,7 @@ dvr.inter.normal = stan('stan/dvr_winter_2level.stan', data = datalist.chill,
 #dvr.inter.cauchy = stan('stan/dvr_winter_2level_cauchy.stan', data = datalist.chill,
  #                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ### 
  
-rgrstand.rmspp.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+rgr.rmspp.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
                                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
 
 chl.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
