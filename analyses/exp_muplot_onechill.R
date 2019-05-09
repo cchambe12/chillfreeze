@@ -13,12 +13,12 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
   par(mar=c(5,7,3,10))
   plot(x=NULL,y=NULL, xlim=xlim, yaxt='n', ylim=ylim,
        xlab=xlab, ylab="", main=nameforfig)
-  axis(2, at=1:5, labels=rev(c("Treatment", "Chilling \n(6 weeks)", "Chilling  \n(8 weeks)", "Treatment x \nChilling \n(6 weeks)", "Treatment x \nChilling \n(8 weeks)")), las=1)
+  axis(2, at=1:3, labels=rev(c("Treatment", "Chilling \n(6 weeks)", "Treatment x \nChilling \n(6 weeks)")), las=1)
   abline(v=0, lty=2, col="darkgrey")
-  rownameshere <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_chill2_sp", "mu_b_txchill1_sp", "mu_b_txchill2_sp")
-  ppeffects <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_chill2_sp", "mu_b_txchill1_sp", "mu_b_txchill2_sp") # or 1:4 here...
-  for(i in 1:5){
-    pos.y<-(5:1)[i]
+  rownameshere <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_txchill1_sp")
+  ppeffects <- c("mu_b_tx_sp", "mu_b_chill1_sp", "mu_b_txchill1_sp") # or 1:4 here...
+  for(i in 1:3){
+    pos.y<-(3:1)[i]
     pos.x<-summary(modelhere)$summary[rownameshere[i],"mean"]
     lines(summary(modelhere)$summary[rownameshere[i],c("25%","75%")],rep(pos.y,2),col="darkgrey")
     points(pos.x,pos.y,cex=1.5,pch=19,col="darkblue")

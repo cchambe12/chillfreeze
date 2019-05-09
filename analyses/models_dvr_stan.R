@@ -23,42 +23,7 @@ source('source/stan_utility.R')
 
 chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #testdat <- read.csv("output/fakedata.csv", header=TRUE)
-#chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
-#nospp <- c("NYSSYL", "FAGGRA") # species to exclude for now because not enough data
-#chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
-
-chill.stan$ht.rate <- ((chill.stan$X60dayheight - chill.stan$lo.ht)/chill.stan$lo.ht) * 100
-chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
-chill.stan$ht.perc <- (chill.stan$X60dayheight/chill.stan$lo.ht)*100
-chill.stan$RGR.stand <- (chill.stan$X60dayheight - log(chill.stan$lo.ht))
-chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
-
-
-chill.stan <- subset(chill.stan, select=c("thickness", "tx", "chill1", "chill2", "species", "ht.rgr", "id", "chlavg", "ht.perc"))
-leaf.chill <- chill.stan[!is.na(chill.stan$thickness),]
-rgr.chill <- chill.stan[!is.na(chill.stan$ht.rgr),]
-leaf.chill <- leaf.chill[(leaf.chill$chill1==1),]
-chl.chill <- chill.stan[!is.na(chill.stan$chlavg),]
-ht.chill <- chill.stan[!is.na(chill.stan$ht.rate),]
-
-ht.chill1$mu_thickness <- ht.chill1$thickness
-leaf.chill$mu_tx <- leaf.chill$tx
-
-thick.tx1 <- stan_glmer(thickness ~ tx + (tx|species), data=leaf.chill)
-
-rgr.tx1 <- stan_glmer(ht.rgr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=rgr.chill)
-chl.tx1 <- stan_glmer(chlavg ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chl.chill) ## Actually interesting!!! Woohoo!!!
-ht.tx1 <- stan_glmer(ht.rate ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=ht.chill)
-
-
-df <- as.data.frame(summary(chl.tx1))
-row.names(df) <- c("mu_a", "mu_tx", "a_sp[1]", "mu_tx[1]", "a_sp[2]", "mu_tx[2]", "a_sp[3]", "mu_tx[3]", "a_sp[4]", "mu_tx[4]",
-                  "a_sp[5]", "mu_tx[5]", "a_sp[6]", "mu_tx[6]", "a_sp[7]", "mu_tx[7]", "a_sp[8]", "mu_tx[8]", 
-                  "sigma", "sigma_mu_a", "sigma_mu_a_tx", "sigma_mu_tx", "mean_PPD", "log-posterior")
-
-
-output <- tidy(thick.tx1, prob=0.5, robust=TRUE)
-save(ht.arm.twochill, file="stan/ht.brm.twochill.Rda")
+chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
 if(FALSE){
 datalist.chill <- with(testdat, 
@@ -73,18 +38,14 @@ datalist.chill <- with(testdat,
 )
 }
 
-rmspp <- c("NYSSYL", "FAGGRA")
-check <- ht.chill1[(ht.chill1$id!="SALPUR_128"),]
-check <- check[(check$species%in%rmspp),]
-
-datalist.chill <- with(ht.chill1, 
-                       list(y = ht.rgr, 
+datalist.chill <- with(chill.stan, 
+                       list(y = dvr, 
                             tx = tx, 
                             chill1 = chill1, 
                             chill2 = chill2,
                             sp = as.numeric(as.factor(species)),
-                            N = nrow(ht.chill1),
-                            n_sp = length(unique(ht.chill1$species))
+                            N = nrow(chill.stan),
+                            n_sp = length(unique(chill.stan$species))
                        )
 )
 
@@ -93,28 +54,26 @@ datalist.chill <- with(ht.chill1,
 ###################### Determining best model ##########################################
 ########################################################################################
 if(FALSE){
-dvr.inter.normal = stan('stan/dvr_winter_2level.stan', data = datalist.chill,
-                 iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ### 
+dvr.inter.skewnormal = stan('stan/dvr_winter_2level_ncp_skewnormal.stan', data = datalist.chill,
+                 iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ### 
+
+#dvr.inter.normal = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+ #                       iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ### 
                
 #dvr.inter.cauchy = stan('stan/dvr_winter_2level_cauchy.stan', data = datalist.chill,
  #                       iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ### 
  
-rgr.rmspp.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
-                                      iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
-
-chl.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
-                          iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99))
 
 #dvr.rstanarm <- stan_glmer(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat) # Not as good!!
 #dvr.brms <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat)
 #dvr.brms.student <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat, family = student())
 
 
-check_all_diagnostics(htdiff.inter.ncp)
+check_all_diagnostics(dvr.inter.skewnormal)
 
 
-y <- as.vector(chill.stan$ht.diff)
-yrep <- extract(ht.inter.ncp)
+y <- as.vector(chill.stan$dvr)
+yrep <- extract(dvr.inter.skewnormal)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)
 ppc.max <- ppc_stat(y, yrep, stat = "max")
@@ -145,12 +104,11 @@ print(loo_2)
 
 ########################################################################################
 ########################################################################################
-dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+dvr.inter.ncp.skew = stan('stan/dvr_winter_2level_ncp_skewnormal.stan', data = datalist.chill,
                      iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
 
 
-save(dvr.inter.ncp, file="stan/dvr_inter_ncp_nofaggranyssyl.Rda")
-save(dvr.inter.ncp, file="stan/dvr_inter_ncp.Rda")
+save(dvr.inter.ncp.skew, file="stan/dvr_inter_ncp_skewnormal.Rda")
  
 
 ########################################################################################
@@ -170,8 +128,19 @@ datalist.chill.drought <- with(chill.drought,
                        )
 )
 
-dvr.inter.ncp.drought = stan('stan/dvr_winter_2level_ncp_drought.stan', data = datalist.chill.drought,
-                     iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
+dvr.inter.ncp.drought = stan('stan/dvr_winter_2level_ncp_drought_skew.stan', data = datalist.chill.drought,
+                     iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ## 
+
+check_all_diagnostics(dvr.inter.ncp.drought)
+
+
+y <- as.vector(chill.stan$dvr)
+yrep <- extract(dvr.inter.ncp.drought)
+yrep <- yrep$yhat
+ppc <- ppc_stat(y, yrep)
+ppc.max <- ppc_stat(y, yrep, stat = "max")
+ppc.min <- ppc_stat(y, yrep, stat = "min")
+ppc.sd <- ppc_stat(y, yrep, stat = "sd")
 
 save(dvr.inter.ncp.drought, file="stan/dvr_inter_ncp_drought.Rda")
 

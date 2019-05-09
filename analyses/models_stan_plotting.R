@@ -16,17 +16,12 @@ options(mc.cores = parallel::detectCores())
 setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
-#load("stan/dvr_inter_ncp_nofaggranyssyl.Rda")
-#load("stan/dvr_inter_ncp.Rda")
+#load("stan/dvr_inter_ncp_skewnormal.Rda")
 load("stan/dvr_inter_ncp_drought.Rda")
 
 chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
-chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
-
-#nospp <- c("NYSSYL", "FAGGRA") # species to exclude for now because not enough data
-#chill.stan <- chill.stan[!(chill.stan$species%in%nospp),]
-
-chill.stan <- subset(chill.stan, select=c("thickness", "tx", "species"))
+#chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
+#chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -37,33 +32,29 @@ chill.stan$species.name <- ifelse(chill.stan$species=="CORRAC", "Cornus racemosa
 chill.stan$species.name <- ifelse(chill.stan$species=="SALPUR", "Salix purpurea", chill.stan$species.name)
 chill.stan$species.name <- ifelse(chill.stan$species=="SORAME", "Sorbus americana", chill.stan$species.name)
 chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentatum", chill.stan$species.name)
-#chill.stan$species.name <- ifelse(chill.stan$species=="FAGGRA", "Fagus grandifolia", chill.stan$species.name)
-#chill.stan$species.name <- ifelse(chill.stan$species=="NYSSYL", "Nyssa sylvatica", chill.stan$species.name)
+chill.stan$species.name <- ifelse(chill.stan$species=="FAGGRA", "Fagus grandifolia", chill.stan$species.name)
+chill.stan$species.name <- ifelse(chill.stan$species=="NYSSYL", "Nyssa sylvatica", chill.stan$species.name)
 
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "thickness"
+figpathmore <- "chl.normal" ### change based on model
 
-source("exp_muplot_rstanarm.R")
+source("exp_muplot.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
-my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 10)
+my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
+xlab <- "Model estimate of change in \nleaf chlorophyll content" ## change based on model
 
+sumer.ni <- summary(chl.inter.normal)$summary
+sumer.ni[grep("mu_", rownames(sumer.ni)),]
 
 sort(unique(chill.stan$species)) # numbers are alphabetical
 
 
-modelhere <- thick.tx1
-quartz()
-muplotfx(modelhere, "", 8, 8, c(0,2), c(-15, 18) , 19.5, 1)
-muplotfx(modelhere, "", 8, 8, c(0,2), c(-0.8, 0.8) , 0.9, 1)
+modelhere <- chl.inter.normal
+#quartz()
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 10.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,3), c(-0.5, 0.5) , 0.58, 2)
 
-nameforfig <- "thickness.tx1"
-xlim=c(-0.8, 0.8)
-ylim=c(0,2)
-width=8
-height=8
-leg1=0.8
-leg2=1
