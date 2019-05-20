@@ -65,7 +65,7 @@ datalist.leaf <- with(leaf.chill,
 #ht.inter.skewnormal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
  #                             iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-ht.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
+ht.inter.normal = stan('stan/growth_winter_2level_skewnormal.stan', data = datalist.chill,
                            iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.leaf,
