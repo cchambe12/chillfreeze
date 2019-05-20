@@ -29,15 +29,17 @@ chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 #chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 #chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
+#chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
+
+#chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
 
 chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
-#rmspp <- c("FAGGRA", "NYSSYL")
-#chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
+rmspp <- c("FAGGRA", "NYSSYL")
+chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
 
 
 datalist.chill <- with(chill.stan, 
-                       list(y = chlavg, 
+                       list(y = ht.rgr, 
                             tx = tx, 
                             chill1 = chill1, 
                             chill2 = chill2,
@@ -63,13 +65,13 @@ datalist.leaf <- with(leaf.chill,
 #ht.inter.skewnormal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
  #                             iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
+ht.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
                            iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.leaf,
                         iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-check_all_diagnostics(chl.inter.normal)
+check_all_diagnostics(ht.inter.normal)
 
 
 y <- as.vector(chill.stan$chlavg)
