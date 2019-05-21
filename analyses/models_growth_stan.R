@@ -24,22 +24,22 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
-chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
+#chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
 #chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 #chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
 
-#chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
+chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
-rmspp <- c("FAGGRA", "NYSSYL")
-chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
+#chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
+#rmspp <- c("FAGGRA", "NYSSYL")
+#chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
 
 
 datalist.chill <- with(chill.stan, 
-                       list(y = ht.rgr, 
+                       list(y = chlavg, 
                             tx = tx, 
                             chill1 = chill1, 
                             chill2 = chill2,
@@ -65,7 +65,7 @@ datalist.leaf <- with(leaf.chill,
 #ht.inter.skewnormal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
  #                             iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-ht.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
+chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
                            iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.leaf,
