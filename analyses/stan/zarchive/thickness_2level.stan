@@ -11,17 +11,17 @@ data {
 	vector[N] y; 		// response
 	vector[N] tx; 	// predictor
 	vector[N] chill1; 	// predictor
-	//vector[N] chill2; 	// predictor
+	vector[N] chill2; 	// predictor
 		
 	}
 
 
 transformed data {
   vector[N] inter_txchill1;
-  //vector[N] inter_txchill2;
+  vector[N] inter_txchill2;
 
   inter_txchill1    = tx .* chill1;
-  //inter_txchill2    = tx .* chill2;
+  inter_txchill2    = tx .* chill2;
 }
 
 
@@ -29,24 +29,24 @@ parameters {
   real mu_a_sp;   
   real mu_b_tx_sp;   
   real mu_b_chill1_sp;   
-  //real mu_b_chill2_sp;
+  real mu_b_chill2_sp;
   real mu_b_txchill1_sp;   
-  //real mu_b_txchill2_sp;   
+  real mu_b_txchill2_sp;   
   real<lower=0> sigma_a_sp; 
   real<lower=0> sigma_b_tx_sp; 
   real<lower=0> sigma_b_chill1_sp; 
-  //real<lower=0> sigma_b_chill2_sp;
+  real<lower=0> sigma_b_chill2_sp;
   real<lower=0> sigma_b_txchill1_sp;
-  //real<lower=0> sigma_b_txchill2_sp;
+  real<lower=0> sigma_b_txchill2_sp;
   real<lower=0> sigma_y; 
 
   real a_sp[n_sp]; // intercept for species
   real b_tx[n_sp]; // slope of forcing effect 
   real b_chill1[n_sp]; // slope of photoperiod effect
-  //real b_chill2[n_sp]; // slope of chill effect
+  real b_chill2[n_sp]; // slope of chill effect
   //vector[n_sp] b_txchill1_ncp; // slope of lat effect
   real b_txchill1[n_sp]; // slope of chill x force effect
-  //real b_txchill2[n_sp]; // slope of chill x force effect
+  real b_txchill2[n_sp]; // slope of chill x force effect
 
 	}
 
@@ -69,9 +69,9 @@ model {
 	a_sp ~ normal(mu_a_sp, sigma_a_sp); 
 	b_tx ~ normal(mu_b_tx_sp, sigma_b_tx_sp); 
 	b_chill1 ~ normal(mu_b_chill1_sp, sigma_b_chill1_sp); 
-	//b_chill2 ~ normal(mu_b_chill2_sp, sigma_b_chill2_sp);
+	b_chill2 ~ normal(mu_b_chill2_sp, sigma_b_chill2_sp);
 	b_txchill1 ~ normal(mu_b_txchill1_sp, sigma_b_txchill1_sp);
-	//b_txchill2 ~ normal(mu_b_txchill2_sp, sigma_b_txchill2_sp); 
+	b_txchill2 ~ normal(mu_b_txchill2_sp, sigma_b_txchill2_sp); 
 	
 	//b_txchill1_ncp ~ normal(0, 5);
 
@@ -82,13 +82,13 @@ model {
         sigma_b_tx_sp ~ normal(0, 1);
         mu_b_chill1_sp ~ normal(0, 5);
         sigma_b_chill1_sp ~ normal(0, 1);
-        //mu_b_chill2_sp ~ normal(0, 50);
-        //sigma_b_chill2_sp ~ normal(0, 10);
+        mu_b_chill2_sp ~ normal(0, 5);
+        sigma_b_chill2_sp ~ normal(0, 1);
         mu_b_txchill1_sp ~ normal(0, 5);
         sigma_b_txchill1_sp ~ normal(0, 1);
 
-        //mu_b_txchill2_sp ~ normal(0, 50);
-        //sigma_b_txchill2_sp ~ normal(0, 10);
+        mu_b_txchill2_sp ~ normal(0, 5);
+        sigma_b_txchill2_sp ~ normal(0, 1);
 
 	y ~ normal(yhat, sigma_y);
 

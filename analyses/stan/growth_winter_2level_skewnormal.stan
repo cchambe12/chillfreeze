@@ -69,29 +69,29 @@ transformed parameters {
 
 model {
 
-	a_sp ~ normal(mu_a_sp, sigma_a_sp); 
-	b_tx ~ normal(mu_b_tx_sp, sigma_b_tx_sp); 
-	b_chill1 ~ normal(mu_b_chill1_sp, sigma_b_chill1_sp); 
-	b_chill2 ~ normal(mu_b_chill2_sp, sigma_b_chill2_sp);
-	b_txchill1 ~ normal(mu_b_txchill1_sp, sigma_b_txchill1_sp);
-	b_txchill2 ~ normal(mu_b_txchill2_sp, sigma_b_txchill2_sp); 
+	a_sp ~ skew_normal(mu_a_sp, sigma_a_sp,5); 
+	b_tx ~ skew_normal(mu_b_tx_sp, sigma_b_tx_sp,5); 
+	b_chill1 ~ skew_normal(mu_b_chill1_sp, sigma_b_chill1_sp,5); 
+	b_chill2 ~ skew_normal(mu_b_chill2_sp, sigma_b_chill2_sp,5);
+	b_txchill1 ~ skew_normal(mu_b_txchill1_sp, sigma_b_txchill1_sp,5);
+	b_txchill2 ~ skew_normal(mu_b_txchill2_sp, sigma_b_txchill2_sp,5); 
 	
 	//b_txchill1_ncp ~ skew_normal(0, 1, 1);
 	//b_txchill2_ncp ~ skew_normal(0, 1, 1);
 
-        mu_a_sp ~ skew_normal(0, 20, 10);
-        sigma_a_sp ~ skew_normal(0, 1, 1);
+        mu_a_sp ~ skew_normal(0, 20, 5);
+        sigma_a_sp ~ skew_normal(0, 15, 3);
 
-        mu_b_tx_sp ~ skew_normal(0, 20, 10);
-        sigma_b_tx_sp ~ skew_normal(0, 1, 1);
-        mu_b_chill1_sp ~ skew_normal(0, 20, 10);
-        sigma_b_chill1_sp ~ skew_normal(0, 1, 1);
-        mu_b_chill2_sp ~ skew_normal(0, 20, 10);
-        sigma_b_chill2_sp ~ skew_normal(0, 1, 1);
-        mu_b_txchill1_sp ~ skew_normal(0, 20, 10);
-        sigma_b_txchill1_sp ~ skew_normal(0, 1, 1);
-        mu_b_txchill2_sp ~ skew_normal(0, 20, 10);
-        sigma_b_txchill2_sp ~ skew_normal(0, 1, 1);
+        mu_b_tx_sp ~ skew_normal(0, 20, 5);
+        sigma_b_tx_sp ~ skew_normal(0, 5, 3);
+        mu_b_chill1_sp ~ skew_normal(0, 20, 5);
+        sigma_b_chill1_sp ~ skew_normal(0, 5, 3);
+        mu_b_chill2_sp ~ skew_normal(0, 20, 5);
+        sigma_b_chill2_sp ~ skew_normal(0, 5, 3);
+        mu_b_txchill1_sp ~ skew_normal(0, 20, 5);
+        sigma_b_txchill1_sp ~ skew_normal(0, 5, 3);
+        mu_b_txchill2_sp ~ skew_normal(0, 20, 5);
+        sigma_b_txchill2_sp ~ skew_normal(0, 5, 3);
 
 	y ~ normal(yhat, sigma_y);
 

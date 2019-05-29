@@ -23,15 +23,16 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
 
-#chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
-#chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
+chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
+chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
+chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
 #chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 #chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
+#chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
 #rmspp <- c("FAGGRA", "NYSSYL")
@@ -39,7 +40,7 @@ chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
 
 
 datalist.chill <- with(chill.stan, 
-                       list(y = chlavg, 
+                       list(y = ht.rgr, 
                             tx = tx, 
                             chill1 = chill1, 
                             chill2 = chill2,
@@ -49,32 +50,24 @@ datalist.chill <- with(chill.stan,
                        )
 )
 
-leaf.chill <- chill.stan[(chill.stan$chill!=3),]
-datalist.leaf <- with(leaf.chill, 
-                       list(y = thickness, 
-                            tx = tx, 
-                            chill1 = chill1,
-                            sp = as.numeric(as.factor(species)),
-                            N = nrow(leaf.chill),
-                            n_sp = length(unique(leaf.chill$species))
-                       )
-)
+library(rstanarm)
+chill.stan$chlconv <- chill.stan$mg.cm2*100
+chl.arm <- stan_glmer(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data = chill.stan)
 
 
-
-#ht.inter.skewnormal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
- #                             iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
+htdiff.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
+                              iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
                            iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.leaf,
+thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.chill,
                         iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 check_all_diagnostics(ht.inter.normal)
 
 
-y <- as.vector(chill.stan$chlavg)
+y <- as.vector(chill.stan$thickness)
 yrep <- rstan::extract(chl.inter.normal)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)

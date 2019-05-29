@@ -60,37 +60,35 @@ transformed parameters {
             yhat[i] = a_sp[sp[i]] + // indexed with species
 		b_tx[sp[i]] * tx[i] +
 		  b_chill1[sp[i]] * chill1[i] +
-		b_txchill1[sp[i]] * inter_txchill1[i] +
-		  b_chill2[sp[i]] * chill2[i] +
-		b_txchill2[sp[i]] * inter_txchill2[i];
+		b_txchill1[sp[i]] * inter_txchill1[i];
 	}
 }
 
 model {
 
-	a_sp ~ normal(mu_a_sp, sigma_a_sp); 
-	b_tx ~ normal(mu_b_tx_sp, sigma_b_tx_sp); 
-	b_chill1 ~ normal(mu_b_chill1_sp, sigma_b_chill1_sp); 
-	b_chill2 ~ normal(mu_b_chill2_sp, sigma_b_chill2_sp);
-	b_txchill1 ~ normal(mu_b_txchill1_sp, sigma_b_txchill1_sp);
-	b_txchill2 ~ normal(mu_b_txchill2_sp, sigma_b_txchill2_sp); 
+	a_sp ~ skew_normal(mu_a_sp, sigma_a_sp, 0); 
+	b_tx ~ skew_normal(mu_b_tx_sp, sigma_b_tx_sp, 0); 
+	b_chill1 ~ skew_normal(mu_b_chill1_sp, sigma_b_chill1_sp, 0); 
+	b_chill2 ~ skew_normal(mu_b_chill2_sp, sigma_b_chill2_sp, 0);
+	b_txchill1 ~ skew_normal(mu_b_txchill1_sp, sigma_b_txchill1_sp, 0);
+	b_txchill2 ~ skew_normal(mu_b_txchill2_sp, sigma_b_txchill2_sp, 0); 
 	
 	//b_txchill1_ncp ~ normal(0, 5);
 
-        mu_a_sp ~ normal(0, 20);
-        sigma_a_sp ~ normal(0, 3);
+        mu_a_sp ~ skew_normal(0, 5, 0);
+        sigma_a_sp ~ skew_normal(0, 1, 0);
 
-        mu_b_tx_sp ~ normal(0, 20);
-        sigma_b_tx_sp ~ normal(0, 3);
-        mu_b_chill1_sp ~ normal(0, 20);
-        sigma_b_chill1_sp ~ normal(0, 3);
-        mu_b_chill2_sp ~ normal(0, 20);
-        sigma_b_chill2_sp ~ normal(0, 3);
-        mu_b_txchill1_sp ~ normal(0, 20);
-        sigma_b_txchill1_sp ~ normal(0, 3);
+        mu_b_tx_sp ~ skew_normal(0, 5, 0);
+        sigma_b_tx_sp ~ skew_normal(0, 1, 0);
+        mu_b_chill1_sp ~ skew_normal(0, 5, 0);
+        sigma_b_chill1_sp ~ skew_normal(0, 1, 0);
+        mu_b_chill2_sp ~ skew_normal(0, 5, 0);
+        sigma_b_chill2_sp ~ skew_normal(0, 1, 0);
+        mu_b_txchill1_sp ~ skew_normal(0, 5, 0);
+        sigma_b_txchill1_sp ~ skew_normal(0, 1, 0);
 
-        mu_b_txchill2_sp ~ normal(0, 20);
-        sigma_b_txchill2_sp ~ normal(0, 3);
+        mu_b_txchill2_sp ~ skew_normal(0, 5, 0);
+        sigma_b_txchill2_sp ~ skew_normal(0, 1, 0);
 
 	y ~ normal(yhat, sigma_y);
 
