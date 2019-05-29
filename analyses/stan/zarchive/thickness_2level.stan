@@ -60,7 +60,9 @@ transformed parameters {
             yhat[i] = a_sp[sp[i]] + // indexed with species
 		b_tx[sp[i]] * tx[i] +
 		  b_chill1[sp[i]] * chill1[i] +
-		b_txchill1[sp[i]] * inter_txchill1[i];
+		b_txchill1[sp[i]] * inter_txchill1[i] +
+		b_chill2[sp[i]] * chill2[i] +
+		b_txchill2[sp[i]] * inter_txchill2[i];
 	}
 }
 
