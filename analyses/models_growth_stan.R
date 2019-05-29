@@ -55,19 +55,19 @@ chill.stan$chlconv <- chill.stan$mg.cm2*100
 chl.arm <- stan_glmer(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data = chill.stan)
 
 
-htdiff.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
-                              iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
+htrgr.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
+                              iter = 5000, warmup=3000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
                            iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.chill,
-                        iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
+#thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.chill,
+ #                       iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-check_all_diagnostics(ht.inter.normal)
+check_all_diagnostics(htrgr.inter.normal)
 
 
-y <- as.vector(chill.stan$thickness)
+y <- as.vector(chill.stan$ht.rgr)
 yrep <- rstan::extract(chl.inter.normal)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)

@@ -77,20 +77,20 @@ model {
 	
 	//b_txchill1_ncp ~ normal(0, 5);
 
-        mu_a_sp ~ normal(0, 20);
-        sigma_a_sp ~ normal(0, 3);
+        mu_a_sp ~ normal(0, 20); // 0, 20 works
+        sigma_a_sp ~ normal(0, 5); // 0,5
 
         mu_b_tx_sp ~ normal(0, 20);
-        sigma_b_tx_sp ~ normal(0, 3);
+        sigma_b_tx_sp ~ normal(0, 5);
         mu_b_chill1_sp ~ normal(0, 20);
-        sigma_b_chill1_sp ~ normal(0, 3);
+        sigma_b_chill1_sp ~ normal(0, 5);
         mu_b_chill2_sp ~ normal(0, 20);
-        sigma_b_chill2_sp ~ normal(0, 3);
+        sigma_b_chill2_sp ~ normal(0, 5);
         mu_b_txchill1_sp ~ normal(0, 20);
-        sigma_b_txchill1_sp ~ normal(0, 3);
+        sigma_b_txchill1_sp ~ normal(0, 5);
 
         mu_b_txchill2_sp ~ normal(0, 20);
-        sigma_b_txchill2_sp ~ normal(0, 3);
+        sigma_b_txchill2_sp ~ normal(0, 5);
 
 	y ~ normal(yhat, sigma_y);
 
