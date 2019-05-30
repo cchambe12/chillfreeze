@@ -9,65 +9,174 @@ graphics.off()
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(gridExtra)
+library(cowplot)
 library(RColorBrewer)
 
 # Set Working Directory
 setwd("~/Documents/git/chillfreeze/analyses")
 
-exp <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
+chillfrz <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
+rmspp <- c("NYSSYL", "FAGGRA")
+chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 
-cont <- exp[(exp$tx==0),]
-frz <- exp[(exp$tx==1),]
-cont$dvrcontmean <- ave(bbpre$fs, bbpre$species)
-bbpre$fspre.sd<-ave(bbpre$fs, bbpre$species, bbpre$cc, FUN=sd)/sqrt(length(unique(bbpre$fsmeanpre)))
-bbpost$fsmeanpost <- ave(bbpost$fs, bbpost$species)
-bbpost$fspost.sd<-ave(bbpost$fs, bbpost$species, bbpost$cc, FUN=sd)/sqrt(length(unique(bbpost$fsmeanpost)))
+dvr <- subset(chillfrz, select=c("species", "chill", "dvr", "tx"))
+dvr <- dvr[!duplicated(dvr),]
 
-bbpre <- subset(bbpre , select=c("species", "fsmeanpre", "fspre.sd"))
-bbpre <- bbpre[!duplicated(bbpre),]
-bbpost <- subset(bbpost , select=c("species", "fsmeanpost", "fspost.sd"))
-bbpost <- bbpost[!duplicated(bbpost),]
+chilldvrfunc <- function (x) {
+  
+  exp <- dvr[(dvr$chill==x),]
+  exp <- na.omit(exp)
+  
+  cont <- exp[(exp$tx==0),]
+  frz <- exp[(exp$tx==1),]
+  cont$dvrcontmean <- ave(cont$dvr, cont$species)
+  cont$dvrcontsd<-ave(cont$dvr, cont$species, cont$tx, FUN=sd)/sqrt(length(unique(cont$dvrcontmean)))
+  frz$dvrfrzmean <- ave(frz$dvr, frz$species)
+  frz$dvrfrzsd<-ave(frz$dvr, frz$species, frz$tx, FUN=sd)/sqrt(length(unique(frz$dvrfrzmean)))
 
-bbdiff <- full_join(bbpre, bbpost)
+  cont <- subset(cont , select=c("species", "dvrcontmean", "dvrcontsd"))
+  cont <- cont[!duplicated(cont),]
+  frz <- subset(frz , select=c("species", "dvrfrzmean", "dvrfrzsd"))
+  frz <- frz[!duplicated(frz),]
 
-bbdiff$diff<-bbdiff$fsmeanpost-bbdiff$fsmeanpre
-bbdiff$diff.sd<-bbdiff$fspost.sd-bbdiff$fspre.sd
+  frzdiff <- full_join(cont, frz)
+
+  frzdiff$diff<-frzdiff$dvrfrzmean-frzdiff$dvrcontmean
+  frzdiff$diff.sd<-frzdiff$dvrfrzsd-frzdiff$dvrcontsd
+
+  frzdiff$xmin <- frzdiff$dvrcontmean-frzdiff$dvrcontsd
+  frzdiff$xmax <- frzdiff$dvrcontmean+frzdiff$dvrcontsd
+  frzdiff$ymin <- frzdiff$dvrfrzmean-frzdiff$dvrfrzsd
+  frzdiff$ymax <- frzdiff$dvrfrzmean+frzdiff$dvrfrzsd
+
+  mround <- function(x,base){ 
+    base*round(x/base) 
+  }
+  
+  frzdiff$diff.labels <- mround(frzdiff$diff, 0.5)
+  
+  frzdiff$species.name <- NA
+  frzdiff$species.name <- ifelse(frzdiff$species=="ACESAC", "Acer saccharinum", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="ALNRUG", "Alnus rugosa", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="BETPAP", "Betula papyrifera", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="BETPOP", "Betula populifolia", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="CORRAC", "Cornus racemosa", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="SALPUR", "Salix purpurea", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="SORAME", "Sorbus americana", frzdiff$species.name)
+  frzdiff$species.name <- ifelse(frzdiff$species=="VIBDEN", "Viburnum dentatum", frzdiff$species.name)
+
+  return(frzdiff)
+
+}
+
+chill4 <- chilldvrfunc(1)
+chill6 <- chilldvrfunc(2)
+chill8 <- chilldvrfunc(3)
+
+tt <- full_join(chill4, chill6)
+tt <- full_join(tt, chill8)
+valsize <- c(1:13)
+sizes <- sort(unique(tt$diff.labels))
 
 
-bbdiff$species<-ifelse(bbdiff$species=="BETPEN", "aaBETPEN", bbdiff$species)
-bbdiff$species<-ifelse(bbdiff$species=="FRAEXC", "zFRAEXC", bbdiff$species)
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
 
-bbdiff$ymin <- bbdiff$fsmeanpre-bbdiff$fspre.sd
-bbdiff$ymax <- bbdiff$fsmeanpre+bbdiff$fspre.sd
-bbdiff$xmin <- bbdiff$fsmeanpost-bbdiff$fspost.sd
-bbdiff$xmax <- bbdiff$fsmeanpost+bbdiff$fspost.sd
-
-bbdiff$diff.labels <- as.numeric(as.factor(bbdiff$diff))
-
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-diff <- ggplot(bbdiff, aes(x=fsmeanpre, y=fsmeanpost, col=species), alpha=2) + 
-  geom_point(aes(x=fsmeanpre, y=fsmeanpost, size=as.factor(diff.labels)), shape=21) + 
+dvr4 <- ggplot(chill4, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha=2) + 
+  geom_point(aes(x=dvrcontmean, y=dvrfrzmean, size=as.factor(diff.labels)), shape=21) + 
   geom_linerange(aes(ymin=ymin, ymax=ymax), alpha=0.3) +
   geom_errorbarh(aes(xmin = xmin, xmax = xmax, height = 0), alpha=0.3) +
   theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.text.align = 0,
+        legend.position = "none",
         legend.key = element_rect(colour = "transparent", fill = "white")) +
   #geom_text(aes(label=species), vjust=2) + 
-  xlab("False spring risk (1951-1983)") + 
-  ylab("False spring risk (1984-2016)") + 
+  xlab("Duration of vegetative risk (control)") + 
+  ylab("Duration of vegetative risk (treatment)") + 
   scale_color_manual(name="Species", values=cols,
-                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
-                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
-                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
-                              "QUEROB"=expression(paste(italic("Quercus robur"))),
-                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) +
-  scale_size_manual(name=expression(Delta*" in false spring risk"), values=c(1,2,3,4,5,6),
-                     labels=c(-0.02, -0.017, -0.011, 0.059, 0.061, 0.069)) +
+                     labels=chill4$species.name) +
+  scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
+                    labels=sizes) +
   #scale_size_continuous(name=expression(Delta*" in false spring risk")) + 
-  coord_cartesian(xlim=c(-0.05,0.5), ylim=c(-0.05,0.5))
+  scale_y_continuous(breaks=seq(8,28,2)) +
+  scale_x_continuous(breaks=seq(8,28,2)) +
+  coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) + guides(col=FALSE) +
+  ggtitle("A. Four weeks chilling")
+   
+dvr6 <- ggplot(chill6, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha=2) + 
+  geom_point(aes(x=dvrcontmean, y=dvrfrzmean, size=as.factor(diff.labels)), shape=21) + 
+  geom_linerange(aes(ymin=ymin, ymax=ymax), alpha=0.3) +
+  geom_errorbarh(aes(xmin = xmin, xmax = xmax, height = 0), alpha=0.3) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.position = "none",
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  #geom_text(aes(label=species), vjust=2) + 
+  xlab("Duration of vegetative risk (control)") + 
+  ylab("Duration of vegetative risk (treatment)") + 
+  scale_color_manual(name="Species", values=cols,
+                     labels=chill6$species.name) +
+  scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
+                    labels=sizes) +
+  #scale_size_continuous(name=expression(Delta*" in false spring risk")) + 
+  scale_y_continuous(breaks=seq(8,28,2)) +
+  scale_x_continuous(breaks=seq(8,28,2)) +
+  coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) + guides(col=FALSE) +
+  ggtitle("B. Six weeks chilling")
+
+dvr8 <- ggplot(chill8, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha=2) + 
+  geom_point(aes(x=dvrcontmean, y=dvrfrzmean, size=as.factor(diff.labels)), shape=21) + 
+  geom_linerange(aes(ymin=ymin, ymax=ymax), alpha=0.3) +
+  geom_errorbarh(aes(xmin = xmin, xmax = xmax, height = 0), alpha=0.3) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.position="none",
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.box="horizontal") +
+  #geom_text(aes(label=species.name), vjust=-1, angle=345, fontface="italic") + 
+  xlab("Duration of vegetative risk (control)") + 
+  ylab("Duration of vegetative risk (treatment)") + 
+  scale_color_manual(name="Species", values=cols,
+                     labels=chill8$species.name) +
+  scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
+                    labels=sizes) +
+  scale_y_continuous(breaks=seq(8,28,2)) +
+  scale_x_continuous(breaks=seq(8,28,2)) +
+  coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) +
+  ggtitle("C. Eight weeks chilling")
+
+
+sizelegend <- ggplot(aes(x=dvrcontmean, y=dvrfrzmean, col=species.name, size=as.factor(diff.labels)), data=tt) + 
+  geom_point(shape=19) +
+  scale_size_manual(name=expression("Change in duration of vegetative risk (days)"), values=valsize,
+                    labels=sizes, guide = guide_legend(title.position = "top", nrow=1, 
+                                                       override.aes = list(shape = 21),
+                                                       label.theme = element_text(size=7))) +
+  scale_color_manual(name="Species", values=cols, labels=tt$species.name,
+                     guide = guide_legend(title.position = "top", nrow=1,
+                                          override.aes = list(size = 2),
+                                          label.theme = element_text(face = "italic", size=7)))+
+  theme(legend.position = "bottom", legend.box="vertical",
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.box.just = "left",
+        #legend.justification = c("center", "bottom"),
+        legend.box.background = element_rect(),
+        legend.title = element_text(size=9),
+        legend.text.align = "left")  
+
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(sizelegend)
 
 quartz()
-plot(diff)
+g1 <- ggarrange(dvr4, dvr6, dvr8, ncol=3)
+dvrplot <- plot_grid(g1, NULL, mylegend, nrow=3, rel_heights=c(3, 0.3, 0.5))
+
+
+ggsave("figures/dvrspeciesdiff.png",width=6,height=3,units="in",bg = "white", dpi=500, plot=dvrplot)
 
 
