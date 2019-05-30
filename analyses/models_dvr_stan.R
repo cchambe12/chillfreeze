@@ -24,6 +24,7 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #testdat <- read.csv("output/fakedata.csv", header=TRUE)
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
+rmspp <- c("FAGGRA", "NYSSYL")
 
 if(FALSE){
 datalist.chill <- with(testdat, 
@@ -54,8 +55,8 @@ datalist.chill <- with(chill.stan,
 ###################### Determining best model ##########################################
 ########################################################################################
 if(FALSE){
-dvr.inter.skewnormal = stan('stan/dvr_winter_2level_ncp_skewnormal.stan', data = datalist.chill,
-                 iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ### 
+dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+                 iter = 5000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ### 
 
 #dvr.inter.normal = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
  #                       iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ### 
@@ -69,7 +70,7 @@ dvr.inter.skewnormal = stan('stan/dvr_winter_2level_ncp_skewnormal.stan', data =
 #dvr.brms.student <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat, family = student())
 
 
-check_all_diagnostics(dvr.inter.skewnormal)
+check_all_diagnostics(dvr.inter.ncp.skew)
 
 
 y <- as.vector(chill.stan$dvr)
@@ -104,15 +105,16 @@ print(loo_2)
 
 ########################################################################################
 ########################################################################################
-dvr.inter.ncp.skew = stan('stan/dvr_winter_2level_ncp_skewnormal.stan', data = datalist.chill,
-                     iter = 2500, warmup=1500, control=list(max_treedepth = 12,adapt_delta = 0.99)) ## 
+dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
+                     iter = 5000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ## 7 divergent transitions
 
 
-save(dvr.inter.ncp.skew, file="stan/dvr_inter_ncp_skewnormal.Rda")
+#save(dvr.inter.ncp, file="stan/dvr_inter_ncp.Rda")
  
 
 ########################################################################################
 ########################################################################################
+if(FALSE){
 chill.drought <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 
 datalist.chill.drought <- with(chill.drought, 
@@ -127,6 +129,7 @@ datalist.chill.drought <- with(chill.drought,
                             n_sp = length(unique(chill.drought$species))
                        )
 )
+
 
 dvr.inter.ncp.drought = stan('stan/dvr_winter_2level_ncp_drought_skew.stan', data = datalist.chill.drought,
                      iter = 4000, warmup=2000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ## 
@@ -143,4 +146,4 @@ ppc.min <- ppc_stat(y, yrep, stat = "min")
 ppc.sd <- ppc_stat(y, yrep, stat = "sd")
 
 save(dvr.inter.ncp.drought, file="stan/dvr_inter_ncp_drought.Rda")
-
+}

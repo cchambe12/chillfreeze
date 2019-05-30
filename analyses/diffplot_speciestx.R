@@ -92,7 +92,7 @@ dvr4 <- ggplot(chill4, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
         legend.key = element_rect(colour = "transparent", fill = "white")) +
   #geom_text(aes(label=species), vjust=2) + 
   xlab("Duration of vegetative risk (control)") + 
-  ylab("Duration of vegetative risk (treatment)") + 
+  ylab("Duration of vegetative \nrisk (treatment)") + 
   scale_color_manual(name="Species", values=cols,
                      labels=chill4$species.name) +
   scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
@@ -113,7 +113,7 @@ dvr6 <- ggplot(chill6, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
         legend.key = element_rect(colour = "transparent", fill = "white")) +
   #geom_text(aes(label=species), vjust=2) + 
   xlab("Duration of vegetative risk (control)") + 
-  ylab("Duration of vegetative risk (treatment)") + 
+  ylab("Duration of vegetative \nrisk (treatment)") + 
   scale_color_manual(name="Species", values=cols,
                      labels=chill6$species.name) +
   scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
@@ -135,7 +135,7 @@ dvr8 <- ggplot(chill8, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
         legend.box="horizontal") +
   #geom_text(aes(label=species.name), vjust=-1, angle=345, fontface="italic") + 
   xlab("Duration of vegetative risk (control)") + 
-  ylab("Duration of vegetative risk (treatment)") + 
+  ylab("Duration of vegetative \nrisk (treatment)") + 
   scale_color_manual(name="Species", values=cols,
                      labels=chill8$species.name) +
   scale_size_manual(name=expression("Change in duration of \nvegetative risk (days)"), values=valsize,
@@ -154,15 +154,16 @@ sizelegend <- ggplot(aes(x=dvrcontmean, y=dvrfrzmean, col=species.name, size=as.
                                                        label.theme = element_text(size=7))) +
   scale_color_manual(name="Species", values=cols, labels=tt$species.name,
                      guide = guide_legend(title.position = "top", nrow=1,
-                                          override.aes = list(size = 2),
+                                          override.aes = list(size = 3),
                                           label.theme = element_text(face = "italic", size=7)))+
   theme(legend.position = "bottom", legend.box="vertical",
         legend.key = element_rect(colour = "transparent", fill = "white"),
         legend.box.just = "left",
-        #legend.justification = c("center", "bottom"),
+        legend.justification = c("center", "bottom"),
         legend.box.background = element_rect(),
         legend.title = element_text(size=9),
-        legend.text.align = "left")  
+        legend.text.align = 0,
+        legend.spacing.y = unit(-0.05, "cm"))  
 
 g_legend<-function(a.gplot){
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
@@ -173,10 +174,14 @@ g_legend<-function(a.gplot){
 mylegend<-g_legend(sizelegend)
 
 quartz()
-g1 <- ggarrange(dvr4, dvr6, dvr8, ncol=3)
-dvrplot <- plot_grid(g1, NULL, mylegend, nrow=3, rel_heights=c(3, 0.3, 0.5))
+dvrplot<-grid.arrange(dvr4, dvr6, dvr8, mylegend, nrow=4, heights = c(4, 0.55, 0.5, 0.55), 
+             layout_matrix=rbind(c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3),
+                                 c(NA),
+                                 c(NA, 4, 4, 4, NA),
+                                 c(NA)))
 
 
-ggsave("figures/dvrspeciesdiff.png",width=6,height=3,units="in",bg = "white", dpi=500, plot=dvrplot)
+
+ggsave("figures/dvrspeciesdifftest.png",width=30, height=14,units="cm",bg = "white",dpi=500, plot=dvrplot)
 
 

@@ -17,9 +17,9 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
 #load("stan/dvr_inter_ncp_skewnormal.Rda")
-load("stan/dvr_inter_ncp_drought.Rda")
+#load("stan/dvr_inter_ncp_drought.Rda")
 
-chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
+#chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 #chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 
@@ -38,14 +38,14 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "ht.rgr" ### change based on model
+figpathmore <- "htrgr.ncp" ### change based on model
 
 source("exp_muplot.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-xlab <- "Model estimate of change in \nrelative growth rate (height in cm)" ## change based on model
+xlab <- "Model estimate of change in \nrelative growth rate in height (cm)" ## change based on model
 
 sumer.ni <- summary(htrgr.inter.normal)$summary
 sumer.ni[grep("mu_", rownames(sumer.ni)),]

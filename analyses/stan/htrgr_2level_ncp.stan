@@ -15,6 +15,7 @@ data {
 		
 	}
 
+
 transformed data {
   vector[N] inter_txchill1;
   vector[N] inter_txchill2;
@@ -22,6 +23,7 @@ transformed data {
   inter_txchill1    = tx .* chill1;
   inter_txchill2    = tx .* chill2;
 }
+
 
 parameters {
   real mu_a_sp;   
@@ -38,10 +40,12 @@ parameters {
   real<lower=0> sigma_b_txchill2_sp;
   real<lower=0> sigma_y; 
 
-  vector[n_sp] a_sp; // intercept for species
-  vector[n_sp] b_tx; // slope of forcing effect 
-  vector[n_sp] b_chill1; // slope of photoperiod effect
-  vector[n_sp] b_chill2; // slope of chill effect
+  real a_sp[n_sp]; // intercept for species
+  real b_tx[n_sp]; // slope of forcing effect 
+  real b_chill1[n_sp]; // slope of photoperiod effect
+  real b_chill2[n_sp]; // slope of chill effect
+  //real b_txchill1[n_sp]; // slope of chill x force effect
+  //real b_txchill2[n_sp]; // slope of chill x force effect
   vector[n_sp] b_txchill1_ncp; // slope of lat effect
   vector[n_sp] b_txchill2_ncp; // slope of chill x force effect
 
@@ -57,11 +61,11 @@ transformed parameters {
   
        	for(i in 1:N){
             yhat[i] = a_sp[sp[i]] + // indexed with species
-		b_tx[sp[i]] * tx[i] + 
-	      	b_chill1[sp[i]] * chill1[i] +
-		b_chill2[sp[i]] * chill2[i] +
-		      b_txchill1[sp[i]] * inter_txchill1[i] +
-                b_txchill2[sp[i]] *  inter_txchill2[i];
+		b_tx[sp[i]] * tx[i] +
+		  b_chill1[sp[i]] * chill1[i] +
+		b_txchill1[sp[i]] * inter_txchill1[i] +
+		  b_chill2[sp[i]] * chill2[i] +
+		b_txchill2[sp[i]] * inter_txchill2[i];
 	}
 }
 
@@ -74,23 +78,23 @@ model {
 	//b_txchill1 ~ normal(mu_b_txchill1_sp, sigma_b_txchill1_sp);
 	//b_txchill2 ~ normal(mu_b_txchill2_sp, sigma_b_txchill2_sp); 
 	
-	b_txchill1_ncp ~ normal(0, 10);
-	b_txchill2_ncp ~ normal(0, 10);
+	b_txchill1_ncp ~ normal(0,1); //implies  b_txchill1 ~ normal(mu_b_txchill1_sp, sigma_b_txchill1_sp);
+	b_txchill2_ncp ~ normal(0,1);
 
-        mu_a_sp ~ normal(0, 50);
-        sigma_a_sp ~ normal(0, 10);
+        mu_a_sp ~ normal(0, 20); // 0, 20 works
+        sigma_a_sp ~ normal(0, 5); // 0,5
 
-        mu_b_tx_sp ~ normal(0, 50);
-        sigma_b_tx_sp ~ normal(0, 10);
-        mu_b_chill1_sp ~ normal(0, 50);
-        sigma_b_chill1_sp ~ normal(0, 10);
-        mu_b_chill2_sp ~ normal(0, 50);
-        sigma_b_chill2_sp ~ normal(0, 10);
-        mu_b_txchill1_sp ~ normal(0, 50);
-        sigma_b_txchill1_sp ~ normal(0, 10);
+        mu_b_tx_sp ~ normal(0, 20);
+        sigma_b_tx_sp ~ normal(0, 5);
+        mu_b_chill1_sp ~ normal(0, 20);
+        sigma_b_chill1_sp ~ normal(0, 5);
+        mu_b_chill2_sp ~ normal(0, 20);
+        sigma_b_chill2_sp ~ normal(0, 5);
+        mu_b_txchill1_sp ~ normal(0, 20);
+        sigma_b_txchill1_sp ~ normal(0, 5);
 
-        mu_b_txchill2_sp ~ normal(0, 50);
-        sigma_b_txchill2_sp ~ normal(0, 10);
+        mu_b_txchill2_sp ~ normal(0, 20);
+        sigma_b_txchill2_sp ~ normal(0, 5);
 
 	y ~ normal(yhat, sigma_y);
 
@@ -108,6 +112,7 @@ generated quantities{
 		b_txchill2[sp[n]] * inter_txchill2[n];
     for (n in 1:N)
       y_ppc[n] = normal_rng(y_ppc[n], sigma_y);
+
 }
 */
 

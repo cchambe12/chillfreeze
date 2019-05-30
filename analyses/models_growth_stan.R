@@ -50,12 +50,7 @@ datalist.chill <- with(chill.stan,
                        )
 )
 
-library(rstanarm)
-chill.stan$chlconv <- chill.stan$mg.cm2*100
-chl.arm <- stan_glmer(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data = chill.stan)
-
-
-htrgr.inter.normal = stan('stan/zarchive/htrgr_2level_normal.stan', data = datalist.chill,
+htrgr.inter = stan('stan/htrgr_2level_normal.stan', data = datalist.chill,
                               iter = 5000, warmup=3000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
@@ -68,7 +63,7 @@ check_all_diagnostics(htrgr.inter.normal)
 
 
 y <- as.vector(chill.stan$ht.rgr)
-yrep <- rstan::extract(chl.inter.normal)
+yrep <- rstan::extract(htrgr.inter.normal)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)
 ppc.max <- ppc_stat(y, yrep, stat = "max")
