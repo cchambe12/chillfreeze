@@ -101,7 +101,7 @@ dvr4 <- ggplot(chill4, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
   scale_y_continuous(breaks=seq(8,28,2)) +
   scale_x_continuous(breaks=seq(8,28,2)) +
   coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) + guides(col=FALSE) +
-  ggtitle("A. Four weeks chilling")
+  ggtitle("A. Four weeks chilling") + geom_abline(intercept = 0, slope = 1, col=grey)
    
 dvr6 <- ggplot(chill6, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha=2) + 
   geom_point(aes(x=dvrcontmean, y=dvrfrzmean, size=as.factor(diff.labels)), shape=21) + 
@@ -122,7 +122,7 @@ dvr6 <- ggplot(chill6, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
   scale_y_continuous(breaks=seq(8,28,2)) +
   scale_x_continuous(breaks=seq(8,28,2)) +
   coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) + guides(col=FALSE) +
-  ggtitle("B. Six weeks chilling")
+  ggtitle("B. Six weeks chilling") + geom_abline(intercept = 0, slope = 1, col=grey)
 
 dvr8 <- ggplot(chill8, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha=2) + 
   geom_point(aes(x=dvrcontmean, y=dvrfrzmean, size=as.factor(diff.labels)), shape=21) + 
@@ -143,7 +143,7 @@ dvr8 <- ggplot(chill8, aes(x=dvrcontmean, y=dvrfrzmean, col=species.name), alpha
   scale_y_continuous(breaks=seq(8,28,2)) +
   scale_x_continuous(breaks=seq(8,28,2)) +
   coord_cartesian(xlim=c(8,28), ylim=c(8,28), expand=TRUE) +
-  ggtitle("C. Eight weeks chilling")
+  ggtitle("C. Eight weeks chilling") + geom_abline(intercept = 0, slope = 1, col=grey)
 
 
 sizelegend <- ggplot(aes(x=dvrcontmean, y=dvrfrzmean, col=species.name, size=as.factor(diff.labels)), data=tt) + 
