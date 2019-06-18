@@ -26,6 +26,7 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
 chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
+chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
 
 #chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 #chill.stan <- chill.stan[!is.na(chill.stan$thickness),]

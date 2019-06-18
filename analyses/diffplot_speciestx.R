@@ -222,7 +222,7 @@ dvrbar4 <- ggplot(chill.bars4, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white")) +
   xlab("") + 
-  ylab("Duration of vegetative risk") + 
+  ylab("Duration of vegetative risk (days)") + 
   scale_fill_manual(name="Species", values=cols,
                     labels=chill.bars4$code) +
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
@@ -238,7 +238,7 @@ dvrbar4 <- ggplot(chill.bars4, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                               "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="Treatments", values=c(0.1, 1), labels=chill.bars4$tx) +
   coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE) + guides(fill=FALSE) +
-  ggtitle("A. Four weeks chilling") 
+  ggtitle("A. Four weeks chilling")  + coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE)
 
 chill.bars6$dvrmean <- ave(chill.bars6$dvr, chill.bars6$tx, chill.bars6$species)
 chill.bars6$dvrsd <- ave(chill.bars6$dvr, chill.bars6$tx, chill.bars6$species, FUN=sd)
@@ -254,9 +254,13 @@ dvrbar6 <- ggplot(chill.bars6, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         legend.text.align = 0,
         legend.position = "none",
         axis.text.x = element_text(face = "italic", angle=45, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white")) +
+        legend.key = element_rect(colour = "transparent", fill = "white")#,
+        #axis.title.y = element_blank(),
+        #axis.text.y = element_blank(),
+        #axis.ticks.y = element_blank()
+        ) +
   xlab("") + 
-  ylab("Duration of vegetative risk") + 
+  ylab("Duration of vegetative risk (days)") + 
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
   geom_hline(aes(yintercept = meantx), col="black", alpha=1, linetype="dashed") +
   #scale_y_continuous(breaks = sort(c(seq(min(5), max(35), length.out=5), 15.4, 17.5))) +
@@ -272,7 +276,7 @@ dvrbar6 <- ggplot(chill.bars6, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                             "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="Treatments", values=c(0.1, 1), labels=chill.bars6$tx) +
   coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE) + guides(fill=FALSE) +
-  ggtitle("B. Six weeks chilling") 
+  ggtitle("B. Six weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE)
 
 
 chill.bars8$dvrmean <- ave(chill.bars8$dvr, chill.bars8$tx, chill.bars8$species)
@@ -289,9 +293,13 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         legend.text.align = 0,
         #legend.position = "none",
         axis.text.x = element_text(face = "italic", angle=45, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white")) +
+        legend.key = element_rect(colour = "transparent", fill = "white")#,
+        #axis.title.y = element_blank(),
+        #axis.text.y = element_blank(),
+        #axis.ticks.y = element_blank()
+        ) +
   xlab("") + 
-  ylab("Duration of vegetative risk") + 
+  ylab("Duration of vegetative risk (days)") + 
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
   geom_hline(aes(yintercept = meantx), col="black", alpha=1, linetype="dashed") +
   #scale_y_continuous(breaks = sort(c(seq(min(5), max(35), length.out=5), 13.2, 16.9))) +
@@ -306,11 +314,11 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                             "SORAME"="Sorbus americana",
                             "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="", values=c(0.1, 1), labels=chill.bars8$tx) +
-  coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE) + guides(fill=FALSE) +
-  ggtitle("C. Eight weeks chilling")
+  guides(fill=FALSE) +
+  ggtitle("C. Eight weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(5,35), expand=TRUE)
 
 
 quartz()
-dvrbarplot <- grid.arrange(dvrbar4, dvrbar6, dvrbar8, ncol=3, widths=c(1, 1, 1.4))
+dvrbarplot <- grid.arrange(dvrbar4, dvrbar6, dvrbar8, ncol=3, widths=c(1, 1, 1.3))
 
 ggsave("figures/dvrspeciesbarplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)

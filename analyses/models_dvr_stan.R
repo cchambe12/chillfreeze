@@ -70,11 +70,11 @@ dvr.inter.ncp = stan('stan/dvr_winter_2level_ncp.stan', data = datalist.chill,
 #dvr.brms.student <- brm(dvr ~ tx*chill1 + tx*chill2 + (1|species), data=testdat, family = student())
 
 
-check_all_diagnostics(dvr.inter.ncp.skew)
+check_all_diagnostics(dvr.inter.ncp)
 
 
 y <- as.vector(chill.stan$dvr)
-yrep <- extract(dvr.inter.skewnormal)
+yrep <- extract(dvr.inter.ncp)
 yrep <- yrep$yhat
 ppc <- ppc_stat(y, yrep)
 ppc.max <- ppc_stat(y, yrep, stat = "max")

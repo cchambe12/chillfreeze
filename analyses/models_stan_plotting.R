@@ -38,23 +38,23 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "htrgr.ncp" ### change based on model
+figpathmore <- "dvr.ncp" ### change based on model
 
 source("exp_muplot.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-xlab <- "Model estimate of change in \nrelative growth rate in height (cm)" ## change based on model
+xlab <- "Model estimate of change in \nduration of vegetative risk (days)" ## change based on model
 
-sumer.ni <- summary(htrgr.inter.normal)$summary
+sumer.ni <- summary(dvr.inter.ncp)$summary
 sumer.ni[grep("mu_", rownames(sumer.ni)),]
 
 sort(unique(chill.stan$species)) # numbers are alphabetical
 
 
-modelhere <- htrgr.inter.normal
+modelhere <- dvr.inter.ncp
 #quartz()
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 10.5, 3.5)
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-1.5, 1.5) , 1.7, 3.5)
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 10.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-1.5, 1.5) , 1.7, 3.5)
 
