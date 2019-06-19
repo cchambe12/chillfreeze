@@ -54,8 +54,8 @@ datalist.chill <- with(chill.stan,
 htrgr.inter = stan('stan/htrgr_2level_normal.stan', data = datalist.chill,
                               iter = 5000, warmup=3000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
-chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
-                           iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
+#chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
+                           #iter = 5000, warmup=3000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
 
 #thickness.chill2 = stan('stan/zarchive/thickness_2level.stan', data = datalist.chill,
  #                       iter = 4500, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
