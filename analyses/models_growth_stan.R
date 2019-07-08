@@ -11,6 +11,7 @@ library(egg) ## for plotting
 library(shinystan)
 library(rstanarm)
 library(rstan)
+library(brms)
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -41,8 +42,8 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 
 chill.stan <- chill.stan[!is.na(chill.stan$tough),]
 
-#toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
- #                    data=chill.stan)
+toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
+                     data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
 
 datalist.chill <- with(chill.stan, 
@@ -58,6 +59,7 @@ datalist.chill <- with(chill.stan,
 
 tough.inter = stan('stan/toughness_2level_normal.stan', data = datalist.chill,
                               iter = 4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
+save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/toughness_brms.Rdata")
 
 #chl.inter.normal = stan('stan/zarchive/chl_2level_normal.stan', data = datalist.chill,
                            #iter = 5000, warmup=3000, control=list(max_treedepth = 15,adapt_delta = 0.99)) ###
@@ -83,7 +85,7 @@ grid.arrange(ppc, ppc.sd, ppc.max, ppc.min, ncol=2, nrow=2)
 save(dvr.inter.ncp.skew, file="stan/ht_inter_ncp_skewnormal.Rda")
   
   
-  
+
   
   
   
