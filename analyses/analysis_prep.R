@@ -89,7 +89,8 @@ table(howfaralong.frz$chilltx)
 
 
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "X60dayheight", "chl1", "chl2",
-                                   "chl3", "chl4", "mg.cm2", "thick1", "thick2", "tough1", "tough2"))
+                                   "chl3", "chl4", "mg.cm2", "thick1", "thick2", "tough1", "tough2",
+                                   "ht.prebudset", "ht.date"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -102,6 +103,20 @@ chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst ### Using this point 
 chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht 
 chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
 chill.stan$tough <- (chill.stan$tough1 + chill.stan$tough2)/2
+
+chill.stan$tough.date <- NA
+chill.stan$tough.date <- ifelse(chill.stan$chill==1, (170+6), chill.stan$tough.date)
+chill.stan$tough.date <- ifelse(chill.stan$chill==2, (184-7), chill.stan$tough.date)
+chill.stan$tough.date <- ifelse(chill.stan$chill==3, (184-21), chill.stan$tough.date)
+
+chill.stan$tough.age <- chill.stan$tough.date - chill.stan$lo
+
+#chill.stan$ht.late <- chill.stan$ht.prebudset - chill.stan$lo.ht
+
+chill.stan$ht.date.new <- NA
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), chill.stan$tough.date)
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
 #write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
 

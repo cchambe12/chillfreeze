@@ -9,6 +9,7 @@ options(stringsAsFactors = FALSE)
 library(RColorBrewer)
 library(rstan)
 library(dplyr)
+library(broom)
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -47,7 +48,7 @@ cols <- adjustcolor("indianred3", alpha.f = 0.3)
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-xlab <- "Model estimate of change in \nleaf toughness (N)" ## change based on model
+xlab <- "Model estimate of change in \nleaf toughness/leaf age (N/days)" ## change based on model
 
 #sumer.ni <- summary()$summary
 #sumer.ni[grep("mu_", rownames(sumer.ni)),]

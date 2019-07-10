@@ -40,11 +40,17 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #rmspp <- c("FAGGRA", "NYSSYL")
 #chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$tough),]
+#chill.stan <- chill.stan[!is.na(chill.stan$tough),]
+
+chill.stan <- chill.stan[!is.na(chill.stan$ht.prebudset),]
+#chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
+chill.stan$ht.rgr <- (log(chill.stan$ht.prebudset) - log(chill.stan$lo.ht))*10
 
 toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
                      data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
+ht.rgr.new <- brm(ht.rgr ~ tx + (tx|species), data=chill.stan,
+                  iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
 datalist.chill <- with(chill.stan, 
                        list(y = tough, 
