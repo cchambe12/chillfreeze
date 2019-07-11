@@ -118,6 +118,8 @@ chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), ch
 chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
 chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
+chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
+
 #write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
 
 #### Below code is just for quick checks with data coming in, to delete when experiment is over!!

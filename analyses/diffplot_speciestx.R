@@ -186,7 +186,7 @@ ggsave("figures/dvrspeciesdifftest.png",width=30, height=14,units="cm",bg = "whi
 
 
 ##### Now for some bar plots with error bars, ordered by day of budburst #####
-dvrbar <- subset(chillfrz, select=c("species", "chill", "tough", "tx", "budburst"))
+dvrbar <- subset(chillfrz, select=c("species", "chill", "rgr_prebudset", "tx", "budburst"))
 dvrbar <- na.omit(dvrbar)
 dvrbar <- dvrbar[!duplicated(dvrbar),]
 dvrbar$tx <-ifelse(dvrbar$tx==0, "control", "treatment")
@@ -206,12 +206,12 @@ chill.bars4 <- dvrbar[(dvrbar$chill==1),]
 chill.bars6 <- dvrbar[(dvrbar$chill==2),]
 chill.bars8 <- dvrbar[(dvrbar$chill==3),]
 
-chill.bars4$dvrmean <- ave(chill.bars4$tough, chill.bars4$tx, chill.bars4$species)
-chill.bars4$dvrsd <- ave(chill.bars4$tough, chill.bars4$tx, chill.bars4$species, FUN=sd)
+chill.bars4$dvrmean <- ave(chill.bars4$rgr_prebudset, chill.bars4$tx, chill.bars4$species)
+chill.bars4$dvrsd <- ave(chill.bars4$rgr_prebudset, chill.bars4$tx, chill.bars4$species, FUN=sd)
 chill.bars4$ymin <- chill.bars4$dvrmean-chill.bars4$dvrsd
 chill.bars4$ymax <- chill.bars4$dvrmean+chill.bars4$dvrsd
-chill.bars4$meancont <- mean(chill.bars4$tough[chill.bars4$tx=="control"]) # 0.44
-chill.bars4$meantx <- mean(chill.bars4$tough[chill.bars4$tx=="treatment"]) # 0.38
+chill.bars4$meancont <- mean(chill.bars4$rgr_prebudset[chill.bars4$tx=="control"]) # 0.44
+chill.bars4$meantx <- mean(chill.bars4$rgr_prebudset[chill.bars4$tx=="treatment"]) # 0.38
 
 dvrbar4 <- ggplot(chill.bars4, aes(x=code, y=dvrmean, fill=code, alpha=tx)) + 
   geom_bar(stat="identity", position=position_dodge()) +
@@ -222,7 +222,7 @@ dvrbar4 <- ggplot(chill.bars4, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white")) +
   xlab("") + 
-  ylab("Leaf toughness (N)") + 
+  ylab("Relative growth rate (cm/days)") + 
   scale_fill_manual(name="Species", values=cols,
                     labels=chill.bars4$code) +
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
@@ -237,15 +237,15 @@ dvrbar4 <- ggplot(chill.bars4, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                               "SORAME"="Sorbus americana",
                               "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="Treatments", values=c(0.1, 1), labels=chill.bars4$tx) +
-  coord_cartesian(xlim=c(1, 8), ylim=c(0,1), expand=TRUE) + guides(fill=FALSE) +
-  ggtitle("A. Four weeks chilling")  + coord_cartesian(xlim=c(1, 8), ylim=c(0,1), expand=TRUE)
+  guides(fill=FALSE) +
+  ggtitle("A. Four weeks chilling")  + coord_cartesian(xlim=c(1, 8), ylim=c(-5,85), expand=TRUE)
 
-chill.bars6$dvrmean <- ave(chill.bars6$tough, chill.bars6$tx, chill.bars6$species)
-chill.bars6$dvrsd <- ave(chill.bars6$tough, chill.bars6$tx, chill.bars6$species, FUN=sd)
+chill.bars6$dvrmean <- ave(chill.bars6$rgr_prebudset, chill.bars6$tx, chill.bars6$species)
+chill.bars6$dvrsd <- ave(chill.bars6$rgr_prebudset, chill.bars6$tx, chill.bars6$species, FUN=sd)
 chill.bars6$ymin <- chill.bars6$dvrmean-chill.bars6$dvrsd
 chill.bars6$ymax <- chill.bars6$dvrmean+chill.bars6$dvrsd
-chill.bars6$meancont <- mean(chill.bars6$tough[chill.bars6$tx=="control"]) #15.4
-chill.bars6$meantx <- mean(chill.bars6$tough[chill.bars6$tx=="treatment"]) #17.5
+chill.bars6$meancont <- mean(chill.bars6$rgr_prebudset[chill.bars6$tx=="control"]) #15.4
+chill.bars6$meantx <- mean(chill.bars6$rgr_prebudset[chill.bars6$tx=="treatment"]) #17.5
 
 dvrbar6 <- ggplot(chill.bars6, aes(x=code, y=dvrmean, fill=code, alpha=tx)) + 
   geom_bar(stat="identity", position=position_dodge()) +
@@ -260,7 +260,7 @@ dvrbar6 <- ggplot(chill.bars6, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         #axis.ticks.y = element_blank()
         ) +
   xlab("") + 
-  ylab("Leaf toughness (N)") + 
+  ylab("Relative growth rate (cm/days)") + 
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
   geom_hline(aes(yintercept = meantx), col="black", alpha=1, linetype="dashed") +
   #scale_y_continuous(breaks = sort(c(seq(min(5), max(35), length.out=5), 15.4, 17.5))) +
@@ -275,16 +275,16 @@ dvrbar6 <- ggplot(chill.bars6, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                             "SORAME"="Sorbus americana",
                             "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="Treatments", values=c(0.1, 1), labels=chill.bars6$tx) +
-  coord_cartesian(xlim=c(1, 8), ylim=c(0,1), expand=TRUE) + guides(fill=FALSE) +
-  ggtitle("B. Six weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(0,1), expand=TRUE)
+  guides(fill=FALSE) +
+  ggtitle("B. Six weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(-5,85), expand=TRUE)
 
 
-chill.bars8$dvrmean <- ave(chill.bars8$tough, chill.bars8$tx, chill.bars8$species)
-chill.bars8$dvrsd <- ave(chill.bars8$tough, chill.bars8$tx, chill.bars8$species, FUN=sd)
+chill.bars8$dvrmean <- ave(chill.bars8$rgr_prebudset, chill.bars8$tx, chill.bars8$species)
+chill.bars8$dvrsd <- ave(chill.bars8$rgr_prebudset, chill.bars8$tx, chill.bars8$species, FUN=sd)
 chill.bars8$ymin <- chill.bars8$dvrmean-chill.bars8$dvrsd
 chill.bars8$ymax <- chill.bars8$dvrmean+chill.bars8$dvrsd
-chill.bars8$meancont <- mean(chill.bars8$tough[chill.bars8$tx=="control"]) #13.2
-chill.bars8$meantx <- mean(chill.bars8$tough[chill.bars8$tx=="treatment"]) #16.9
+chill.bars8$meancont <- mean(chill.bars8$rgr_prebudset[chill.bars8$tx=="control"]) #13.2
+chill.bars8$meantx <- mean(chill.bars8$rgr_prebudset[chill.bars8$tx=="treatment"]) #16.9
 
 dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) + 
   geom_bar(stat="identity", position=position_dodge()) +
@@ -299,7 +299,7 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
         #axis.ticks.y = element_blank()
         ) +
   xlab("") + 
-  ylab("Leaf toughness (N)") + 
+  ylab("Relative growth rate (cm/days)") + 
   geom_hline(aes(yintercept = meancont), col="black", alpha=0.3, linetype="dashed") +
   geom_hline(aes(yintercept = meantx), col="black", alpha=1, linetype="dashed") +
   #scale_y_continuous(breaks = sort(c(seq(min(5), max(35), length.out=5), 13.2, 16.9))) +
@@ -315,10 +315,10 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
                             "VIBDEN"="Viburnum dentatum")) +
   scale_alpha_manual(name="", values=c(0.1, 1), labels=chill.bars8$tx) +
   guides(fill=FALSE) +
-  ggtitle("C. Eight weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(0,1), expand=TRUE)
+  ggtitle("C. Eight weeks chilling") + coord_cartesian(xlim=c(1, 8), ylim=c(-5,85), expand=TRUE)
 
 
 quartz()
 dvrbarplot <- grid.arrange(dvrbar4, dvrbar6, dvrbar8, ncol=3, widths=c(1, 1, 1.3))
 
-ggsave("figures/toughnessspeciesplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)
+ggsave("figures/rgrprebudset_speciesplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)

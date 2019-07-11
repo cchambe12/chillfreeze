@@ -20,11 +20,12 @@ setwd("~/Documents/git/chillfreeze/analyses")
 ## load the model
 #load("stan/dvr_inter_ncp_skewnormal.Rda")
 #load("stan/dvr_inter_ncp_drought.Rda")
-load("stan/toughness_brms.Rdata")
+#load("stan/toughness_brms.Rdata")
+load("stan/rgr_prebudset_brms.Rdata")
 
 #chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
-chill.stan <- chill.stan[!is.na(chill.stan$tough),]
+chill.stan <- chill.stan[!is.na(chill.stan$ht.prebudset),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -41,14 +42,14 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "toughness.brms" ### change based on model
+figpathmore <- "rgr_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-xlab <- "Model estimate of change in \nleaf toughness/leaf age (N/days)" ## change based on model
+xlab <- "Model estimate of change in \nrelative growth rate (cm/days)" ## change based on model
 
 #sumer.ni <- summary()$summary
 #sumer.ni[grep("mu_", rownames(sumer.ni)),]
@@ -57,65 +58,66 @@ xlab <- "Model estimate of change in \nleaf toughness/leaf age (N/days)" ## chan
 
 spp <- unique(chill.stan$species)
 
+modelhere <- ht.rgr.new
 
-tx <- coef(toughness.mod, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
+tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
   rename(mean = Estimate) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
-  select( mean, `25%`, `75%`) 
+  dplyr::select(mean, `25%`, `75%`) 
 new.names<-NULL
 for(i in 1:length(spp)){
   new.names[i]<-paste("tx", "[", i, "]", sep="")
 }
 tx$parameter<-new.names
-chill1 <- coef(toughness.mod, prob=c(0.25, 0.75))$species[, c(1, 3:4), 3] %>%
+chill1 <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 3] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
   rename(mean = Estimate) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
-  select( mean, `25%`, `75%`) 
+  dplyr::select( mean, `25%`, `75%`) 
 new.names<-NULL
 for(i in 1:length(spp)){
   new.names[i]<-paste("chill1", "[", i, "]", sep="")
 }
 chill1$parameter<-new.names
 mod.ranef<-full_join(tx, chill1)
-chill2 <- coef(toughness.mod, prob=c(0.25, 0.75))$species[, c(1, 3:4), 4] %>%
+chill2 <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 4] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
   rename(mean = Estimate) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
-  select( mean, `25%`, `75%`) 
+  dplyr::select( mean, `25%`, `75%`) 
 new.names<-NULL
 for(i in 1:length(spp)){
   new.names[i]<-paste("chill2", "[", i, "]", sep="")
 }
 chill2$parameter<-new.names
 mod.ranef <- full_join(mod.ranef, chill2)
-txchill1 <- coef(toughness.mod, prob=c(0.25, 0.75))$species[, c(1, 3:4), 5] %>%
+txchill1 <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 5] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
   rename(mean = Estimate) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
-  select( mean, `25%`, `75%`) 
+  dplyr::select( mean, `25%`, `75%`) 
 new.names<-NULL
 for(i in 1:length(spp)){
   new.names[i]<-paste("tx:chill1", "[", i, "]", sep="")
 }
 txchill1$parameter<-new.names
 mod.ranef<-full_join(mod.ranef, txchill1)
-txchill2 <- coef(toughness.mod, prob=c(0.25, 0.75))$species[, c(1, 3:4), 6] %>%
+txchill2 <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 6] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
   rename(mean = Estimate) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
-  select( mean, `25%`, `75%`) 
+  dplyr::select( mean, `25%`, `75%`) 
 new.names<-NULL
 for(i in 1:length(spp)){
   new.names[i]<-paste("tx:chill2", "[", i, "]", sep="")
@@ -123,9 +125,8 @@ for(i in 1:length(spp)){
 txchill2$parameter<-new.names
 mod.ranef<-full_join(mod.ranef, txchill2)
 
-modelhere <- toughness.mod
 modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 10.5, 3.5)
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.2, 0.2) , 0.22, 3.5)
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-20, 30) , 32, 3.5)
 
