@@ -48,10 +48,13 @@ chill.stan <- chill.stan[!is.na(chill.stan$rgr_prebudset),]
 #toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
  #                    data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
-ht.rgr.new <- brm(rgr_prebudset ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
-                  iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+#ht.rgr.new <- brm(rgr_prebudset ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+ #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
-save(ht.rgr.new, file="~/Documents/git/chillfreeze/analyses/stan/rgr_prebudset_brms.Rdata")
+#thickness.mod <- brm(thickness ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+#                  iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+
+#save(thickness.mod, file="~/Documents/git/chillfreeze/analyses/stan/thickness_brms.Rdata")
 
 datalist.chill <- with(chill.stan, 
                        list(y = tough, 
