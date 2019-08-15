@@ -8,3 +8,11 @@ lm(absorb~conc, data=df.caffeic)
 
 
 plot(absorb~conc, data=df.caffeic)
+
+
+## Function for absorbance
+folinfunc <- function(x) { 
+  
+  absorb = 0.00264*x + 0.022
+  
+  }
