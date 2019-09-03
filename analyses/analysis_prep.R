@@ -58,8 +58,8 @@ obs$ht2 <- as.Date(obs$leafout + 28, origin = obs$start)
 
 obs$ht.mid <- as.Date(obs$leafout + 60, origin = obs$start)
 
-whentomeasure <- subset(obs, select=c("id", "ht.mid"))
-whentomeasure <- whentomeasure[!duplicated(whentomeasure),]
+#whentomeasure <- subset(obs, select=c("id", "ht.mid"))
+#whentomeasure <- whentomeasure[!duplicated(whentomeasure),]
 #write.csv(whentomeasure, file="~/Desktop/whentomeasureheights.csv", row.names = FALSE)
 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
@@ -85,12 +85,9 @@ table(howfaralong.frz$chilltx)
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 
-
-
-
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "X60dayheight", "chl1", "chl2",
                                    "chl3", "chl4", "mg.cm2", "thick1", "thick2", "tough1", "tough2",
-                                   "ht.prebudset", "ht.date"))
+                                   "ht.prebudset", "ht.date", "phenol"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -119,6 +116,13 @@ chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), ch
 chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
 chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
+
+source("..//standardcurve.R")
+
+chill.stan$folin <- folinfunc(as.numeric(chill.stan$phenol))
+
+
+
 
 #write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
 
