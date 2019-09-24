@@ -85,9 +85,8 @@ table(howfaralong.frz$chilltx)
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 
-chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "X60dayheight", "chl1", "chl2",
-                                   "chl3", "chl4", "mg.cm2", "thick1", "thick2", "tough1", "tough2",
-                                   "ht.prebudset", "ht.date", "phenol"))
+chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "thick1", "thick2", "tough1", "tough2",
+                                  "budset", "shoots", "roots", "ht.final", "mg.cm2", "phenol"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -97,9 +96,10 @@ with(chill.stan, table(chill1, chill2))
 
 chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst ### Using this point of code for "drought" effect test
-chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht 
-chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
+#chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht 
+#chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
 chill.stan$tough <- (chill.stan$tough1 + chill.stan$tough2)/2
+chill.stan$thick <- (chill.stan$thick1 + chill.stan$thick2)/2
 
 chill.stan$tough.date <- NA
 chill.stan$tough.date <- ifelse(chill.stan$chill==1, (170+6), chill.stan$tough.date)
@@ -110,19 +110,31 @@ chill.stan$tough.age <- chill.stan$tough.date - chill.stan$lo
 
 #chill.stan$ht.late <- chill.stan$ht.prebudset - chill.stan$lo.ht
 
-chill.stan$ht.date.new <- NA
-chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), chill.stan$tough.date)
-chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
-chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
+#chill.stan$ht.date.new <- NA
+#chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), chill.stan$tough.date)
+#chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
+#chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
-chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
+chill.stan$budset <- as.Date(chill.stan$budset, "%m/%d/%y")
+chill.stan$bset <- yday(chill.stan$budset)
+
+chill.stan$budsetdoy <- NA
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==1, (chill.stan$budsetdoy+6), chill.stan$bset)
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==2, (chill.stan$budsetdoy-7), chill.stan$bset)
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==3, (chill.stan$budsetdoy-21), chill.stan$bset)
+
+chill.stan$gslength <- chill.stan$budsetdoy - chill.stan$lo
+
+#chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
+
+chill.stan$rgr_final <- (chill.stan$ht.final - chill.stan$lo.ht)/(chill.stan$gslength)*100
 
 source("..//standardcurve.R")
 
 chill.stan$folin <- folinfunc(as.numeric(chill.stan$phenol))
 
 
-
+write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_traits.csv", row.names=FALSE)
 
 #write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
 

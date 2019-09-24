@@ -21,8 +21,9 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 source('source/stan_utility.R')
 
-chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
+#chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
+chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
@@ -42,7 +43,9 @@ chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 
 #chill.stan <- chill.stan[!is.na(chill.stan$tough),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$rgr_prebudset),]
+chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
+chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
 #toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
