@@ -25,6 +25,8 @@ source('source/stan_utility.R')
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
+chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
+
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
@@ -33,19 +35,20 @@ chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
 #chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
 
+
 #chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
+#chill.stan$mg.cm2 <- chill.stan$mg.cm2*100
+#chill.stan$chlavg <- as.numeric(chill.stan$chlavg)
 
 #chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
-#rmspp <- c("FAGGRA", "NYSSYL")
-#chill.stan <- chill.stan[!(chill.stan%in%rmspp),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$tough),]
 
-chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
-chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
-chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
+#chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+#chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
+#chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
 #toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
@@ -54,11 +57,25 @@ chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
 #ht.rgr.new <- brm(rgr_prebudset ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
  #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
+#chlavg.mod <- brm(chlavg ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+ #                                  iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+
 #thickness.mod <- brm(thickness ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
 #                  iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
 #save(thickness.mod, file="~/Documents/git/chillfreeze/analyses/stan/thickness_brms.Rdata")
 
+htmid.mod <- brm(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+               iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+
+save(htmid.mod, file="~/Documents/git/chillfreeze/analyses/stan/htmid_brms.Rdata")
+
+#dvr.mod <- brm(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+ #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+
+#save(dvr.mod, file="~/Documents/git/chillfreeze/analyses/stan/dvr_brms.Rdata")
+
+if(FALSE){
 datalist.chill <- with(chill.stan, 
                        list(y = tough, 
                             tx = tx, 
@@ -97,7 +114,7 @@ grid.arrange(ppc, ppc.sd, ppc.max, ppc.min, ncol=2, nrow=2)
 
 save(dvr.inter.ncp.skew, file="stan/ht_inter_ncp_skewnormal.Rda")
   
-  
+}  
 
   
   

@@ -86,7 +86,8 @@ table(howfaralong.frz$chilltx)
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "thick1", "thick2", "tough1", "tough2",
-                                  "budset", "shoots", "roots", "ht.final", "mg.cm2", "phenol"))
+                                  "budset", "shoots", "roots", "ht.final", "mg.cm2", "phenol", "chlavg",
+                                  "ht.diff"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 

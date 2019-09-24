@@ -21,12 +21,16 @@ setwd("~/Documents/git/chillfreeze/analyses")
 ## load the model
 #load("stan/dvr_inter_ncp_skewnormal.Rda")
 #load("stan/dvr_inter_ncp_drought.Rda")
+#load("stan/dvr_brms.Rdata")
 #load("stan/toughness_brms.Rdata")
-load("stan/rgr_prebudset_brms.Rdata")
+#load("stan/thickness_brms.Rdata")
+#load("stan/rgr_prebudset_brms.Rdata")
+load("stan/htmid_brms.Rdata")
 
 #chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
-chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
-chill.stan <- chill.stan[!is.na(chill.stan$ht.prebudset),]
+#chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
+chill.stan <- read.csv("output/clean_dvr_traits.csv")
+chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -43,15 +47,18 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "thickness_brms" ### change based on model
+figpathmore <- "htmid_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-mu <- expression(mu)
-xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
+#mu <- expression(mu)
+#xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
+xlab <- "Model estimate of change in leaf toughness (N)"
+xlab <- "Model estimate of change in rate of leafout (days)"
+xlab <- "Model estimate of change in growth (cm)"
 
 #sumer.ni <- summary()$summary
 #sumer.ni[grep("mu_", rownames(sumer.ni)),]
@@ -60,7 +67,7 @@ xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)
 
 spp <- unique(chill.stan$species)
 
-modelhere <- thickness.mod
+modelhere <- htmid.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -129,6 +136,6 @@ mod.ranef<-full_join(mod.ranef, txchill2)
 
 modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 10.5, 3.5)
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.5, 0.5) , 0.55, 3.5)
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 12) , 12.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.15, 0.15) , 0.16, 3.5)
 
