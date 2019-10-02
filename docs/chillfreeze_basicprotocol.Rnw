@@ -51,6 +51,10 @@ Experiment Part 1 - Recieved bare root seedlings from Cold Stream Farm. Potted o
 \item[$\bullet$] Growth Chamber: Ramp down temperature starting at 6pm to 10C, 8pm to 5C, 10pm to 0C, 12am to -3C, 3am to 0C, 4am to 5C, 6am to 10C and 8am to 15C. 12 hour photoperiod (6-6) 
 \end{itemize}
 
+\begin{itemize}
+\item photoperiod was ramped to 16 hours over the summer and then starting 24 Sept was ramped back down to 12 hours.
+\end{itemize}
+
 \newpage
 \begin{center}
 \captionof{table}{List of species being used in experiment. 10 species, 16 per chilling treatment and 8 per false spring treatment per chilling treatment.}\label{tab:exp1} 
