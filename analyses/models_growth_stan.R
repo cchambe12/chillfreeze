@@ -25,7 +25,9 @@ source('source/stan_utility.R')
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
-chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
+chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+
+#mod <- brm(gslength~tx, data=chill.stan)
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
