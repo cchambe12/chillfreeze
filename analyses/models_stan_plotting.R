@@ -24,12 +24,12 @@ setwd("~/Documents/git/chillfreeze/analyses")
 #load("stan/toughness_brms.Rdata")
 #load("stan/thickness_brms.Rdata")
 #load("stan/rgr_prebudset_brms.Rdata")
-load("stan/thickness_brms.Rdata")
+load("stan/meristem_brms.Rdata")
 
 #chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 #chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
-chill.stan <- chill.stan[!is.na(chill.stan$thick),]
+chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -46,7 +46,7 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "thickness_brms" ### change based on model
+figpathmore <- "meristem_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 

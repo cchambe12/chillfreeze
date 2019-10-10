@@ -68,9 +68,9 @@ meri.drought <- brm(meristem ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2
 save(meri.drought, file="~/Documents/git/chillfreeze/analyses/stan/meridrought_brms.Rdata")
 }
 
-toughness.mod <- brm(reltough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
-                     data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
-save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/reltoughness_brms.Rdata")
+#toughness.mod <- brm(reltough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
+ #                    data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+#save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/reltoughness_brms.Rdata")
 
 #ht.rgr.new <- brm(rgr_prebudset ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
  #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))

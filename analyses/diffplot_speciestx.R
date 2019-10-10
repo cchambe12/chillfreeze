@@ -22,8 +22,8 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 ##### Now for some bar plots with error bars, ordered by day of budburst #####
 
 #### THINGS TO CHANGE BASED ON DIFFERENT TRAITS/RESPONSE VARIABLES!!!! #####
-x <- "ht.diff" ## name for response ## ht.diff, dvr, tough
-mu <- expression(mu)
+x <- "meristem" ## name for response ## ht.diff, dvr, tough
+#mu <- expression(mu)
 ylab <- "Relative growth rate (cm/60days)" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
 ylim <- c(-5,85) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
 chillfrz$x <- chillfrz$ht.diff
