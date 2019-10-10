@@ -25,12 +25,12 @@ setwd("~/Documents/git/chillfreeze/analyses")
 #load("stan/toughness_brms.Rdata")
 #load("stan/thickness_brms.Rdata")
 #load("stan/rgr_prebudset_brms.Rdata")
-load("stan/htmid_brms.Rdata")
+load("stan/meristem_brms.Rdata")
 
 #chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 #chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
-chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
+chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -47,7 +47,7 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "htmid_brms" ### change based on model
+figpathmore <- "meristem_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
@@ -59,6 +59,7 @@ alphahere = 0.4
 xlab <- "Model estimate of change in leaf toughness (N)"
 xlab <- "Model estimate of change in rate of leafout (days)"
 xlab <- "Model estimate of change in growth (cm)"
+xlab <- "Model estimate of change in shoot apical meristem damage"
 
 #sumer.ni <- summary()$summary
 #sumer.ni[grep("mu_", rownames(sumer.ni)),]
@@ -67,7 +68,7 @@ xlab <- "Model estimate of change in growth (cm)"
 
 spp <- unique(chill.stan$species)
 
-modelhere <- htmid.mod
+modelhere <- meri.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -138,4 +139,5 @@ modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
 muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 12) , 12.5, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.15, 0.15) , 0.16, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.25, 3.5)
 

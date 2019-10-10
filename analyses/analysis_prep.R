@@ -87,7 +87,7 @@ table(howfaralong.frz$chilltx)
 
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "thick1", "thick2", "tough1", "tough2",
                                   "budset", "shoots", "roots", "ht.final", "mg.cm2", "phenol", "chlavg",
-                                  "ht.diff"))
+                                  "ht.diff", "meristem"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -99,7 +99,7 @@ chill.stan$species <- substr(chill.stan$id, 0, 6)
 chill.stan$dvr <- chill.stan$leafout - chill.stan$budburst ### Using this point of code for "drought" effect test
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht 
 #chill.stan$chlavg <- apply(chill.stan[,8:11], 1, mean)
-chill.stan$tough <- (chill.stan$tough1 + chill.stan$tough2)/2
+chill.stan$tough <- ifelse(!is.na(chill.stan$tough2), (chill.stan$tough1 + chill.stan$tough2)/2, chill.stan$tough1)
 chill.stan$thick <- (chill.stan$thick1 + chill.stan$thick2)/2
 
 chill.stan$tough.date <- NA
@@ -139,6 +139,7 @@ write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dv
 
 #write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_60dayoutput.csv", row.names=FALSE)
 
+#########################
 #### Below code is just for quick checks with data coming in, to delete when experiment is over!!
 
 chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
