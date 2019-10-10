@@ -24,7 +24,7 @@ source('source/stan_utility.R')
 #chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 #chill.stan <- read.csv("output/fakedata_height.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
-chill.stan <- read.csv("output/clean_dvr_drought.csv")
+#chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
 #chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 
@@ -54,12 +54,12 @@ chill.stan <- read.csv("output/clean_dvr_drought.csv")
 #chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
-chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
+#chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
 
-meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                data=chill.stan, family=binomial(link="logit"), iter=4000, warmup=2500, 
-                control=list(max_treedepth=15, adapt_delta=0.99))
-save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
+#meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+ #               data=chill.stan, family=binomial(link="logit"), iter=4000, warmup=2500, 
+  #              control=list(max_treedepth=15, adapt_delta=0.99))
+#save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
 
 if(FALSE){
 meri.drought <- brm(meristem ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2 + (1| species),
@@ -68,8 +68,9 @@ meri.drought <- brm(meristem ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2
 save(meri.drought, file="~/Documents/git/chillfreeze/analyses/stan/meridrought_brms.Rdata")
 }
 
-#toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
- #                    data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+toughness.mod <- brm(reltough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), 
+                     data=chill.stan, iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/reltoughness_brms.Rdata")
 
 #ht.rgr.new <- brm(rgr_prebudset ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
  #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
@@ -82,10 +83,10 @@ save(meri.drought, file="~/Documents/git/chillfreeze/analyses/stan/meridrought_b
 
 #save(thickness.mod, file="~/Documents/git/chillfreeze/analyses/stan/thickness_brms.Rdata")
 
-htmid.mod <- brm(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
-               iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
+#htmid.mod <- brm(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
+ #              iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))
 
-save(htmid.mod, file="~/Documents/git/chillfreeze/analyses/stan/htmid_brms.Rdata")
+#save(htmid.mod, file="~/Documents/git/chillfreeze/analyses/stan/htmid_brms.Rdata")
 
 #dvr.mod <- brm(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2|species), data=chill.stan,
  #                 iter=4000, warmup=2500, control=list(max_treedepth = 15,adapt_delta = 0.99))

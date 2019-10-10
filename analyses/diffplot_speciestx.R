@@ -22,10 +22,11 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 ##### Now for some bar plots with error bars, ordered by day of budburst #####
 
 #### THINGS TO CHANGE BASED ON DIFFERENT TRAITS/RESPONSE VARIABLES!!!! #####
-x <- "tough" ## name for response
-ylab <- "Leaf toughness (N)" ### y axis label
-ylim <- c(5,30) ## c(-5,85) for rgr60, #c(5,30) for dvr
-chillfrz$x <- chillfrz$dvr
+x <- "ht.diff" ## name for response ## ht.diff, dvr, tough
+mu <- expression(mu)
+ylab <- "Relative growth rate (cm/60days)" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
+ylim <- c(-5,85) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
+chillfrz$x <- chillfrz$ht.diff
 ############################################################################
 
 dvrbar <- subset(chillfrz, select=c("species", "chill", "x", "tx", "budburst"))
@@ -165,7 +166,7 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
 quartz()
 dvrbarplot <- grid.arrange(dvrbar4, dvrbar6, dvrbar8, ncol=3, widths=c(1, 1, 1.3))
 
-ggsave("figures/rgrprebudset_speciesplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)
+ggsave("figures/rgr60_speciesplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)
 
 
 ##################### Old Plots ##########################

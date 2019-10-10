@@ -87,7 +87,7 @@ table(howfaralong.frz$chilltx)
 
 chill.stan <- subset(obs, select=c("id", "budburst", "leafout", "tx", "chill", "lo.ht", "thick1", "thick2", "tough1", "tough2",
                                   "budset", "shoots", "roots", "ht.final", "mg.cm2", "phenol", "chlavg",
-                                  "ht.diff", "meristem"))
+                                  "ht.diff", "meristem", "ht.prebudset"))
 
 
 chill.stan$chill1 = ifelse(chill.stan$chill == 2, 1, 0) 
@@ -109,12 +109,14 @@ chill.stan$tough.date <- ifelse(chill.stan$chill==3, (184-21), chill.stan$tough.
 
 chill.stan$tough.age <- chill.stan$tough.date - chill.stan$lo
 
-#chill.stan$ht.late <- chill.stan$ht.prebudset - chill.stan$lo.ht
+chill.stan$reltough <- (chill.stan$tough/chill.stan$tough.age)*1000
 
-#chill.stan$ht.date.new <- NA
-#chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), chill.stan$tough.date)
-#chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
-#chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
+chill.stan$ht.late <- chill.stan$ht.prebudset - chill.stan$lo.ht
+
+chill.stan$ht.date.new <- NA
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==1, (chill.stan$ht.date+6), chill.stan$tough.date)
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), chill.stan$tough.date)
+chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
 chill.stan$budset <- as.Date(chill.stan$budset, "%m/%d/%y")
 chill.stan$bset <- yday(chill.stan$budset)
@@ -126,7 +128,7 @@ chill.stan$budsetdoy <- ifelse(chill.stan$chill==3, (chill.stan$budsetdoy-21), c
 
 chill.stan$gslength <- chill.stan$budsetdoy - chill.stan$lo
 
-#chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
+chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
 
 chill.stan$rgr_final <- (chill.stan$ht.final - chill.stan$lo.ht)/(chill.stan$gslength)*100
 
