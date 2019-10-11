@@ -24,9 +24,29 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 #### THINGS TO CHANGE BASED ON DIFFERENT TRAITS/RESPONSE VARIABLES!!!! #####
 x <- "meristem" ## name for response ## ht.diff, dvr, tough
 #mu <- expression(mu)
-ylab <- "Relative growth rate (cm/60days)" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
-ylim <- c(-5,85) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
-chillfrz$x <- chillfrz$ht.diff
+ylab <- "Proportion of individuals with meristem damage" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
+ylim <- c(0.01,1) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
+chillfrz$x <- chillfrz$meristem
+
+if(x=="meristem"){
+  meri <- subset(chillfrz, select=c(id, chill, x, tx, species))
+  meri <- meri[!is.na(meri$x),]
+  meri <- within(meri, { meritot <- as.numeric(ave(id, species, tx, chill, FUN=length))}) # total number of inds per group
+  meridmg <- meri[(meri$x==1),] 
+  meridmg$meridmg <- as.numeric(ave(meridmg$x, meridmg$species, meridmg$tx, meridmg$chill, FUN=length))# dmg meristem observations per group
+  meridmg <- dplyr::select(meridmg, -id, -x)
+  
+  meri <- dplyr::select(meri, -id, -x)
+  meri <- left_join(meri, meridmg)
+  
+  meri$meridmg <- ifelse(is.na(meri$meridmg), 0, meri$meridmg)
+  meri$meriprop <- meri$meridmg/meri$meritot
+  
+  chillfrz <- left_join(chillfrz, meri)
+  chillfrz$x <- chillfrz$meriprop
+}
+
+
 ############################################################################
 
 dvrbar <- subset(chillfrz, select=c("species", "chill", "x", "tx", "budburst"))
@@ -166,7 +186,7 @@ dvrbar8 <- ggplot(chill.bars8, aes(x=code, y=dvrmean, fill=code, alpha=tx)) +
 quartz()
 dvrbarplot <- grid.arrange(dvrbar4, dvrbar6, dvrbar8, ncol=3, widths=c(1, 1, 1.3))
 
-ggsave("figures/rgr60_speciesplot.png",width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)
+ggsave(paste("figures/",x,"_speciesplot.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrbarplot)
 
 
 ##################### Old Plots ##########################
