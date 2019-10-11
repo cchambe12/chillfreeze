@@ -56,10 +56,10 @@ chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
 #chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
 
-#meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
- #               data=chill.stan, family=binomial(link="logit"), iter=4000, warmup=2500, 
-  #              control=list(max_treedepth=15, adapt_delta=0.99))
-#save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
+meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                data=chill.stan, family=binomial(link="logit"), iter=4000, warmup=2500, 
+                control=list(max_treedepth=15, adapt_delta=0.99))
+save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
 
 if(FALSE){
 meri.drought <- brm(meristem ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2 + (1| species),

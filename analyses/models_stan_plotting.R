@@ -53,12 +53,12 @@ cols <- adjustcolor("indianred3", alpha.f = 0.3)
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
-mu <- expression(mu)
-xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
+#mu <- expression(mu)
+#xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 #xlab <- "Model estimate of change in leaf toughness (N)"
 #xlab <- "Model estimate of change in rate of leafout (days)"
 #xlab <- "Model estimate of change in growth (cm)"
-#xlab <- "Model estimate of change in shoot apical meristem damage"
+xlab <- "Model estimate of change in shoot apical meristem damage"
 
 
 #sumer.ni <- summary()$summary
@@ -68,7 +68,7 @@ xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)
 
 spp <- unique(chill.stan$species)
 
-modelhere <- thickness.mod
+modelhere <- meri.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -137,7 +137,7 @@ mod.ranef<-full_join(mod.ranef, txchill2)
 
 modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 12) , 12.5, 3.5)
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 12) , 12.5, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-.15, .15) , .16, 3.5)
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.4, 0.4) , .42, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.4, 0.4) , .42, 3.5)
 
