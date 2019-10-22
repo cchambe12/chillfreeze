@@ -50,8 +50,13 @@ chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- chill.stan[!is.na(chill.stan$tough),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
-#chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
-#chill.stan <- chill.stan[!is.na(chill.stan$roottoshoot),]
+chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
+chill.stan <- chill.stan[!is.na(chill.stan$roots),]
+
+mod3 <- brm(roots~tx, data=chill.stan)
+mod4 <- brm(shoots~tx, data=chill.stan)
+
+
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
 #chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
