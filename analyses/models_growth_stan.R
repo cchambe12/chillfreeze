@@ -26,9 +26,12 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
-#chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 
-#mod <- brm(gslength~tx, data=chill.stan)
+mod <- brm(gslength~tx, data=chill.stan)
+
+chill.stan <- chill.stan[!is.na(chill.stan$ht.final),]
+mod2 <- brm(ht.final~tx, data=chill.stan)
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
@@ -51,7 +54,7 @@ chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
 #chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
-chill.stan <- chill.stan[!is.na(chill.stan$roots),]
+chill.stan <- chill.stan[!is.na(chill.stan$shoots),]
 
 mod3 <- brm(roots~tx, data=chill.stan)
 mod4 <- brm(shoots~tx, data=chill.stan)
