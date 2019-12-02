@@ -31,7 +31,8 @@ chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 mod <- brm(gslength~tx, data=chill.stan)
 
 chill.stan <- chill.stan[!is.na(chill.stan$ht.final),]
-mod2 <- brm(ht.final~tx, data=chill.stan)
+chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
+mod2 <- brm(finalht.diff~tx, data=chill.stan)
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
@@ -58,6 +59,8 @@ chill.stan <- chill.stan[!is.na(chill.stan$shoots),]
 
 mod3 <- brm(roots~tx, data=chill.stan)
 mod4 <- brm(shoots~tx, data=chill.stan)
+
+mod5 <- brm(roottoshoot~tx, data=chill.stan)
 
 
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
