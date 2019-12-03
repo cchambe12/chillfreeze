@@ -28,7 +28,7 @@ chill.stan <- read.csv("output/clean_dvr_traits.csv")
 
 chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 
-mod <- brm(gslength~tx, data=chill.stan)
+mod <- brm(gslength~tx + (tx|species), data=chill.stan)
 
 chill.stan <- chill.stan[!is.na(chill.stan$ht.final),]
 chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
