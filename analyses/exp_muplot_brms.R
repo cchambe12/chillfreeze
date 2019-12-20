@@ -24,7 +24,7 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
     points(pos.x,pos.y,cex=1.5,pch=19,col="darkblue")
     for(spsi in 1:length(spnum)){#spsi=1
       pos.sps.i<-which(grepl(paste("[",spsi,"]",sep=""),mod.ranef$parameter,fixed=TRUE))
-      jitt<-runif(1,0.05,0.4)
+      jitt<-(spsi/20) + 0.02
       pos.y.sps.i<-pos.y-jitt
       pos.x.sps.i<-mod.ranef[pos.sps.i[i],"mean"]
       lines(mod.ranef[pos.sps.i[i],c("25%","75%")],rep(pos.y.sps.i,2),

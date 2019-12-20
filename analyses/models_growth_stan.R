@@ -26,13 +26,29 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
-chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+#chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 
-mod <- brm(gslength~tx + (tx|species), data=chill.stan)
+#gslength.mod <- brm(gslength ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+ #                      data=chill.stan, iter=4000, warmup=2500, 
+  #                     control=list(max_treedepth=15, adapt_delta=0.99))
+#save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslength_brms.Rdata")
 
 chill.stan <- chill.stan[!is.na(chill.stan$ht.final),]
-chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
-mod2 <- brm(finalht.diff~tx, data=chill.stan)
+chill.stan$finaldiff <- chill.stan$ht.final - chill.stan$lo.ht
+htdiff.mod <- brm(finaldiff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                            data=chill.stan, iter=4000, warmup=2500, 
+                           control=list(max_treedepth=15, adapt_delta=0.99))
+save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htdiff_brms.Rdata")
+
+### NOT EXCITING OR SENSICAL: chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
+### NOT EXCITING OR SENSICAL: htfinal.mod <- brm(finalht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                                #          data=chill.stan, iter=4000, warmup=2500, 
+                                #         control=list(max_treedepth=15, adapt_delta=0.99))
+
+### NOT EXCITING OR SENSICAL:chill.stan$htdiff.final <- (chill.stan$ht.final-chill.stan$lo.ht)/chill.stan$gslength
+### NOT EXCITING OR SENSICAL:simp.htdiff <- brm(htdiff.final ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+               #    data=chill.stan, iter=4000, warmup=2500, 
+              #     control=list(max_treedepth=15, adapt_delta=0.99))
 
 #chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
@@ -56,11 +72,23 @@ mod2 <- brm(finalht.diff~tx, data=chill.stan)
 #chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
 chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
 chill.stan <- chill.stan[!is.na(chill.stan$shoots),]
+#rmsppfornow <- c("FAGGRA", "NYSSYL", "ALNRUG")
+#chill.stan <- chill.stan[!(chill.stan$species%in%rmsppfornow),]
 
-mod3 <- brm(roots~tx, data=chill.stan)
-mod4 <- brm(shoots~tx, data=chill.stan)
+roots.mod <- brm(roots ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+            data=chill.stan, iter=4000, warmup=2500, 
+            control=list(max_treedepth=15, adapt_delta=0.99))
+save(roots.mod, file="~/Documents/git/chillfreeze/analyses/stan/roots_brms.Rdata")
 
-mod5 <- brm(roottoshoot~tx, data=chill.stan)
+shoots.mod <- brm(shoots ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                data=chill.stan, iter=4000, warmup=2500, 
+                control=list(max_treedepth=15, adapt_delta=0.99))
+save(shoots.mod, file="~/Documents/git/chillfreeze/analyses/stan/shoots_brms.Rdata")
+
+roottoshoot.mod <- brm(roottoshoot ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+           data=chill.stan, iter=4000, warmup=2500, 
+           control=list(max_treedepth=15, adapt_delta=0.99))
+save(roottoshoot.mod, file="~/Documents/git/chillfreeze/analyses/stan/roottoshoot_brms.Rdata")
 
 
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
