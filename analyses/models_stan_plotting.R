@@ -47,7 +47,7 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "htfinal_brms" ### change based on model
+figpathmore <- "totbiomass_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
@@ -58,11 +58,13 @@ alphahere = 0.4
 #xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 #xlab <- "Model estimate of change in leaf toughness (N)"
 #xlab <- "Model estimate of change in rate of leafout (days)"
-xlab <- "Model estimate of change in growth (cm)"
+#xlab <- "Model estimate of change in growth (cm)"
 #xlab <- "Model estimate of change in shoot apical meristem damage"
 #xlab <- "Model estimate of change in growing season length"
 #xlab <- "Model estimate of change in belowground biomass (g)"
+#xlab <- "Model estimate of change in aboveground biomass (g)"
 #xlab <- "Model estimate of change in root to shoot biomass ratio (g)"
+#xlab <- "Model estimate of change in total biomass (g)"
 
 
 #sumer.ni <- summary()$summary
@@ -72,7 +74,7 @@ xlab <- "Model estimate of change in growth (cm)"
 
 spp <- unique(chill.stan$species)
 
-modelhere <- htdiff.mod
+modelhere <- totbiomass.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -141,7 +143,8 @@ mod.ranef<-full_join(mod.ranef, txchill2)
 
 modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-15, 15) , 16.5, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-.15, .15) , .16, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.4, 0.4) , .42, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5)
