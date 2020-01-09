@@ -136,6 +136,7 @@ source("..//standardcurve.R")
 
 chill.stan$folin <- folinfunc(as.numeric(chill.stan$phenol))
 
+chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
 
 write.csv(chill.stan, file="~/Documents/git/chillfreeze/analyses/output/clean_dvr_traits.csv", row.names=FALSE)
 

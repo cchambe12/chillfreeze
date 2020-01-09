@@ -90,7 +90,7 @@ roottoshoot.mod <- brm(roottoshoot ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chi
            control=list(max_treedepth=15, adapt_delta=0.99))
 save(roottoshoot.mod, file="~/Documents/git/chillfreeze/analyses/stan/roottoshoot_brms.Rdata")
 
-chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
+#chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
 totbiomass.mod <- brm(totbiomass ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                        data=chill.stan, iter=4000, warmup=2500, 
                        control=list(max_treedepth=15, adapt_delta=0.99))

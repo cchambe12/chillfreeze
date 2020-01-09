@@ -22,11 +22,11 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 ##### Now for some bar plots with error bars, ordered by day of budburst #####
 
 #### THINGS TO CHANGE BASED ON DIFFERENT TRAITS/RESPONSE VARIABLES!!!! #####
-x <- "reltough" ## name for response ## ht.diff, dvr, tough
+x <- "roots" ## name for response ## ht.diff, dvr, tough
 #mu <- expression(mu)
-ylab <- "Leaf toughness (mN/leaf age(days))" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
-ylim <- c(0.5,7) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
-chillfrz$x <- chillfrz$reltough
+ylab <- "Belowground biomass (g)" ##"Leaf toughness (mN/leaf age(days))" # expression(paste("Leaf thickness (", mu, "m)", sep="")) ### y axis label
+ylim <- c(8,80) ##c(0.5,7) ## c(-5,85) for rgr60, #c(5,30) for dvr, c(0.1,1) for tough, c(0.01,0.3) for thick
+chillfrz$x <- chillfrz$roots
 
 if(x=="meristem"){
   meri <- subset(chillfrz, select=c(id, chill, x, tx, species))
