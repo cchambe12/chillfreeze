@@ -86,7 +86,6 @@ The main objective of this experiment is to evaluate the interspecific variation
 
 \item False spring events can result in photosynthetic tissue loss, which could potentially impact multiple years of growth and, with the growing season extending, individuals could be exposed to more frosts in the future \citep{Liu2018}. 
 \item Individuals and species that initiate budburst earlier in the season are more freeze tolerant \citep{Korner2016}, however, as climate change advances, less freeze tolerant individuals may start initiating budburst before the last freeze date. % Possibly in regrisk discussion
-\item Despite the importance of false spring events, the extent of damage and the frequency and intensity of false spring events is still largely unknown. %EMW: Cut this, it doesn't seem true to me, nor is it relevant to your paper. 
 
 
 \item As budburst and leafout are strongly cued by temperature, predicting false spring risk requires considering the major factors controlling climate. 
@@ -102,7 +101,7 @@ Once buds exit the dormancy phase, they are less freeze tolerant and less resist
 
 
 \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase. 
-\ item This helps protect temperate plants against stochastic warm spells in the winter so that they do not break dormancy too early in the season.
+\item This helps protect temperate plants against stochastic warm spells in the winter so that they do not break dormancy too early in the season.
 
 
 
