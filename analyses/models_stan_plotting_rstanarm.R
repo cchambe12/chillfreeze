@@ -62,7 +62,7 @@ alphahere = 0.4
 #xlab <- "Model estimate of change in rate of leafout (days)"
 #xlab <- "Model estimate of change in growth (cm)"
 #xlab <- "Model estimate of change in shoot apical meristem damage"
-xlab <- "Model estimate of change in growing season length"
+xlab <- "Model estimate of change in growing season length (days)"
 #xlab <- "Model estimate of change in belowground biomass (g)"
 #xlab <- "Model estimate of change in aboveground biomass (g)"
 #xlab <- "Model estimate of change in root to shoot biomass ratio (g)"
@@ -81,7 +81,7 @@ modelhere <- gslength.mod
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
   round(digits = 2) %>% 
-  rename(mean = Estimate) %>%
+  rename(mean = (Intercept)) %>%
   rename(`25%` = Q25) %>%
   rename(`75%` = Q75) %>%
   dplyr::select(mean, `25%`, `75%`) 
@@ -145,7 +145,7 @@ mod.ranef<-full_join(mod.ranef, txchill2)
 
 modoutput <- tidy(modelhere, prob=c(0.5))
 #quartz()
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5)
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-15, 15) , 16.5, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-.15, .15) , .16, 3.5)
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-0.4, 0.4) , .42, 3.5)

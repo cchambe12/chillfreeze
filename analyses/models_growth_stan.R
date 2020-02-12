@@ -26,18 +26,24 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
-#chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
+chill.stan.gs <- chill.stan[!is.na(chill.stan$gslength),]
 
-#gslength.mod <- brm(gslength ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
- #                      data=chill.stan, iter=4000, warmup=2500, 
-  #                     control=list(max_treedepth=15, adapt_delta=0.99))
-#save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslength_brms.Rdata")
+gslength.mod <- brm(gslength ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                       data=chill.stan.gs, iter=4000, warmup=2500, 
+                    prior = prior(normal(180, 40), class=Intercept),
+                       control=list(max_treedepth=15, adapt_delta=0.99))
+save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslength_brms.Rdata")
 
-chill.stan <- chill.stan[!is.na(chill.stan$ht.final),]
-chill.stan$finaldiff <- chill.stan$ht.final - chill.stan$lo.ht
+chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.final),]
+chill.stan.ht$finaldiff <- chill.stan.ht$ht.final - chill.stan.ht$lo.ht
+
+get_prior(finaldiff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan.ht)
+
 htdiff.mod <- brm(finaldiff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                            data=chill.stan, iter=4000, warmup=2500, 
-                           control=list(max_treedepth=15, adapt_delta=0.99))
+                            data=chill.stan.ht, iter=4000, warmup=2500, 
+                           control=list(max_treedepth=15, adapt_delta=0.99),
+                         prior = prior(normal(60, 30), class=Intercept))
 save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htdiff_brms.Rdata")
 
 ### NOT EXCITING OR SENSICAL: chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
@@ -70,41 +76,73 @@ save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htdiff_brms.Rda
 #chill.stan <- chill.stan[!is.na(chill.stan$tough),]
 
 #chill.stan <- chill.stan[!is.na(chill.stan$gslength),]
-chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
-chill.stan <- chill.stan[!is.na(chill.stan$shoots),]
+#chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
+#chill.stan <- chill.stan[!is.na(chill.stan$shoots),]
 #rmsppfornow <- c("FAGGRA", "NYSSYL", "ALNRUG")
 #chill.stan <- chill.stan[!(chill.stan$species%in%rmsppfornow),]
 
+chill.stan.rt <- chill.stan[!is.na(chill.stan$roots),]
+
+get_prior(roots ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan.rt)
+
 roots.mod <- brm(roots ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-            data=chill.stan, iter=4000, warmup=2500, 
+            data=chill.stan.rt, iter=4000, warmup=2500, 
+            prior = prior(normal(30, 15), class=Intercept),
             control=list(max_treedepth=15, adapt_delta=0.99))
 save(roots.mod, file="~/Documents/git/chillfreeze/analyses/stan/roots_brms.Rdata")
 
+chill.stan.sh <- chill.stan[!is.na(chill.stan$shoots),]
+
 shoots.mod <- brm(shoots ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                data=chill.stan, iter=4000, warmup=2500, 
+                data=chill.stan.sh, iter=4000, warmup=2500,
+                prior = prior(normal(30, 15), class=Intercept),
                 control=list(max_treedepth=15, adapt_delta=0.99))
 save(shoots.mod, file="~/Documents/git/chillfreeze/analyses/stan/shoots_brms.Rdata")
 
+chill.stan$roottoshoot <- chill.stan$roots/chill.stan$shoots
+chill.stan.rs <- chill.stan[!is.na(chill.stan$roottoshoot),]
+get_prior(roottoshoot ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species), data=chill.stan.rs)
+          
 roottoshoot.mod <- brm(roottoshoot ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-           data=chill.stan, iter=4000, warmup=2500, 
+           data=chill.stan.rs, iter=4000, warmup=2500, 
+           prior = prior(cauchy(0, 15), class=Intercept),
            control=list(max_treedepth=15, adapt_delta=0.99))
 save(roottoshoot.mod, file="~/Documents/git/chillfreeze/analyses/stan/roottoshoot_brms.Rdata")
 
-#chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
+chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
+chill.stan.tb <- chill.stan[!is.na(chill.stan$totbiomass),]
 totbiomass.mod <- brm(totbiomass ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                       data=chill.stan, iter=4000, warmup=2500, 
+                       data=chill.stan.tb, iter=4000, warmup=2500, 
+                      prior = prior(normal(40, 15), class=Intercept),
                        control=list(max_treedepth=15, adapt_delta=0.99))
-save(totbiomass.mod, file="~/Documents/git/chillfreeze/analyses/stan/roottoshoot_brms.Rdata")
+save(totbiomass.mod, file="~/Documents/git/chillfreeze/analyses/stan/totbiomass_brms.Rdata")
 
 
 #chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
 
-#chill.stan <- chill.stan[!is.na(chill.stan$meristem),]
+chill.stan.meri <- chill.stan[!is.na(chill.stan$meristem),]
 
 meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                data=chill.stan, family=binomial(link="logit"), iter=4000, warmup=2500, 
+                data=chill.stan.meri, family=binomial(link="logit"), iter=4000, warmup=2500,
+                prior = prior(normal(0, 1), class=Intercept),
                 control=list(max_treedepth=15, adapt_delta=0.99))
 save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
+
+chill.stan.th <- chill.stan[!is.na(chill.stan$thick),]
+
+thickness.mod <- brm(thick ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                    data=chill.stan.th, iter=4000, warmup=2500, 
+                    prior = prior(normal(0, 1), class=Intercept),
+                    control=list(max_treedepth=15, adapt_delta=0.99))
+save(thickness.mod, file="~/Documents/git/chillfreeze/analyses/stan/thickness_brms.Rdata")
+
+chill.stan.tough <- chill.stan[!is.na(chill.stan$tough),]
+
+toughness.mod <- stan_glmer(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                            data=chill.stan.tough, iter=4000, warmup=2500,
+                            control=list(max_treedepth=15, adapt_delta=0.99))
+save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/toughness_brms.Rdata")
 
 if(FALSE){
 meri.drought <- brm(meristem ~ tx*chill1 + tx*chill2 + tx*drought1 + tx*drought2 + (1| species),
