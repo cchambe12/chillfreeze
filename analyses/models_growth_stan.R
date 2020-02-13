@@ -123,24 +123,34 @@ save(totbiomass.mod, file="~/Documents/git/chillfreeze/analyses/stan/totbiomass_
 
 chill.stan.meri <- chill.stan[!is.na(chill.stan$meristem),]
 
+get_prior(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan.meri, family=binomial(link="logit"))
+
 meri.mod <- brm(meristem ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                data=chill.stan.meri, family=binomial(link="logit"), iter=4000, warmup=2500,
-                prior = prior(normal(0, 1), class=Intercept),
+                data=chill.stan.meri, family=bernoulli(link="logit"), iter=4000, warmup=2500,
+                prior = prior(normal(0, 10)),
                 control=list(max_treedepth=15, adapt_delta=0.99))
 save(meri.mod, file="~/Documents/git/chillfreeze/analyses/stan/meristem_brms.Rdata")
 
 chill.stan.th <- chill.stan[!is.na(chill.stan$thick),]
+chill.stan.th$thick <- chill.stan.th$thick*1000
+
+get_prior(thick ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+           data=chill.stan.th)
 
 thickness.mod <- brm(thick ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                     data=chill.stan.th, iter=4000, warmup=2500, 
-                    prior = prior(normal(0, 1), class=Intercept),
                     control=list(max_treedepth=15, adapt_delta=0.99))
 save(thickness.mod, file="~/Documents/git/chillfreeze/analyses/stan/thickness_brms.Rdata")
 
 chill.stan.tough <- chill.stan[!is.na(chill.stan$tough),]
 
-toughness.mod <- stan_glmer(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+get_prior(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan.tough)
+
+toughness.mod <- brm(tough ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                             data=chill.stan.tough, iter=4000, warmup=2500,
+                            prior=prior(normal(0,10)),
                             control=list(max_treedepth=15, adapt_delta=0.99))
 save(toughness.mod, file="~/Documents/git/chillfreeze/analyses/stan/toughness_brms.Rdata")
 
