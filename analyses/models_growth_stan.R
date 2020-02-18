@@ -26,13 +26,16 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
-chill.stan.gs <- chill.stan[!is.na(chill.stan$gslength),]
 
-gslength.mod <- brm(gslength ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+chill.stan$gslength.bb <- chill.stan$bset - chill.stan$budburst
+chill.stan$gslength.lo <- chill.stan$bset - chill.stan$leafout
+chill.stan.gs <- chill.stan[!is.na(chill.stan$gslength.lo),]
+
+gslength.mod <- brm(gslength.lo ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                        data=chill.stan.gs, iter=4000, warmup=2500, 
-                    prior = prior(normal(180, 40), class=Intercept),
+                    prior = prior(normal(200, 40), class=Intercept),
                        control=list(max_treedepth=15, adapt_delta=0.99))
-save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslength_brms.Rdata")
+save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslengthlo_brms.Rdata")
 
 chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.final),]
 chill.stan.ht$finaldiff <- chill.stan.ht$ht.final - chill.stan.ht$lo.ht

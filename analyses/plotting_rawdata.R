@@ -13,7 +13,7 @@ library(egg)
 # Setting working directory
 setwd("~/Documents/git/chillfreeze/analyses/output")
 
-chill.stan <- read.csv("clean_dvr_60dayoutput.csv", header=TRUE)
+chill.stan <- read.csv("clean_dvr_traits.csv", header=TRUE)
 
 labs <- c("SALPUR"=expression(paste(italic("Salix purpurea"))),
           "CORRAC"=expression(paste(italic("Cornus racemosa"))),

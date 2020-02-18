@@ -18,13 +18,13 @@ options(mc.cores = parallel::detectCores())
 setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
-#load("stan/gslength_brms.Rdata")
+load("stan/gslengthlo_brms.Rdata")
 #load("stan/htdiff_brms.Rdata")
 #load("stan/roots_brms.Rdata")
 #load("stan/shoots_brms.Rdata")
 #load("stan/totbiomass_brms.Rdata")
 #load("stan/toughness_brms.Rdata")
-load("stan/thickness_brms.Rdata")
+#load("stan/thickness_brms.Rdata")
 #load("stan/rgr_prebudset_brms.Rdata")
 #load("stan/meristem_brms.Rdata")
 #load("stan/roottoshoot_brms.Rdata")
@@ -32,7 +32,8 @@ load("stan/thickness_brms.Rdata")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv", header=TRUE)
 #chill.stan <- read.csv("output/clean_dvr_60dayoutput.csv", header=TRUE)
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
-chill.stan <- chill.stan[!is.na(chill.stan$thick),]
+chill.stan$gslength.lo <- chill.stan$bset - chill.stan$leafout
+chill.stan <- chill.stan[!is.na(chill.stan$gslength.lo),]
 
 chill.stan$species.name <- NA
 chill.stan$species.name <- ifelse(chill.stan$species=="ACESAC", "Acer saccharinum", chill.stan$species.name)
@@ -49,7 +50,7 @@ chill.stan$species.name <- ifelse(chill.stan$species=="VIBDEN", "Viburnum dentat
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "thickness_brms" ### change based on model
+figpathmore <- "gslengthlo_brms" ### change based on model
 
 source("exp_muplot_brms.R")
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
@@ -57,12 +58,12 @@ my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
 #mu <- expression(mu)
-xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
+#xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 #xlab <- "Model estimate of change in leaf toughness (N)"
 #xlab <- "Model estimate of change in rate of leafout (days)"
 #xlab <- "Model estimate of change in shoot growth (cm)"
 #xlab <- "Model estimate of change in shoot apical meristem damage"
-#xlab <- "Model estimate of change in growing season length"
+xlab <- "Model estimate of change in growing season length (days)"
 #xlab <- "Model estimate of change in belowground biomass (g)"
 #xlab <- "Model estimate of change in aboveground biomass (g)"
 #xlab <- "Model estimate of change in belowground to aboveground biomass ratio (g)"
@@ -76,7 +77,7 @@ xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)
 
 spp <- unique(chill.stan$species)
 
-modelhere <- thickness.mod
+modelhere <- gslength.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
