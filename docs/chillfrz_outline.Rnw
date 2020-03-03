@@ -86,25 +86,54 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth.
   \begin{enumerate}
   \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase. 
-  \item This helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring.
+  \item This helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.
   \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation to sugar accumulation \citep{Tixier2019}.
-  \item Decreases in chilling temperatures from climate change could affect budburst timing.
-  \item And, reduced chilling---especially if there are fewer cold nights---could impact a plant's tolerance of freezing temperatures throughout the winter.
+  \item Sugar accumulation over the winter increases cold hardiness 
+  \end{enumerate}
+
+\item Winter warming could impact the quality of budburst \citep{Bonhomme2010}.
+  \item Decreases in chilling temperatures from climate change could affect budburst timing (CITE), as well as the synchrony of budburst within an individual or population \citep{Sanzperez2009}.
+  \item And, reduced chilling---especially if there are fewer cold nights---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
   \item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
   \item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
   \end{enumerate}
   
 
-\item Here, we assess the effects of climate change on temperate tree and shrub seedlings to test:  
+\item Here, we assessed the effects of three levels of over-winter chilling on seedling phenology and growth across ten temperate tree and shrub species. 
   \begin{enumerate}
-  \item (1) How reduced chilling impacts temperate plant phenology and growth?
-  \item (2) How reduced chilling affects spring freezing tolerance?
-  \item (3) How false springs impact seedling growth?
+  \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{
+  \circ}$C to mimic a false spring event. 
+  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does amount of over-winter chilling and (2) how do false spring events impact phenology and growth?
   \end{enumerate}
 \end{enumerate}
   
   %premature budburst
-  
+\section*{Methods}
+\subsection*{Plant Selection and Material}
+\begin{enumerate}
+\item We chose 10 temperate woody plant tree and shrub species with varying phenologies, that were not used as crops or ornamental species: \textit{Acer saccharinum} L., \textit{Alnus incana rugosa} L., \textit{Betula papyrifera} Marsh., \textit{Betula populifolia} Marsh., \textit{Cornus racemosa} Lam., \textit{Fagus grandifolia} Ehrh., \textit{Nyssa sylvatica} Marsh., \textit{Salix purpurea} L., \textit{Sorbus americana} Marsh., and \textit{Viburnum dentatum} L.
+  \begin{enumerate}
+  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6’ N -86$^{\circ}$12’ W) for a total of 480 individuals.
+  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17’ N -71$^{\circ}$8’ W) at 4$^{\circ}$C to maintain dormancy.
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Growth Chamber and Greenhouse Conditions}
+\begin{enumerate}
+\item Individuals were randomly selected and placed in six experimental treatments: 4 weeks of chilling at 4$^{\circ}$C x no false spring, 4 weeks of chilling at 4$^{\circ}$C x false spring, 6 weeks of chilling at 4$^{\circ}$C x no false spring, 6 weeks of chilling at 4$^{\circ}$C x false spring,
+8 weeks of chilling at 4$^{\circ}$C x no false spring, 8 weeks of chilling at 4$^{\circ}$C x false spring.
+  \begin{enumerate}
+  \item While individuals were in the growth chamber to recieve the chilling treatment, photoperiod was manipulated to be eight hour days.
+  \item Lighting within the chambers was provided through a combination of T5HO fluorescent lamps with halogen incandescent bulbs at roughly 250 $\mu mol/m^{2}/s$.
+  \item Individuals were rotated within and among growth chambers every two weeks to eliminate possible growth chamber effects.
+  \end{enumerate}
+\item Once chilling was completed, individuals were moved to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$.
+  \begin{enumerate}
+  \item Photoperiod was set to 12 hour days throughout the spring until all individuals reached full leaf expansion.
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Phenology and False Spring Treatment}
+
+
 
   
   The actual temperatures that plants can tolerate vary strongly by species  and by a tissue's degree of cold hardiness. During the cold acclimation phase --- which is generally triggered by shorter photoperiods \citep{Howe2003, Charrier2011, Strimbeck2015, Welling1997} and, in some species, cold nights \citep{Charrier2011, Heide2005} --- cold hardiness increases rapidly as temperate plants begin to enter dormancy. At maximum cold hardiness, vegetative tissues can generally sustain temperatures from -25$^{\circ}$C to -40$^{\circ}$C \citep{Charrier2011,Korner2012,Vitasse2014} or sometimes even lower temperatures \citep[to -60$^{\circ}$C in extreme cases,][] {Korner2012}. Freezing tolerance diminishes again during the cold deacclimation phase, when metabolism and development start to increase, and plant tissues become especially vulnerable. 
@@ -118,7 +147,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \section*{Methods}
 
-     We assessed the effects of three levels of over-winter chilling on seedling phenology and growth across ten temperate tree and shrub species. Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3°C for three hours in a controlled growth chamber environment to mimic a false spring. Individuals were then put in a greenhouse for the remainder of the growing season to measure phenology and growth.
+     
 
 We found that false springs impacted growth and growing season length. Individuals exposed to the false spring treatment took longer to fully leafout at the beginning of the season and initiated dormancy earlier at the end of the season, thus reducing the length of the growing season. Additionally, across all species and chilling treatments, individuals exposed to false springs experienced more damage to the main shoot and relied more on lateral shoot growth, rendering inefficient growth patterns. However, individuals had increased growth with increased over-winter chilling. With sufficient chilling, growth and biomass were much higher---whether or not they were exposed to a false spring---suggesting chilling is more important for seedling growth than avoiding false springs. With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
 
