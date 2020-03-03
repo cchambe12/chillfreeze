@@ -92,6 +92,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \end{enumerate}
 
 \item Winter warming could impact the quality of budburst \citep{Bonhomme2010}.
+  \begin{enumerate}
   \item Decreases in chilling temperatures from climate change could affect budburst timing (CITE), as well as the synchrony of budburst within an individual or population \citep{Sanzperez2009}.
   \item And, reduced chilling---especially if there are fewer cold nights---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
   \item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
