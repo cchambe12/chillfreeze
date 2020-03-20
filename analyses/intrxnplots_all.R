@@ -26,7 +26,7 @@ dvr <- na.omit(dvr)
 
 cols <- colorRampPalette(brewer.pal(3,"Dark2"))(3)
 dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
-  geom_smooth(method="lm") + geom_jitter(width=0.1) +
+  geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
   xlab("Treatment") +
@@ -44,7 +44,7 @@ dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor
                                                                   "6 weeks",
                                                                   "8 weeks"))
 
-ggsave(paste("figures/dvrsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
+ggsave(paste("figures/dvrsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
 
 
 if(FALSE){
@@ -99,7 +99,7 @@ totbioplot <- ggplot(totbiomass, aes(x=tx, y=totbiomass, shape=as.factor(chill),
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/totbiomasssimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=totbioplot)
+ggsave(paste("figures/totbiomasssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=totbioplot)
 
 #ggplot(totbiomass, aes(x=as.character(chill), y=totbiomass)) + 
  # geom_boxplot()
@@ -129,7 +129,7 @@ htfinalplot <- ggplot(ht.final, aes(x=tx, y=ht.final, shape=as.factor(chill), co
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/htfinalsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=htfinalplot)
+ggsave(paste("figures/htfinalsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htfinalplot)
 
 #### Toughness
 tough <- subset(chillfrz, select=c("species", "chill", "tough", "tx"))
@@ -156,7 +156,7 @@ toughplot <- ggplot(tough, aes(x=tx, y=tough, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/toughsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=toughplot)
+ggsave(paste("figures/toughsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=toughplot)
 
 #### thickness
 thick <- subset(chillfrz, select=c("species", "chill", "thick", "tx"))
@@ -183,7 +183,7 @@ thickplot <- ggplot(thick, aes(x=tx, y=thick, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/thicksimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=thickplot)
+ggsave(paste("figures/thicksimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=thickplot)
 
 #### Growing season length
 gslength <- subset(chillfrz, select=c("species", "chill", "gslength", "tx"))
@@ -210,7 +210,7 @@ gslengthplot <- ggplot(gslength, aes(x=tx, y=gslength, shape=as.factor(chill), c
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/gslengthsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=gslengthplot)
+ggsave(paste("figures/gslengthsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=gslengthplot)
 
 #### Aboveground biomass
 shoots <- subset(chillfrz, select=c("species", "chill", "shoots", "tx"))
@@ -237,7 +237,7 @@ shootsplot <- ggplot(shoots, aes(x=tx, y=shoots, shape=as.factor(chill), colour=
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/shootssimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=shootsplot)
+ggsave(paste("figures/shootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=shootsplot)
 
 #### belowground biomass
 roots <- subset(chillfrz, select=c("species", "chill", "roots", "tx"))
@@ -264,7 +264,7 @@ rootsplot <- ggplot(roots, aes(x=tx, y=roots, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/rootssimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=rootsplot)
+ggsave(paste("figures/rootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootsplot)
 
 #### Roots to shoots ratio
 chillfrz$rootstoshoots <- chillfrz$roots/chillfrz$shoots
@@ -292,7 +292,7 @@ rootstoshootsplot <- ggplot(rootstoshoots, aes(x=tx, y=rootstoshoots, shape=as.f
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/rootstoshootssimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=rootstoshootsplot)
+ggsave(paste("figures/rootstoshootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootstoshootsplot)
 
 
 #### Height 60 days
@@ -320,7 +320,7 @@ htdiffplot <- ggplot(ht.diff, aes(x=tx, y=ht.diff, shape=as.factor(chill), colou
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/htmidsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=htdiffplot)
+ggsave(paste("figures/htmidsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htdiffplot)
 
 #### Chlorophyll
 chlavg <- subset(chillfrz, select=c("species", "chill", "chlavg", "tx"))
@@ -349,4 +349,4 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/chlavgsimple.png",sep=""),width=30, height=12,units="cm",bg = "white",dpi=500, plot=chlplot)
+ggsave(paste("figures/chlavgsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=chlplot)
