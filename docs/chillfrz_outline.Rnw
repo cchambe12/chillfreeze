@@ -74,7 +74,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   
 \item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
   \begin{enumerate}
-  \item One such weather event is known as a `false spring', which is when temperatures drop below freezing after budburst has initiated.
+  \item One such weather event is known as a `false spring', which is when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated.
   \item Freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
   \item Thus, temperate plants are at risk of false springs and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze damage by timing budburst effectively.
   \item The rate of budburst, or the duration of vegeative risk \citep{Chamberlain2019}, is a risky time for a plant and if a false spring occurs during this time, a plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009}.
@@ -86,7 +86,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   
 \item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth.
   \begin{enumerate}
-  \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase \citep{Charrier2015}. 
+  \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase \citep{Charrier2011}. 
   \item Endodormancy is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment. 
   \item Ecodormancy begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
   \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.
@@ -98,6 +98,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \item Sugar accumulation over the winter increases cold hardiness but is also crucial for dormancy break \citep{Tixier2017, Tixier2019}.
   \item Decreases in chilling temperatures from climate change could affect budburst timing \citep{Nanninga2017}, as well as the synchrony of budburst within a population or even within an individual \citep{Sanzperez2009}.
   \item And, reduced chilling---especially if there are fewer cold nights with warming---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
+  \item With decreased freezing tolerance, plants are susceptible to damage to leaf tissue, canopy dieback, xylem embolism and injury to the shoot apical meristem, all of which could greatly reduce a plant's ability to recover for the remainder of the growing season or even survive until the next season \citep{Sakai1987,Gu2008}.
   %\item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
   %\item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
   \end{enumerate}
@@ -117,8 +118,9 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item We chose 10 temperate woody plant tree and shrub species with varying phenologies, that were not used as crops or ornamental species: \textit{Acer saccharinum} L., \textit{Alnus incana rugosa} L., \textit{Betula papyrifera} Marsh., \textit{Betula populifolia} Marsh., \textit{Cornus racemosa} Lam., \textit{Fagus grandifolia} Ehrh., \textit{Nyssa sylvatica} Marsh., \textit{Salix purpurea} L., \textit{Sorbus americana} Marsh., and \textit{Viburnum dentatum} L.
   \begin{enumerate}
-  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6’ N -86$^{\circ}$12’ W) for a total of 480 individuals.
-  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17’ N -71$^{\circ}$8’ W) at 4$^{\circ}$C to maintain dormancy.
+  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6\’ N -86$^{\circ}$12\’ W) for a total of 480 individuals.
+  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17\’ N -71$^{\circ}$8\’ W) at 4$^{\circ}$C to maintain dormancy.
+  \item Two species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}---were delivered as root cuttings rather than seedlings and had to be removed from the experiment resulting in eight total species and 384 individuals.
   \end{enumerate}
 \end{enumerate}
 \subsection*{Growth Chamber and Greenhouse Conditions}
@@ -130,7 +132,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \item Lighting within the chambers was provided through a combination of T5HO fluorescent lamps with halogen incandescent bulbs at roughly 250 $\mu mol/m^{2}/s$.
   \item Individuals were rotated within and among growth chambers every two weeks to eliminate possible growth chamber effects.
   \end{enumerate}
-\item Once chilling was completed, individuals were moved to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$.
+\item Once chilling was completed, individuals were moved to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$C.
   \begin{enumerate}
   \item Photoperiod was set to 12 hour days throughout the spring until all individuals reached full leaf expansion.
   \item After all individuals reached full leaf expansion, greenhouse temperatures and photoperiods were kept ambient (see Supplemental Materials for more information). 
@@ -140,38 +142,177 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item Phenology observations were taken every 2-3 days through full leaf expansion and then recorded weekly over the summer.
   \begin{enumerate}
-  \item Budburst was denoted as BBCH stage 07, which is 'beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk for each individual \citep{Finn2007}.
-  \item For the individuals under the 'false spring treatment', once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19, they were placed in a growth chamber set to mimic a false spring event.
+  \item Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk for each individual \citep{Finn2007}.
+  \item For the individuals under the `false spring treatment', once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19, they were placed in a growth chamber set to mimic a false spring event.
   \item Individuals receiving the false spring treatment were placed in a growth chamber for 14 hours, starting at 6pm. 
-  \item Temperatures in the growth chamber were ramped down: 6pm to 10C, 8pm to 5C, 10pm to 0C, 12am to -3C, 3am to 0C, 4am to 5C, 6am to 10C and 8am temperatures rose again to 15C (Figure \ref{gccond}).
+  \item Temperatures in the growth chamber were ramped down: 6pm to 10$^{\circ}$C, 8pm to 5$^{\circ}$C, 10pm to 0$^{\circ}$C, 12am to -3$^{\circ}$C, 3am to 0$^{\circ}$C, 4am to 5$^{\circ}$C, 6am to 10$^{\circ}$C and 8am temperatures rose again to 15$^{\circ}$C (Figure XX).
   \item After 8am the following day, individuals were collected at placed back in the greenhouse with all of the other plants. 
+  \item Once all individuals reached full leaf expansion (BBCH stage 19), phenology observations were made weekly until August 1st, when observations were made every 2-3 days again to monitor fall phenology. 
+  \item Individuals were monitored until complete budset, at which point they were harvested for biomass measurements.
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Growth measurements}
+\begin{enumerate}
+\item Growth was closely measured throughout the entirety of the experiment. 
+  \begin{enumerate}
+  \item Height was measured three times throughout the growing season: the day an individual reached full leaf expansion, 60 days after full leaf out and when an individual reached complete budset. 
+  \item We measured the chlorophyll content of four leaves on each individual 60 days after full leaf out using an atLEAF CHL PLUS Chlorophyll meter (\url{https://www.atleaf.com/atLEAF\_CHL\_PLUS}).
+  \item The average chlorophyll content was calculated and then converted to mg/cm\textsuperscript{2} using the atLEAF CHL PLUS conversion tool (\url{https://www.atleaf.com/SPAD}).
+  \item We measured leaf thickness using a Shars Digital Micrometer (\url{https://www.shars.com/products\linebreak/measuring/micrometers/0-1-solid-metal-frame-electronic-outside-micrometer}) and leaf toughness in Newtons using a Shimpo Digital Force Gauge (\url{http://shimpoinstruments.com/force\_gauges/fg\-3000}) on two leaves for each individual.
+  \item Additionally, we monitored damage to the shoot apical meristem, which consisted of complete damage or disruption of growth in the main stem and resulted in early dormancy induction or reliance on lateral shoot growth.
+  \item Finally, belowground and aboveground biomass were harvested after an individual reached complete budset to include leaves in our biomass calculations. 
+  \item Belowground and aboveground plant material were separated and then put in a Shel Lab Forced Air Oven (\url{https://www.sheldonmanufacturing.com/shel\-lab\-products/productid/SMO28HP\-2}) at 60$^{\circ}$C for at least 4 days. 
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Data analysis}
+\begin{enumerate}
+\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage, (8) total biomass and (9) belowground to aboveground biomass ratio. 
+  \begin{enumerate}
+  \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
+  \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
+\begin{align*}
+y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{species[i]}}X_chill1 + \beta_{chill2_{species[i]}}X_chill2\\
+&+ \beta_{txchill1_{species[i]}}X_txchill1 + \beta_{txchill2_{species[i]}}X_txchill2 + \epsilon_i\\,
+\end{align*}
+\begin{align*}
+\epsilon_i & \sim N(0,\sigma_y) \\
+\end{align*}
 
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
 
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
+
+\item where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
+\item For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
+
+\begin{align*}
+ y_i & \sim Binomial(1,p) \tag{2} \\
+logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{species[i]}}X_chill1 + \beta_{chill2_{species[i]}}X_chill2\\
+&+ \beta_{txchill1_{species[i]}}X_txchill1 + \beta_{txchill2_{species[i]}}X_txchill2 + \epsilon_i \nonumber\\,
+\end{align*}
+
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
+
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
+
+  \item We ran four chains, each with 2 500 warm-up iterations and 4 000 sampling iterations for a total of 6 000 posterior samples for each predictor for each model using weakly informative priors. 
+  \item Increasing priors three-fold did not impact our results.
+  \item We evaluated our model performance based on $\hat{R}$ values that were close to one and did not include models with divergent transitions in our results. 
+  \item We also evaluated high $n_{eff}$ (4000 for most parameters, but as low as 1400 for a couple of parameters in the shoot apical meristem model). 
+  \item We additionally assessed chain convergence and posterior predictive checks visually \citep{BDA}.
+  \end{enumerate}
+\end{enumerate}
+
+\section*{Results}
+\begin{enumerate}
+\item We found that false springs impacted both phenology and growth. 
+  \begin{enumerate}
+  \item Individuals exposed to the false spring treatment had longer duration of vegetative risks (XX) at the beginning of the season and generally initiated dormancy earlier at the end of the season (XX), except for the cohort that received only 4 weeks of over-winter chilling, which had a consistent growing season length (XX). 
+  \item However, growing season lengths were shortest for the cohort that received 8 weeks of over-winter chilling (XX), but individuals had increased growth rates with increased over-winter chilling (XX). 
+  \item Under 8 weeks of chilling, growth and biomass were maintained (XX) regardless of false spring treatment and were higher even with shorter growing season lengths.
+  \end{enumerate}
   
-  %The actual temperatures that plants can tolerate vary strongly by species  and by a tissue's degree of cold hardiness. During the cold acclimation phase --- which is generally triggered by shorter photoperiods \citep{Howe2003, Charrier2011, Strimbeck2015, Welling1997} and, in some species, cold nights \citep{Charrier2011, Heide2005} --- cold hardiness increases rapidly as temperate plants begin to enter dormancy. At maximum cold hardiness, vegetative tissues can generally sustain temperatures from -25$^{\circ}$C to -40$^{\circ}$C \citep{Charrier2011,Korner2012,Vitasse2014} or sometimes even lower temperatures \citep[to -60$^{\circ}$C in extreme cases,][] {Korner2012}. Freezing tolerance diminishes again during the cold deacclimation phase, when metabolism and development start to increase, and plant tissues become especially vulnerable. 
+\item Growth traits were affected differently.
+  \begin{enumerate}
+  \item Additionally, across all species and chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem and relied more on lateral shoot growth, rendering inefficient growth patterns. 
+  \end{enumerate}
+\end{enumerate}
+
+\section*{Discussion}
+\begin{enumerate}
+  \item Thus, false springs reduce the length of the growing season when the chilling requirement is met.
+  \item This suggests chilling is more important for seedling growth than avoiding false springs. 
+  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. 
+  \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
+  \end{enumerate}
 
 
-%FROM RETHINKING: At the level of an individual plant, vulnerability to frost damage varies across tissues and seasonally with plant development. Different tissues are often more or less sensitive to low temperatures. Flower and fruit tissues are often easily damaged by freezing temperatures \citep{Augspurger2009, Caradonna2016, Inouye2000, Lenz2013}, while wood and bark tissues can survive lower temperatures through various methods \citep{Strimbeck2015}. Similar to wood and bark, leaf and bud tissues can often survive lower temperatures without damage \citep{Charrier2011}. However, for most tissues, tolerance of low temperatures varies seasonally with the environment through the development of cold hardiness (i.e. freezing tolerance), which allows plants to survive colder winter temperatures through various physiological mechanisms \citep[e.g., deep supercooling, increased solute concentration, and an increase in dehydrins and other proteins,][] {Sakai1987, Strimbeck2015}. 
 
-%FROM RETHINKING: Cold hardiness is an essential process for temperate plants to survive cold winters and hard freezes \citep{Vitasse2014}, especially in allowing bud tissue to overwinter without damage. Much cold hardiness research focuses on vegetative and floral buds, especially in the agricultural literature, where buds greatly determine crop success each season.
-
-
-
-\section*{Methods}
-
-     
-
-We found that false springs impacted growth and growing season length. Individuals exposed to the false spring treatment took longer to fully leafout at the beginning of the season and initiated dormancy earlier at the end of the season, thus reducing the length of the growing season. Additionally, across all species and chilling treatments, individuals exposed to false springs experienced more damage to the main shoot and relied more on lateral shoot growth, rendering inefficient growth patterns. However, individuals had increased growth with increased over-winter chilling. With sufficient chilling, growth and biomass were much higher---whether or not they were exposed to a false spring---suggesting chilling is more important for seedling growth than avoiding false springs. With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
-
-Though spring phenology (e.g., budburst and leafout) is advancing with recent climate change, last freeze dates are not anticipated to advance at the same rate. This mismatch in timing could result in more intense false spring events for temperate tree and shrub species and impact some of our crops---like apples. These events can damage buds, leaves and flowers and, in extreme cases, result in canopy dieback or damage to the xylem. Thus, false springs can have drastic economic and ecological consequences. Boston springs are confusing, temperatures can drop significantly in early February but rise again in early March, just to lead to one last snow storm at the end of March or early April. Since starting my PhD at the Arboretum, I have found myself watching the Magnolias as they are common victims of these fluctuations: they often bloom early in the season---sometimes as early as February---but then the flowers can sustain a large amount of damage from those March snow and ice storms. 
-
-Since springs can be so tricky to navigate, temperate plants have evolved to minimize false spring damage through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize false spring risk by timing budburst effectively. By having flexible phenologies, individuals can take advantage of a full growing season, without being at risk of freezing temperatures.
-
-In an experiment I ran at the Weld Hill Research Building, I examined the effects of false springs on eight deciduous tree and shrub seedlings. I discovered that trees exposed to freezing temperatures after budburst sustained leaf damage, which ultimately led to shorter growing seasons. I also found that false springs cause damage to the shoot apical meristem (i.e., the region that allows a plant to grow straight and tall), leading to unique growth patterns. And though these changes in growth habits can be charming, they are largely inefficient and could result in seedling dieback in our forests. Additionally, I evaluated the impacts of less over-winter chilling, an essential cue in spring phenology and one that is predicted to decrease with increasing temperatures. I found that chilling not only affected budburst timing but it also determined the amount of growth an individual experienced over the course of a growing season. Individuals with less over-winter chilling had less total biomass overall. 
-
-Our forests are essential carbon sinks, they sequester carbon, mitigate the effects of climate change and work to counteract human impact. If we continue to practice poor habits that harm our environment, our trees will be at risk of having less efficient growing seasons, thus leading to smaller forests and subsequently a reduction in our carbon sinks. 
 
 \bibliography{..//references/chillfreeze.bib}
+
+\section*{Tables and Figures}
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/growthchamber.pdf}%\label{fig:gccond}
+  -\end{center}
+  -\end{figure}}
+  
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/dvr_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/gslengthlo_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/meristem_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/chlavg.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/toughness_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/thickness_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/htdiff_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/totbiomass_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/roottoshoot_brms.pdf} %\label{fig:allmsmts}
+  -\end{center}
+  -\end{figure}}
 
 \end{document}

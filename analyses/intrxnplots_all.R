@@ -28,7 +28,8 @@ cols <- colorRampPalette(brewer.pal(3,"Dark2"))(3)
 dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
-  theme_classic() + 
+  theme_classic() +
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Duration of Vegetative Risk (days)") +
   expand_limits(y=0) +
@@ -47,15 +48,15 @@ dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor
 ggsave(paste("figures/dvrsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
 
 
-if(FALSE){
+if(TRUE){
 #### Meristem
 meristem <- subset(chillfrz, select=c("species", "chill", "meristem", "tx"))
 meristem <- meristem[!duplicated(meristem),]
 meristem <- na.omit(meristem)
 
 cols <- colorRampPalette(brewer.pal(3,"Dark2"))(3)
-ggplot(meristem, aes(x=tx, y=meristem, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
-  geom_smooth(method="lm") + 
+meriplot <- ggplot(meristem, aes(x=tx, y=meristem, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
+  geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1, height=0.1) +
   geom_point() +
   theme_classic() + 
   xlab("Treatment") +
@@ -72,6 +73,8 @@ ggplot(meristem, aes(x=tx, y=meristem, shape=as.factor(chill), colour=as.factor(
   scale_shape_manual(name="Chill Treatment", values=c(15, 16, 17), labels=c("4 weeks",
                                                                             "6 weeks",
                                                                             "8 weeks"))
+
+ggsave(paste("figures/merisimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=meriplot)
 }
 
 #### Total Biomass
@@ -84,6 +87,7 @@ totbioplot <- ggplot(totbiomass, aes(x=tx, y=totbiomass, shape=as.factor(chill),
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Biomass (g)") +
   coord_cartesian(expand = TRUE) +
@@ -141,6 +145,7 @@ toughplot <- ggplot(tough, aes(x=tx, y=tough, shape=as.factor(chill), colour=as.
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Leaf toughness (N)") +
   coord_cartesian(expand = TRUE) +
@@ -195,6 +200,7 @@ gslengthplot <- ggplot(gslength, aes(x=tx, y=gslength, shape=as.factor(chill), c
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Growing season length (days)") +
   coord_cartesian(expand = TRUE) +
@@ -305,6 +311,7 @@ htdiffplot <- ggplot(ht.diff, aes(x=tx, y=ht.diff, shape=as.factor(chill), colou
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Shoot growth 60 days after budburst (cm)") +
   coord_cartesian(expand = TRUE) +
@@ -334,6 +341,7 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
+  theme(legend.position="none") +
   xlab("Treatment") +
   ylab("Chlorophyll content (mg/cm^2)") +
   coord_cartesian(expand = TRUE) +
@@ -350,3 +358,11 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
                                                                             "8 weeks"))
 
 ggsave(paste("figures/chlavgsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=chlplot)
+
+
+quartz()
+allmsmts <- grid.arrange(dvrplot, gslengthplot, meriplot,
+             chlplot, toughplot, thickplot,
+             htdiffplot, totbioplot, rootstoshootsplot, ncol=3, widths=c(1,1,1.5))
+
+ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=1000, plot=allmsmts)
