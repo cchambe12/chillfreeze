@@ -65,19 +65,19 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \section*{Introduction}
 \begin{enumerate}
-\item The timing of spring in temperate deciduous trees and shrubs shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management.
+\item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management.
   \begin{enumerate}
   \item With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout) is advancing.
   \item Budburst in trees and shrubs requires three cues: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod).
-  \item As budburst and leafout are strongly cued by temperature, deciduous woody plants provide compelling evidence of climate-induced warming.
+  \item As budburst and leafout are strongly cued by temperature, deciduous woody plants provide compelling evidence of climate-induced warming and temperature shifts.
   \end{enumerate}
   
-\item And though the world is getting hotter, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
+\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
   \begin{enumerate}
   \item One such weather event is known as a `false spring', which is when temperatures drop below freezing after budburst has initiated.
-  \item Temperate plants are at risk of freezing temperatures and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze risk by timing budburst effectively.
   \item Freezing tolerance steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
-  \item Seedlings and saplings initiate budburst before canopy closure in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species at greater risk to false spring damage than adult trees \citep{Vitasse2014}.
+  \item Thus, temperate plants are at risk of freezing temperatures and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize false spring risk by timing budburst effectively.
+  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk to false spring damage \citep{Vitasse2014}.
   \item False springs can be very damaging, with reports of trees taking 16-38 days to refoliate after leaf loss from freezing temperatures \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}. 
   \item Such damage can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake \citep{Hufkens2012, Klosterman2018, Richardson2013}
   \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies \citep{OBrien2012}.
@@ -86,15 +86,17 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth.
   \begin{enumerate}
   \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase. 
-  \item This helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.
+  \item Endodormancy is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment. 
+  \item Ecodormancy begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
+  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false springs \citep{Basler2014}.
   \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation to sugar accumulation \citep{Tixier2019}.
   \item Sugar accumulation over the winter increases cold hardiness 
   \end{enumerate}
 
 \item Winter warming could impact the quality of budburst \citep{Bonhomme2010}.
   \begin{enumerate}
-  \item Decreases in chilling temperatures from climate change could affect budburst timing (CITE), as well as the synchrony of budburst within an individual or population \citep{Sanzperez2009}.
-  \item And, reduced chilling---especially if there are fewer cold nights---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
+  \item Decreases in chilling temperatures from climate change could affect budburst timing (CITE), as well as the synchrony of budburst within a population or even within an individual \citep{Sanzperez2009}.
+  \item And, reduced chilling---especially if there are fewer cold nights with warming---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
   \item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
   \item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
   \end{enumerate}
@@ -102,9 +104,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \item Here, we assessed the effects of three levels of over-winter chilling on seedling phenology and growth across ten temperate tree and shrub species. 
   \begin{enumerate}
-  \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{
-  \circ}$C to mimic a false spring event. 
-  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does amount of over-winter chilling and (2) how do false spring events impact phenology and growth?
+  \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{\circ}$C to mimic a false spring event. 
+  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology and growth?
   \end{enumerate}
 \end{enumerate}
   
