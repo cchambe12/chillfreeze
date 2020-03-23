@@ -69,41 +69,43 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \begin{enumerate}
   \item With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout) is advancing.
   \item Budburst in trees and shrubs requires three cues: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod).
-  \item As budburst and leafout are strongly cued by temperature, deciduous woody plants provide compelling evidence of climate-induced warming and temperature shifts.
+  \item As budburst and leafout are strongly cued by temperature, species ranges and growing seasons are highly susceptible to change with climate-induced warming \citep{Chuine2001}.
   \end{enumerate}
   
 \item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
   \begin{enumerate}
   \item One such weather event is known as a `false spring', which is when temperatures drop below freezing after budburst has initiated.
-  \item Freezing tolerance steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
-  \item Thus, temperate plants are at risk of freezing temperatures and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize false spring risk by timing budburst effectively.
-  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk to false spring damage \citep{Vitasse2014}.
+  \item Freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
+  \item Thus, temperate plants are at risk of false springs and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze damage by timing budburst effectively.
+  \item The rate of budburst, or the duration of vegeative risk \citep{Chamberlain2019}, is a risky time for a plant and if a false spring occurs during this time, a plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009}.
+  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk \citep{Vitasse2014}.
   \item False springs can be very damaging, with reports of trees taking 16-38 days to refoliate after leaf loss from freezing temperatures \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}. 
-  \item Such damage can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake \citep{Hufkens2012, Klosterman2018, Richardson2013}
-  \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies \citep{OBrien2012}.
+  \item Such damage can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake as well as forest recruitment \citep{Hufkens2012, Klosterman2018, Richardson2013}
+  \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies and climate forecasting \citep{OBrien2019}.
   \end{enumerate}
   
 \item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth.
   \begin{enumerate}
-  \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase. 
+  \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase \citep{Charrier2015}. 
   \item Endodormancy is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment. 
   \item Ecodormancy begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
-  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false springs \citep{Basler2014}.
-  \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation to sugar accumulation \citep{Tixier2019}.
-  \item Sugar accumulation over the winter increases cold hardiness 
+  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.
   \end{enumerate}
 
-\item Winter warming could impact the quality of budburst \citep{Bonhomme2010}.
+\item Winter warming could impact the quality of budburst \citep{Cleland2007,Bonhomme2010}.
   \begin{enumerate}
-  \item Decreases in chilling temperatures from climate change could affect budburst timing (CITE), as well as the synchrony of budburst within a population or even within an individual \citep{Sanzperez2009}.
+  \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation into sugar accumulation \citep{Tixier2019}.
+  \item Sugar accumulation over the winter increases cold hardiness but is also crucial for dormancy break \citep{Tixier2017, Tixier2019}.
+  \item Decreases in chilling temperatures from climate change could affect budburst timing \citep{Nanninga2017}, as well as the synchrony of budburst within a population or even within an individual \citep{Sanzperez2009}.
   \item And, reduced chilling---especially if there are fewer cold nights with warming---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
-  \item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
-  \item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
+  %\item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
+  %\item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
   \end{enumerate}
   
 
-\item Here, we assessed the effects of three levels of over-winter chilling on seedling phenology and growth across ten temperate tree and shrub species. 
+\item Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across ten temperate tree and shrub species. 
   \begin{enumerate}
+  \item Individuals were exposed to three levels of over-winter chilling. 
   \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{\circ}$C to mimic a false spring event. 
   \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology and growth?
   \end{enumerate}
@@ -124,21 +126,30 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Individuals were randomly selected and placed in six experimental treatments: 4 weeks of chilling at 4$^{\circ}$C x no false spring, 4 weeks of chilling at 4$^{\circ}$C x false spring, 6 weeks of chilling at 4$^{\circ}$C x no false spring, 6 weeks of chilling at 4$^{\circ}$C x false spring,
 8 weeks of chilling at 4$^{\circ}$C x no false spring, 8 weeks of chilling at 4$^{\circ}$C x false spring.
   \begin{enumerate}
-  \item While individuals were in the growth chamber to recieve the chilling treatment, photoperiod was manipulated to be eight hour days.
+  \item While individuals were in the growth chamber under chilling conditions, photoperiod was mantained at eight hour days.
   \item Lighting within the chambers was provided through a combination of T5HO fluorescent lamps with halogen incandescent bulbs at roughly 250 $\mu mol/m^{2}/s$.
   \item Individuals were rotated within and among growth chambers every two weeks to eliminate possible growth chamber effects.
   \end{enumerate}
 \item Once chilling was completed, individuals were moved to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$.
   \begin{enumerate}
   \item Photoperiod was set to 12 hour days throughout the spring until all individuals reached full leaf expansion.
+  \item After all individuals reached full leaf expansion, greenhouse temperatures and photoperiods were kept ambient (see Supplemental Materials for more information). 
   \end{enumerate}
 \end{enumerate}
 \subsection*{Phenology and False Spring Treatment}
+\begin{enumerate}
+\item Phenology observations were taken every 2-3 days through full leaf expansion and then recorded weekly over the summer.
+  \begin{enumerate}
+  \item Budburst was denoted as BBCH stage 07, which is 'beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk for each individual \citep{Finn2007}.
+  \item For the individuals under the 'false spring treatment', once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19, they were placed in a growth chamber set to mimic a false spring event.
+  \item Individuals receiving the false spring treatment were placed in a growth chamber for 14 hours, starting at 6pm. 
+  \item Temperatures in the growth chamber were ramped down: 6pm to 10C, 8pm to 5C, 10pm to 0C, 12am to -3C, 3am to 0C, 4am to 5C, 6am to 10C and 8am temperatures rose again to 15C (Figure \ref{gccond}).
+  \item After 8am the following day, individuals were collected at placed back in the greenhouse with all of the other plants. 
 
 
 
   
-  The actual temperatures that plants can tolerate vary strongly by species  and by a tissue's degree of cold hardiness. During the cold acclimation phase --- which is generally triggered by shorter photoperiods \citep{Howe2003, Charrier2011, Strimbeck2015, Welling1997} and, in some species, cold nights \citep{Charrier2011, Heide2005} --- cold hardiness increases rapidly as temperate plants begin to enter dormancy. At maximum cold hardiness, vegetative tissues can generally sustain temperatures from -25$^{\circ}$C to -40$^{\circ}$C \citep{Charrier2011,Korner2012,Vitasse2014} or sometimes even lower temperatures \citep[to -60$^{\circ}$C in extreme cases,][] {Korner2012}. Freezing tolerance diminishes again during the cold deacclimation phase, when metabolism and development start to increase, and plant tissues become especially vulnerable. 
+  %The actual temperatures that plants can tolerate vary strongly by species  and by a tissue's degree of cold hardiness. During the cold acclimation phase --- which is generally triggered by shorter photoperiods \citep{Howe2003, Charrier2011, Strimbeck2015, Welling1997} and, in some species, cold nights \citep{Charrier2011, Heide2005} --- cold hardiness increases rapidly as temperate plants begin to enter dormancy. At maximum cold hardiness, vegetative tissues can generally sustain temperatures from -25$^{\circ}$C to -40$^{\circ}$C \citep{Charrier2011,Korner2012,Vitasse2014} or sometimes even lower temperatures \citep[to -60$^{\circ}$C in extreme cases,][] {Korner2012}. Freezing tolerance diminishes again during the cold deacclimation phase, when metabolism and development start to increase, and plant tissues become especially vulnerable. 
 
 
 %FROM RETHINKING: At the level of an individual plant, vulnerability to frost damage varies across tissues and seasonally with plant development. Different tissues are often more or less sensitive to low temperatures. Flower and fruit tissues are often easily damaged by freezing temperatures \citep{Augspurger2009, Caradonna2016, Inouye2000, Lenz2013}, while wood and bark tissues can survive lower temperatures through various methods \citep{Strimbeck2015}. Similar to wood and bark, leaf and bud tissues can often survive lower temperatures without damage \citep{Charrier2011}. However, for most tissues, tolerance of low temperatures varies seasonally with the environment through the development of cold hardiness (i.e. freezing tolerance), which allows plants to survive colder winter temperatures through various physiological mechanisms \citep[e.g., deep supercooling, increased solute concentration, and an increase in dehydrins and other proteins,][] {Sakai1987, Strimbeck2015}. 
