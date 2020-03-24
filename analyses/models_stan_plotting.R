@@ -93,7 +93,7 @@ if(FALSE){
 
 spp <- unique(chill.stan$species)
 
-modelhere <- totbiomass.mod
+modelhere <- roottoshoot.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
