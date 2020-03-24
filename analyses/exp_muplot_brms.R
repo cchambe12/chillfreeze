@@ -7,7 +7,7 @@
 
 muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg2){
   spnum <- unique(chill.stan$species)
-  svg(file.path(figpath, paste("", nameforfig, figpathmore, ".svg", sep="")),
+  pdf(file.path(figpath, paste("", nameforfig, figpathmore, ".pdf", sep="")),
       width = width, height = height)
   par(xpd=FALSE)
   par(mar=c(5,7,3,10))
