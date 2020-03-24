@@ -105,15 +105,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -137,7 +137,7 @@ print(xtable(modoutput,
 <<label=suppmodgs, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/gslengthlo_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/gslength_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -153,15 +153,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -185,7 +185,7 @@ print(xtable(modoutput,
 <<label=suppmodmeri, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/meri_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/meristem_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -201,20 +201,20 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem growth.", label="tab:suppmodmeri",
+             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.", label="tab:suppmodmeri",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -249,15 +249,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -281,7 +281,7 @@ print(xtable(modoutput,
 <<label=suppmodtough, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/tough_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/toughness_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -297,15 +297,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -329,7 +329,7 @@ print(xtable(modoutput,
 <<label=suppmodthick, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/thick_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/thickness_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -345,15 +345,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -393,15 +393,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -441,15 +441,16 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
@@ -471,7 +472,7 @@ print(xtable(modoutput,
 <<label=suppmodrtos, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/totbiomass_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/roottoshoot_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -487,15 +488,15 @@ modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
 modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
 
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+#modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+#modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+#modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+#modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+#modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
 
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+#modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+#modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+#modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
