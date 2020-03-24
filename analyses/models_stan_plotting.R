@@ -77,7 +77,7 @@ alphahere = 0.4
 
 #xlab <- "Model estimate of change in shoot growth (cm)"
 #xlab <- "Model estimate of change in total biomass (g)"
-xlab <- "Model estimate of change in belowground to aboveground biomass ratio (g)"
+xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
 
 if(FALSE){
 #xlab <- "Model estimate of change in belowground biomass (g)"
