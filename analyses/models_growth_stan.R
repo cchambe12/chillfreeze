@@ -26,6 +26,19 @@ source('source/stan_utility.R')
 chill.stan <- read.csv("output/clean_dvr_traits.csv")
 #chill.stan <- read.csv("output/clean_dvr_drought.csv")
 
+chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
+rmspp <- c("FAGGRA", "NYSSYL")
+chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
+
+get_prior(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan)
+
+dvr.mod <- brm(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                    data=chill.stan, iter=4000, warmup=2500, 
+                    prior = prior(normal(20, 10), class=Intercept),
+                    control=list(max_treedepth=15, adapt_delta=0.99))
+save(dvr.mod, file="~/Documents/git/chillfreeze/analyses/stan/dvr_brms.Rdata")
+
 
 chill.stan$gslength.bb <- chill.stan$bset - chill.stan$budburst
 chill.stan$gslength.lo <- chill.stan$bset - chill.stan$leafout
@@ -47,32 +60,37 @@ htdiff.mod <- brm(finaldiff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | s
                             data=chill.stan.ht, iter=4000, warmup=2500, 
                            control=list(max_treedepth=15, adapt_delta=0.99),
                          prior = prior(normal(60, 30), class=Intercept))
+save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htfinal_brms.Rdata")
+
+rmspp <- c("FAGGRA", "NYSSYL")
+chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
+chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.diff),]
+
+get_prior(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan.ht)
+
+htdiff.mod <- brm(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                  data=chill.stan.ht, iter=4000, warmup=2500, 
+                  control=list(max_treedepth=15, adapt_delta=0.99),
+                  prior = prior(normal(5, 10), class=Intercept))
 save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htdiff_brms.Rdata")
 
-### NOT EXCITING OR SENSICAL: chill.stan$finalht.diff <- ((log(chill.stan$ht.final)-log(chill.stan$lo.ht))/chill.stan$gslength) *1000
-### NOT EXCITING OR SENSICAL: htfinal.mod <- brm(finalht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-                                #          data=chill.stan, iter=4000, warmup=2500, 
-                                #         control=list(max_treedepth=15, adapt_delta=0.99))
+chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
+chill.stan$mg.cm2 <- chill.stan$mg.cm2*100
+chill.stan$chlavg <- as.numeric(chill.stan$chlavg)
 
-### NOT EXCITING OR SENSICAL:chill.stan$htdiff.final <- (chill.stan$ht.final-chill.stan$lo.ht)/chill.stan$gslength
-### NOT EXCITING OR SENSICAL:simp.htdiff <- brm(htdiff.final ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
-               #    data=chill.stan, iter=4000, warmup=2500, 
-              #     control=list(max_treedepth=15, adapt_delta=0.99))
+chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
+rmspp <- c("FAGGRA", "NYSSYL")
+chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
-#chill.stan$ht.diff <- chill.stan$X60dayheight - chill.stan$lo.ht
-#chill.stan <- chill.stan[!is.na(chill.stan$ht.diff),]
-#chill.stan$ht.rgr <- (log(chill.stan$X60dayheight) - log(chill.stan$lo.ht)) * 10
-#chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
+get_prior(chlavg ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan)
 
-#chill.stan$thickness <- ((chill.stan$thick1 + chill.stan$thick2)/2)*10
-#chill.stan <- chill.stan[!is.na(chill.stan$thickness),]
-
-
-#chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
-#chill.stan$mg.cm2 <- chill.stan$mg.cm2*100
-#chill.stan$chlavg <- as.numeric(chill.stan$chlavg)
-
-#chill.stan <- chill.stan[!is.na(chill.stan$chlavg),]
+chl.mod <- brm(chlavg ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                 data=chill.stan, iter=4000, warmup=2500, 
+                 prior = prior(normal(30, 10), class=Intercept),
+                 control=list(max_treedepth=15, adapt_delta=0.99))
+save(chl.mod, file="~/Documents/git/chillfreeze/analyses/stan/chlavg_brms.Rdata")
 
 #chill.stan <- chill.stan[!is.na(chill.stan$ht.rgr),]
 

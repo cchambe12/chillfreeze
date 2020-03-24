@@ -118,9 +118,10 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item We chose 10 temperate woody plant tree and shrub species with varying phenologies, that were not used as crops or ornamental species: \textit{Acer saccharinum} L., \textit{Alnus incana rugosa} L., \textit{Betula papyrifera} Marsh., \textit{Betula populifolia} Marsh., \textit{Cornus racemosa} Lam., \textit{Fagus grandifolia} Ehrh., \textit{Nyssa sylvatica} Marsh., \textit{Salix purpurea} L., \textit{Sorbus americana} Marsh., and \textit{Viburnum dentatum} L.
   \begin{enumerate}
-  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6\’ N -86$^{\circ}$12\’ W) for a total of 480 individuals.
-  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17\’ N -71$^{\circ}$8\’ W) at 4$^{\circ}$C to maintain dormancy.
+  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6' N -86$^{\circ}$12' W) for a total of 480 individuals.
+  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17' N -71$^{\circ}$8' W) at 4$^{\circ}$C to maintain dormancy.
   \item Two species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}---were delivered as root cuttings rather than seedlings and had to be removed from the experiment resulting in eight total species and 384 individuals.
+  \item After all individuals had leafed out, all seedlings were up-potted to new pots (NEW POT SIZE HERE) and given fertilizer (FERTILIZER INFO HERE).
   \end{enumerate}
 \end{enumerate}
 \subsection*{Growth Chamber and Greenhouse Conditions}
@@ -172,8 +173,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
 \begin{align*}
-y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{species[i]}}X_chill1 + \beta_{chill2_{species[i]}}X_chill2\\
-&+ \beta_{txchill1_{species[i]}}X_txchill1 + \beta_{txchill2_{species[i]}}X_txchill2 + \epsilon_i\\,
+y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \tag{1}\\,
 \end{align*}
 \begin{align*}
 \epsilon_i & \sim N(0,\sigma_y) \\
@@ -195,8 +196,8 @@ y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{specie
 
 \begin{align*}
  y_i & \sim Binomial(1,p) \tag{2} \\
-logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{species[i]}}X_chill1 + \beta_{chill2_{species[i]}}X_chill2\\
-&+ \beta_{txchill1_{species[i]}}X_txchill1 + \beta_{txchill2_{species[i]}}X_txchill2 + \epsilon_i \nonumber\\,
+logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \nonumber\\,
 \end{align*}
 
 \item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
@@ -235,6 +236,10 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{s
   \item Shoot growth for the first 60 days of the growing season was highest for the 8 weeks of chilling cohort but false spring conditions reduced growth for the 6 and 8 weeks of chilling groups (XX and XX respectively).
   \item Individuals exposed to false spring conditions had lower total biomasses for both the 4 weeks of chilling cohort (XX) and the 6 weeks of chilling cohort (XX), but the 8 weeks of chilling cohort had higher total biomasses overall, regardless of whether or not there was a false spring treatment imposed (XX no false spring and XX for false spring conditions).
   \end{enumerate}
+  
+\item Species responded differently to false spring and chilling requirements.
+  \begin{enumerate}
+  \item Well, actually it's not entirely obvious that they did... need to think of new figures to make for this...
 \end{enumerate}
 
 \section*{Discussion}
@@ -243,6 +248,15 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_tx + \beta_{chill1_{s
   \item This suggests chilling is more important for seedling growth than avoiding false springs. 
   \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. 
   \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
+  \end{enumerate}
+  
+\item Major sections
+  \begin{enumerate}
+  \item Chilling and False spring (as above)
+  \item Herbivory risk
+  \item Species differences...
+  \item Forecasting
+  \item Implications for forest recruitment
   \end{enumerate}
 
 
