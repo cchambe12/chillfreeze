@@ -30,7 +30,8 @@ dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor
   geom_point() +
   theme_classic() +
   theme(legend.position="none") +
-  xlab("Treatment") +
+  ggtitle("a)") +
+  xlab("") +
   ylab("Duration of Vegetative Risk (days)") +
   expand_limits(y=0) +
   scale_y_continuous(breaks = seq(0, 40, by=5)) + 
@@ -45,7 +46,7 @@ dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor
                                                                   "6 weeks",
                                                                   "8 weeks"))
 
-ggsave(paste("figures/dvrsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
+#ggsave(paste("figures/dvrsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
 
 
 if(TRUE){
@@ -59,37 +60,10 @@ meriplot <- ggplot(meristem, aes(x=tx, y=meristem, shape=as.factor(chill), colou
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1, height=0.1) +
   geom_point() +
   theme_classic() + 
-  xlab("Treatment") +
+  #theme(legend.position = "none") +
+  ggtitle("c)") +
+  xlab("") +
   ylab("Shoot apical meristem damage") +
-  coord_cartesian(expand = TRUE) +
-  scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
-  scale_x_continuous(breaks = c(0,1), labels=c("Control", "False Spring")) +
-  scale_color_manual(name="Chill Treatment", values=cols, labels=c("4 weeks",
-                                                                   "6 weeks",
-                                                                   "8 weeks")) +
-  scale_fill_manual(name="Chill Treatment", values=cols, labels=c("4 weeks",
-                                                                  "6 weeks",
-                                                                  "8 weeks")) +
-  scale_shape_manual(name="Chill Treatment", values=c(15, 16, 17), labels=c("4 weeks",
-                                                                            "6 weeks",
-                                                                            "8 weeks"))
-
-ggsave(paste("figures/merisimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=meriplot)
-}
-
-#### Total Biomass
-totbiomass <- subset(chillfrz, select=c("species", "chill", "totbiomass", "tx"))
-totbiomass <- totbiomass[!duplicated(totbiomass),]
-totbiomass <- na.omit(totbiomass)
-
-cols <- colorRampPalette(brewer.pal(3,"Dark2"))(3)
-totbioplot <- ggplot(totbiomass, aes(x=tx, y=totbiomass, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
-  geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
-  geom_point() +
-  theme_classic() + 
-  theme(legend.position="none") +
-  xlab("Treatment") +
-  ylab("Biomass (g)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
   scale_x_continuous(breaks = c(0,1), labels=c("Control", "False Spring")) +
@@ -103,7 +77,37 @@ totbioplot <- ggplot(totbiomass, aes(x=tx, y=totbiomass, shape=as.factor(chill),
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/totbiomasssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=totbioplot)
+#ggsave(paste("figures/merisimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=meriplot)
+}
+
+#### Total Biomass
+totbiomass <- subset(chillfrz, select=c("species", "chill", "totbiomass", "tx"))
+totbiomass <- totbiomass[!duplicated(totbiomass),]
+totbiomass <- na.omit(totbiomass)
+
+cols <- colorRampPalette(brewer.pal(3,"Dark2"))(3)
+totbioplot <- ggplot(totbiomass, aes(x=tx, y=totbiomass, shape=as.factor(chill), colour=as.factor(chill), fill=as.factor(chill))) +
+  geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
+  geom_point() +
+  theme_classic() + 
+  theme(legend.position="none") +
+  ggtitle("h)") +
+  xlab("") +
+  ylab("Total Biomass (g)") +
+  coord_cartesian(expand = TRUE) +
+  #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
+  scale_x_continuous(breaks = c(0,1), labels=c("Control", "False Spring")) +
+  scale_color_manual(name="Chill Treatment", values=cols, labels=c("4 weeks",
+                                                                   "6 weeks",
+                                                                   "8 weeks")) +
+  scale_fill_manual(name="Chill Treatment", values=cols, labels=c("4 weeks",
+                                                                  "6 weeks",
+                                                                  "8 weeks")) +
+  scale_shape_manual(name="Chill Treatment", values=c(15, 16, 17), labels=c("4 weeks",
+                                                                            "6 weeks",
+                                                                            "8 weeks"))
+
+#ggsave(paste("figures/totbiomasssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=totbioplot)
 
 #ggplot(totbiomass, aes(x=as.character(chill), y=totbiomass)) + 
  # geom_boxplot()
@@ -118,7 +122,9 @@ htfinalplot <- ggplot(ht.final, aes(x=tx, y=ht.final, shape=as.factor(chill), co
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
-  xlab("Treatment") +
+  theme(legend.position = "none") +
+  ggtitle("g)") +
+  xlab("") +
   ylab("Total shoot growth (cm)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
@@ -133,7 +139,7 @@ htfinalplot <- ggplot(ht.final, aes(x=tx, y=ht.final, shape=as.factor(chill), co
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/htfinalsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htfinalplot)
+#ggsave(paste("figures/htfinalsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htfinalplot)
 
 #### Toughness
 tough <- subset(chillfrz, select=c("species", "chill", "tough", "tx"))
@@ -146,7 +152,8 @@ toughplot <- ggplot(tough, aes(x=tx, y=tough, shape=as.factor(chill), colour=as.
   geom_point() +
   theme_classic() + 
   theme(legend.position="none") +
-  xlab("Treatment") +
+  ggtitle("e)") +
+  xlab("") +
   ylab("Leaf toughness (N)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
@@ -161,7 +168,7 @@ toughplot <- ggplot(tough, aes(x=tx, y=tough, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/toughsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=toughplot)
+#ggsave(paste("figures/toughsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=toughplot)
 
 #### thickness
 thick <- subset(chillfrz, select=c("species", "chill", "thick", "tx"))
@@ -173,7 +180,8 @@ thickplot <- ggplot(thick, aes(x=tx, y=thick, shape=as.factor(chill), colour=as.
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
-  xlab("Treatment") +
+  ggtitle("f)") +
+  xlab("") +
   ylab(expression(paste("Leaf thickness (", mu, "m)", sep=""))) +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
@@ -188,7 +196,7 @@ thickplot <- ggplot(thick, aes(x=tx, y=thick, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/thicksimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=thickplot)
+#ggsave(paste("figures/thicksimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=thickplot)
 
 #### Growing season length
 gslength <- subset(chillfrz, select=c("species", "chill", "gslength", "tx"))
@@ -201,7 +209,8 @@ gslengthplot <- ggplot(gslength, aes(x=tx, y=gslength, shape=as.factor(chill), c
   geom_point() +
   theme_classic() + 
   theme(legend.position="none") +
-  xlab("Treatment") +
+  ggtitle("b)") +
+  xlab("") +
   ylab("Growing season length (days)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
@@ -216,7 +225,7 @@ gslengthplot <- ggplot(gslength, aes(x=tx, y=gslength, shape=as.factor(chill), c
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/gslengthsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=gslengthplot)
+#ggsave(paste("figures/gslengthsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=gslengthplot)
 
 #### Aboveground biomass
 shoots <- subset(chillfrz, select=c("species", "chill", "shoots", "tx"))
@@ -243,7 +252,7 @@ shootsplot <- ggplot(shoots, aes(x=tx, y=shoots, shape=as.factor(chill), colour=
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/shootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=shootsplot)
+#ggsave(paste("figures/shootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=shootsplot)
 
 #### belowground biomass
 roots <- subset(chillfrz, select=c("species", "chill", "roots", "tx"))
@@ -270,7 +279,7 @@ rootsplot <- ggplot(roots, aes(x=tx, y=roots, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/rootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootsplot)
+#ggsave(paste("figures/rootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootsplot)
 
 #### Roots to shoots ratio
 chillfrz$rootstoshoots <- chillfrz$roots/chillfrz$shoots
@@ -283,8 +292,10 @@ rootstoshootsplot <- ggplot(rootstoshoots, aes(x=tx, y=rootstoshoots, shape=as.f
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
-  xlab("Treatment") +
-  ylab("Root Biomass to Shoot Biomass ratio (g)") +
+  #theme(legend.position="none") +
+  ggtitle("i)") +
+  xlab("") +
+  ylab("Root Biomass to \nShoot Biomass ratio (g)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
   scale_x_continuous(breaks = c(0,1), labels=c("Control", "False Spring")) +
@@ -298,7 +309,7 @@ rootstoshootsplot <- ggplot(rootstoshoots, aes(x=tx, y=rootstoshoots, shape=as.f
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/rootstoshootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootstoshootsplot)
+#ggsave(paste("figures/rootstoshootssimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=rootstoshootsplot)
 
 
 #### Height 60 days
@@ -327,7 +338,7 @@ htdiffplot <- ggplot(ht.diff, aes(x=tx, y=ht.diff, shape=as.factor(chill), colou
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/htmidsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htdiffplot)
+#ggsave(paste("figures/htmidsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=htdiffplot)
 
 #### Chlorophyll
 chlavg <- subset(chillfrz, select=c("species", "chill", "chlavg", "tx"))
@@ -357,12 +368,12 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
                                                                             "6 weeks",
                                                                             "8 weeks"))
 
-ggsave(paste("figures/chlavgsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=chlplot)
+#ggsave(paste("figures/chlavgsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=chlplot)
 
 
 quartz()
 allmsmts <- grid.arrange(dvrplot, gslengthplot, meriplot,
              chlplot, toughplot, thickplot,
-             htdiffplot, totbioplot, rootstoshootsplot, ncol=3, widths=c(1,1,1.5))
+             htfinalplot, totbioplot, rootstoshootsplot, ncol=3, widths=c(1,1,1.5))
 
-ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=800, plot=allmsmts)
+ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=900, plot=allmsmts)

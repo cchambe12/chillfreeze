@@ -258,6 +258,7 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
   \item Forecasting
   \item Implications for forest recruitment
   \end{enumerate}
+\end{enumerate}
 
 
 
@@ -265,14 +266,6 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \bibliography{..//references/chillfreeze.bib}
 
 \section*{Tables and Figures}
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/growthchamber.pdf}%\label{fig:gccond}
-  -\end{center}
-  -\end{figure}}
-  
-  
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} %\label{fig:allmsmts}
@@ -281,56 +274,22 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/dvr_brms.pdf} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_phenandmeri.png} %\label{fig:allmsmts}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/gslengthlo_brms.pdf} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.png} %\label{fig:allmsmts}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/meristem_brms.pdf} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.png} %\label{fig:allmsmts}
   -\end{center}
   -\end{figure}}
   
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/chlavg.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
   
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/toughness_brms.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
-  
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/thickness_brms.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
-  
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/htdiff_brms.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
-  
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/totbiomass_brms.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
-  
-  {\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/roottoshoot_brms.pdf} %\label{fig:allmsmts}
-  -\end{center}
-  -\end{figure}}
 
 \end{document}
