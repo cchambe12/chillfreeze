@@ -365,4 +365,4 @@ allmsmts <- grid.arrange(dvrplot, gslengthplot, meriplot,
              chlplot, toughplot, thickplot,
              htdiffplot, totbioplot, rootstoshootsplot, ncol=3, widths=c(1,1,1.5))
 
-ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=1000, plot=allmsmts)
+ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=800, plot=allmsmts)
