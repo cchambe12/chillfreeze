@@ -26,6 +26,10 @@
 %\usepackage{lineno}
 %\linenumbers
 
+%cross referencing:
+\usepackage{xr}
+\externaldocument{chillfrz_supp}
+
 \newmdenv[
   topline=true,
   bottomline=true,
@@ -62,6 +66,98 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<label=numbers, echo=FALSE, results="asis", warning=FALSE, message=FALSE,>>=
+#load models and data to report numbers of things
+options(stringsAsFactors = FALSE)
+library(brms)
+
+## Set Working Directory
+setwd("~/Documents/git/chillfreeze/analyses/")
+
+## load the model
+load("stan/dvr_brms.Rdata")
+load("stan/gslengthlo_brms.Rdata") 
+load("stan/meristem_brms.Rdata")
+
+load("stan/chlavg_brms.Rdata")
+load("stan/toughness_brms.Rdata")
+load("stan/thickness_brms.Rdata")
+
+load("stan/htfinal_brms.Rdata") 
+load("stan/totbiomass_brms.Rdata")
+load("stan/roottoshoot_brms.Rdata")
+
+chillfrz <- read.csv("output/clean_dvr_traits.csv", header=TRUE)
+rmspp <- c("NYSSYL", "FAGGRA")
+chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
+
+### DVR Model
+dvrtx<-round(fixef(dvr.mod, pars="tx", summary=FALSE), digits=2) 
+dvrchill1<-round(fixef(dvr.mod, pars="chill1", summary=FALSE), digits=2) 
+dvrchill2<-round(fixef(dvr.mod, pars="chill2", summary=FALSE), digits=2) 
+dvrtxchill1<-round(fixef(dvr.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+dvrtxchill2<-round(fixef(dvr.mod, pars="tx:chill2", summary=FALSE), digits=2) 
+
+### Gslength Model
+gslengthtx<-round(fixef(gslength.mod, pars="tx", summary=FALSE), digits=2) 
+gslengthchill1<-round(fixef(gslength.mod, pars="chill1", summary=FALSE), digits=2) 
+gslengthchill2<-round(fixef(gslength.mod, pars="chill2", summary=FALSE), digits=2) 
+gslengthtxchill1<-round(fixef(gslength.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+gslengthtxchill2<-round(fixef(gslength.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Meristem Model
+meritx<-round(fixef(meri.mod, pars="tx", summary=FALSE), digits=2) 
+merichill1<-round(fixef(meri.mod, pars="chill1", summary=FALSE), digits=2) 
+merichill2<-round(fixef(meri.mod, pars="chill2", summary=FALSE), digits=2) 
+meritxchill1<-round(fixef(meri.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+meritxchill2<-round(fixef(meri.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Chlo Model
+chltx<-round(fixef(chl.mod, pars="tx", summary=FALSE), digits=2) 
+chlchill1<-round(fixef(chl.mod, pars="chill1", summary=FALSE), digits=2) 
+chlchill2<-round(fixef(chl.mod, pars="chill2", summary=FALSE), digits=2) 
+chltxchill1<-round(fixef(chl.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+chltxchill2<-round(fixef(chl.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Tough Model
+toughtx<-round(fixef(toughness.mod, pars="tx", summary=FALSE), digits=2) 
+toughchill1<-round(fixef(toughness.mod, pars="chill1", summary=FALSE), digits=2) 
+toughchill2<-round(fixef(toughness.mod, pars="chill2", summary=FALSE), digits=2) 
+toughtxchill1<-round(fixef(toughness.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+toughtxchill2<-round(fixef(toughness.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Thick Model
+thicktx<-round(fixef(thickness.mod, pars="tx", summary=FALSE), digits=2) 
+thickchill1<-round(fixef(thickness.mod, pars="chill1", summary=FALSE), digits=2) 
+thickchill2<-round(fixef(thickness.mod, pars="chill2", summary=FALSE), digits=2) 
+thicktxchill1<-round(fixef(thickness.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+thicktxchill2<-round(fixef(thickness.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Ht final Model
+httx<-round(fixef(htdiff.mod, pars="tx", summary=FALSE), digits=2) 
+htchill1<-round(fixef(htdiff.mod, pars="chill1", summary=FALSE), digits=2) 
+htchill2<-round(fixef(htdiff.mod, pars="chill2", summary=FALSE), digits=2) 
+httxchill1<-round(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+httxchill2<-round(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Total biomass Model
+totbiomasstx<-round(fixef(totbiomass.mod, pars="tx", summary=FALSE), digits=2) 
+totbiomasschill1<-round(fixef(totbiomass.mod, pars="chill1", summary=FALSE), digits=2) 
+totbiomasschill2<-round(fixef(totbiomass.mod, pars="chill2", summary=FALSE), digits=2) 
+totbiomasstxchill1<-round(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+totbiomasstxchill2<-round(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+### Root to Shoot Model
+roottoshoottx<-round(fixef(roottoshoot.mod, pars="tx", summary=FALSE), digits=2) 
+roottoshootchill1<-round(fixef(roottoshoot.mod, pars="chill1", summary=FALSE), digits=2) 
+roottoshootchill2<-round(fixef(roottoshoot.mod, pars="chill2", summary=FALSE), digits=2) 
+roottoshoottxchill1<-round(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE), digits=2) 
+roottoshoottxchill2<-round(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE), digits=2)
+
+@
+
+
+
 
 \section*{Introduction}
 \begin{enumerate}
