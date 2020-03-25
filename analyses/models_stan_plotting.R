@@ -19,7 +19,7 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
 #load("stan/dvr_brms.Rdata")
-#load("stan/gslengthlo_brms.Rdata")
+load("stan/gslengthlo_brms.Rdata")
 #load("stan/meristem_brms.Rdata")
 
 #load("stan/chlavg_brms.Rdata")
@@ -29,7 +29,7 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 #load("stan/htfinal_brms.Rdata")
 #load("stan/totbiomass_brms.Rdata")
-load("stan/roottoshoot_brms.Rdata")
+#load("stan/roottoshoot_brms.Rdata")
 
 if(FALSE){
 ##load("stan/rgr_prebudset_brms.Rdata")
@@ -60,24 +60,24 @@ chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "chlavg_brms" ### change based on model
+figpathmore <- "gslength_brms" ### change based on model
 
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
 # display.brewer.all()
 alphahere = 0.4
 #xlab <- "Model estimate of change in \nduration of vegetative risk (days)"
-#xlab <- "Model estimate of change in growing season length (days)"
+xlab <- "Model estimate of change in growing season length (days)"
 #xlab <- "Model estimate of change in shoot apical meristem damage"
 
-xlab <- expression(paste("Model estimate of change in chlorophyll content (mg/", cm^2, ")"))
+#xlab <- expression(paste("Model estimate of change in chlorophyll content (mg/", cm^2, ")"))
 #xlab <- "Model estimate of change in leaf toughness (N)"
 #mu <- expression(mu)
 #xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 
 #xlab <- "Model estimate of change in shoot growth (cm)"
 #xlab <- "Model estimate of change in total biomass (g)"
-xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
+#xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
 
 if(FALSE){
 #xlab <- "Model estimate of change in belowground biomass (g)"
@@ -93,7 +93,7 @@ if(FALSE){
 
 spp <- unique(chill.stan$species)
 
-modelhere <- chl.mod
+modelhere <- gslength.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -165,16 +165,16 @@ modoutput <- tidy(modelhere, prob=c(0.5))
 source("exp_muplot_brms.R")
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 16.5, 3.5) ## use for DVR
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## use for gslengthlo
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## use for gslengthlo
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5) ## meristem
 
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-5, 5) , 5.5, 3.5) ## chloro
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-5, 5) , 5.5, 3.5) ## chloro
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-.15, .15) , .16, 3.5) ##toughness
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## thickness
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5) ## ht final
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5) ## tot biomass
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.1, 3.5) ### root to shoot
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.1, 3.5) ### root to shoot
 
 
 #### Not included for now: muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 11, 3.5) ## ht diff

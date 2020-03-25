@@ -83,7 +83,7 @@ load("stan/chlavg_brms.Rdata")
 load("stan/toughness_brms.Rdata")
 load("stan/thickness_brms.Rdata")
 
-load("stan/htfinal_brms.Rdata") 
+load("stan/htdiff_brms.Rdata") 
 load("stan/totbiomass_brms.Rdata")
 load("stan/roottoshoot_brms.Rdata")
 
@@ -91,71 +91,164 @@ chillfrz <- read.csv("output/clean_dvr_traits.csv", header=TRUE)
 rmspp <- c("NYSSYL", "FAGGRA")
 chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 
-### DVR Model
-dvrtx<-round(fixef(dvr.mod, pars="tx", summary=FALSE), digits=2) 
-dvrchill1<-round(fixef(dvr.mod, pars="chill1", summary=FALSE), digits=2) 
-dvrchill2<-round(fixef(dvr.mod, pars="chill2", summary=FALSE), digits=2) 
-dvrtxchill1<-round(fixef(dvr.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-dvrtxchill2<-round(fixef(dvr.mod, pars="tx:chill2", summary=FALSE), digits=2) 
+### DVR Model - WITH ENOUGH CHILLING, CAN COMPENSATE FOR TX!!!
+dvrtx<-round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)), digits=2) ### 2.97
+dvrtxsd<-round(sd(fixef(dvr.mod, pars="tx", summary=FALSE)), digits=2) # 0.97
+dvrchill1<-round(mean(fixef(dvr.mod, pars="chill1", summary=FALSE)), digits=2) # -0.53
+dvrchill1sd<-round(sd(fixef(dvr.mod, pars="chill1", summary=FALSE)), digits=2) # 1.38
+dvrchill2<-round(mean(fixef(dvr.mod, pars="chill2", summary=FALSE)), digits=2) ### -2.67
+dvrchill2sd<-round(sd(fixef(dvr.mod, pars="chill2", summary=FALSE)), digits=2) # 1.14
 
-### Gslength Model
-gslengthtx<-round(fixef(gslength.mod, pars="tx", summary=FALSE), digits=2) 
-gslengthchill1<-round(fixef(gslength.mod, pars="chill1", summary=FALSE), digits=2) 
-gslengthchill2<-round(fixef(gslength.mod, pars="chill2", summary=FALSE), digits=2) 
-gslengthtxchill1<-round(fixef(gslength.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-gslengthtxchill2<-round(fixef(gslength.mod, pars="tx:chill2", summary=FALSE), digits=2)
+dvrtxchill1<-round(mean(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+dvrtxchill1sd<-round(sd(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 1.14
+dvrtxchill1 <- dvrtx + dvrchill1 + dvrtxchill1 ### 1.53
 
-### Meristem Model
-meritx<-round(fixef(meri.mod, pars="tx", summary=FALSE), digits=2) 
-merichill1<-round(fixef(meri.mod, pars="chill1", summary=FALSE), digits=2) 
-merichill2<-round(fixef(meri.mod, pars="chill2", summary=FALSE), digits=2) 
-meritxchill1<-round(fixef(meri.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-meritxchill2<-round(fixef(meri.mod, pars="tx:chill2", summary=FALSE), digits=2)
+dvrtxchill2<-round(mean(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=2) 
+dvrtxchill2sd<-round(sd(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 1.08
+dvrtxchill2 <- dvrtx + dvrchill2 + dvrtxchill2 # 0.92
 
-### Chlo Model
-chltx<-round(fixef(chl.mod, pars="tx", summary=FALSE), digits=2) 
-chlchill1<-round(fixef(chl.mod, pars="chill1", summary=FALSE), digits=2) 
-chlchill2<-round(fixef(chl.mod, pars="chill2", summary=FALSE), digits=2) 
-chltxchill1<-round(fixef(chl.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-chltxchill2<-round(fixef(chl.mod, pars="tx:chill2", summary=FALSE), digits=2)
 
-### Tough Model
-toughtx<-round(fixef(toughness.mod, pars="tx", summary=FALSE), digits=2) 
-toughchill1<-round(fixef(toughness.mod, pars="chill1", summary=FALSE), digits=2) 
-toughchill2<-round(fixef(toughness.mod, pars="chill2", summary=FALSE), digits=2) 
-toughtxchill1<-round(fixef(toughness.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-toughtxchill2<-round(fixef(toughness.mod, pars="tx:chill2", summary=FALSE), digits=2)
+### Gslength Model - CHILLING EXTENDS GS!!!! AND CAN COMPENSATE FOR TX!
+gslengthtx<-round(mean(fixef(gslength.mod, pars="tx", summary=FALSE)), digits=2) # -3.22
+gslengthtxsd<-round(sd(fixef(gslength.mod, pars="tx", summary=FALSE)), digits=2) # 5.46
+gslengthchill1<-round(mean(fixef(gslength.mod, pars="chill1", summary=FALSE)), digits=2) ### 16.08
+gslengthchill1sd<-round(sd(fixef(gslength.mod, pars="chill1", summary=FALSE)), digits=2) # 4.94
+gslengthchill2<-round(mean(fixef(gslength.mod, pars="chill2", summary=FALSE)), digits=2) ### 19.97
+gslengthchill2sd<-round(sd(fixef(gslength.mod, pars="chill2", summary=FALSE)), digits=2) # 5.05
+gslengthtxchill1<-round(mean(fixef(gslength.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+gslengthtxchill1sd<-round(sd(fixef(gslength.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 6.63
+gslengthtxchill1 <- gslengthtx + gslengthchill1 + gslengthtxchill1 # -1
 
-### Thick Model
-thicktx<-round(fixef(thickness.mod, pars="tx", summary=FALSE), digits=2) 
-thickchill1<-round(fixef(thickness.mod, pars="chill1", summary=FALSE), digits=2) 
-thickchill2<-round(fixef(thickness.mod, pars="chill2", summary=FALSE), digits=2) 
-thicktxchill1<-round(fixef(thickness.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-thicktxchill2<-round(fixef(thickness.mod, pars="tx:chill2", summary=FALSE), digits=2)
+gslengthtxchill2<-round(mean(fixef(gslength.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+gslengthtxchill2sd<-round(sd(fixef(gslength.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 6.97
+gslengthtxchill2 <- gslengthtx + gslengthchill2 + gslengthtxchill2 ### 7.63
 
-### Ht final Model
-httx<-round(fixef(htdiff.mod, pars="tx", summary=FALSE), digits=2) 
-htchill1<-round(fixef(htdiff.mod, pars="chill1", summary=FALSE), digits=2) 
-htchill2<-round(fixef(htdiff.mod, pars="chill2", summary=FALSE), digits=2) 
-httxchill1<-round(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-httxchill2<-round(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE), digits=2)
+### Meristem Model - MERISTEM DAMAGE ACROSS CHILL TXs!!
+meritx<-round(mean(fixef(meri.mod, pars="tx", summary=FALSE)), digits=2) ### 2.07
+meritxsd<-round(sd(fixef(meri.mod, pars="tx", summary=FALSE)), digits=2) # 0.97
+merichill1<-round(mean(fixef(meri.mod, pars="chill1", summary=FALSE)), digits=2) # -0.53
+merichill1sd<-round(sd(fixef(meri.mod, pars="chill1", summary=FALSE)), digits=2) # 1.88
+merichill2<-round(mean(fixef(meri.mod, pars="chill2", summary=FALSE)), digits=2) # -0.18
+merichill2sd<-round(sd(fixef(meri.mod, pars="chill2", summary=FALSE)), digits=2) # 1.17
+meritxchill1<-round(mean(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+meritxchill1sd<-round(sd(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 1.42
+meritxchill1 <- meritx + merichill1 + meritxchill1 # 1.33
 
-### Total biomass Model
-totbiomasstx<-round(fixef(totbiomass.mod, pars="tx", summary=FALSE), digits=2) 
-totbiomasschill1<-round(fixef(totbiomass.mod, pars="chill1", summary=FALSE), digits=2) 
-totbiomasschill2<-round(fixef(totbiomass.mod, pars="chill2", summary=FALSE), digits=2) 
-totbiomasstxchill1<-round(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-totbiomasstxchill2<-round(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE), digits=2)
+meritxchill2<-round(mean(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=2) 
+meritxchill2sd<-round(sd(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 1.31
+meritxchill2 <- meritx + merichill2 + meritxchill2 ### 2.17
 
-### Root to Shoot Model
-roottoshoottx<-round(fixef(roottoshoot.mod, pars="tx", summary=FALSE), digits=2) 
-roottoshootchill1<-round(fixef(roottoshoot.mod, pars="chill1", summary=FALSE), digits=2) 
-roottoshootchill2<-round(fixef(roottoshoot.mod, pars="chill2", summary=FALSE), digits=2) 
-roottoshoottxchill1<-round(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE), digits=2) 
-roottoshoottxchill2<-round(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE), digits=2)
+### Chlo Model ### PROBABLY MOVE TO SUPP!!! TX DECREASES CHLORO ESP WITH MORE CHILLING...
+chltx<-round(mean(fixef(chl.mod, pars="tx", summary=FALSE)), digits=2) # -0.35
+chltxsd<-round(sd(fixef(chl.mod, pars="tx", summary=FALSE)), digits=2) # 0.77
+chlchill1<-round(mean(fixef(chl.mod, pars="chill1", summary=FALSE)), digits=2) # -0.06
+chlchill1sd<-round(sd(fixef(chl.mod, pars="chill1", summary=FALSE)), digits=2) # 0.84
+chlchill2<-round(mean(fixef(chl.mod, pars="chill2", summary=FALSE)), digits=2) # 0.43
+chlchill2sd<-round(sd(fixef(chl.mod, pars="chill2", summary=FALSE)), digits=2) # 0.91
+chltxchill1<-round(mean(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+chltxchill1sd<-round(sd(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 1.16
+chltxchill1 <- chltx + chlchill1 + chltxchill1 ### -1.45
+
+chltxchill2<-round(mean(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+chltxchill2sd<-round(sd(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 1.07
+chltxchill2 <- chltx + chlchill2 + chltxchill2 ### -2.03
+
+### Tough Model - TOUGHNESS DECREASES ACROSS ALL CHILL TXs!!!!
+toughtx<-round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)), digits=2) ### -0.05
+toughtxsd<-round(sd(fixef(toughness.mod, pars="tx", summary=FALSE)), digits=2) # 0.02
+toughchill1<-round(mean(fixef(toughness.mod, pars="chill1", summary=FALSE)), digits=2) ### -0.06
+toughchill1sd<-round(sd(fixef(toughness.mod, pars="chill1", summary=FALSE)), digits=2) # 0.02
+toughchill2<-round(mean(fixef(toughness.mod, pars="chill2", summary=FALSE)), digits=2) ### -0.05
+toughchill2sd<-round(sd(fixef(toughness.mod, pars="chill2", summary=FALSE)), digits=2) # 0.02
+toughtxchill1<-round(mean(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+toughtxchill1sd<-round(sd(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 0.03
+toughtxchill1 <- toughtx + toughchill1 + toughtxchill1 ### -0.09
+
+toughtxchill2<-round(mean(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+toughtxchill2sd<-round(sd(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 0.03
+toughtxchill2 <- toughtx + toughchill2 + toughtxchill2 ### -0.08
+
+### Thick Model - THICKNESS DECREASES ACROSS ALL CHILL TXs, ESP 4 & 8 wks
+thicktx<-round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)), digits=2) ### -8.9
+thicktxsd<-round(sd(fixef(thickness.mod, pars="tx", summary=FALSE)), digits=2) # 3.74
+thickchill1<-round(mean(fixef(thickness.mod, pars="chill1", summary=FALSE)), digits=2) ### 7.21
+thickchill1sd<-round(sd(fixef(thickness.mod, pars="chill1", summary=FALSE)), digits=2) # 6.55
+thickchill2<-round(mean(fixef(thickness.mod, pars="chill2", summary=FALSE)), digits=2) ### -8.38
+thickchill2sd<-round(sd(fixef(thickness.mod, pars="chill2", summary=FALSE)), digits=2) # 7.48
+thicktxchill1<-round(mean(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+thicktxchill1sd<-round(sd(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 5.31
+thicktxchill1 <- thicktx + thickchill1 + thicktxchill1 # -3.5
+
+thicktxchill2<-round(mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+thicktxchill2sd<-round(sd(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 5.25
+thicktxchill2 <- thicktx + thickchill2 + thicktxchill2 ### -15.78
+
+### Ht 60 day Model - Not very intersting, chilling increases growth but nothing with TX
+httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # -0.44
+httxsd<-round(sd(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # 0.98
+htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) ### 2.81
+htchill1sd<-round(sd(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) # 1.55
+htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) ### 1.32
+htchill2sd<-round(sd(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) # 1.21
+httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+httxchill1sd<-round(sd(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 1.48
+httxchill1 <- httx + htchill1 + httxchill1 # 0.36
+
+httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+httxchill2sd<-round(sd(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 1.46
+httxchill2 <- httx + htchill2 + httxchill2 # 0.68
+
+if(FALSE){
+### Ht final Model - Not intersting
+load("stan/htfinal_brms.Rdata")
+httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) ### 5.06
+httxsd<-round(sd(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # 4.38
+htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) # 2.92
+htchill1sd<-round(sd(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) # 4.14
+htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) ### 11
+htchill2sd<-round(sd(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) # 4.01
+httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+httxchill1sd<-round(sd(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 6.37
+httxchill1 <- httx + htchill1 + httxchill1 # -0.42
+
+httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+httxchill2sd<-round(sd(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 5.49
+httxchill2 <- httx + htchill2 + httxchill2 # 4.73
+}
+
+
+### Total biomass Model - TX DECREASES BIOMASS BUT CHILLING CAN COMPENSATE!!!
+totbiomasstx<-round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)), digits=2) ### -3.45
+totbiomasstxsd<-round(sd(fixef(totbiomass.mod, pars="tx", summary=FALSE)), digits=2)  # 2.78
+totbiomasschill1<-round(mean(fixef(totbiomass.mod, pars="chill1", summary=FALSE)), digits=2) # 0.38
+totbiomasschill1sd<-round(sd(fixef(totbiomass.mod, pars="chill1", summary=FALSE)), digits=2) # 2.91
+totbiomasschill2<-round(mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)), digits=2) # 2.59
+totbiomasschill2sd<-round(sd(fixef(totbiomass.mod, pars="chill2", summary=FALSE)), digits=2) # 3.04
+totbiomasstxchill1<-round(mean(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+totbiomasstxchill1sd<-round(sd(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=2) #  4.04
+totbiomasstxchill1 <- totbiomasstx + totbiomasschill1 + totbiomasstxchill1 # -3.62
+
+totbiomasstxchill2<-round(mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+totbiomasstxchill2sd<-round(sd(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=2) #  3.97
+totbiomasstxchill2 <- totbiomasstx + totbiomasschill2 + totbiomasstxchill2 # 2.88
+
+
+### Root to Shoot Model - TX REDUCES ROOT MASS
+roottoshoottx<-round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)), digits=2) ### -0.18
+roottoshoottxsd<-round(sd(fixef(roottoshoot.mod, pars="tx", summary=FALSE)), digits=2) # 0.15
+roottoshootchill1<-round(mean(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)), digits=2) #    -0.03
+roottoshootchill1sd<-round(sd(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)), digits=2) # 0.14
+roottoshootchill2<-round(mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)), digits=2) #    -0.16
+roottoshootchill2sd<-round(sd(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)), digits=2) # 0.17
+roottoshoottxchill1<-round(mean(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+roottoshoottxchill1sd<-round(sd(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 0.31
+roottoshoottxchill1 <- roottoshoottx + roottoshootchill1 + roottoshoottxchill1 # -0.11
+
+roottoshoottxchill2<-round(mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+roottoshoottxchill2sd<-round(sd(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 0.23
+roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 ### -0.29
 
 @
-
 
 
 
@@ -204,7 +297,7 @@ roottoshoottxchill2<-round(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALS
   \begin{enumerate}
   \item Individuals were exposed to three levels of over-winter chilling. 
   \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{\circ}$C to mimic a false spring event. 
-  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology and growth?
+  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology, physical leaf characteristics and growth?
   \end{enumerate}
 \end{enumerate}
   
@@ -242,7 +335,7 @@ roottoshoottxchill2<-round(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALS
   \item Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk for each individual \citep{Finn2007}.
   \item For the individuals under the `false spring treatment', once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19, they were placed in a growth chamber set to mimic a false spring event.
   \item Individuals receiving the false spring treatment were placed in a growth chamber for 14 hours, starting at 6pm. 
-  \item Temperatures in the growth chamber were ramped down: 6pm to 10$^{\circ}$C, 8pm to 5$^{\circ}$C, 10pm to 0$^{\circ}$C, 12am to -3$^{\circ}$C, 3am to 0$^{\circ}$C, 4am to 5$^{\circ}$C, 6am to 10$^{\circ}$C and 8am temperatures rose again to 15$^{\circ}$C (Figure XX).
+  \item Temperatures in the growth chamber were ramped down: 6pm to 10$^{\circ}$C, 8pm to 5$^{\circ}$C, 10pm to 0$^{\circ}$C, 12am to -3$^{\circ}$C, 3am to 0$^{\circ}$C, 4am to 5$^{\circ}$C, 6am to 10$^{\circ}$C and 8am temperatures rose again to 15$^{\circ}$C (Figure \ref{fig:gccond}).
   \item After 8am the following day, individuals were collected at placed back in the greenhouse with all of the other plants. 
   \item Once all individuals reached full leaf expansion (BBCH stage 19), phenology observations were made weekly until August 1st, when observations were made every 2-3 days again to monitor fall phenology. 
   \item Individuals were monitored until complete budset, at which point they were harvested for biomass measurements.
@@ -263,7 +356,7 @@ roottoshoottxchill2<-round(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALS
 \end{enumerate}
 \subsection*{Data analysis}
 \begin{enumerate}
-\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage, (8) total biomass and (9) belowground to aboveground biomass ratio. 
+\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage and (8) total biomass. % CUT FOR NOW: and (9) belowground to aboveground biomass ratio. 
   \begin{enumerate}
   \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
   \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
@@ -317,42 +410,60 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 
 \section*{Results}
 \begin{enumerate}
-\item We found that false springs impacted both phenology and growth. 
+\item False springs and chilling durations impacted phenology. 
   \begin{enumerate}
-  \item Individuals exposed to the false spring treatment had longer duration of vegetative risks (XX) at the beginning of the season and generally initiated dormancy earlier at the end of the season (XX), except for the cohort that received only 4 weeks of over-winter chilling, which had a consistent growing season length (Figure XX). 
-  \item However, growing season lengths were shortest for the cohort that received 8 weeks of over-winter chilling (XX), but individuals had increased growth rates with increased over-winter chilling (XX). 
-  \item Under 8 weeks of chilling, growth and biomass were maintained (XX) regardless of false spring treatment and were higher even with shorter growing season lengths.
+  \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for both the four weeks and six weeks of chilling cohorts (\Sexpr{dvrtx} $\pm$ \Sexpr{dvrtxsd} and \Sexpr{dvrtxchill1} $\pm$ \Sexpr{dvrtxchill1sd}, respectively; Figure \ref{fig:intrxns}a) Figure \ref{fig:mupheno}a) and Table \ref{tab:suppmoddvr}).
+  \item Longer chilling treatments reduced the duration of vegetative risk, especially in the 8 weeks of chilling cohort (\Sexpr{dvrchill2} $\pm$ \Sexpr{dvrchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
+  \item Additionally, individuals that received eight weeks of chilling did not experience major changes in their durations of vegetative risk (\Sexpr{dvrtxchill2} $\pm$ \Sexpr{dvrtxchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a and Table \ref{tab:suppmoddvr}). 
+  \item With increases in chilling duration, the growing season length increased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks; Figure \ref{fig:intrxns}b), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
   \end{enumerate}
   
-\item Addtional growth traits were affected differently.
+\item False springs affected physical leaf traits.
   \begin{enumerate}
-  \item Across all species and chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (Figure XX and XX) and relied more on lateral shoot growth, rendering inefficient growth patterns. 
-  \item Leaf chlorophyll content decreased under false spring conditions for the 6 weeks (XX) and 8 weeks (XX) of chilling cohorts.
-  \item Leaf toughness and leaf thickness both decreased across all chilling treatments under false spring conditions (XX for 4 weeks of chilling, XX for 6 weeks of chilling and XX for 8 weeks of chilling).
-  \item Shoot growth for the first 60 days of the growing season was highest for the 8 weeks of chilling cohort but false spring conditions reduced growth for the 6 and 8 weeks of chilling groups (XX and XX respectively).
-  \item Individuals exposed to false spring conditions had lower total biomasses for both the 4 weeks of chilling cohort (XX) and the 6 weeks of chilling cohort (XX), but the 8 weeks of chilling cohort had higher total biomasses overall, regardless of whether or not there was a false spring treatment imposed (XX no false spring and XX for false spring conditions).
+  \item Leaf chlorophyll content decreased under false spring conditions, especially in the six weeks (\Sexpr{chltxchill1} $\pm$ \Sexpr{chltxchill1sd}) and eight weeks (\Sexpr{chltxchill2} $\pm$ \Sexpr{chltxchill2sd}; Figure \ref{fig:intrxns}c) Figure \ref{fig:muchl}) and Table \ref{tab:suppmodchl}) of chilling cohorts.
+  \item Leaf toughness decreased across all chilling treatments under false spring conditions (\Sexpr{toughtx} $\pm$ \Sexpr{toughtxsd} for four weeks of chilling, \Sexpr{toughtxchill1} $\pm$ \Sexpr{toughtxchill1sd} for six weeks of chilling and \Sexpr{toughtxchill2} $\pm$ \Sexpr{toughtxchill2sd} for eight weeks of chilling; Figure \ref{fig:intrxns}d), Figure \ref{fig:muleaf}a) and Table \ref{tab:suppmodtough}).
+  \item Additionally, leaf thickness decreased across all chilling treatments under false spring conditions (\Sexpr{thicktx} $\pm$ \Sexpr{thicktxsd} for four weeks of chilling, \Sexpr{thicktxchill1} $\pm$ \Sexpr{thicktxchill1sd} for six weeks of chilling and \Sexpr{thicktxchill2} $\pm$ \Sexpr{thicktxchill2sd} for eight weeks of chilling; Figure \ref{fig:intrxns}e), Figure \ref{fig:muleaf}b) and Table \ref{tab:suppmodthick}).
   \end{enumerate}
   
-\item Species responded differently to false spring and chilling requirements.
+\item False springs impacted growth.
   \begin{enumerate}
-  \item Well, actually it's not entirely obvious that they did... need to think of new figures to make for this...
+  \item Across all chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (\Sexpr{meritx} $\pm$ \Sexpr{meritxsd} for four weeks, \Sexpr{meritxchill1} $\pm$ \Sexpr{meritxchill1sd} for six weeks and \Sexpr{meritxchill2} $\pm$ \Sexpr{meritxchill2sd} for eight weeks; Figure \ref{fig:intrxns}f), Figure \ref{fig:mugrowth}a) and Table \ref{tab:suppmodmeri}) 
+  \item Shoot growth for the first 60 days of the growing season increased with increased chilling durations (\Sexpr{htchill1} $\pm$ \Sexpr{htchill1sd} for six weeks of chilling and \Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd} for eight weeks of chilling} except growing did not increase under false spring conditions (\Sexpr{httxchill1} $\pm$ \Sexpr{httxchill1sd} for six weeks and \Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd} for eight weeks; Figure \ref{fig:intrxns}g), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
+  \item Individuals exposed to false spring conditions had lower total biomasses when they were exposed to only four weeks of chilling (\Sexpr{totbiomasstx} $\pm$ \Sexpr{totbiomasstxsd}) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (\Sexpr{totbiomasstxchill1} $\pm$ \Sexpr{totbiomasstxchill1sd}) and the eight weeks of chilling cohort (\Sexpr{totbiomasstxchill2} $\pm$ \Sexpr{totbiomasschill2sd}; Figure \ref{fig:intrxns}g), Figure \ref{fig:mugrowth}b) and Table \ref{tab:suppmodtotbio})).
+  \end{enumerate}
+  
 \end{enumerate}
 
 \section*{Discussion}
 \begin{enumerate}
-  \item Thus, false springs reduce the length of the growing season when the chilling requirement is met.
-  \item This suggests chilling is more important for seedling growth than avoiding false springs. 
-  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. 
+\item The effects of chilling and false spring events on phenology: chilling is so important for phenology and can compensate for the detrimental effects of false springs.
+  \begin{enumerate}
+  \item False springs increase the duration of vegetive risk, leading to an increased risk in multiple false spring risks in one season.
+  \item But chilling can compensate for this increase in duration of vegetative risk: if the chilling requirement is met, the rate of budburst does not increase with a false spring event.
+  \item This suggests chilling is more important for seedlings in terms of exposure to multiple false springs as well as increased growing season lengths.
+  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions.
   \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
   \end{enumerate}
   
-\item Major sections
+\item False springs greatly impact the physical characteristics of the leaf.
   \begin{enumerate}
-  \item Chilling and False spring (as above)
-  \item Herbivory risk
-  \item Species differences...
-  \item Forecasting
-  \item Implications for forest recruitment
+  \item With chlorophyll content, leaf toughness and leaf thickness decreasing, the quality of the leaf dwindles.
+  \item This reduction in quality could subsequently lead to an increase in herbivory risk (CITE).
+  \item Further studies that assess the secondary compounds and total phenolic content (CITE) of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
+  \end{enumerate}
+  
+\item With sufficient chilling, false springs are less damaging to seedling growth.
+  \begin{enumerate}
+  \item However, false springs consistently impair shoot apical meristem growth, which can lead to relience on lateral shoot growth, rendering inefficient growth patterns.
+  \item Shoot apical meristem damage can lead to potential dieback of seedlings in subsequent growing seasons (CITE). 
+  \end{enumerate}
+  
+\item Understanding the impacts of false springs coupled with reduced over-winter chilling is essential for forecasting.
+  \begin{enumerate}
+  \item Our findings have large implications for forest recruitment.
+  \item With over-winter chilling decreasing with climate change, seedlings are more at risk of sustaining damage from false spring events. 
+  \item Understanding recruitment and inter- and intraspecific competition with false springs is crucial. 
+  \item If individuals that initiate budburst earlier are more at risk of false spring exposure, this could lead to dieback of early-budbursting species in temperate forests with climate change.
   \end{enumerate}
 \end{enumerate}
 
@@ -364,25 +475,29 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \section*{Tables and Figures}
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} 
+  -\caption{Interaction plots for all phenology, leaf and growth measurements. }\label{fig:intrxns}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_phenandmeri.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_phen.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) duration of vegetative risk and b) growing season length. Dots and lines show means and 50\% uncertainty intervals.}\label{fig:muphen}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness and b) leaf thickness. Dots and lines show means and 50\% uncertainty intervals. }\label{fig:muleaf}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) shoot apical meristem damage and b) total biomass. Dots and lines show means and 50\% uncertainty intervals. }\label{fig:mugrowth}
   -\end{center}
   -\end{figure}}
   

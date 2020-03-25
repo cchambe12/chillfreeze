@@ -116,7 +116,6 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 
 
-
 \section*{Introduction}
 \begin{enumerate}
 \item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management.
@@ -162,7 +161,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \begin{enumerate}
   \item Individuals were exposed to three levels of over-winter chilling. 
   \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{\circ}$C to mimic a false spring event. 
-  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology and growth?
+  \item Individuals were then put in a greenhouse for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology, physical leaf characteristics and growth?
   \end{enumerate}
 \end{enumerate}
   
@@ -200,7 +199,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \item Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk for each individual \citep{Finn2007}.
   \item For the individuals under the `false spring treatment', once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19, they were placed in a growth chamber set to mimic a false spring event.
   \item Individuals receiving the false spring treatment were placed in a growth chamber for 14 hours, starting at 6pm. 
-  \item Temperatures in the growth chamber were ramped down: 6pm to 10$^{\circ}$C, 8pm to 5$^{\circ}$C, 10pm to 0$^{\circ}$C, 12am to -3$^{\circ}$C, 3am to 0$^{\circ}$C, 4am to 5$^{\circ}$C, 6am to 10$^{\circ}$C and 8am temperatures rose again to 15$^{\circ}$C (Figure XX).
+  \item Temperatures in the growth chamber were ramped down: 6pm to 10$^{\circ}$C, 8pm to 5$^{\circ}$C, 10pm to 0$^{\circ}$C, 12am to -3$^{\circ}$C, 3am to 0$^{\circ}$C, 4am to 5$^{\circ}$C, 6am to 10$^{\circ}$C and 8am temperatures rose again to 15$^{\circ}$C (Figure \ref{fig:gccond}).
   \item After 8am the following day, individuals were collected at placed back in the greenhouse with all of the other plants. 
   \item Once all individuals reached full leaf expansion (BBCH stage 19), phenology observations were made weekly until August 1st, when observations were made every 2-3 days again to monitor fall phenology. 
   \item Individuals were monitored until complete budset, at which point they were harvested for biomass measurements.
@@ -221,7 +220,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \end{enumerate}
 \subsection*{Data analysis}
 \begin{enumerate}
-\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage, (8) total biomass and (9) belowground to aboveground biomass ratio. 
+\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage and (8) total biomass. % CUT FOR NOW: and (9) belowground to aboveground biomass ratio. 
   \begin{enumerate}
   \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
   \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
@@ -275,42 +274,60 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 
 \section*{Results}
 \begin{enumerate}
-\item We found that false springs impacted both phenology and growth. 
+\item False springs and chilling durations impacted phenology. 
   \begin{enumerate}
-  \item Individuals exposed to the false spring treatment had longer duration of vegetative risks (XX) at the beginning of the season and generally initiated dormancy earlier at the end of the season (XX), except for the cohort that received only 4 weeks of over-winter chilling, which had a consistent growing season length (Figure XX). 
-  \item However, growing season lengths were shortest for the cohort that received 8 weeks of over-winter chilling (XX), but individuals had increased growth rates with increased over-winter chilling (XX). 
-  \item Under 8 weeks of chilling, growth and biomass were maintained (XX) regardless of false spring treatment and were higher even with shorter growing season lengths.
+  \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for both the four weeks and six weeks of chilling cohorts (2.97 $\pm$ 0.79 and 1.53 $\pm$ 1.14, respectively; Figure \ref{fig:intrxns}a) Figure \ref{fig:mupheno}a) and Table \ref{tab:suppmoddvr}).
+  \item Longer chilling treatments reduced the duration of vegetative risk, especially in the 8 weeks of chilling cohort (-2.67 $\pm$ 1.14; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
+  \item Additionally, individuals that received eight weeks of chilling did not experience major changes in their durations of vegetative risk (0.92 $\pm$ 1.08; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a and Table \ref{tab:suppmoddvr}). 
+  \item With increases in chilling duration, the growing season length increased for individuals exposed to six and eight weeks of chilling (16.08 $\pm$ 4.94 for six weeks and 19.97 $\pm$ 5.05 for eight weeks; Figure \ref{fig:intrxns}b), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
   \end{enumerate}
   
-\item Addtional growth traits were affected differently.
+\item False springs affected physical leaf traits.
   \begin{enumerate}
-  \item Across all species and chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (Figure XX and XX) and relied more on lateral shoot growth, rendering inefficient growth patterns. 
-  \item Leaf chlorophyll content decreased under false spring conditions for the 6 weeks (XX) and 8 weeks (XX) of chilling cohorts.
-  \item Leaf toughness and leaf thickness both decreased across all chilling treatments under false spring conditions (XX for 4 weeks of chilling, XX for 6 weeks of chilling and XX for 8 weeks of chilling).
-  \item Shoot growth for the first 60 days of the growing season was highest for the 8 weeks of chilling cohort but false spring conditions reduced growth for the 6 and 8 weeks of chilling groups (XX and XX respectively).
-  \item Individuals exposed to false spring conditions had lower total biomasses for both the 4 weeks of chilling cohort (XX) and the 6 weeks of chilling cohort (XX), but the 8 weeks of chilling cohort had higher total biomasses overall, regardless of whether or not there was a false spring treatment imposed (XX no false spring and XX for false spring conditions).
+  \item Leaf chlorophyll content decreased under false spring conditions, especially in the six weeks (-1.45 $\pm$ 1.16) and eight weeks (-2.03 $\pm$ 1.07; Figure \ref{fig:intrxns}c) Figure \ref{fig:muchl}) and Table \ref{tab:suppmodchl}) of chilling cohorts.
+  \item Leaf toughness decreased across all chilling treatments under false spring conditions (-0.05 $\pm$ 0.02 for four weeks of chilling, -0.09 $\pm$ 0.03 for six weeks of chilling and -0.08 $\pm$ 0.03 for eight weeks of chilling; Figure \ref{fig:intrxns}d), Figure \ref{fig:muleaf}a) and Table \ref{tab:suppmodtough}).
+  \item Additionally, leaf thickness decreased across all chilling treatments under false spring conditions (-8.9 $\pm$ 3.74 for four weeks of chilling, -3.5 $\pm$ 5.31 for six weeks of chilling and -15.78 $\pm$ 5.25 for eight weeks of chilling; Figure \ref{fig:intrxns}e), Figure \ref{fig:muleaf}b) and Table \ref{tab:suppmodthick}).
   \end{enumerate}
   
-\item Species responded differently to false spring and chilling requirements.
+\item False springs impacted growth.
   \begin{enumerate}
-  \item Well, actually it's not entirely obvious that they did... need to think of new figures to make for this...
+  \item Across all chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (2.07 $\pm$ 0.97 for four weeks, 1.33 $\pm$ 1.42 for six weeks and 2.17 $\pm$ 1.31 for eight weeks; Figure \ref{fig:intrxns}f), Figure \ref{fig:mugrowth}a) and Table \ref{tab:suppmodmeri}) 
+  \item Shoot growth for the first 60 days of the growing season increased with increased chilling durations (2.81 $\pm$ 1.55 for six weeks of chilling and 1.32 $\pm$ 1.21 for eight weeks of chilling} except growing did not increase under false spring conditions (0.36 $\pm$ 1.48 for six weeks and 0.68 $\pm$ 1.46 for eight weeks; Figure \ref{fig:intrxns}g), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
+  \item Individuals exposed to false spring conditions had lower total biomasses when they were exposed to only four weeks of chilling (-3.45 $\pm$ 2.78) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (-3.62 $\pm$ 4.04) and the eight weeks of chilling cohort (2.88 $\pm$ 3.04; Figure \ref{fig:intrxns}g), Figure \ref{fig:mugrowth}b) and Table \ref{tab:suppmodtotbio})).
+  \end{enumerate}
+  
 \end{enumerate}
 
 \section*{Discussion}
 \begin{enumerate}
-  \item Thus, false springs reduce the length of the growing season when the chilling requirement is met.
-  \item This suggests chilling is more important for seedling growth than avoiding false springs. 
-  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. 
+\item The effects of chilling and false spring events on phenology: chilling is so important for phenology and can compensate for the detrimental effects of false springs.
+  \begin{enumerate}
+  \item False springs increase the duration of vegetive risk, leading to an increased risk in multiple false spring risks in one season.
+  \item But chilling can compensate for this increase in duration of vegetative risk: if the chilling requirement is met, the rate of budburst does not increase with a false spring event.
+  \item This suggests chilling is more important for seedlings in terms of exposure to multiple false springs as well as increased growing season lengths.
+  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions.
   \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
   \end{enumerate}
   
-\item Major sections
+\item False springs greatly impact the physical characteristics of the leaf.
   \begin{enumerate}
-  \item Chilling and False spring (as above)
-  \item Herbivory risk
-  \item Species differences...
-  \item Forecasting
-  \item Implications for forest recruitment
+  \item With chlorophyll content, leaf toughness and leaf thickness decreasing, the quality of the leaf dwindles.
+  \item This reduction in quality could subsequently lead to an increase in herbivory risk (CITE).
+  \item Further studies that assess the secondary compounds and total phenolic content (CITE) of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
+  \end{enumerate}
+  
+\item With sufficient chilling, false springs are less damaging to seedling growth.
+  \begin{enumerate}
+  \item However, false springs consistently impair shoot apical meristem growth, which can lead to relience on lateral shoot growth, rendering inefficient growth patterns.
+  \item Shoot apical meristem damage can lead to potential dieback of seedlings in subsequent growing seasons (CITE). 
+  \end{enumerate}
+  
+\item Understanding the impacts of false springs coupled with reduced over-winter chilling is essential for forecasting.
+  \begin{enumerate}
+  \item Our findings have large implications for forest recruitment.
+  \item With over-winter chilling decreasing with climate change, seedlings are more at risk of sustaining damage from false spring events. 
+  \item Understanding recruitment and inter- and intraspecific competition with false springs is crucial. 
+  \item If individuals that initiate budburst earlier are more at risk of false spring exposure, this could lead to dieback of early-budbursting species in temperate forests with climate change.
   \end{enumerate}
 \end{enumerate}
 
@@ -322,25 +339,29 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \section*{Tables and Figures}
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} 
+  -\caption{Interaction plots for all phenology, leaf and growth measurements. }\label{fig:intrxns}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_phenandmeri.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_phen.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) duration of vegetative risk and b) growing season length. Dots and lines show means and 50\% uncertainty intervals.}\label{fig:muphen}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness and b) leaf thickness. Dots and lines show means and 50\% uncertainty intervals. }\label{fig:muleaf}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.png} %\label{fig:allmsmts}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) shoot apical meristem damage and b) total biomass. Dots and lines show means and 50\% uncertainty intervals. }\label{fig:mugrowth}
   -\end{center}
   -\end{figure}}
   

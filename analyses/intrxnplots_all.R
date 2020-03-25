@@ -46,6 +46,14 @@ dvrplot <- ggplot(dvr, aes(x=tx, y=dvr, shape=as.factor(chill), colour=as.factor
                                                                   "6 weeks",
                                                                   "8 weeks"))
 
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(dvrplot)
+
 #ggsave(paste("figures/dvrsimple.png",sep=""),width=15, height=12,units="cm",bg = "white",dpi=500, plot=dvrplot)
 
 
@@ -60,8 +68,8 @@ meriplot <- ggplot(meristem, aes(x=tx, y=meristem, shape=as.factor(chill), colou
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1, height=0.1) +
   geom_point() +
   theme_classic() + 
-  #theme(legend.position = "none") +
-  ggtitle("c)") +
+  theme(legend.position = "none") +
+  ggtitle("f)") +
   xlab("") +
   ylab("Shoot apical meristem damage") +
   coord_cartesian(expand = TRUE) +
@@ -152,7 +160,7 @@ toughplot <- ggplot(tough, aes(x=tx, y=tough, shape=as.factor(chill), colour=as.
   geom_point() +
   theme_classic() + 
   theme(legend.position="none") +
-  ggtitle("e)") +
+  ggtitle("d)") +
   xlab("") +
   ylab("Leaf toughness (N)") +
   coord_cartesian(expand = TRUE) +
@@ -180,7 +188,8 @@ thickplot <- ggplot(thick, aes(x=tx, y=thick, shape=as.factor(chill), colour=as.
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
-  ggtitle("f)") +
+  theme(legend.position="none") +
+  ggtitle("e)") +
   xlab("") +
   ylab(expression(paste("Leaf thickness (", mu, "m)", sep=""))) +
   coord_cartesian(expand = TRUE) +
@@ -292,7 +301,7 @@ rootstoshootsplot <- ggplot(rootstoshoots, aes(x=tx, y=rootstoshoots, shape=as.f
   geom_smooth(method="lm", se=FALSE) + geom_jitter(width=0.1) +
   geom_point() +
   theme_classic() + 
-  #theme(legend.position="none") +
+  theme(legend.position="none") +
   ggtitle("i)") +
   xlab("") +
   ylab("Root Biomass to \nShoot Biomass ratio (g)") +
@@ -323,6 +332,7 @@ htdiffplot <- ggplot(ht.diff, aes(x=tx, y=ht.diff, shape=as.factor(chill), colou
   geom_point() +
   theme_classic() + 
   theme(legend.position="none") +
+  ggtitle("g)") +
   xlab("Treatment") +
   ylab("Shoot growth 60 days after budburst (cm)") +
   coord_cartesian(expand = TRUE) +
@@ -354,6 +364,7 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
   theme_classic() + 
   theme(legend.position="none") +
   xlab("Treatment") +
+  ggtitle("c)") +
   ylab("Chlorophyll content (mg/cm^2)") +
   coord_cartesian(expand = TRUE) +
   #scale_y_continuous(breaks = c(0,1), labels=c("No damage", "Damage")) + 
@@ -372,8 +383,8 @@ chlplot <- ggplot(chlavg, aes(x=tx, y=chlavg, shape=as.factor(chill), colour=as.
 
 
 quartz()
-allmsmts <- grid.arrange(dvrplot, gslengthplot, meriplot,
+allmsmts <- grid.arrange(dvrplot, gslengthplot, mylegend,
              chlplot, toughplot, thickplot,
-             htfinalplot, totbioplot, rootstoshootsplot, ncol=3, widths=c(1,1,1.5))
+             meriplot, htdiffplot, totbioplot, ncol=3, widths=c(1,1,1))
 
 ggsave(paste("figures/allmsmts.png",sep=""),width=25, height=25,units="cm",bg = "white",dpi=900, plot=allmsmts)
