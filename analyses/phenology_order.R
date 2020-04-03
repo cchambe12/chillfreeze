@@ -24,7 +24,7 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 # 'order' or 'rank' command in R I think to transform mean leafout to just
 #a rank and try to plot how consistent this is across treatments.
 
-bbandgs <- subset(chillfrz, select=c("budburst", "leafout", "tx", "chill", "bset", "species"))
+bbandgs <- subset(chillfrz, select=c("budburst", "leafout", "tx", "chill", "budsetdoy", "species"))
 bbandgs <- na.omit(bbandgs)
 bbandgs$txchill <- paste0(bbandgs$tx, bbandgs$chill)
 
@@ -86,7 +86,15 @@ eightwktx$bsorder <- ave(eightwktx$budsetdoy, eightwktx$species)
 
 
 ### Clean things up a bit then plot
-ggplot(bbandgs, aes(x=leafout, y=budsetdoy))
+cols <- colorRampPalette(brewer.pal(6,"Dark2"))(6)
+ggplot(bbandgs, aes(x=leafout, y=budsetdoy, col=txchill)) + theme_classic() + geom_point() + geom_smooth(method="lm", aes(col=txchill)) +
+  scale_color_manual(name=("Treatment"), values=cols,
+                     labels=c("01"="4 wks: Control",
+                              "11"="4 wks: Treatment",
+                              "02"="6 wks: Control",
+                              "12"="6 wks: Treatment",
+                              "03"="8 wks: Control",
+                              "13"="8 wks: Treatment"))
 
 
 
