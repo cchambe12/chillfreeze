@@ -40,15 +40,22 @@ dvr.mod <- brm(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
 save(dvr.mod, file="~/Documents/git/chillfreeze/analyses/stan/dvr_brms.Rdata")
 
 
-chill.stan$gslength.bb <- chill.stan$bset - chill.stan$budburst
-chill.stan$gslength.lo <- chill.stan$bset - chill.stan$leafout
+chill.stan$gslength.bb <- chill.stan$budsetdoy - chill.stan$budburst
+chill.stan$gslength.lo <- chill.stan$budsetdoy - chill.stan$leafout
 chill.stan.gs <- chill.stan[!is.na(chill.stan$gslength.lo),]
 
-gslength.mod <- brm(gslength.lo ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+gslength.modbb <- brm(gslength.bb ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                        data=chill.stan.gs, iter=4000, warmup=2500, 
                     prior = prior(normal(200, 40), class=Intercept),
                        control=list(max_treedepth=15, adapt_delta=0.99))
-save(gslength.mod, file="~/Documents/git/chillfreeze/analyses/stan/gslengthlo_brms.Rdata")
+save(gslength.modbb, file="~/Documents/git/chillfreeze/analyses/stan/gslengthlo_brms.Rdata")
+
+gslength.modlo <- brm(gslength.lo ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                      data=chill.stan.gs, iter=4000, warmup=2500, 
+                      prior = prior(normal(200, 40), class=Intercept),
+                      control=list(max_treedepth=15, adapt_delta=0.99))
+save(gslength.modlo, file="~/Documents/git/chillfreeze/analyses/stan/gslengthlo_brms_adjusted.Rdata")
+
 
 chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.final),]
 chill.stan.ht$finaldiff <- chill.stan.ht$ht.final - chill.stan.ht$lo.ht

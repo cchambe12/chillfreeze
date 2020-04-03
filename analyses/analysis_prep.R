@@ -119,12 +119,12 @@ chill.stan$ht.date.new <- ifelse(chill.stan$chill==2, (chill.stan$ht.date-7), ch
 chill.stan$ht.date.new <- ifelse(chill.stan$chill==3, (chill.stan$ht.date-21), chill.stan$tough.date)
 
 chill.stan$budset <- as.Date(chill.stan$budset, "%m/%d/%y")
-chill.stan$bset <- yday(chill.stan$budset)
+chill.stan$bset <- as.numeric(yday(chill.stan$budset))
 
 chill.stan$budsetdoy <- NA
-chill.stan$budsetdoy <- ifelse(chill.stan$chill==1, (chill.stan$budsetdoy+6), chill.stan$bset)
-chill.stan$budsetdoy <- ifelse(chill.stan$chill==2, (chill.stan$budsetdoy-7), chill.stan$bset)
-chill.stan$budsetdoy <- ifelse(chill.stan$chill==3, (chill.stan$budsetdoy-21), chill.stan$bset)
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==1, (chill.stan$bset+6), chill.stan$budsetdoy)
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==2, (chill.stan$bset-7), chill.stan$budsetdoy)
+chill.stan$budsetdoy <- ifelse(chill.stan$chill==3, (chill.stan$bset-21), chill.stan$budsetdoy)
 
 chill.stan$gslength <- chill.stan$budsetdoy - chill.stan$lo
 
@@ -132,9 +132,9 @@ chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.
 
 chill.stan$rgr_final <- (chill.stan$ht.final - chill.stan$lo.ht)/(chill.stan$gslength)*100
 
-source("..//standardcurve.R")
+#source("..//standardcurve.R")
 
-chill.stan$folin <- folinfunc(as.numeric(chill.stan$phenol))
+#chill.stan$folin <- folinfunc(as.numeric(chill.stan$phenol))
 
 chill.stan$totbiomass <- chill.stan$roots + chill.stan$shoots
 
