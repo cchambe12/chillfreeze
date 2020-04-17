@@ -250,38 +250,38 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
 
 @
 
-
-
 \section*{Introduction}
+% emw-midApril2020: When do you write this up, be careful not to plagiarize yourself. The text needs to be different enough from your other papers (I fin that this can be really hard in methods, but should be do-able in the rest of the text)
 \begin{enumerate}
-\item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management.
-  \begin{enumerate}
+\item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management. 
+  \begin{enumerate} 
   \item With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout) is advancing.
-  \item Budburst in trees and shrubs requires three cues: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod).
-  \item As budburst and leafout are strongly cued by temperature, species ranges and growing seasons are highly susceptible to change with climate-induced warming \citep{Chuine2001}.
+  \item As budburst and leafout are strongly cued by temperature, species ranges and growing seasons are highly susceptible to change with climate-induced warming \citep{Chuine2001}. % emw-midApril2020: I wondered if it might be good to build on your opening point and maybe follow here by saying: Indeed, forests are leafing out so much earlier that there is discussion about whether early springs could act as important carbon sinks ...Maybe? It feels like some sort of transition might work where you more acknowledge the 'good' advance side and transition to the 'bad' (though of course avoiding all good/bad language).
   \end{enumerate}
   
-\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
+\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. % emw-midApril2020: Nice!
   \begin{enumerate}
-  \item One such weather event is known as a `false spring', which is when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated.
-  \item Freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
-  \item Thus, temperate plants are at risk of false springs and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze damage by timing budburst effectively.
-  \item The rate of budburst, or the duration of vegeative risk \citep{Chamberlain2019}, is a risky time for a plant and if a false spring occurs during this time, a plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009}.
-  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk \citep{Vitasse2014}.
+  \item These weather events can in turn have big impacts on plant development each spring ... 
+  \item One such event is known as a `false spring', which is when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated.
+  \item Just after budburst is initiated is a risky time for plants \citep{Chamberlain2019} and plants can sustain major damage if a frost hits during this time. 
   \item False springs can be very damaging, with reports of trees taking 16-38 days to refoliate after leaf loss from freezing temperatures \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}. 
   \item Such damage can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake as well as forest recruitment \citep{Hufkens2012, Klosterman2018, Richardson2013}
+  \item Further, if a false spring occurs and damages a plant, that plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009} thus ... [there can be big knock-on effects for the ecosystem?]
   \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies and climate forecasting \citep{OBrien2019}.
   \end{enumerate}
+  % emw-midApril2020: I re-organized the above to try to 'funnel' the paper more, you want to get your readers interested! A wide breadth of readers too, so early on we want to leave out the complexities that we can (what cues species use, canopy versus understory etc. -- ask yourself if the readers to know this info right now, I think it can wait until they know what (1) what false spring are and (2) why they matter).
   
-\item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth.
+    % emw-midApril2020: This below paragraph is in a good spot! You set the reader up for climate change and phenology, false springs as an important complicating factor -- and now -- an alternative villain thickens the plot! Warm winters. You just need a transition here for the reader ... something along the lines of 'false springs are not the only thing that may complicate forecasts' or such (depending on how you develop the previous paragraphs)
+\item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth. % emw-midApril2020: I would re-write this opening sentence with just warmer winters ... 
   \begin{enumerate}
+  \item Warmer winters matter because they impact one of the  three major cues plants use to time budburst: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod). % emw-midApril2020: For the below be sure your readers knows why they need to learn all these dormancy stages ...
   \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase \citep{Charrier2011}. 
   \item Endodormancy is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment. 
   \item Ecodormancy begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
-  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.
+  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.% emw-midApril2020: Can you connect the reader back here to why this matters? Just a clause to transition to the next paragraph I think.
   \end{enumerate}
 
-\item Winter warming could impact the quality of budburst \citep{Cleland2007,Bonhomme2010}.
+\item Winter warming could impact the quality of budburst \citep{Cleland2007,Bonhomme2010}. % emw-midApril2020: I feel like the point of this paragraph is to convince readers that chilling and false springs may importantly interact, but that is not very clear. Can we make this paragraph's key information more clear? What do the readers need to know to care about and understand your study and what could be skipped or saved for the discussion where you unpack some of the complexity ... 
   \begin{enumerate}
   \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation into sugar accumulation \citep{Tixier2019}.
   \item Sugar accumulation over the winter increases cold hardiness but is also crucial for dormancy break \citep{Tixier2017, Tixier2019}.
@@ -292,6 +292,12 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   %\item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
   \end{enumerate}
   
+  \item Spot for 2-3 additional paragraphs on species differences, community impacts
+    \begin{enumerate} % emw-midApril2020: I pulled these points from above as they seemed to specific for how early they were in the intro. I think they could work -- with additional info -- to set up that species are not all the same. From just above the intro could flow: An ideal strategy might thus be to require high chilling, leafout late and avoid frost, but competition between plants puts pressure on individuals to leafout as early as possible and gain priority access to resources ... Thus plants have multiple strategies -- some are late (avoidance), some avoid by speeding through the risky bit (add your info on freezing tolerance), some may try to tolerate .... Then perhaps another paragraph on differences across functional groups and species.
+      \item Freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
+  \item Thus, temperate plants are at risk of false springs and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze damage by timing budburst effectively.
+  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk \citep{Vitasse2014}.
+  \end{enumerate}
 
 \item Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across ten temperate tree and shrub species. 
   \begin{enumerate}
@@ -357,7 +363,7 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
 \subsection*{Data analysis}
 \begin{enumerate}
 \item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage and (8) total biomass. % CUT FOR NOW: and (9) belowground to aboveground biomass ratio. 
-  \begin{enumerate}
+  \begin{enumerate} %emw-midApril2020: I would move all equations to the supp as your methods are long already and they are fairly standard equations
   \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
   \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
