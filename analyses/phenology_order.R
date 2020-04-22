@@ -31,6 +31,153 @@ bbandgs$txchill <- paste0(bbandgs$tx, bbandgs$chill)
 unique(bbandgs$txchill)
 # "01"  "11"  "02"  "12"  "03"  "13"
 
+
+
+#### Let's look at overall averages and then do barplots... I think that will be the best first stab
+bbandgs$lobyspp <- ave(bbandgs$leafout, bbandgs$species)
+bbandgs$code <- reorder(bbandgs$species, bbandgs$lobyspp) ## Levels: SALPUR CORRAC BETPAP BETPOP ALNRUG VIBDEN SORAME ACESAC
+
+
+bbandgs$lobytxchill <- ave(bbandgs$leafout, bbandgs$species, bbandgs$txchill)
+
+colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
+orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, fill=txchill)) + 
+  geom_bar(stat="identity", position = position_dodge()) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (leafout)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_fill_manual(name="Treatments", values=colz, 
+                        labels=c("01"="Control x 4wks Chill",
+                                 "02"="Control x 6wks Chill",
+                                 "03"="Control x 8wks Chill",
+                                 "11"="False Spring x 4wks Chill",
+                                 "12"="False Spring x 4wks Chill",
+                                 "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderlo
+
+
+orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, col=txchill)) + 
+  geom_line(aes(group=txchill)) + 
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (leafout)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_color_manual(name="Treatments", values=c("01"=colz[1], 
+                                                 "11"=colz[2],
+                                                 "02"=colz[3],
+                                                 "12"=colz[4],
+                                                 "03"=colz[5],
+                                                 "13"=colz[6]),
+                    labels=c("01"="Control x 4wks Chill",
+                             "11"="False Spring x 4wks Chill",
+                             "02"="Control x 6wks Chill",
+                             "12"="False Spring x 4wks Chill",
+                             "03"="Control x 8wks Chill",
+                             "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderlo
+
+
+
+
+bbandgs$bsetbyspp <- ave(bbandgs$budsetdoy, bbandgs$species)
+bbandgs$codebset <- reorder(bbandgs$species, bbandgs$bsetbyspp) ## Levels: SALPUR CORRAC BETPAP BETPOP ALNRUG VIBDEN SORAME ACESAC
+bbandgs$bsetbytxchill <- ave(bbandgs$budsetdoy, bbandgs$species, bbandgs$txchill)
+
+orderbudset <- ggplot(bbandgs, aes(x=codebset, y=bsetbytxchill, col=txchill)) + 
+  geom_line(aes(group=txchill)) + 
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (budset)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_color_manual(name="Treatments", values=c("01"=colz[1], 
+                                                 "11"=colz[2],
+                                                 "02"=colz[3],
+                                                 "12"=colz[4],
+                                                 "03"=colz[5],
+                                                 "13"=colz[6]),
+                     labels=c("01"="Control x 4wks Chill",
+                              "11"="False Spring x 4wks Chill",
+                              "02"="Control x 6wks Chill",
+                              "12"="False Spring x 4wks Chill",
+                              "03"="Control x 8wks Chill",
+                              "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderbudset
+
+
+colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
+orderbset <- ggplot(bbandgs, aes(x=codebset, y=bsetbytxchill, fill=txchill)) + 
+  geom_bar(stat="identity") +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (budset)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_fill_manual(name="Treatments", values=colz, 
+                    labels=c("01"="Control x 4wks Chill",
+                             "02"="Control x 6wks Chill",
+                             "03"="Control x 8wks Chill",
+                             "11"="False Spring x 4wks Chill",
+                             "12"="False Spring x 4wks Chill",
+                             "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderbset
+
+
+
+
+
+
 fourwk <- bbandgs[(bbandgs$txchill=="01"),]
 fourwktx <- bbandgs[(bbandgs$txchill=="11"),]
 
@@ -96,7 +243,43 @@ ggplot(bbandgs, aes(x=leafout, y=budsetdoy, col=txchill)) + theme_classic() + ge
                               "03"="8 wks: Control",
                               "13"="8 wks: Treatment"))
 
+##################################################################################
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
+orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, col=code, linetype=txchill)) + 
+  geom_bar(stat="identity", position=position_dodge(), fill="white") +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1)) +
+  xlab("") + 
+  ylab("Day of year (leafout)") + 
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
+                              "ALNRUG"="Alnus rugosa",
+                              "BETPAP"="Betula papyrifera",
+                              "BETPOP"="Betula populifolia",
+                              "CORRAC"="Cornus racemosa", 
+                              "SALPUR"="Salix purpurea",
+                              "SORAME"="Sorbus americana",
+                              "VIBDEN"="Viburnum dentatum")) +
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_linetype_manual(name="Treatments", values=c(1:6), 
+                        labels=c("01"="Control x 4wks Chill",
+                                 "02"="Control x 6wks Chill",
+                                 "03"="Control x 8wks Chill",
+                                 "11"="False Spring x 4wks Chill",
+                                 "12"="False Spring x 4wks Chill",
+                                 "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
 
+
+quartz()
+orderlo
 
 
 
