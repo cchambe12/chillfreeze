@@ -76,7 +76,7 @@ setwd("~/Documents/git/chillfreeze/analyses/")
 
 ## load the model
 load("stan/dvr_brms.Rdata")
-load("stan/gslengthlo_brms.Rdata") 
+load("stan/gslengthlo_brms_adjusted.Rdata") 
 load("stan/meristem_brms.Rdata")
 
 load("stan/chlavg_brms.Rdata")
@@ -109,19 +109,19 @@ dvrtxchill2 <- dvrtx + dvrchill2 + dvrtxchill2 # 0.92
 
 
 ### Gslength Model - CHILLING EXTENDS GS!!!! AND CAN COMPENSATE FOR TX!
-gslengthtx<-round(mean(fixef(gslength.mod, pars="tx", summary=FALSE)), digits=2) # -3.22
-gslengthtxsd<-round(sd(fixef(gslength.mod, pars="tx", summary=FALSE)), digits=2) # 5.46
-gslengthchill1<-round(mean(fixef(gslength.mod, pars="chill1", summary=FALSE)), digits=2) ### 16.08
-gslengthchill1sd<-round(sd(fixef(gslength.mod, pars="chill1", summary=FALSE)), digits=2) # 4.94
-gslengthchill2<-round(mean(fixef(gslength.mod, pars="chill2", summary=FALSE)), digits=2) ### 19.97
-gslengthchill2sd<-round(sd(fixef(gslength.mod, pars="chill2", summary=FALSE)), digits=2) # 5.05
-gslengthtxchill1<-round(mean(fixef(gslength.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
-gslengthtxchill1sd<-round(sd(fixef(gslength.mod, pars="tx:chill1", summary=FALSE)), digits=2) # 6.63
-gslengthtxchill1 <- gslengthtx + gslengthchill1 + gslengthtxchill1 # -1
+gslengthtx<-round(mean(fixef(gslength.modlo, pars="tx", summary=FALSE)), digits=2) # -2.9
+gslengthtxsd<-round(sd(fixef(gslength.modlo, pars="tx", summary=FALSE)), digits=2) # 5.52
+gslengthchill1<-round(mean(fixef(gslength.modlo, pars="chill1", summary=FALSE)), digits=2) ### 3.11
+gslengthchill1sd<-round(sd(fixef(gslength.modlo, pars="chill1", summary=FALSE)), digits=2) # 4.97
+gslengthchill2<-round(mean(fixef(gslength.modlo, pars="chill2", summary=FALSE)), digits=2) ### -6.82
+gslengthchill2sd<-round(sd(fixef(gslength.modlo, pars="chill2", summary=FALSE)), digits=2) # 5.11
+gslengthtxchill1<-round(mean(fixef(gslength.modlo, pars="tx:chill1", summary=FALSE)), digits=2) 
+gslengthtxchill1sd<-round(sd(fixef(gslength.modlo, pars="tx:chill1", summary=FALSE)), digits=2) # 6.63
+gslengthtxchill1 <- gslengthtx + gslengthchill1 + gslengthtxchill1 # -13.91
 
-gslengthtxchill2<-round(mean(fixef(gslength.mod, pars="tx:chill2", summary=FALSE)), digits=2)
-gslengthtxchill2sd<-round(sd(fixef(gslength.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 6.97
-gslengthtxchill2 <- gslengthtx + gslengthchill2 + gslengthtxchill2 ### 7.63
+gslengthtxchill2<-round(mean(fixef(gslength.modlo, pars="tx:chill2", summary=FALSE)), digits=2)
+gslengthtxchill2sd<-round(sd(fixef(gslength.modlo, pars="tx:chill2", summary=FALSE)), digits=2) # 6.97
+gslengthtxchill2 <- gslengthtx + gslengthchill2 + gslengthtxchill2 ### -19.08
 
 ### Meristem Model - MERISTEM DAMAGE ACROSS CHILL TXs!!
 meritx<-round(mean(fixef(meri.mod, pars="tx", summary=FALSE)), digits=2) ### 2.07
