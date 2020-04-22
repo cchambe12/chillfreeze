@@ -26,10 +26,10 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 
 bbandgs <- subset(chillfrz, select=c("budburst", "leafout", "tx", "chill", "budsetdoy", "species"))
 bbandgs <- na.omit(bbandgs)
-bbandgs$txchill <- paste0(bbandgs$tx, bbandgs$chill)
+bbandgs$txchill <- paste0(bbandgs$chill, bbandgs$tx)
 
 unique(bbandgs$txchill)
-# "01"  "11"  "02"  "12"  "03"  "13"
+# "10"  "11"  "20"  "21"  "30"  "31"
 
 
 
@@ -37,19 +37,28 @@ unique(bbandgs$txchill)
 bbandgs$lobyspp <- ave(bbandgs$leafout, bbandgs$species)
 bbandgs$code <- reorder(bbandgs$species, bbandgs$lobyspp) ## Levels: SALPUR CORRAC BETPAP BETPOP ALNRUG VIBDEN SORAME ACESAC
 
-
+### Okay, now we're going to try and rank them based on order by treatment by species
+# Step 1)
 bbandgs$lobytxchill <- ave(bbandgs$leafout, bbandgs$species, bbandgs$txchill)
 
-colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
-orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, fill=txchill)) + 
-  geom_bar(stat="identity", position = position_dodge()) +
+bbandgs$species_tx <- paste(bbandgs$species, bbandgs$txchill, sep="_")
+bbandgs$code <- reorder(bbandgs$species_tx, bbandgs$lobytxchill)
+
+
+bbandgs$rank <- rank(bbandgs$lobytxchill, bbandgs$species_tx)
+
+# Step 2) Plot using this rank
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
+rankbytx <- ggplot(bbandgs, aes(y=rank, x=txchill, col=species)) + 
+  geom_line(aes(group=species)) + 
   theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.text.align = 0,
-        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white")) +
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.text = element_text(face="italic")) +
   xlab("") + 
-  ylab("Day of year (leafout)") + 
-  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+  ylab("Order/Rank of leafout") +  
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
                             "ALNRUG"="Alnus rugosa",
                             "BETPAP"="Betula papyrifera",
                             "BETPOP"="Betula populifolia",
@@ -57,18 +66,82 @@ orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, fill=txchill)) +
                             "SALPUR"="Salix purpurea",
                             "SORAME"="Sorbus americana",
                             "VIBDEN"="Viburnum dentatum")) +
-  scale_fill_manual(name="Treatments", values=colz, 
-                        labels=c("01"="Control x 4wks Chill",
-                                 "02"="Control x 6wks Chill",
-                                 "03"="Control x 8wks Chill",
-                                 "11"="False Spring x 4wks Chill",
-                                 "12"="False Spring x 4wks Chill",
-                                 "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+  scale_x_discrete(labels=c("10"="Control x \n4wks Chill",
+                              "11"="False Spring x \n4wks Chill",
+                              "20"="Control x \n6wks Chill",
+                              "21"="False Spring x \n6wks Chill",
+                              "30"="Control x \n8wks Chill",
+                              "31"="False Spring x \n8wks Chill")) + coord_cartesian(expand = c(0,0))
 
 
 quartz()
-orderlo
+rankbytx
 
+## Great!! 
+
+# Step 3: Now let's try and reorder and be easier about days ranking system...
+bbandgs$lobytxchill <- ave(bbandgs$leafout, bbandgs$species, bbandgs$txchill)
+
+
+
+
+
+
+
+
+# Step 1) For budset now
+bbandgs$bsetbytxchill <- ave(bbandgs$budsetdoy, bbandgs$species, bbandgs$txchill)
+
+bbandgs$species_tx <- paste(bbandgs$species, bbandgs$txchill, sep="_")
+bbandgs$codebset <- reorder(bbandgs$species_tx, bbandgs$lobytxchill)
+
+
+bbandgs$rankbset <- rank(bbandgs$bsetbytxchill, bbandgs$species_tx)
+
+# Step 2) Plot using this rank
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
+bsetrankbytx <- ggplot(bbandgs, aes(y=rankbset, x=txchill, col=species)) + 
+  geom_line(aes(group=species)) + 
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.text = element_text(face="italic")) +
+  xlab("") + 
+  ylab("Order/Rank of leafout") +  
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
+                              "ALNRUG"="Alnus rugosa",
+                              "BETPAP"="Betula papyrifera",
+                              "BETPOP"="Betula populifolia",
+                              "CORRAC"="Cornus racemosa", 
+                              "SALPUR"="Salix purpurea",
+                              "SORAME"="Sorbus americana",
+                              "VIBDEN"="Viburnum dentatum")) +
+  scale_x_discrete(labels=c("10"="Control x \n4wks Chill",
+                            "11"="False Spring x \n4wks Chill",
+                            "20"="Control x \n6wks Chill",
+                            "21"="False Spring x \n6wks Chill",
+                            "30"="Control x \n8wks Chill",
+                            "31"="False Spring x \n8wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+bsetrankbytx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
 
 orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, col=txchill)) + 
   geom_line(aes(group=txchill)) + 
@@ -102,8 +175,6 @@ orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, col=txchill)) +
 
 quartz()
 orderlo
-
-
 
 
 bbandgs$bsetbyspp <- ave(bbandgs$budsetdoy, bbandgs$species)
@@ -142,39 +213,6 @@ orderbudset <- ggplot(bbandgs, aes(x=codebset, y=bsetbytxchill, col=txchill)) +
 
 quartz()
 orderbudset
-
-
-colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
-orderbset <- ggplot(bbandgs, aes(x=codebset, y=bsetbytxchill, fill=txchill)) + 
-  geom_bar(stat="identity") +
-  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.text.align = 0,
-        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white")) +
-  xlab("") + 
-  ylab("Day of year (budset)") + 
-  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
-                            "ALNRUG"="Alnus rugosa",
-                            "BETPAP"="Betula papyrifera",
-                            "BETPOP"="Betula populifolia",
-                            "CORRAC"="Cornus racemosa", 
-                            "SALPUR"="Salix purpurea",
-                            "SORAME"="Sorbus americana",
-                            "VIBDEN"="Viburnum dentatum")) +
-  scale_fill_manual(name="Treatments", values=colz, 
-                    labels=c("01"="Control x 4wks Chill",
-                             "02"="Control x 6wks Chill",
-                             "03"="Control x 8wks Chill",
-                             "11"="False Spring x 4wks Chill",
-                             "12"="False Spring x 4wks Chill",
-                             "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
-
-
-quartz()
-orderbset
-
-
-
 
 
 
@@ -283,3 +321,64 @@ orderlo
 
 
 
+
+orderlo <- ggplot(bbandgs, aes(x=code, y=lobytxchill, fill=txchill)) + 
+  geom_bar(stat="identity", position = position_dodge()) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (leafout)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_fill_manual(name="Treatments", values=colz, 
+                    labels=c("01"="Control x 4wks Chill",
+                             "02"="Control x 6wks Chill",
+                             "03"="Control x 8wks Chill",
+                             "11"="False Spring x 4wks Chill",
+                             "12"="False Spring x 4wks Chill",
+                             "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderlo
+
+
+
+
+
+colz <- colorRampPalette(brewer.pal(6,"Paired"))(6)
+orderbset <- ggplot(bbandgs, aes(x=codebset, y=bsetbytxchill, fill=txchill)) + 
+  geom_bar(stat="identity") +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.key = element_rect(colour = "transparent", fill = "white")) +
+  xlab("") + 
+  ylab("Day of year (budset)") + 
+  scale_x_discrete(labels=c("ACESAC"="Acer saccharinum",
+                            "ALNRUG"="Alnus rugosa",
+                            "BETPAP"="Betula papyrifera",
+                            "BETPOP"="Betula populifolia",
+                            "CORRAC"="Cornus racemosa", 
+                            "SALPUR"="Salix purpurea",
+                            "SORAME"="Sorbus americana",
+                            "VIBDEN"="Viburnum dentatum")) +
+  scale_fill_manual(name="Treatments", values=colz, 
+                    labels=c("01"="Control x 4wks Chill",
+                             "02"="Control x 6wks Chill",
+                             "03"="Control x 8wks Chill",
+                             "11"="False Spring x 4wks Chill",
+                             "12"="False Spring x 4wks Chill",
+                             "13"="False Spring x 4wks Chill")) + coord_cartesian(expand = c(0,0))
+
+
+quartz()
+orderbset
