@@ -63,16 +63,16 @@ chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.final),]
 chill.stan.ht$finaldiff <- chill.stan.ht$ht.final - chill.stan.ht$lo.ht
 chill.stan.ht$finaldiff.rate <- (chill.stan.ht$finaldiff/chill.stan.ht$gslength.lo)*10 ## this makes the units mm/day
 chill.stan.ht$finaldiff.rgr <- (log(chill.stan.ht$ht.final)-log(chill.stan.ht$lo.ht))/(chill.stan.ht$gslength.lo) * 1000 
-chill.stan.htrate <- chill.stan.ht[!is.na(chill.stan.ht$finaldiff.rgr),]
+chill.stan.htrate <- chill.stan.ht[!is.na(chill.stan.ht$finaldiff.rate),]
 
-get_prior(finaldiff.rgr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+get_prior(finaldiff.rate ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
           data=chill.stan.htrate)
 
-htdiffrgr.mod <- brm(finaldiff.rgr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+htdiffrate.mod <- brm(finaldiff.rate ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                             data=chill.stan.htrate, iter=4000, warmup=2500,
                            control=list(max_treedepth=15, adapt_delta=0.99),
                          prior = prior(normal(5, 20), class=Intercept))
-save(htdiffrgr.mod, file="~/Documents/git/chillfreeze/analyses/stan/htfinalrgr_brms.Rdata")
+save(htdiffrate.mod, file="~/Documents/git/chillfreeze/analyses/stan/htfinalrate_brms.Rdata")
 
 rmspp <- c("FAGGRA", "NYSSYL")
 chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
