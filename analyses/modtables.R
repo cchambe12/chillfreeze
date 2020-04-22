@@ -28,10 +28,12 @@ load("stan/toughness_brms.Rdata")
 load("stan/thickness_brms.Rdata")
 
 load("stan/htfinal_brms.Rdata") 
+load("stan/htdiffrate_brms.Rdata")
 load("stan/totbiomass_brms.Rdata")
+load("stan/biomassrate100_brms.Rdata")
 load("stan/roottoshoot_brms.Rdata")
 
-mod <- chl.mod
+mod <- biomassrate100.mod
 
 mod90<-as.data.frame(tidy(mod, prob=0.9))
 names(mod90)<-c("term", "estimate", "error", "10%", "90%")
@@ -42,7 +44,7 @@ mod98<-as.data.frame(tidy(mod, prob=0.98))
 names(mod98)<-c("term", "estimate", "error", "2%", "98%")
 modfull <- full_join(modfull, mod98)
 modfull <- subset(modfull, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
-write.csv(modfull, file="output/chlavg_modeloutput.csv", row.names=FALSE)
+write.csv(modfull, file="output/biomassrate100_modeloutput.csv", row.names=FALSE)
 
 
 

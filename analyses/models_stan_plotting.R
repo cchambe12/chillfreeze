@@ -19,7 +19,7 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
 #load("stan/dvr_brms.Rdata")
-load("stan/gslengthlo_brms.Rdata")
+#load("stan/gslengthlo_brms_adjusted.Rdata")
 #load("stan/meristem_brms.Rdata")
 
 #load("stan/chlavg_brms.Rdata")
@@ -28,7 +28,9 @@ load("stan/gslengthlo_brms.Rdata")
 
 
 #load("stan/htfinal_brms.Rdata")
+#load("stan/htfinalrate_brms.Rdata")
 #load("stan/totbiomass_brms.Rdata")
+#load("stan/biomassrate_brms.Rdata")
 #load("stan/roottoshoot_brms.Rdata")
 
 if(FALSE){
@@ -60,7 +62,7 @@ chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "gslengthtest_brms" ### change based on model
+figpathmore <- "htfinalrate_brms" ### change based on model
 
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
@@ -76,6 +78,7 @@ xlab <- "Model estimate of change in growing season length (days)"
 #xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 
 #xlab <- "Model estimate of change in shoot growth (cm)"
+xlab <- "Model estimate of change in shoot growth per day (mm/day)"
 #xlab <- "Model estimate of change in total biomass (g)"
 #xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
 
@@ -93,7 +96,7 @@ if(FALSE){
 
 spp <- unique(chill.stan$species)
 
-modelhere <- gslength.modlo
+modelhere <- htdiffrate.mod
 
 tx <- coef(modelhere, prob=c(0.25, 0.75))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -165,7 +168,7 @@ modoutput <- tidy(modelhere, prob=c(0.5))
 source("exp_muplot_brms.R")
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 16.5, 3.5) ## use for DVR
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## use for gslengthlo
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## use for gslengthlo
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5) ## meristem
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-5, 5) , 5.5, 3.5) ## chloro
@@ -174,7 +177,7 @@ muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## use for gslengt
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5) ## ht final
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5) ## tot biomass
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.1, 3.5) ### root to shoot
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.1, 3.5) ### root to shoot and growth rate
 
 
 #### Not included for now: muplotfx(modelhere, "", 8, 8, c(0,5), c(-10, 10) , 11, 3.5) ## ht diff

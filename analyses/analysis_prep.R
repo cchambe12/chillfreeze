@@ -126,7 +126,8 @@ chill.stan$budsetdoy <- ifelse(chill.stan$chill==1, (chill.stan$bset+6), chill.s
 chill.stan$budsetdoy <- ifelse(chill.stan$chill==2, (chill.stan$bset-7), chill.stan$budsetdoy)
 chill.stan$budsetdoy <- ifelse(chill.stan$chill==3, (chill.stan$bset-21), chill.stan$budsetdoy)
 
-chill.stan$gslength <- chill.stan$budsetdoy - chill.stan$lo
+chill.stan$gslength.lo <- chill.stan$budsetdoy - chill.stan$lo
+chill.stan$bset <- NULL
 
 chill.stan$rgr_prebudset <- (chill.stan$ht.prebudset - chill.stan$lo.ht)/(chill.stan$ht.date.new - chill.stan$leafout)*100
 
