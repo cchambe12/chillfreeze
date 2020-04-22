@@ -20,7 +20,7 @@ chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 
 ## load the model
 load("stan/dvr_brms.Rdata")
-load("stan/gslengthlo_brms.Rdata") 
+load("stan/gslengthlo_brms_adjusted.Rdata") 
 load("stan/meristem_brms.Rdata")
 
 load("stan/chlavg_brms.Rdata")
@@ -33,7 +33,7 @@ load("stan/totbiomass_brms.Rdata")
 load("stan/biomassrate100_brms.Rdata")
 load("stan/roottoshoot_brms.Rdata")
 
-mod <- biomassrate100.mod
+mod <- gslength.modlo
 
 mod90<-as.data.frame(tidy(mod, prob=0.9))
 names(mod90)<-c("term", "estimate", "error", "10%", "90%")
@@ -44,7 +44,7 @@ mod98<-as.data.frame(tidy(mod, prob=0.98))
 names(mod98)<-c("term", "estimate", "error", "2%", "98%")
 modfull <- full_join(modfull, mod98)
 modfull <- subset(modfull, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
-write.csv(modfull, file="output/biomassrate100_modeloutput.csv", row.names=FALSE)
+write.csv(modfull, file="output/gslength_modeloutput.csv", row.names=FALSE)
 
 
 
