@@ -40,6 +40,26 @@ dvr.mod <- brm(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
 save(dvr.mod, file="~/Documents/git/chillfreeze/analyses/stan/dvr_brms.Rdata")
 
 
+get_prior(leafout ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan)
+
+leafout.mod <- brm(leafout ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+               data=chill.stan, iter=4000, warmup=2500, 
+               prior = prior(normal(50, 15), class=Intercept),
+               control=list(max_treedepth=15, adapt_delta=0.99))
+save(leafout.mod, file="~/Documents/git/chillfreeze/analyses/stan/leafout_brms.Rdata")
+
+
+get_prior(budsetdoy ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+          data=chill.stan)
+
+budsetdoy.mod <- brm(budsetdoy ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+                   data=chill.stan, iter=4000, warmup=2500, 
+                   prior = prior(normal(330, 50), class=Intercept),
+                   control=list(max_treedepth=15, adapt_delta=0.99))
+save(budsetdoy.mod, file="~/Documents/git/chillfreeze/analyses/stan/budset_brms.Rdata")
+
+
 chill.stan$gslength.bb <- chill.stan$budsetdoy - chill.stan$budburst
 #chill.stan$gslength.lo <- chill.stan$budsetdoy - chill.stan$leafout
 chill.stan.gs <- chill.stan[!is.na(chill.stan$gslength.lo),]
