@@ -83,10 +83,83 @@ rankbytx
 bbandgs$lobytxchill <- ave(bbandgs$leafout, bbandgs$species, bbandgs$txchill)
 
 
+### So I think this has to be a for loop... where we order species_tx by rank and then adjust by window of 2 days
+speciestxrank <- subset(bbandgs, select=c(species_tx, lobytxchill, txchill, rank))
+speciestxrank <- speciestxrank[!duplicated(speciestxrank),]
+speciestxrank <- arrange(speciestxrank, rank)
+
+speciestxrank$rank_order <- 1:nrow(speciestxrank)
+
+speciestxrank <- arrange(speciestxrank, txchill, rank)
+
+speciestxrank$rank_adj <- NA
+
+txs <- sort(unique(speciestxrank$species_tx))
+newranks <- c()
+
+for(j in 1:length(txs)) {  #j=5
+  
+  subby <- subset(speciestxrank, as.numeric(speciestxrank$txchill)==txs[j])
+  
+  for(i in c(1:nrow(subby))) { ## i=2
+    
+    if(i==1) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i]
+      
+    } else if (i>=3 && (subby$lobytxchill[i] - 3) <= subby$lobytxchill[i-2]) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i-2] + 0.8
+      
+    } else if (i>=2 && (subby$lobytxchill[i] - 3) <= subby$lobytxchill[i-1]) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i-1] + 0.4
+      
+    } else 
+      
+      subby$rank_adj[i] <- subby$rank_order[i]
+  
+  }
+  
+  newranks <- c(newranks, subby$rank_adj)
+  
+}
+
+speciestxrank$rank_adj <- NULL
+
+spp_rankfix <- cbind(speciestxrank, newranks)
+
+bbandgs_rankfix <- full_join(bbandgs, spp_rankfix)
+  
+
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
+rankadj_bytx <- ggplot(bbandgs_rankfix, aes(y=newranks, x=txchill, col=species)) + 
+  geom_line(aes(group=species)) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.text = element_text(face="italic")) +
+  xlab("") + 
+  ylab("Order/Rank of leafout") +  
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
+                              "ALNRUG"="Alnus rugosa",
+                              "BETPAP"="Betula papyrifera",
+                              "BETPOP"="Betula populifolia",
+                              "CORRAC"="Cornus racemosa", 
+                              "SALPUR"="Salix purpurea",
+                              "SORAME"="Sorbus americana",
+                              "VIBDEN"="Viburnum dentatum")) +
+  scale_x_discrete(labels=c("10"="Control x \n4wks Chill",
+                            "11"="False Spring x \n4wks Chill",
+                            "20"="Control x \n6wks Chill",
+                            "21"="False Spring x \n6wks Chill",
+                            "30"="Control x \n8wks Chill",
+                            "31"="False Spring x \n8wks Chill")) + scale_y_continuous(expand = c(0, 0))
 
 
-
-
+quartz()
+rankadj_bytx
 
 
 # Step 1) For budset now
@@ -128,4 +201,80 @@ bsetrankbytx <- ggplot(bbandgs, aes(y=rankbset, x=txchill, col=species)) +
 quartz()
 bsetrankbytx
 
+##################################################################################
+speciestxrank_bset <- subset(bbandgs, select=c(species_tx, bsetbytxchill, txchill, rankbset))
+speciestxrank_bset <- speciestxrank_bset[!duplicated(speciestxrank_bset),]
+speciestxrank_bset <- arrange(speciestxrank_bset, rankbset)
 
+speciestxrank_bset$rank_order <- 1:nrow(speciestxrank_bset)
+
+speciestxrank_bset <- arrange(speciestxrank_bset, txchill, rankbset)
+
+speciestxrank_bset$rank_adj <- NA
+
+txs <- as.numeric(sort(unique(speciestxrank_bset$txchill)))
+newranks <- c()
+
+for(j in 1:length(txs)) {  #j=5
+  
+  subby <- subset(speciestxrank_bset, as.numeric(speciestxrank_bset$txchill)==txs[j])
+  
+  for(i in c(1:nrow(subby))) { ## i=2
+    
+    if(i==1) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i]
+      
+    } else if (i>=3 && (subby$bsetbytxchill[i] - 3) <= subby$bsetbytxchill[i-2]) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i-2] + 0.8
+      
+    } else if (i>=2 && (subby$bsetbytxchill[i] - 3) <= subby$bsetbytxchill[i-1]) {
+      
+      subby$rank_adj[i] <- subby$rank_order[i-1] + 0.4
+      
+    } else 
+      
+      subby$rank_adj[i] <- subby$rank_order[i]
+    
+  }
+  
+  newranks <- c(newranks, subby$rank_adj)
+  
+}
+
+speciestxrank_bset$rank_adj <- NULL
+
+spp_rankfix_bset <- cbind(speciestxrank_bset, newranks)
+
+bbandgs_rankfix_bset <- full_join(bbandgs, spp_rankfix_bset)
+
+
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(8)
+rankadj_bytx_bset <- ggplot(bbandgs_rankfix_bset, aes(y=newranks, x=txchill, col=species)) + 
+  geom_line(aes(group=species)) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.text = element_text(face="italic")) +
+  xlab("") + 
+  ylab("Order/Rank of leafout") +  
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
+                              "ALNRUG"="Alnus rugosa",
+                              "BETPAP"="Betula papyrifera",
+                              "BETPOP"="Betula populifolia",
+                              "CORRAC"="Cornus racemosa", 
+                              "SALPUR"="Salix purpurea",
+                              "SORAME"="Sorbus americana",
+                              "VIBDEN"="Viburnum dentatum")) +
+  scale_x_discrete(labels=c("10"="Control x \n4wks Chill",
+                            "11"="False Spring x \n4wks Chill",
+                            "20"="Control x \n6wks Chill",
+                            "21"="False Spring x \n6wks Chill",
+                            "30"="Control x \n8wks Chill",
+                            "31"="False Spring x \n8wks Chill")) + scale_y_continuous(expand = c(0, 0))
+
+
+quartz()
+rankadj_bytx_bset
