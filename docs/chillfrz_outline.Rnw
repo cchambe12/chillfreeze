@@ -83,7 +83,7 @@ load("stan/chlavg_brms.Rdata")
 load("stan/toughness_brms.Rdata")
 load("stan/thickness_brms.Rdata")
 
-load("stan/htdiff_brms.Rdata") 
+load("stan/htfinal_brms.Rdata") ## need to download to compile
 load("stan/totbiomass_brms.Rdata")
 load("stan/roottoshoot_brms.Rdata")
 
@@ -183,6 +183,7 @@ thicktxchill2<-round(mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE))
 thicktxchill2sd<-round(sd(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 5.25
 thicktxchill2 <- thicktx + thickchill2 + thicktxchill2 ### -15.78
 
+if(FALSE){
 ### Ht 60 day Model - Not very intersting, chilling increases growth but nothing with TX
 httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # -0.44
 httxsd<-round(sd(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # 0.98
@@ -197,8 +198,8 @@ httxchill1 <- httx + htchill1 + httxchill1 # 0.36
 httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
 httxchill2sd<-round(sd(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 1.46
 httxchill2 <- httx + htchill2 + httxchill2 # 0.68
+}
 
-if(FALSE){
 ### Ht final Model - Not intersting
 load("stan/htfinal_brms.Rdata")
 httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) ### 5.06
@@ -214,7 +215,6 @@ httxchill1 <- httx + htchill1 + httxchill1 # -0.42
 httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
 httxchill2sd<-round(sd(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2) # 5.49
 httxchill2 <- httx + htchill2 + httxchill2 # 4.73
-}
 
 
 ### Total biomass Model - TX DECREASES BIOMASS BUT CHILLING CAN COMPENSATE!!!
@@ -256,50 +256,54 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
 \item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management. 
   \begin{enumerate} 
   \item With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout) is advancing.
-  \item As budburst and leafout are strongly cued by temperature, species ranges and growing seasons are highly susceptible to change with climate-induced warming \citep{Chuine2001}. % emw-midApril2020: I wondered if it might be good to build on your opening point and maybe follow here by saying: Indeed, forests are leafing out so much earlier that there is discussion about whether early springs could act as important carbon sinks ...Maybe? It feels like some sort of transition might work where you more acknowledge the 'good' advance side and transition to the 'bad' (though of course avoiding all good/bad language).
+  \item As budburst and leafout are strongly cued by temperature, species' ranges and growing season lengths are highly susceptible to change with climate-induced warming \citep{Chuine2001}. 
+  \item These advancements in spring phenology is leading to increased carbon uptake across temperate forests, which are essential carbon sinks that combat the negative effects of climate change \citep{Keenan2014}.
   \end{enumerate}
   
-\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. % emw-midApril2020: Nice!
+\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. 
   \begin{enumerate}
-  \item These weather events can in turn have big impacts on plant development each spring ... 
+  \item These weather events can in turn have big impacts on plant development each spring. 
   \item One such event is known as a `false spring', which is when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated.
-  \item Just after budburst is initiated is a risky time for plants \citep{Chamberlain2019} and plants can sustain major damage if a frost hits during this time. 
-  \item False springs can be very damaging, with reports of trees taking 16-38 days to refoliate after leaf loss from freezing temperatures \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}. 
+  \item After budburst initiates, it is a risky time for plants \citep{Chamberlain2019} and plants can sustain major damage if a freeze hits during this time. 
+  \item It has been reported that it can take up to 16-38 days for plants to refoliate after leaf loss from a false spring \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}. 
   \item Such damage can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake as well as forest recruitment \citep{Hufkens2012, Klosterman2018, Richardson2013}
-  \item Further, if a false spring occurs and damages a plant, that plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009} thus ... [there can be big knock-on effects for the ecosystem?]
+  \item Further, if a false spring occurs and damages a plant, that plant is at an increased risk of experiencing an additional false spring as freezing temperatures can slow the rate of budburst \citep{Augspurger2009} thus there can be even greater reprecussions for the ecosystem.
   \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies and climate forecasting \citep{OBrien2019}.
   \end{enumerate}
-  % emw-midApril2020: I re-organized the above to try to 'funnel' the paper more, you want to get your readers interested! A wide breadth of readers too, so early on we want to leave out the complexities that we can (what cues species use, canopy versus understory etc. -- ask yourself if the readers to know this info right now, I think it can wait until they know what (1) what false spring are and (2) why they matter).
   
-    % emw-midApril2020: This below paragraph is in a good spot! You set the reader up for climate change and phenology, false springs as an important complicating factor -- and now -- an alternative villain thickens the plot! Warm winters. You just need a transition here for the reader ... something along the lines of 'false springs are not the only thing that may complicate forecasts' or such (depending on how you develop the previous paragraphs)
-\item With climate change advancing, chilling is predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth. % emw-midApril2020: I would re-write this opening sentence with just warmer winters ... 
+\item False springs are not the only things that may complicate forecasts.
   \begin{enumerate}
-  \item Warmer winters matter because they impact one of the  three major cues plants use to time budburst: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod). % emw-midApril2020: For the below be sure your readers knows why they need to learn all these dormancy stages ...
-  \item Deciduous trees and shrubs require a certain number of chilling hours in order to leave the endodormancy phase \citep{Charrier2011}. 
-  \item Endodormancy is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment. 
-  \item Ecodormancy begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
-  \item This two-phase sequence of dormancy helps protect temperate plants against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014}.% emw-midApril2020: Can you connect the reader back here to why this matters? Just a clause to transition to the next paragraph I think.
+  \item Winters are warming, which could potentially impact not only phenology but also growth.
+  \item Warmer winters directly impact one of the three major cues plants use to time budburst: (1) over-winter cold temperatures (chilling), (2) warming spring temperatures (forcing) and (3) longer daylengths (photoperiod). 
+  \item Due to harsh winters and unpredictable springs, temperate tree and shrub species have evolved to use a two-phase sequence of dormancy.
+  \item The first phase---endodormancy---is the period of winter when temperate trees are inhibited from growing, regardless of the outdoor environment and individuals require a certain number of chilling hours to exit this initial phase \citep{Charrier2011}.
+  \item The sceond phase---ecodormancy---begins after the chilling requirement has been met and is the period of time when growth can occur but the external environment is not conducive to growth (e.g. too cold) \citep{Basler2012}. 
+  \item With endo- and ecodormancy phases, temperate plants are better protected against stochastic warm spells in the winter and reduce the risk of a false spring \citep{Basler2014} though climate change complicates the timing and depth of dormancy \citep{Charrier2011}.
   \end{enumerate}
 
-\item Winter warming could impact the quality of budburst \citep{Cleland2007,Bonhomme2010}. % emw-midApril2020: I feel like the point of this paragraph is to convince readers that chilling and false springs may importantly interact, but that is not very clear. Can we make this paragraph's key information more clear? What do the readers need to know to care about and understand your study and what could be skipped or saved for the discussion where you unpack some of the complexity ... 
+\item Winter warming and its effect on dormancy could impact the quality of budburst \citep{Cleland2007,Bonhomme2010}. 
   \begin{enumerate}
-  \item Optimal chilling accumulates between 0$^{\circ}$C to 4$^{\circ}$C, which is also the optimal temperature for starch degradation into sugar accumulation \citep{Tixier2019}.
-  \item Sugar accumulation over the winter increases cold hardiness but is also crucial for dormancy break \citep{Tixier2017, Tixier2019}.
   \item Decreases in chilling temperatures from climate change could affect budburst timing \citep{Nanninga2017}, as well as the synchrony of budburst within a population or even within an individual \citep{Sanzperez2009}.
   \item And, reduced chilling---especially if there are fewer cold nights with warming---could impact a plant's tolerance of freezing temperatures throughout the winter \citep{Charrier2011}.
   \item With decreased freezing tolerance, plants are susceptible to damage to leaf tissue, canopy dieback, xylem embolism and injury to the shoot apical meristem, all of which could greatly reduce a plant's ability to recover for the remainder of the growing season or even survive until the next season \citep{Sakai1987,Gu2008}.
-  %\item As plants enter dormancy, their vulnerability to freeze damage begins to increase and their cold hardiness (i.e., freezing tolerance) increases. 
-  %\item Cold hardiness allows plants to survive freezing temperatures through myriad mechanisms including deep supercooling, increased solute concentration, and an increase in dehydrins or other proteins \citep{Sakai1987, Strimbeck2015}.
+  \item Thus, understanding the interplay of warming winters and false spring risk is critical for understanding how temperate forests will change in the future. 
   \end{enumerate}
   
-  \item Spot for 2-3 additional paragraphs on species differences, community impacts
-    \begin{enumerate} % emw-midApril2020: I pulled these points from above as they seemed to specific for how early they were in the intro. I think they could work -- with additional info -- to set up that species are not all the same. From just above the intro could flow: An ideal strategy might thus be to require high chilling, leafout late and avoid frost, but competition between plants puts pressure on individuals to leafout as early as possible and gain priority access to resources ... Thus plants have multiple strategies -- some are late (avoidance), some avoid by speeding through the risky bit (add your info on freezing tolerance), some may try to tolerate .... Then perhaps another paragraph on differences across functional groups and species.
-      \item Freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded, with leafout being the most susceptible to false spring damage \citep {Lenz2016}.
-  \item Thus, temperate plants are at risk of false springs and have evolved to minimize risk through myriad strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize spring freeze damage by timing budburst effectively.
-  \item Seedlings and saplings generally initiate budburst before the canopy trees in order to benefit from the increased light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts understory species and individuals at greater risk \citep{Vitasse2014}.
+\item Temperate tree and shrub species respond to the three phenological cues in varying ways to reach budburst.
+  \begin{enumerate} % emw-midApril2020: I pulled these points from above as they seemed to specific for how early they were in the intro. I think they could work -- with additional info -- to set up that species are not all the same. From just above the intro could flow: An ideal strategy might thus be to require high chilling, leafout late and avoid frost, but competition between plants puts pressure on individuals to leafout as early as possible and gain priority access to resources ... Thus plants have multiple strategies -- some are late (avoidance), some avoid by speeding through the risky bit (add your info on freezing tolerance), some may try to tolerate .... Then perhaps another paragraph on differences across functional groups and species.
+  \item Ideally, individuals would evolve to require high levels of chilling to delay budburst and ultimately diminish false spring risk but competition for nutrients, water and light resources in the early spring pushes individuals to leafout earlier.
+  \item Thus, plants use myriad strategies to minimize false spring risk but maximize growth.
+  \item As freezing tolerance in a plant steadily decreases after budburst begins until the leaf is fully unfolded \citep{Lenz2016}, some species avoid false spring risk by employing mechanisms to speed through this high risk timeframe.
+  \item Other species use trichomes or high solute concentrations in the leaves to increase freezing tolerance during budburst \citep{Agrawal2004, Sakai1987}, while still other species have high chilling, forcing and/or photoperiod requirements and leafout late in the spring to avoid damage from false springs altogether.
   \end{enumerate}
-
-\item Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across ten temperate tree and shrub species. 
+  
+\item Young trees and understory species generally initiate budburst before the canopy trees to benefit from higher light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts these species and individuals at higher risk of freeze damage \citep{Vitasse2014}.
+  \end{enumerate}
+  \item Species typically leafout in a similar sequence, with understory species leafing out earlier and higher canopy trees leafing out last but many studies are predicting substantial shifts in chronological order and reassembly of species' leafout with climate change \citep{Roberts2015, Laube2014}.
+  \item As warming alters winter temperatures and false spring prevalence, phenological cues and their interactions are anticipated to change, which could greatly alter competition among forest species for early season resources and ultimately impact carbon uptake in temperate forests.
+  \end{enumerate}
+  
+\item Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across eight temperate tree and shrub species. 
   \begin{enumerate}
   \item Individuals were exposed to three levels of over-winter chilling. 
   \item Once budburst was initiated, half of the individuals were exposed to freezing temperatures at -3$^{\circ}$C to mimic a false spring event. 
@@ -307,7 +311,7 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   \end{enumerate}
 \end{enumerate}
   
-  %premature budburst
+
 \section*{Methods}
 \subsection*{Plant Selection and Material}
 \begin{enumerate}
@@ -365,47 +369,6 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
 \item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage and (8) total biomass. % CUT FOR NOW: and (9) belowground to aboveground biomass ratio. 
   \begin{enumerate} %emw-midApril2020: I would move all equations to the supp as your methods are long already and they are fairly standard equations
   \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
-  \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
-
-\begin{align*}
-y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
-&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \tag{1}\\,
-\end{align*}
-\begin{align*}
-\epsilon_i & \sim N(0,\sigma_y) \\
-\end{align*}
-
-\item The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
-
-\begin{align*}
-\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
-\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
-\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
-\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
-\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
-\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
-\end{align*}
-
-\item where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
-\item For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
-
-\begin{align*}
- y_i & \sim Binomial(1,p) \tag{2} \\
-logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
-&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \nonumber\\,
-\end{align*}
-
-\item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
-
-\begin{align*}
-\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
-\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
-\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
-\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
-\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
-\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
-\end{align*}
-
   \item We ran four chains, each with 2 500 warm-up iterations and 4 000 sampling iterations for a total of 6 000 posterior samples for each predictor for each model using weakly informative priors. 
   \item Increasing priors three-fold did not impact our results.
   \item We evaluated our model performance based on $\hat{R}$ values that were close to one and did not include models with divergent transitions in our results. 
@@ -416,12 +379,14 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 
 \section*{Results}
 \begin{enumerate}
-\item False springs and chilling durations impacted phenology. 
+\item False springs and chilling durations impacted idnvidual phenology but not phenological rank within the community. 
   \begin{enumerate}
+  \item Order of leafout timing was consistent across all treatments, with \textit{Salix purpurea} always being first to leafout, followed by \textit{Betula papyrifera}, \textit{B. populifolia} and \textit{Cornus racemosa} and finally by \textit{Alnus rugosa}, \textit{Sorbus americana}, \textit{Viburnum dentatum} and \textit{Acer saccharinum} (Figure \ref{fig:rank}).
+  \item \textit{Viburnum dentatum} was the only species to change rank across treatments, though it consistently was grouped with the later-leafout group of species.
   \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for both the four weeks and six weeks of chilling cohorts (\Sexpr{dvrtx} $\pm$ \Sexpr{dvrtxsd} and \Sexpr{dvrtxchill1} $\pm$ \Sexpr{dvrtxchill1sd}, respectively; Figure \ref{fig:intrxns}a) Figure \ref{fig:mupheno}a) and Table \ref{tab:suppmoddvr}).
   \item Longer chilling treatments reduced the duration of vegetative risk, especially in the 8 weeks of chilling cohort (\Sexpr{dvrchill2} $\pm$ \Sexpr{dvrchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
   \item Additionally, individuals that received eight weeks of chilling did not experience major changes in their durations of vegetative risk (\Sexpr{dvrtxchill2} $\pm$ \Sexpr{dvrtxchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a and Table \ref{tab:suppmoddvr}). 
-  \item With increases in chilling duration, the growing season length increased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks; Figure \ref{fig:intrxns}b), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
+  \item With increases in chilling duration, the growing season length decreased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks; Figure \ref{fig:intrxns}b), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
   \end{enumerate}
   
 \item False springs affected physical leaf traits.
@@ -434,7 +399,7 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \item False springs impacted growth.
   \begin{enumerate}
   \item Across all chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (\Sexpr{meritx} $\pm$ \Sexpr{meritxsd} for four weeks, \Sexpr{meritxchill1} $\pm$ \Sexpr{meritxchill1sd} for six weeks and \Sexpr{meritxchill2} $\pm$ \Sexpr{meritxchill2sd} for eight weeks; Figure \ref{fig:intrxns}f), Figure \ref{fig:mugrowth}a) and Table \ref{tab:suppmodmeri}) 
-  \item Shoot growth for the first 60 days of the growing season increased with increased chilling durations (\Sexpr{htchill1} $\pm$ \Sexpr{htchill1sd} for six weeks of chilling and \Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd} for eight weeks of chilling} except growing did not increase under false spring conditions (\Sexpr{httxchill1} $\pm$ \Sexpr{httxchill1sd} for six weeks and \Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd} for eight weeks; Figure \ref{fig:intrxns}g), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
+  \item Shoot growth over the growing season increased with increased chilling durations (\Sexpr{htchill1} $\pm$ \Sexpr{htchill1sd} for six weeks of chilling and \Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd} for eight weeks of chilling} except growth was not affected under false spring conditions (\Sexpr{httxchill1} $\pm$ \Sexpr{httxchill1sd} for six weeks and \Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd} for eight weeks; Figure \ref{fig:intrxns}g), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
   \item Individuals exposed to false spring conditions had lower total biomasses when they were exposed to only four weeks of chilling (\Sexpr{totbiomasstx} $\pm$ \Sexpr{totbiomasstxsd}) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (\Sexpr{totbiomasstxchill1} $\pm$ \Sexpr{totbiomasstxchill1sd}) and the eight weeks of chilling cohort (\Sexpr{totbiomasstxchill2} $\pm$ \Sexpr{totbiomasschill2sd}; Figure \ref{fig:intrxns}g), Figure \ref{fig:mugrowth}b) and Table \ref{tab:suppmodtotbio})).
   \end{enumerate}
   
@@ -442,11 +407,17 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 
 \section*{Discussion}
 \begin{enumerate}
-\item The effects of chilling and false spring events on phenology: chilling is so important for phenology and can compensate for the detrimental effects of false springs.
+\item Growth chamber studies and climate model projections predict substantial shifts in species leafout order under climate change conditions \citep{Roberts2015, Laube2014}, other studies using long-term phenology observations suggest leafout phenology order is consistent across years \citep{Wesolowski2006}.
+  \begin{enumerate}{
+  \item We are not seeing major shifts in species leafout order except for in \textit{Viburnum dentatum}, which still leafs out within the later cohort of species across all treatments.
+  \item Therefore, we do not predict major reassembly of forest communities due to winter warming or false spring incidence. %% Can I be this strong?
+  \end{enumerate}
+
+\item Chilling length is greatly influences spring phenology and can compensate for the detrimental effects of false springs.
   \begin{enumerate}
   \item False springs increase the duration of vegetive risk, leading to an increased risk in multiple false spring risks in one season.
   \item But chilling can compensate for this increase in duration of vegetative risk: if the chilling requirement is met, the rate of budburst does not increase with a false spring event.
-  \item This suggests chilling is more important for seedlings in terms of exposure to multiple false springs as well as increased growing season lengths.
+  \item This suggests chilling is more important for seedlings in terms of exposure to multiple false springs.
   \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions.
   \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
   \end{enumerate}
@@ -455,7 +426,7 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
   \begin{enumerate}
   \item With chlorophyll content, leaf toughness and leaf thickness decreasing, the quality of the leaf dwindles.
   \item This reduction in quality could subsequently lead to an increase in herbivory risk (CITE).
-  \item Further studies that assess the secondary compounds and total phenolic content (CITE) of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
+  \item Further studies that assess the secondary compounds and total phenolic content \citep{Ayers1993, Webber2016} of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
   \end{enumerate}
   
 \item With sufficient chilling, false springs are less damaging to seedling growth.
@@ -481,8 +452,8 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \section*{Tables and Figures}
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/allmsmts.png} 
-  -\caption{Interaction plots for all phenology, leaf and growth measurements. }\label{fig:intrxns}
+  -\includegraphics[width=18cm]{..//analyses/figures/leafout_orderandraw.png} 
+  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:rank}
   -\end{center}
   -\end{figure}}
   

@@ -74,7 +74,51 @@ library(broom)
 
 
 @
+\section*{Methods}
 
+Discuss here how the experiment was designed and how we needed three greenhouses to perfectly test our question about growing season length and end of season growth.
+
+\subsection*{Data analysis and model equations}
+\item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
+
+\begin{align*}
+y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \tag{1}\\,
+\end{align*}
+\begin{align*}
+\epsilon_i & \sim N(0,\sigma_y) \\
+\end{align*}
+
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
+
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
+
+\item where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
+\item For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
+
+\begin{align*}
+ y_i & \sim Binomial(1,p) \tag{2} \\
+logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \nonumber\\,
+\end{align*}
+
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
+
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
 
 {\begin{figure} [H]
   -\begin{center}
