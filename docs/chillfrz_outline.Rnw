@@ -298,7 +298,7 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   \end{enumerate}
   
 \item Young trees and understory species generally initiate budburst before the canopy trees to benefit from higher light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts these species and individuals at higher risk of freeze damage \citep{Vitasse2014}.
-  \end{enumerate}
+  \begin{enumerate}
   \item Species typically leafout in a similar sequence, with understory species leafing out earlier and higher canopy trees leafing out last but many studies are predicting substantial shifts in chronological order and reassembly of species' leafout with climate change \citep{Roberts2015, Laube2014}.
   \item As warming alters winter temperatures and false spring prevalence, phenological cues and their interactions are anticipated to change, which could greatly alter competition among forest species for early season resources and ultimately impact carbon uptake in temperate forests.
   \end{enumerate}
@@ -358,7 +358,7 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   \item Height was measured three times throughout the growing season: the day an individual reached full leaf expansion, 60 days after full leaf out and when an individual reached complete budset. 
   \item We measured the chlorophyll content of four leaves on each individual 60 days after full leaf out using an atLEAF CHL PLUS Chlorophyll meter (\url{https://www.atleaf.com/atLEAF\_CHL\_PLUS}).
   \item The average chlorophyll content was calculated and then converted to mg/cm\textsuperscript{2} using the atLEAF CHL PLUS conversion tool (\url{https://www.atleaf.com/SPAD}).
-  \item We measured leaf thickness using a Shars Digital Micrometer (\url{https://www.shars.com/products\linebreak/measuring/micrometers/0-1-solid-metal-frame-electronic-outside-micrometer}) and leaf toughness in Newtons using a Shimpo Digital Force Gauge (\url{http://shimpoinstruments.com/force\_gauges/fg\-3000}) on two leaves for each individual.
+  \item We measured leaf thickness using a Shars Digital Micrometer (\url{https://www.shars.com/products\linebreak/measuring/micrometers/0-1-solid-metal-frame-electronic-outside-micrometer}) and leaf toughness in Newtons using a Shimpo Digital Force Gauge (\url{http://shimpoinstruments.com/force\_gauges/fg-3000}) on two leaves for each individual.
   \item Additionally, we monitored damage to the shoot apical meristem, which consisted of complete damage or disruption of growth in the main stem and resulted in early dormancy induction or reliance on lateral shoot growth.
   \item Finally, belowground and aboveground biomass were harvested after an individual reached complete budset to include leaves in our biomass calculations. 
   \item Belowground and aboveground plant material were separated and then put in a Shel Lab Forced Air Oven (\url{https://www.sheldonmanufacturing.com/shel\-lab\-products/productid/SMO28HP\-2}) at 60$^{\circ}$C for at least 4 days. 
@@ -383,26 +383,25 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   \begin{enumerate}
   \item Order of leafout timing was consistent across all treatments, with \textit{Salix purpurea} always being first to leafout, followed by \textit{Betula papyrifera}, \textit{B. populifolia} and \textit{Cornus racemosa} and finally by \textit{Alnus rugosa}, \textit{Sorbus americana}, \textit{Viburnum dentatum} and \textit{Acer saccharinum} (Figure \ref{fig:rank}).
   \item \textit{Viburnum dentatum} was the only species to change rank across treatments, though it consistently was grouped with the later-leafout group of species.
-  \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for both the four weeks and six weeks of chilling cohorts (\Sexpr{dvrtx} $\pm$ \Sexpr{dvrtxsd} and \Sexpr{dvrtxchill1} $\pm$ \Sexpr{dvrtxchill1sd}, respectively; Figure \ref{fig:intrxns}a) Figure \ref{fig:mupheno}a) and Table \ref{tab:suppmoddvr}).
-  \item Longer chilling treatments reduced the duration of vegetative risk, especially in the 8 weeks of chilling cohort (\Sexpr{dvrchill2} $\pm$ \Sexpr{dvrchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
-  \item Additionally, individuals that received eight weeks of chilling did not experience major changes in their durations of vegetative risk (\Sexpr{dvrtxchill2} $\pm$ \Sexpr{dvrtxchill2sd}; Figure \ref{fig:intrxns}a), Figure \ref{fig:muphen}a and Table \ref{tab:suppmoddvr}). 
-  \item With increases in chilling duration, the growing season length decreased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks; Figure \ref{fig:intrxns}b), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
+  \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for both the four weeks and six weeks of chilling cohorts (\Sexpr{dvrtx} $\pm$ \Sexpr{dvrtxsd} and \Sexpr{dvrtxchill1} $\pm$ \Sexpr{dvrtxchill1sd}, respectively) Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
+  \item Longer chilling treatments reduced the duration of vegetative risk, especially in the 8 weeks of chilling cohort (\Sexpr{dvrchill2} $\pm$ \Sexpr{dvrchill2sd}), Figure \ref{fig:muphen}a) and Table \ref{tab:suppmoddvr}).
+  \item Additionally, individuals that received eight weeks of chilling did not experience major changes in their durations of vegetative risk (\Sexpr{dvrtxchill2} $\pm$ \Sexpr{dvrtxchill2sd}), Figure \ref{fig:muphen}a and Table \ref{tab:suppmoddvr}). 
+  \item With increases in chilling duration, the growing season length decreased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks), Figure \ref{fig:muphen}b) and Table \ref{tab:suppmodgs}).
   \end{enumerate}
   
 \item False springs affected physical leaf traits.
   \begin{enumerate}
-  \item Leaf chlorophyll content decreased under false spring conditions, especially in the six weeks (\Sexpr{chltxchill1} $\pm$ \Sexpr{chltxchill1sd}) and eight weeks (\Sexpr{chltxchill2} $\pm$ \Sexpr{chltxchill2sd}; Figure \ref{fig:intrxns}c) Figure \ref{fig:muchl}) and Table \ref{tab:suppmodchl}) of chilling cohorts.
-  \item Leaf toughness decreased across all chilling treatments under false spring conditions (\Sexpr{toughtx} $\pm$ \Sexpr{toughtxsd} for four weeks of chilling, \Sexpr{toughtxchill1} $\pm$ \Sexpr{toughtxchill1sd} for six weeks of chilling and \Sexpr{toughtxchill2} $\pm$ \Sexpr{toughtxchill2sd} for eight weeks of chilling; Figure \ref{fig:intrxns}d), Figure \ref{fig:muleaf}a) and Table \ref{tab:suppmodtough}).
-  \item Additionally, leaf thickness decreased across all chilling treatments under false spring conditions (\Sexpr{thicktx} $\pm$ \Sexpr{thicktxsd} for four weeks of chilling, \Sexpr{thicktxchill1} $\pm$ \Sexpr{thicktxchill1sd} for six weeks of chilling and \Sexpr{thicktxchill2} $\pm$ \Sexpr{thicktxchill2sd} for eight weeks of chilling; Figure \ref{fig:intrxns}e), Figure \ref{fig:muleaf}b) and Table \ref{tab:suppmodthick}).
+  \item Leaf chlorophyll content decreased under false spring conditions, especially in the six weeks (\Sexpr{chltxchill1} $\pm$ \Sexpr{chltxchill1sd}) and eight weeks (\Sexpr{chltxchill2} $\pm$ \Sexpr{chltxchill2sd}) Figure \ref{fig:muchl}) and Table \ref{tab:suppmodchl}) of chilling cohorts.
+  \item Leaf toughness decreased across all chilling treatments under false spring conditions (\Sexpr{toughtx} $\pm$ \Sexpr{toughtxsd} for four weeks of chilling, \Sexpr{toughtxchill1} $\pm$ \Sexpr{toughtxchill1sd} for six weeks of chilling and \Sexpr{toughtxchill2} $\pm$ \Sexpr{toughtxchill2sd} for eight weeks of chilling), Figure \ref{fig:muleaf}a) and Table \ref{tab:suppmodtough}).
+  \item Additionally, leaf thickness decreased across all chilling treatments under false spring conditions (\Sexpr{thicktx} $\pm$ \Sexpr{thicktxsd} for four weeks of chilling, \Sexpr{thicktxchill1} $\pm$ \Sexpr{thicktxchill1sd} for six weeks of chilling and \Sexpr{thicktxchill2} $\pm$ \Sexpr{thicktxchill2sd} for eight weeks of chilling), Figure \ref{fig:muleaf}b) and Table \ref{tab:suppmodthick}).
   \end{enumerate}
   
 \item False springs impacted growth.
   \begin{enumerate}
-  \item Across all chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (\Sexpr{meritx} $\pm$ \Sexpr{meritxsd} for four weeks, \Sexpr{meritxchill1} $\pm$ \Sexpr{meritxchill1sd} for six weeks and \Sexpr{meritxchill2} $\pm$ \Sexpr{meritxchill2sd} for eight weeks; Figure \ref{fig:intrxns}f), Figure \ref{fig:mugrowth}a) and Table \ref{tab:suppmodmeri}) 
-  \item Shoot growth over the growing season increased with increased chilling durations (\Sexpr{htchill1} $\pm$ \Sexpr{htchill1sd} for six weeks of chilling and \Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd} for eight weeks of chilling} except growth was not affected under false spring conditions (\Sexpr{httxchill1} $\pm$ \Sexpr{httxchill1sd} for six weeks and \Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd} for eight weeks; Figure \ref{fig:intrxns}g), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
-  \item Individuals exposed to false spring conditions had lower total biomasses when they were exposed to only four weeks of chilling (\Sexpr{totbiomasstx} $\pm$ \Sexpr{totbiomasstxsd}) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (\Sexpr{totbiomasstxchill1} $\pm$ \Sexpr{totbiomasstxchill1sd}) and the eight weeks of chilling cohort (\Sexpr{totbiomasstxchill2} $\pm$ \Sexpr{totbiomasschill2sd}; Figure \ref{fig:intrxns}g), Figure \ref{fig:mugrowth}b) and Table \ref{tab:suppmodtotbio})).
+  \item Across all chilling treatments, individuals exposed to false springs experienced more damage to the shoot apical meristem (\Sexpr{meritx} $\pm$ \Sexpr{meritxsd} for four weeks, \Sexpr{meritxchill1} $\pm$ \Sexpr{meritxchill1sd} for six weeks and \Sexpr{meritxchill2} $\pm$ \Sexpr{meritxchill2sd} for eight weeks), Figure \ref{fig:mugrowth}a) and Table \ref{tab:suppmodmeri}) 
+  \item Shoot growth over the growing season increased with increased chilling durations (\Sexpr{htchill1} $\pm$ \Sexpr{htchill1sd} for six weeks of chilling and \Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd} for eight weeks of chilling) except growth was not affected under false spring conditions (\Sexpr{httxchill1} $\pm$ \Sexpr{httxchill1sd} for six weeks and \Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd} for eight weeks), Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
+  \item Individuals exposed to false spring conditions had lower total biomasses when they were exposed to only four weeks of chilling (\Sexpr{totbiomasstx} $\pm$ \Sexpr{totbiomasstxsd}) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (\Sexpr{totbiomasstxchill1} $\pm$ \Sexpr{totbiomasstxchill1sd}) and the eight weeks of chilling cohort (\Sexpr{totbiomasstxchill2} $\pm$ \Sexpr{totbiomasschill2sd}), Figure \ref{fig:mugrowth}b) and Table \ref{tab:suppmodtotbio})).
   \end{enumerate}
-  
 \end{enumerate}
 
 \section*{Discussion}
@@ -426,7 +425,7 @@ roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 #
   \begin{enumerate}
   \item With chlorophyll content, leaf toughness and leaf thickness decreasing, the quality of the leaf dwindles.
   \item This reduction in quality could subsequently lead to an increase in herbivory risk (CITE).
-  \item Further studies that assess the secondary compounds and total phenolic content \citep{Ayers1993, Webber2016} of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
+  \item Further studies that assess the secondary compounds and total phenolic content \citep{Ayres1993, Webber2016} of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
   \end{enumerate}
   
 \item With sufficient chilling, false springs are less damaging to seedling growth.
