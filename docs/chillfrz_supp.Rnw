@@ -79,6 +79,7 @@ library(broom)
 Discuss here how the experiment was designed and how we needed three greenhouses to perfectly test our question about growing season length and end of season growth.
 
 \subsection*{Data analysis and model equations}
+\begin{enumerate}
 \item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
 \begin{align*}
@@ -120,10 +121,21 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
 \end{align*}
 
+\end{enumerate}
+
+\section*{Supplemental tables and figures}
+
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/growthchamber.pdf}
   -\caption{False spring treament temperature regime in the growth chamber}\label{fig:gccond}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/budset_orderandraw.png} 
+  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
   -\end{center}
   -\end{figure}}
 

@@ -114,7 +114,56 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \section*{Supplemental Tables and Figures}
 
 
+\section*{Methods}
 
+Discuss here how the experiment was designed and how we needed three greenhouses to perfectly test our question about growing season length and end of season growth.
+
+\subsection*{Data analysis and model equations}
+\begin{enumerate}
+\item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
+
+\begin{align*}
+y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \tag{1}\\,
+\end{align*}
+\begin{align*}
+\epsilon_i & \sim N(0,\sigma_y) \\
+\end{align*}
+
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
+
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
+
+\item where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
+\item For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
+
+\begin{align*}
+ y_i & \sim Binomial(1,p) \tag{2} \\
+logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
+&+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \nonumber\\,
+\end{align*}
+
+\item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
+
+\begin{align*}
+\alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
+\beta_{tx_{species}} & \sim N(\mu_{tx}, \sigma_{tx}) \\
+\beta_{chill1_{species}} & \sim N(\mu_{chill1}, \sigma_{chill1}) \\
+\beta_{chill2_{species}} & \sim N(\mu_{chill2}, \sigma_{chill2}) \\
+\beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
+\beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
+\end{align*}
+
+\end{enumerate}
+
+\section*{Supplemental tables and figures}
 
 {\begin{figure} [H]
   -\begin{center}
@@ -122,10 +171,17 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   -\caption{False spring treament temperature regime in the growth chamber}\label{fig:gccond}
   -\end{center}
   -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/budset_orderandraw.png} 
+  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
+  -\end{center}
+  -\end{figure}}
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:37 2020
+% Wed May  6 10:58:35 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on duration of vegetative risk.} \\ 
   \hline
@@ -193,7 +249,7 @@ Intercept & 16.02 & 12.46 & 13.60 & 15.08 & 16.90 & 18.52 & 20.23 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:37 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on growing season length.} \\ 
   \hline
@@ -262,7 +318,7 @@ Intercept & 283.95 & 249.62 & 263.13 & 276.95 & 291.73 & 302.64 & 310.98 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:37 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf chlorophyll content.} \\ 
   \hline
@@ -337,7 +393,7 @@ Intercept & 30.96 & 24.38 & 26.36 & 29.21 & 32.74 & 35.50 & 37.89 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:37 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf toughness.} \\ 
   \hline
@@ -406,7 +462,7 @@ Intercept & 0.43 & 0.27 & 0.33 & 0.39 & 0.47 & 0.53 & 0.59 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:38 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf thickness.} \\ 
   \hline
@@ -475,7 +531,7 @@ Intercept & 141.76 & 119.08 & 125.87 & 135.57 & 147.79 & 158.06 & 166.29 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:38 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.} \\ 
   \hline
@@ -550,7 +606,7 @@ Intercept & 54.03 & 19.77 & 30.82 & 44.95 & 63.22 & 77.68 & 88.97 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:38 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.} \\ 
   \hline
@@ -619,7 +675,7 @@ Intercept & -1.68 & -4.65 & -3.49 & -2.25 & -1.03 & -0.13 & 0.68 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed Apr 22 11:35:38 2020
+% Wed May  6 10:58:36 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.} \\ 
   \hline

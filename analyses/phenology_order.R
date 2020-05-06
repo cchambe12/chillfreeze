@@ -217,7 +217,7 @@ rankadj_bytx
 bbandgs$bsetbytxchill <- ave(bbandgs$budsetdoy, bbandgs$species, bbandgs$txchill)
 
 bbandgs$species_tx <- paste(bbandgs$species, bbandgs$txchill, sep="_")
-bbandgs$codebset <- reorder(bbandgs$species_tx, bbandgs$lobytxchill)
+bbandgs$codebset <- reorder(bbandgs$species_tx, bbandgs$bsetbytxchill)
 
 
 bbandgs$rankbset <- rank(bbandgs$bsetbytxchill, bbandgs$species_tx)
@@ -228,10 +228,11 @@ bsetrankbytx <- ggplot(bbandgs, aes(y=rankbset, x=txchill, col=species)) +
   geom_line(aes(group=species)) + 
   theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.text.align = 0,
+        legend.position = "none",
         legend.key = element_rect(colour = "transparent", fill = "white"),
         legend.text = element_text(face="italic")) +
   xlab("") + 
-  ylab("Order/Rank of leafout") +  
+  ylab("Order of budset") +  
   scale_color_manual(name="Species", values=cols,
                      labels=c("ACESAC"="Acer saccharinum",
                               "ALNRUG"="Alnus rugosa",
@@ -246,11 +247,51 @@ bsetrankbytx <- ggplot(bbandgs, aes(y=rankbset, x=txchill, col=species)) +
                             "20"="Control x \n6wks Chill",
                             "21"="False Spring x \n6wks Chill",
                             "30"="Control x \n8wks Chill",
-                            "31"="False Spring x \n8wks Chill")) + coord_cartesian(expand = c(0,0))
+                            "31"="False Spring x \n8wks Chill")) + scale_y_continuous(expand=c(0,0))
 
 
-quartz()
-bsetrankbytx
+#quartz()
+#bsetrankbytx
+
+#### Now let's look at raw budset data by treatments
+bsetbytx <- ggplot(bbandgs, aes(y=budsetdoy, x=txchill, col=species)) +  geom_jitter(width=0.2) +
+  theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.text.align = 0,
+        legend.position="none",
+        legend.key = element_rect(colour = "transparent", fill = "white"),
+        legend.text = element_text(face="italic")) +
+  xlab("") + 
+  ylab("Day of budset") +  
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("ACESAC"="Acer saccharinum",
+                              "ALNRUG"="Alnus rugosa",
+                              "BETPAP"="Betula papyrifera",
+                              "BETPOP"="Betula populifolia",
+                              "CORRAC"="Cornus racemosa", 
+                              "SALPUR"="Salix purpurea",
+                              "SORAME"="Sorbus americana",
+                              "VIBDEN"="Viburnum dentatum")) +
+  scale_x_discrete(labels=c("10"="Control x \n4wks Chill",
+                            "11"="False Spring x \n4wks Chill",
+                            "20"="Control x \n6wks Chill",
+                            "21"="False Spring x \n6wks Chill",
+                            "30"="Control x \n8wks Chill",
+                            "31"="False Spring x \n8wks Chill")) 
+
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(bsetbytx)
+
+png("figures/budset_orderandraw.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=12,
+    height=4.5, units="in", res = 350 )
+
+grid.arrange(bsetrankbytx, bsetbytx, mylegend, ncol=3, widths=c(1.2,1.2,0.42))
+dev.off()
 
 ##################################################################################
 speciestxrank_bset <- subset(bbandgs, select=c(species_tx, bsetbytxchill, txchill, rankbset))
