@@ -4,45 +4,45 @@ The top-level auxiliary file: chillfrz_outline.aux
 The style file: ..//references/styles/besjournals.bst.bst
 Database file #1: ..//references/chillfreeze.bib.bib
 Warning--I didn't find a database entry for "Onda2011"
-You've used 37 entries,
+You've used 34 entries,
             2805 wiz_defined-function locations,
-            1320 strings with 19739 characters,
-and the built_in function-call counts, 23442 in all, are:
-= -- 1967
-> -- 1114
-< -- 16
-+ -- 431
-- -- 391
-* -- 1959
-:= -- 3754
-add.period$ -- 74
-call.type$ -- 37
-change.case$ -- 314
-chr.to.int$ -- 38
-cite$ -- 37
-duplicate$ -- 1583
-empty$ -- 1637
-format.name$ -- 495
-if$ -- 4539
+            1301 strings with 19327 characters,
+and the built_in function-call counts, 21912 in all, are:
+= -- 1847
+> -- 1044
+< -- 14
++ -- 404
+- -- 367
+* -- 1844
+:= -- 3496
+add.period$ -- 68
+call.type$ -- 34
+change.case$ -- 291
+chr.to.int$ -- 35
+cite$ -- 34
+duplicate$ -- 1470
+empty$ -- 1523
+format.name$ -- 466
+if$ -- 4240
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 347
-newline$ -- 115
-num.names$ -- 148
-pop$ -- 626
+missing$ -- 322
+newline$ -- 106
+num.names$ -- 136
+pop$ -- 578
 preamble$ -- 1
-purify$ -- 278
+purify$ -- 258
 quote$ -- 0
-skip$ -- 557
+skip$ -- 515
 stack$ -- 0
-substring$ -- 1202
-swap$ -- 873
+substring$ -- 1157
+swap$ -- 819
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 327
+type$ -- 303
 warning$ -- 0
-while$ -- 172
+while$ -- 162
 width$ -- 0
-write$ -- 407
+write$ -- 375
 (There was 1 warning)

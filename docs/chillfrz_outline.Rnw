@@ -3,6 +3,7 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{tabularx}
+\usepackage{hyperref}
 \usepackage{siunitx}
 \usepackage{amssymb} % for math symbols
 \usepackage{amsmath} % for aligning equations
