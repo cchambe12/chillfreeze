@@ -24,12 +24,12 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 #load("stan/chlavg_brms.Rdata")
 #load("stan/toughness_brms.Rdata")
-load("stan/thickness_brms.Rdata")
+#load("stan/thickness_brms.Rdata")
 
 
 #load("stan/htfinal_brms.Rdata")
 #load("stan/htfinalrate_brms.Rdata")
-#load("stan/totbiomass_brms.Rdata")
+load("stan/totbiomass_brms.Rdata")
 #load("stan/biomassrate_brms.Rdata")
 #load("stan/roottoshoot_brms.Rdata")
 
@@ -62,7 +62,7 @@ chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "thickness90_brms" ### change based on model
+figpathmore <- "totbiomass90_brms" ### change based on model
 
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
@@ -74,12 +74,12 @@ alphahere = 0.4
 
 #xlab <- expression(paste("Model estimate of change in chlorophyll content (mg/", cm^2, ")"))
 #xlab <- "Model estimate of change in leaf toughness (N)"
-mu <- expression(mu)
-xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
+#mu <- expression(mu)
+#xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 
 #xlab <- "Model estimate of change in shoot growth (cm)"
 #xlab <- "Model estimate of change in shoot growth per day (mm/day)"
-#xlab <- "Model estimate of change in total biomass (g)"
+xlab <- "Model estimate of change in total biomass (g)"
 #xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
 
 if(FALSE){
@@ -96,7 +96,7 @@ if(FALSE){
 
 spp <- unique(chill.stan$species)
 
-modelhere <- thickness.mod
+modelhere <- totbiomass.mod
 
 tx <- coef(modelhere, prob=c(0.10, 0.90))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
@@ -173,10 +173,10 @@ source("exp_muplot_brms90.R")
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-5, 5) , 5.5, 3.5) ## chloro
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-.15, .15) , .16, 3.5) ##toughness
-muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## thickness
+#muplotfx(modelhere, "", 8, 8, c(0,5), c(-35, 35) , 36.5, 3.5) ## thickness
 
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-22, 22) , 23.5, 3.5) ## ht final
-#muplotfx(modelhere, "", 8, 8, c(0,5), c(-8, 8) , 9, 3.5) ## tot biomass
+muplotfx(modelhere, "", 8, 8, c(0,5), c(-15, 15) , 16, 3.5) ## tot biomass
 #muplotfx(modelhere, "", 8, 8, c(0,5), c(-1, 1) , 1.1, 3.5) ### root to shoot and growth rate
 
 

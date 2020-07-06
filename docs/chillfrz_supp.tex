@@ -81,6 +81,10 @@
 \usepackage{lineno}
 \linenumbers
 
+%cross referencing:
+\usepackage{xr}
+\externaldocument{chillfrz_outline}
+
 \newmdenv[
   topline=true,
   bottomline=true,
@@ -164,24 +168,17 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \end{enumerate}
 
 \section*{Supplemental tables and figures}
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/growthchamber.pdf}
-  -\caption{False spring treament temperature regime in the growth chamber}\label{fig:gccond}
-  -\end{center}
-  -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/budset_orderandraw.png} 
+  -\includegraphics[width=12cm]{..//analyses/figures/budsetorder_byrank.pdf} 
   -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
   -\end{center}
   -\end{figure}}
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:35 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on duration of vegetative risk.} \\ 
   \hline
@@ -249,7 +246,7 @@ Intercept & 16.02 & 12.46 & 13.60 & 15.08 & 16.90 & 18.52 & 20.23 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on growing season length.} \\ 
   \hline
@@ -318,7 +315,7 @@ Intercept & 283.95 & 249.62 & 263.13 & 276.95 & 291.73 & 302.64 & 310.98 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf chlorophyll content.} \\ 
   \hline
@@ -386,14 +383,14 @@ Intercept & 30.96 & 24.38 & 26.36 & 29.21 & 32.74 & 35.50 & 37.89 \\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/chlavg.pdf} 
+  -\includegraphics[width=18cm]{..//analyses/figures/chlavg90_brms.pdf} 
   -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on chlorophyll content. }\label{fig:muchl}
   -\end{center}
   -\end{figure}}
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf toughness.} \\ 
   \hline
@@ -462,7 +459,7 @@ Intercept & 0.43 & 0.27 & 0.33 & 0.39 & 0.47 & 0.53 & 0.59 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf thickness.} \\ 
   \hline
@@ -531,7 +528,7 @@ Intercept & 141.76 & 119.08 & 125.87 & 135.57 & 147.79 & 158.06 & 166.29 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:41 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.} \\ 
   \hline
@@ -606,7 +603,7 @@ Intercept & 54.03 & 19.77 & 30.82 & 44.95 & 63.22 & 77.68 & 88.97 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.} \\ 
   \hline
@@ -675,7 +672,7 @@ Intercept & -1.68 & -4.65 & -3.49 & -2.25 & -1.03 & -0.13 & 0.68 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Wed May  6 10:58:36 2020
+% Wed Jun 17 16:14:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.} \\ 
   \hline
