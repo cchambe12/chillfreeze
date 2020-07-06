@@ -1,5 +1,62 @@
 Started 12 May 2020
 
+
+<><><><><><><><><><>
+17 June 2020 draft (comments on 6 July 2020)
+
+My git shows different files than what you sent ... so I used the email files, let me know if something might be wrong with my git (or if you just have not pushed in a while).
+
+I suggest next steps are to either (a) send me an updated outline so I can review the discussion (and maybe results? Let me know), or (b) send the written methods. Both need to be done, which you want to tackle first is up to you!
+
+A few %EMW6Jul throughout the .rnw, please check them out. I didn't re-read all my comments to make sure they make sense, so let me know if you have any questions! More comments below.
+
+
+INTRO 
+- I made some changes to:
+(I.1) Set up DVR which I don't think we did yet.
+(I.2) Broke down the community paragraph which seemed to have two separate points (see %EMW6Jul for one more place you might consider breaking down the paragraph)
+
+METHODS
+- Methods and results should be past tense. 
+- Also be sure to keep your methods compact when you do write them up. I can help with this (it might be easiest if you draft them first then ask me to edit JUST the methods while you work on other text). 
+- Do we clearly state how we calculated growing season length? We should, we need to define that we are making our calculations relative to each individual plant's phenology and maybe give an example (non-phenology people get confused here).  
+
+RESULTS
+- I think we should consider opening the discussion with two basics: false springs caused damage and chilling speeded days to budburst -- *So we could add a model using all the NON-false spring individuals to the supp and mention it in the results early on (see comment %EMW6Jul)* 
+- Desperate need of units *throughout* ... for example " With increases in chilling duration, the growing season length decreased for individuals exposed to six and eight weeks of chilling (2.48 ± 4.87 for six weeks and -9.66 ± 5 for eight weeks; Figure 3b) and Table S2)." Do we mean days? Also, why is it +2.48 and -9.66 when the text suggests they should be in the same direction?
+- Biomass is both singular and plural I believe.
+- I again broke up the paragraph at the end on species/community effects.
+
+RESULTS special topic: Review ALL results closely:
+- My biggest request is that you review all your results as written to make sure they're accurate. Remember that 'treatment' means the full treatment, not just the main effects and remember that we're NOT using null hypothesis testing so when you say something didn't happen I expect to see a value around zero, which was sometimes not the case. Here's one example:
+
+"All species experience meristem damage under false spring conditions except for Betula populifolia and Sorbus americana and Viburnum dentatum generally experienced meristem 
+damage under all treatments (Figure 5a)." 
+
+I would re-write the first clause as "All species experienced meristem damage under false spring conditions, though the effect was variable by species with Betula populifolia and Sorbus americana experiencing less damage (Fig. 5a).
+
+This latter clause is *not* correct -- according to the figure Viburnum dentatum experienced damage in the two chill treatments WITHOUT a false spring, but in the false spring x chill treatments they did not experience damage. I would write a new sentence, "Additionally, Viburnum dentatum experienced meristem  damage under 6 and 8 week chill treatments without a false spring, but showed no damage under either chill treatment with a false spring." 
+
+I'd recommend printing the text of the results (or the figures) and go through each to make sure what we say lines up exactly with what we show. I can help with any questions as it is not easy (part of the joy of null hypothesis testing is the black/white nature. but it's a false binary, so worth the effort to do it right and not fall back on null hypothesis testing).
+
+Depending on how much you change, I'd be happy to look at this section again!
+
+
+DISCUSSION
+- I think this needs the most work, please check out my comments in the Rnw. I'd like to see another version of this before we start writing (beyond the methods).
+
+
+FIGURES:
+- Work on order so it matches results I think. 
+- Could one figure be: apical damage (a), total biomass (b), leaf toughness (c) and leaf thickness (d)? That would mean we have a set of figures for phenology and one for other plant attributes (all sort of related to growth/tissue quality).
+
+
+SUPP
+- Fig S1 references (a) and (b) but only shows one panel.
+
+
+
+
 <><><><><><><><><><>
 12 May 2020 comments
 

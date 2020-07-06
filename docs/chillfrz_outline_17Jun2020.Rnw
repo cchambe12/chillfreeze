@@ -1,0 +1,531 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{textcomp}
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//references/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+%\usepackage{lineno}
+%\linenumbers
+
+%cross referencing:
+\usepackage{xr}
+\usepackage{xr-hyper}
+\externaldocument{/Users/CatherineChamberlain/Documents/git/chillfreeze/docs/chillfrz_supp}
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+\begin{document}
+
+\noindent \textbf{\Large{False spring damage on temperate tree seedlings is amplified with winter warming}}
+
+\noindent Authors:\\
+C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
+\vspace{2ex}\\
+\emph{Author affiliations:}\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{3}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+\vspace{2ex}
+$^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+\setkeys{Gin}{width=0.8\textwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<label=numbers, echo=FALSE, results="asis", warning=FALSE, message=FALSE,>>=
+#load models and data to report numbers of things
+options(stringsAsFactors = FALSE)
+library(brms)
+
+## Set Working Directory
+setwd("/Users/CatherineChamberlain/Documents/git/chillfreeze/analyses/")
+
+## load the model
+load("stan/dvr_brms.Rdata")
+load("stan/gslengthlo_brms_adjusted.Rdata") 
+load("stan/meristem_brms.Rdata")
+
+load("stan/chlavg_brms.Rdata")
+load("stan/toughness_brms.Rdata")
+load("stan/thickness_brms.Rdata")
+
+load("stan/htfinal_brms.Rdata") ## need to download to compile
+load("stan/totbiomass_brms.Rdata")
+load("stan/roottoshoot_brms.Rdata")
+
+chillfrz <- read.csv("output/clean_dvr_traits.csv", header=TRUE)
+rmspp <- c("NYSSYL", "FAGGRA")
+chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
+
+### DVR Model - WITH ENOUGH CHILLING, CAN COMPENSATE FOR TX!!!
+dvrtx<-round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)), digits=2) ### 2.97
+dvrtxsd<-round(mean(fixef(dvr.mod, pars="tx")[2]), digits=2) 
+dvrchill1<-round(mean(fixef(dvr.mod, pars="chill1", summary=FALSE)), digits=2) # -0.53
+dvrchill1sd<-round(mean(fixef(dvr.mod, pars="chill1")[2]), digits=2)
+dvrchill2<-round(mean(fixef(dvr.mod, pars="chill2", summary=FALSE)), digits=2) ### -2.67
+dvrchill2sd<-round(mean(fixef(dvr.mod, pars="chill2")[2]), digits=2) # 1.14
+
+dvrtxchill1<-round(mean(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+dvrtxchill1sd<-round(mean(fixef(dvr.mod, pars="tx:chill1")[2]), digits=2) # 1.14
+dvrtxchill1 <- dvrtx + dvrchill1 + dvrtxchill1 ### 1.53
+
+dvrtxchill2<-round(mean(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=2) 
+dvrtxchill2sd<-round(mean(fixef(dvr.mod, pars="tx:chill2")[2]), digits=2) # 1.08
+dvrtxchill2 <- dvrtx + dvrchill2 + dvrtxchill2 # 0.92
+
+
+### Gslength Model - CHILLING EXTENDS GS!!!! AND CAN COMPENSATE FOR TX!
+gslengthtx<-round(mean(fixef(gslength.modlo, pars="tx", summary=FALSE)), digits=2) # -2.9
+gslengthtxsd<-round(mean(fixef(gslength.modlo, pars="tx")[2]), digits=2) # 5.52
+gslengthchill1<-round(mean(fixef(gslength.modlo, pars="chill1", summary=FALSE)), digits=2) ### 3.11
+gslengthchill1sd<-round(mean(fixef(gslength.modlo, pars="chill1")[2]), digits=2) # 4.97
+gslengthchill2<-round(mean(fixef(gslength.modlo, pars="chill2", summary=FALSE)), digits=2) ### -6.82
+gslengthchill2sd<-round(mean(fixef(gslength.modlo, pars="chill2")[2]), digits=2) # 5.11
+gslengthtxchill1<-round(mean(fixef(gslength.modlo, pars="tx:chill1", summary=FALSE)), digits=2) 
+gslengthtxchill1sd<-round(mean(fixef(gslength.modlo, pars="tx:chill1")[2]), digits=2) # 6.63
+gslengthtxchill1 <- gslengthtx + gslengthchill1 + gslengthtxchill1 # -13.91
+
+gslengthtxchill2<-round(mean(fixef(gslength.modlo, pars="tx:chill2", summary=FALSE)), digits=2)
+gslengthtxchill2sd<-round(mean(fixef(gslength.modlo, pars="tx:chill2")[2]), digits=2) # 6.97
+gslengthtxchill2 <- gslengthtx + gslengthchill2 + gslengthtxchill2 ### -19.08
+
+### Meristem Model - MERISTEM DAMAGE ACROSS CHILL TXs!!
+meritx<-round(mean(fixef(meri.mod, pars="tx", summary=FALSE)), digits=2) ### 2.07
+meritxsd<-round(mean(fixef(meri.mod, pars="tx")[2]), digits=2) # 0.97
+merichill1<-round(mean(fixef(meri.mod, pars="chill1", summary=FALSE)), digits=2) # -0.53
+merichill1sd<-round(mean(fixef(meri.mod, pars="chill1")[2]), digits=2) # 1.88
+merichill2<-round(mean(fixef(meri.mod, pars="chill2", summary=FALSE)), digits=2) # -0.18
+merichill2sd<-round(mean(fixef(meri.mod, pars="chill2")[2]), digits=2) # 1.17
+#merichill2sd <- merichill2sd[2] - merichill2sd[1]
+meritxchill1<-round(mean(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+meritxchill1sd<-round(mean(fixef(meri.mod, pars="tx:chill1")[2]), digits=2) # 1.42
+#meritxchill1sd <- meritxchill1sd[2] - meritxchill1sd[1]
+meritxchill1 <- meritx + merichill1 + meritxchill1 # 1.33
+
+meritxchill2<-round(mean(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=2) 
+meritxchill2sd<-round(mean(fixef(meri.mod, pars="tx:chill2")[2]), digits=2) # 1.31
+#meritxchill2sd <- meritxchill2sd[2] - meritxchill2sd[1]
+meritxchill2 <- meritx + merichill2 + meritxchill2 ### 2.17
+
+### Chlo Model ### PROBABLY MOVE TO SUPP!!! TX DECREASES CHLORO ESP WITH MORE CHILLING...
+chltx<-round(mean(fixef(chl.mod, pars="tx", summary=FALSE)), digits=2) # -0.35
+chltxsd<-round(mean(fixef(chl.mod, pars="tx")[2]), digits=2) # 0.77
+#chltxsd <- chltxsd[2] - chltxsd[1]
+chlchill1<-round(mean(fixef(chl.mod, pars="chill1", summary=FALSE)), digits=2) # -0.06
+chlchill1sd<-round(mean(fixef(chl.mod, pars="chill1")[2]), digits=2) # 0.84
+#chlchill1sd <- chlchill1sd[2] - chlchill1sd[1]
+chlchill2<-round(mean(fixef(chl.mod, pars="chill2", summary=FALSE)), digits=2) # 0.43
+chlchill2sd<-round(mean(fixef(chl.mod, pars="chill2")[2]), digits=2) # 0.91
+chltxchill1 <- round(mean(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+chltxchill1sd <-round(mean(fixef(chl.mod, pars="tx:chill1")[2]), digits=2) 
+chltxchill1 <- chltx + chlchill1 + chltxchill1  
+
+chltxchill2<-round(mean(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+chltxchill2sd<-round(mean(fixef(chl.mod, pars="tx:chill2")[2]), digits=2) # 1.07
+#chltxchill2sd <- chltxchill2sd[2] - chltxchill2sd[1]
+chltxchill2 <- chltx + chlchill2 + chltxchill2 ### -2.03
+
+### Tough Model - TOUGHNESS DECREASES ACROSS ALL CHILL TXs!!!!
+toughtx<-round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)), digits=2) ### -0.05
+toughtxsd<-round(mean(fixef(toughness.mod, pars="tx")[2]), digits=2) # 0.02
+#toughtxsd <- toughtxsd[2] - toughtxsd[1]
+toughchill1<-round(mean(fixef(toughness.mod, pars="chill1", summary=FALSE)), digits=2) ### -0.06
+toughchill1sd<-round(mean(fixef(toughness.mod, pars="chill1")[2]), digits=2) # 0.02
+#toughchill1sd <- toughchill1sd[2] - toughchill1sd[1]
+toughchill2<-round(mean(fixef(toughness.mod, pars="chill2", summary=FALSE)), digits=2) ### -0.05
+toughchill2sd<-round(mean(fixef(toughness.mod, pars="chill2")[2]), digits=2) # 0.02
+#toughchill2sd <- toughchill2sd[2] - toughchill2sd[1]
+toughtxchill1<-round(mean(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=2) 
+toughtxchill1sd<-round(mean(fixef(toughness.mod, pars="tx:chill1")[2]), digits=2) # 0.03
+#toughtxchill1sd <- toughtxchill1sd[2] - toughtxchill1sd[1]
+toughtxchill1 <- toughtx + toughchill1 + toughtxchill1 ### -0.09
+
+toughtxchill2<-round(mean(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+toughtxchill2sd<-round(mean(fixef(toughness.mod, pars="tx:chill2")[2]), digits=2) # 0.03
+#toughtxchill2sd <- toughtxchill2sd[2] - toughtxchill2sd[1]
+toughtxchill2 <- toughtx + toughchill2 + toughtxchill2 ### -0.08
+
+### Thick Model - THICKNESS DECREASES ACROSS ALL CHILL TXs, ESP 4 & 8 wks
+thicktx<-round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)), digits=2) ### -8.9
+thicktxsd<-round(mean(fixef(thickness.mod, pars="tx")[2]), digits=2) # 3.74
+#thicktxsd <- thicktxsd[2] - thicktxsd[1]
+thickchill1<-round(mean(fixef(thickness.mod, pars="chill1", summary=FALSE)), digits=2) ### 7.21
+thickchill1sd<-round(mean(fixef(thickness.mod, pars="chill1")[2]), digits=2) # 6.55
+#thickchill1sd <- thickchill1sd[2] - thickchill1sd[1]
+thickchill2<-round(mean(fixef(thickness.mod, pars="chill2", summary=FALSE)), digits=2) ### -8.38
+thickchill2sd<-round(mean(fixef(thickness.mod, pars="chill2")[2]), digits=2) # 7.48
+#thickchill2sd <- thickchill2sd[2] - thickchill2sd[1]
+thicktxchill1<-round(mean(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+thicktxchill1sd<-round(mean(fixef(thickness.mod, pars="tx:chill1")[2]), digits=2) # 5.31
+#thicktxchill1sd <- thicktxchill1sd[2] - thicktxchill1sd[1]
+thicktxchill1 <- thicktx + thickchill1 + thicktxchill1 # -3.5
+
+thicktxchill2<-round(mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+thicktxchill2sd<-round(mean(fixef(thickness.mod, pars="tx:chill2")[2]), digits=2) # 5.25
+#thicktxchill2sd <- thicktxchill2sd[2] - thicktxchill2sd[1]
+thicktxchill2 <- thicktx + thickchill2 + thicktxchill2 ### -15.78
+
+if(FALSE){
+### Ht 60 day Model - Not very intersting, chilling increases growth but nothing with TX
+httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) # -0.44
+httxsd<-round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=2) # 0.98
+#httxsd<- httxsd[2] - httxsd[1]
+htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) ### 2.81
+htchill1sd<-round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=2) # 1.55
+#htchill1sd<- htchill1sd[2] - htchill1sd[1]
+htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) ### 1.32
+htchill2sd<-round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=2) # 1.21
+#htchill2sd<- htchill2sd[2] - htchill2sd[1]
+httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+httxchill1sd<-round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=2) # 1.48
+#httxchill1sd<- httxchill1sd[2] - httxchill1sd[1]
+httxchill1 <- httx + htchill1 + httxchill1 # 0.36
+
+httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+httxchill2sd<-round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=2) # 1.46
+#httxchill2sd<- httxchill2sd[2] - httxchill2sd[1]
+httxchill2 <- httx + htchill2 + httxchill2 # 0.68
+}
+
+### Ht final Model - Not intersting
+load("stan/htfinal_brms.Rdata")
+httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) ### 5.06
+httxsd<-round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=2) # 4.38
+#httxsd <- httxsd[2] - httxsd[1]
+htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=2) ### 2.81
+htchill1sd<-round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=2) # 1.55
+#htchill1sd<- htchill1sd[2] - htchill1sd[1]
+htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=2) ### 1.32
+htchill2sd<-round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=2) # 1.21
+#htchill2sd<- htchill2sd[2] - htchill2sd[1]
+httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+httxchill1sd<-round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=2) # 1.48
+#httxchill1sd<- httxchill1sd[2] - httxchill1sd[1]
+httxchill1 <- round(httx + htchill1 + httxchill1, digits=2) # 0.36
+
+httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+httxchill2sd<-round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=2) # 1.46
+#httxchill2sd<- httxchill2sd[2] - httxchill2sd[1]
+httxchill2 <- httx + htchill2 + httxchill2 # 0.68
+
+
+### Total biomass Model - TX DECREASES BIOMASS BUT CHILLING CAN COMPENSATE!!!
+totbiomasstx<-round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)), digits=2) ### -3.45
+totbiomasstxsd<-round(mean(fixef(totbiomass.mod, pars="tx")[2]), digits=2)  # 2.78
+#totbiomasstxsd <- totbiomasstxsd[2] - totbiomasstxsd[1]
+totbiomasschill1<-round(mean(fixef(totbiomass.mod, pars="chill1", summary=FALSE)), digits=2) # 0.38
+totbiomasschill1sd<-round(mean(fixef(totbiomass.mod, pars="chill1")[2]), digits=2) # 2.91
+#totbiomasschill1sd <- totbiomasschill1sd[2] - totbiomasschill1sd[1]
+totbiomasschill2<-round(mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)), digits=2) # 2.59
+totbiomasschill2sd<-round(mean(fixef(totbiomass.mod, pars="chill2")[2]), digits=2) # 3.04
+#totbiomasschill2sd <- totbiomasschill2sd[2] - totbiomasschill2sd[1]
+totbiomasstxchill1<-round(mean(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+totbiomasstxchill1sd<-round(mean(fixef(totbiomass.mod, pars="tx:chill1")[2]), digits=2) #  4.04
+#totbiomasstxchill1sd <- totbiomasstxchill1sd[2] - totbiomasstxchill1sd[1]
+totbiomasstxchill1 <- totbiomasstx + totbiomasschill1 + totbiomasstxchill1 # -3.62
+
+totbiomasstxchill2<-round(mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+totbiomasstxchill2sd<-round(mean(fixef(totbiomass.mod, pars="tx:chill2")[2]), digits=2) #  3.97
+#totbiomasstxchill2sd <- totbiomasstxchill2sd[2] - totbiomasstxchill2sd[1]
+totbiomasstxchill2 <- totbiomasstx + totbiomasschill2 + totbiomasstxchill2 # 2.88
+
+
+### Root to Shoot Model - TX REDUCES ROOT MASS
+roottoshoottx<-round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)), digits=2) ### -0.18
+roottoshoottxsd<-round(mean(fixef(roottoshoot.mod, pars="tx")[2]), digits=2) # 0.15
+#roottoshoottxsd <- roottoshoottxsd[2] - roottoshoottxsd[1]
+roottoshootchill1<-round(mean(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)), digits=2) #    -0.03
+roottoshootchill1sd<-round(mean(fixef(roottoshoot.mod, pars="chill1")[2]), digits=2) # 0.14
+#roottoshootchill1sd <- roottoshootchill1sd[2] - roottoshootchill1sd[1]
+roottoshootchill2<-round(mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)), digits=2) #    -0.16
+roottoshootchill2sd<-round(mean(fixef(roottoshoot.mod, pars="chill2")[2]), digits=2) # 0.17
+#roottoshootchill2sd <- roottoshootchill2sd[2] - roottoshootchill2sd[1]
+roottoshoottxchill1<-round(mean(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=2)
+roottoshoottxchill1sd<-round(mean(fixef(roottoshoot.mod, pars="tx:chill1")[2]), digits=2) # 0.31
+#roottoshoottxchill1sd <- roottoshoottxchill1sd[2] - roottoshoottxchill1sd[1]
+roottoshoottxchill1 <- roottoshoottx + roottoshootchill1 + roottoshoottxchill1 # -0.11
+
+roottoshoottxchill2<-round(mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=2)
+roottoshoottxchill2sd<-round(mean(fixef(roottoshoot.mod, pars="tx:chill2")[2]), digits=2) # 0.23
+#roottoshoottxchill2sd <- roottoshoottxchill2sd[2] - roottoshoottxchill2sd[1]
+roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 ### -0.29
+
+@
+
+\section*{Introduction}
+\begin{enumerate}
+\item The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to carbon sequestration to forest management. 
+  \begin{enumerate} 
+  \item With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout, which  are strongly cued by temperature) is advancing causing longer growing seasons \citep{Chuine2001} and reshaping these services.  
+  \item In one major example, advancing spring phenology has lead to increased carbon uptake across temperate forests, which are essential carbon sinks that combat the negative effects of climate change \citep{Keenan2014}.
+  \item But climate change has other important effects that could cause declines in these services: specifically cold snaps during the spring and reduced cool temperatures in the winter. 
+  \end{enumerate}
+  
+\item And though the Northern Hemisphere is getting warmer, climate change is affecting general temperature trends but extreme weather events (e.g., polar vortexes) are still occurring. %EMW6Jul -- could be two paragraphs, consider starting a new one at `Further false springs can increase ...'
+  \begin{enumerate}
+  \item These weather events can in turn have big impacts on plant development each spring. 
+  \item One such event is known as a `false spring', which is when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated.
+  \item Damage from false spring events can have cascading effects to pollinators \citep{Boggs2012, Pardee2017}, nutrient cycling and carbon uptake as well as forest recruitment \citep{Hufkens2012, Klosterman2018, Richardson2013}.
+  \item Further false springs can increase the chance of additional false springs within a growing season by extending the period that plants are most at risk---the time between budburst and leafout (what we refer to as the `duration of vegetative risk'). Observational studies suggest plants take longer to re-flush leaves after a false spring--up to 38 days \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}, which could lead to additional false springs in a season \citep{Augspurger2009}.
+  \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies and climate forecasting \citep{OBrien2019}.
+  \end{enumerate}
+  
+\item Warmer winters may also play a critical role in the future of forests as they directly impact one of the  major cues plants use to time budburst: over-winter cold temperatures (chilling), (in addition to warming spring temperatures (forcing) and longer daylengths).
+  \begin{enumerate}
+  \item Many temperate plants have evolved chilling requirements to avoid leafout during warm snaps in the middle of the winter, but with climate change chilling requirements may not be met. 
+  \item  If chilling is not met, plants may leaf out much slower or incompletely, which can in turn affect freeze tolerance. 
+  \item Thus, understanding the interplay of warming winters and false spring risk is critical to predict how temperate forests will change in the future.
+  \end{enumerate} 
+  
+  
+\item This interaction between winter chilling and false springs may vary across species within a community, as species have likely evolved along a trade-off of risking spring frosts for early access to resources.
+  \begin{enumerate}
+  \item Ideally, individuals would evolve to require high levels of chilling to delay budburst and ultimately diminish false spring risk but competition for nutrients, water and light resources in the early spring pushes individuals to leafout earlier. 
+  \item Young trees and understory species generally initiate budburst before the canopy trees to benefit from higher light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts these species and individuals at higher risk of freeze damage \citep{Vitasse2014}.
+  \item Thus, successful forest recruitment requires seedlings and saplings to minimize false spring risk while maximizing growth.
+   \end{enumerate}
+ 
+
+\item The combination of species-level differences in responses to false springs and chilling and climate change could reshape the temporal assembly of forest communities. 
+  \item Species typically leafout in a similar sequence, with understory species leafing out earlier and higher canopy trees leafing out last but many studies are predicting substantial shifts in chronological order and reassembly of species' leafout with climate change \citep{Roberts2015, Laube2014}.
+  \item As warming alters winter temperatures and false spring prevalence, phenological cues and their interactions are anticipated to change, which could greatly alter competition and recruitment among forest species for early season resources and ultimately impact species diversity and carbon uptake in temperate forests.
+  \end{enumerate}
+  
+\item Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across eight temperate tree and shrub species. 
+  \begin{enumerate}
+  \item Individuals were exposed to different levels of over-winter chilling and then half of the individuals were exposed to a false spring event. 
+  \item Individuals were observed for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology, physical leaf characteristics and growth?
+  \end{enumerate}
+\end{enumerate}
+  
+
+\section*{Methods}
+\subsection*{Plant Selection and Material}
+\begin{enumerate}
+\item We used 8 temperate woody plant tree and shrub species with varying phenologies, that were not used as crops or ornamental species: \textit{Acer saccharinum} L., \textit{Alnus incana rugosa} L., \textit{Betula papyrifera} Marsh., \textit{Betula populifolia} Marsh., \textit{Cornus racemosa} Lam., \textit{Salix purpurea} L., \textit{Sorbus americana} Marsh., and \textit{Viburnum dentatum} L. Two additional species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}---were also originally included in the experimental design, but were not delivered in a usable condition and thus could not be used in the experiment.
+  \begin{enumerate}
+  \item We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6' N -86$^{\circ}$12' W) for a total of 480 individuals (or 384 individuals??)
+  \item Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17' N -71$^{\circ}$8' W) at 4$^{\circ}$C to maintain dormancy.
+  \item After all individuals had leafed out, all seedlings were up-potted to new pots (NEW POT SIZE HERE) and given fertilizer (FERTILIZER INFO HERE).
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Growth Chamber and Greenhouse Conditions}
+\begin{enumerate}
+\item Individuals were randomly selected and placed in six experimental treatments: 4 weeks of chilling at 4$^{\circ}$C x no false spring, 4 weeks of chilling at 4$^{\circ}$C x false spring, 6 weeks of chilling at 4$^{\circ}$C x no false spring, 6 weeks of chilling at 4$^{\circ}$C x false spring,
+8 weeks of chilling at 4$^{\circ}$C x no false spring, 8 weeks of chilling at 4$^{\circ}$C x false spring.
+  \begin{enumerate}
+  \item While individuals were in the growth chamber under chilling conditions, photoperiod was maintained at eight hour days.
+  \item Lighting within the chambers was provided through a combination of T5HO fluorescent lamps with halogen incandescent bulbs at roughly 250 $\mu mol/m^{2}/s$.
+  \item Individuals were rotated within and among growth chambers every two weeks to eliminate possible growth chamber effects.
+  \end{enumerate}
+\item Once chilling was completed, individuals were moved to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$C.
+  \begin{enumerate}
+  \item Photoperiod was set to 12 hour days throughout the spring until all individuals reached full leaf expansion.
+  \item After all individuals (of all species?) reached full leaf expansion, greenhouse temperatures and photoperiods were kept ambient (see Supplemental Materials for more information). 
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Phenology and False Spring Treatment}
+\begin{enumerate}
+\item Phenology observations were taken every 2-3 days through full leaf expansion and then recorded weekly over the summer. 
+  \begin{enumerate}
+  \item Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk \citep{Chamberlain2019} for each individual \citep{Finn2007}.
+  \item Individuals in the `false spring treatment' were placed in a growth chamber set to mimic a false spring event during budburst, defined as once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19 (that is, each individual was exposed to a false spring based on its individual phenological timing). 
+  \item Individuals receiving the false spring treatment were placed in a growth chamber for 14 hours, starting at 6pm. 
+  \item Temperatures in the growth chamber were ramped down over 14 hours (Figure \ref{fig:gccond}).
+  \item After 8am the following day, individuals were collected at placed back in the greenhouse with all of the other plants. 
+  \item Once all individuals reached full leaf expansion (BBCH stage 19), phenology observations were made weekly until August 1st, when observations were made every 2-3 days again to monitor fall phenology. [ACTIVE voice please!]
+  \item Individuals were monitored until complete budset, at which point they were harvested for biomass measurements.
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Growth measurements}
+\begin{enumerate}
+\item Growth was closely measured throughout the entirety of the experiment. 
+  \begin{enumerate}
+  \item Height was measured three times throughout the growing season: the day an individual reached full leaf expansion, 60 days after full leaf out and when an individual reached complete budset. 
+  \item We measured the chlorophyll content of four leaves on each individual 60 days after full leaf out using an atLEAF CHL PLUS Chlorophyll meter.
+  \item The average chlorophyll content was calculated and then converted to mg/cm\textsuperscript{2} using the atLEAF CHL PLUS conversion tool.
+  \item We measured leaf thickness using a Shars Digital Micrometer (scale works to 0.001mm) and leaf toughness in Newtons using a Shimpo Digital Force Gauge on two leaves for each individual.
+  \item Additionally, we monitored damage to the shoot apical meristem [VISUALLY?], which consisted of complete damage or disruption of growth in the main stem and resulted in early dormancy induction or reliance on lateral shoot growth.
+  \item Finally, belowground and aboveground biomass were harvested after an individual reached complete budset to include leaves in our biomass calculations. 
+  \item Belowground and aboveground plant material were separated and then put in a Shel Lab Forced Air Oven at 60$^{\circ}$C for at least 4 days. 
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Data analysis}
+[METHODS (and Results) are in past tense]
+\begin{enumerate}
+\item Using Bayesian hierarchical models with the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, we estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) total growth in centimeters, (4) chlorophyll content, (5) leaf thickness, (6) leaf toughness, (7) shoot apical meristem damage and (8) total biomass. % CUT FOR NOW: and (9) belowground to aboveground biomass ratio. 
+  \begin{enumerate} %emw-midApril2020: I would move all equations to the supp as your methods are long already and they are fairly standard equations
+  \item Species are modeled hierarchically as grouping factors, which generates an estimate and posterior distribution of the overall response across the eight species used in our experiment.
+  \item We ran four chains, each with 2 500 warm-up iterations and 4 000 sampling iterations for a total of 6 000 posterior samples for each predictor for each model using weakly informative priors. 
+  \item Increasing priors three-fold did not impact our results.
+  \item We evaluated our model performance based on $\hat{R}$ values that were close to one and did not include models with divergent transitions in our results. 
+  \item We also evaluated high $n_{eff}$ (4000 for most parameters, but as low as 1400 for a couple of parameters in the shoot apical meristem model). 
+  \item We additionally assessed chain convergence and posterior predictive checks visually \citep{BDA}.
+  \end{enumerate}
+\end{enumerate}
+
+\section*{Results}
+[Please add UNITS!]
+\begin{enumerate}
+\item False springs and chilling durations both impacted individual phenology. 
+  \begin{enumerate}
+  \item Individuals exposed to the false spring treatment had longer durations of vegetative risk for the four weeks and slightly for the six weeks of chilling cohort (\Sexpr{dvrtx} $\pm$ \Sexpr{dvrtxsd} and \Sexpr{dvrtxchill1} $\pm$ \Sexpr{dvrtxchill1sd}, respectively; Figure \ref{fig:muphen}\textbf{a} and Table \ref{tab:suppmoddvr}).
+  \item Longer chilling treatments reduced the duration of vegetative risk, especially in the eight weeks of chilling cohort (\Sexpr{dvrchill2} $\pm$ \Sexpr{dvrchill2sd}; Figure \ref{fig:muphen}\textbf{a}) and Table \ref{tab:suppmoddvr}). %EMW6Jul -- should we also add a simple analysis (mentioned here but otherwise just a supp table to explain how much chilling speed up budburst?)
+  
+  %EMW6Jul -- see edits below, this topic of additivity will be important to any readers who are ANOVA specialists (most ecologists, though your audience will be more diverse than that)
+  \item Effects on the duration of vegetative risk from false spring (longer) and from increased chilling (shorter) were generally additive, resulting in no major changes in the durations of vegetative risk for individuals exposed to a false spring that received eight weeks of chilling (\Sexpr{dvrtxchill2} $\pm$ \Sexpr{dvrtxchill2sd}), Figure \ref{fig:muphen}\textbf{a} and Table \ref{tab:suppmoddvr}). 
+  \item With increases in chilling duration, the growing season length decreased for individuals exposed to six and eight weeks of chilling (\Sexpr{gslengthchill1} $\pm$ \Sexpr{gslengthchill1sd} for six weeks and \Sexpr{gslengthchill2} $\pm$ \Sexpr{gslengthchill2sd} for eight weeks; Figure \ref{fig:muphen}\textbf{b}) and Table \ref{tab:suppmodgs}).
+  \end{enumerate}
+  
+\item False springs affected physical leaf traits.
+  \begin{enumerate}
+  \item Leaf chlorophyll content decreased under false spring conditions with increases in chilling, especially with eight weeks of chilling (\Sexpr{chltxchill1} $\pm$ \Sexpr{chltxchill1sd} for six weeks and \Sexpr{chltxchill2} $\pm$ \Sexpr{chltxchill2sd} for eight weeks; Figure \ref{fig:muchl}) and Table \ref{tab:suppmodchl}).
+  \item Leaf toughness decreased across all chilling treatments under false spring conditions (\Sexpr{toughtx} $\pm$ \Sexpr{toughtxsd} for four weeks of chilling, \Sexpr{toughtxchill1} $\pm$ \Sexpr{toughtxchill1sd} for six weeks of chilling and \Sexpr{toughtxchill2} $\pm$ \Sexpr{toughtxchill2sd} for eight weeks of chilling; Figure \ref{fig:muleaf}\textbf{a} and Table \ref{tab:suppmodtough}).
+  \item Additionally, leaf thickness decreased across four and eight week chilling durations under false spring conditions, but there was little change for the six weeks of chilling cohort (\Sexpr{thicktx} $\pm$ \Sexpr{thicktxsd} for four weeks of chilling, \Sexpr{thicktxchill1} $\pm$ \Sexpr{thicktxchill1sd} for six weeks of chilling and \Sexpr{thicktxchill2} $\pm$ \Sexpr{thicktxchill2sd} for eight weeks of chilling; Figure \ref{fig:muleaf}\textbf{b} and Table \ref{tab:suppmodthick}).
+  \end{enumerate}
+  
+\item False springs impacted growth habit but not total biomass. %EMW6Jul -- do you think this should move up one paragraph? It seems like phenology and damage are the big things folks will be interested in.
+  \begin{enumerate}
+  \item Across all chilling treatments, especially for the four and eight week cohorts, individuals exposed to false springs experienced more damage to the shoot apical meristem (\Sexpr{meritx} $\pm$ \Sexpr{meritxsd} for four weeks, \Sexpr{meritxchill1} $\pm$ \Sexpr{meritxchill1sd} for six weeks and \Sexpr{meritxchill2} $\pm$ \Sexpr{meritxchill2sd} for eight weeks; Figure \ref{fig:mugrowth}\textbf{a} and Table \ref{tab:suppmodmeri}) 
+  \item Shoot growth over the growing season increased with eight weeks of chilling (\Sexpr{htchill2} $\pm$ \Sexpr{htchill2sd}) except growth was not affected under false spring conditions (\Sexpr{httxchill2} $\pm$ \Sexpr{httxchill2sd}; Figure \ref{fig:muheight}) and Table \ref{tab:suppmodht})).
+  \item Individuals exposed to false spring conditions had slightly lower total biomasses when they were exposed to only four weeks of chilling (\Sexpr{totbiomasstx} $\pm$ \Sexpr{totbiomasstxsd}) but there was very little change in total biomass under false spring conditions compared to the control for both the six weeks of chilling cohort (\Sexpr{totbiomasstxchill1} $\pm$ \Sexpr{totbiomasstxchill1sd}) and the eight weeks of chilling cohort (\Sexpr{totbiomasstxchill2} $\pm$ \Sexpr{totbiomasschill2sd}; Figure \ref{fig:mugrowth}\textbf{b}) and Table \ref{tab:suppmodtotbio})).
+  \end{enumerate}
+  
+  \item False springs and chilling duration treatments resulted in only some species-level differences %EMW6Jul -- be very careful that what we say here matches our results and is not too black and white
+ \begin{enumerate}
+  \item Duration of vegetative risk decreased for most species with increasing chilling durations (i.e., the six and eight week cohorts), except for \textit{Salix purpurea}, which experienced longer durations of vegetative risk with longer chilling durations, especially for six weeks of chilling (Figure \ref{fig:muphen}\textbf{a}). 
+  \item There was a lot of species-level variation with leaf thickness under the longer chilling durations, with \textit{Sorbus americana} and \textit{Viburnum dentatum} having thicker leaves with increases in chilling (Figure \ref{fig:muleaf}\textbf{b}). 
+  \item All species experience meristem damage under false spring conditions except for \textit{Betula populifolia} and \textit{Sorbus americana} and \textit{Viburnum dentatum} generally experienced meristem damage under all treatments (Figure \ref{fig:mugrowth}\textbf{a}). 
+  \end{enumerate}
+  
+\item Despite large treatment effects on phenology, we found no major effects on phenological rank within the community.
+  \item Order of leafout timing was consistent across all treatments, with \textit{Salix purpurea} always being first to leafout, followed by \textit{Betula papyrifera}, \textit{B. populifolia} and \textit{Cornus racemosa} and finally by \textit{Alnus rugosa}, \textit{Sorbus americana}, \textit{Viburnum dentatum} and \textit{Acer saccharinum} (Figure \ref{fig:rank}).
+  \item \textit{Viburnum dentatum} was the only species to change rank across treatments, though it consistently was grouped with the later-leafout group of species.
+  \item Order of budset timing was also consistent across all treatments, with \textit{Cornus racemosa} and \textit{Sorbus americana} being first to set bud, followed by \textit{Betula papyrifera} and \textit{Acer saccharinum} and finally by \textit{Viburnum dentatum}, \textit{B. populifolia}, \textit{Salix purpurea} and \textit{Alnus rugosa} (Figure \ref{fig:bsetrank}).
+  \item \textit{Acer saccharinum} was the only species to change rank across treatments, though it consistently was grouped with \textit{Betula papyrifera} and \textit{Viburnum dentatum}.
+  \end{enumerate}
+\end{enumerate}
+
+\section*{Discussion}
+%EMW6Jul -- I think it might be best to start with a statement that says our treatments worked. Maybe something like the below? 
+\item Our experiment replicated the major features of false springs---causing plant damage---and chilling---advancing spring phenology, allowing us to examine the cascading consequences of these two interactive effects of climate change across eight deciduous forest tree species. Our results showed these effects altered multiple aspects of plant phenology, leaf traits and plant growth. Importantly, we found false springs and chilling have opposing additive effects on the duration of vegetative risk, suggesting the combination of increased false springs and warmer winters could be especially detrimental.
+\begin{enumerate} %EMW6Jul -- SUBHEADING: False springs and chilling interactively determine risk and damage (or something)
+\item Chilling length greatly influences spring phenology during the critical budburst to leafout phases, and thus can compensate for the detrimental effects of false springs on phenology.
+  \begin{enumerate}
+  \item False springs increase the duration of vegetive risk, leading to an increased risk in multiple false spring risks in one season.
+  \item But chilling can compensate for this increase in duration of vegetative risk: if the chilling requirement is met, the rate of budburst does not increase with a false spring event. %EMW6Jul -- should we just avoid language of whether chilling requirements are met if possible?
+  \item This suggests chilling is more important for seedlings in terms of exposure to multiple false springs.
+  \item With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions.
+  \item This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
+  \end{enumerate}
+  
+  %EMW6Jul -- Again, I suggest you flip these (which I have done here, since it really seems to flow to me).   
+\item Additionally with sufficient chilling, false springs are less damaging to seedling growth.
+  \begin{enumerate}
+  \item False springs consistently impair shoot apical meristem growth, which can lead to reliance on lateral shoot growth, rendering inefficient growth patterns.
+  \item Shoot apical meristem damage---if significant within a stand---can lead to declines in recruitment \citep{Rhodes2018}. 
+  \item [Need more here! Flesh out a little] %EMW6Jul -- I think the point about chilling needs a bit more text here.
+  \end{enumerate}
+  
+\item False springs greatly impact the physical characteristics of the leaf.
+  \begin{enumerate}
+  \item With chlorophyll content, leaf toughness and leaf thickness decreasing, the quality of the leaf dwindles.
+  \item This reduction in quality could subsequently lead to an increase in herbivory risk \citep{Onda2011}.
+  \item Further studies that assess the secondary compounds and total phenolic content \citep{Ayres1993, Webber2016} of the leaves exposed to false springs are needed to better understand the level of herbivory risk. 
+  \item [Need more here! Just an extra sentence] %EMW6Jul -- I think we should not what chilling does here, could just be a sentence, but would then nicely mirror the previous paragraphs
+  \end{enumerate}
+
+  %EMW6Jul -- SUBHEADING: False springs and chilling do not reshape temporal assembly
+  
+    %EMW6Jul -- I wonder if you want a paragraph here about temporal assembly and species differences in treatment responses (see my last comment below) ... one thing we have not discussed but could sneak in are whether all the species we used are equally at risk of false springs in nature ... probably not and here we could say it. 
+\begin{enumerate}
+\item Growth chamber studies and climate model projections predict substantial shifts in species leafout order under climate change conditions \citep{Roberts2015, Laube2014}, other studies using long-term phenology observations suggest leafout phenology order is consistent across years \citep{Wesolowski2006}.
+  \begin{enumerate}{
+  \item We are not seeing major shifts in species leafout order except for in \textit{Viburnum dentatum}, which still leafs out within the later cohort of species across all treatments.
+  \item Therefore, we do not predict major reassembly of forest communities due to winter warming or false spring incidence. 
+  \item Can we say more here? %EMW6Jul -- *why* \citep{Roberts2015, Laube2014} predict shifts and we don't? I think pointing out assumptions that were wrong or differences that could cause this discrepancy is important. 
+    \end{enumerate}
+  
+    %EMW6Jul -- We should be able to pull this together nicely -- we show big interesting effects of chilling x false spring on DVR and damage (at least the false spring treatment), but we see no effects on temporal assembly. This means we could expect climate change to reshape forest communities, but it may not come from temporal assembly directly, but from the damage and leaf trait impacts of false spring and chilling. That's cool! Be sure to play it up. I think you could add a paragraph to that point here, that could flow to your final paragraph below. 
+
+\item Understanding the impacts of false springs coupled with reduced over-winter chilling is essential for forecasting.
+  \begin{enumerate}
+  \item Our findings have large implications for forest recruitment.
+  \item With over-winter chilling decreasing with climate change, seedlings are more at risk of sustaining damage from false spring events. 
+  \item Understanding recruitment and inter- and intraspecific competition with false springs is crucial. 
+  \item If individuals that initiate budburst earlier are more at risk of false spring exposure, this could lead to dieback of early-budbursting species in temperate forests with climate change.     %EMW6Jul -- One thing missing earlier in the discussion to me is some small mention of variation in species -- I think some papers predict early species have low chill, but we did not see lower chill effects for early species, did we? I think you should try to clause on the DUAL effects. And one point to that might be that since the chilling effect was pretty consistent these early species may get double-whammy  -- since they have chill cues, they will get longer DVR if they lose chill and longer DVR if false springs go up... 
+  \end{enumerate}
+\end{enumerate}
+
+
+
+
+\bibliography{..//references/chillfreeze.bib}
+
+\section*{Tables and Figures}
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/growthchamber.pdf}
+  -\caption{False spring treament temperature regime in the growth chamber}\label{fig:gccond}
+  -\end{center}
+  -\end{figure}}
+
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/leafoutorder_byrank.pdf} 
+  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:rank}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_phen90.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) duration of vegetative risk and b) growing season length. Dots and lines show means and 90\% uncertainty intervals.}\label{fig:muphen}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits90.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness and b) leaf thickness. Dots and lines show means and 90\% uncertainty intervals. }\label{fig:muleaf}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=18cm]{..//analyses/figures/mu_growth90.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) shoot apical meristem damage and b) total biomass. Dots and lines show means and 90\% uncertainty intervals. }\label{fig:mugrowth}
+  -\end{center}
+  -\end{figure}}
+  
+  
+
+\end{document}
