@@ -1,0 +1,306 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{textcomp}
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//references/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+%\usepackage{lineno}
+%\linenumbers
+
+%cross referencing:
+\usepackage{xr}
+\usepackage{xr-hyper}
+\externaldocument{/Users/CatherineChamberlain/Documents/git/chillfreeze/docs/chillfrz_supp}
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+\begin{document}
+
+\noindent \textbf{\Large{False spring damage on temperate tree seedlings is amplified with winter warming}}
+
+\noindent Authors:\\
+C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
+\vspace{2ex}\\
+\emph{Author affiliations:}\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{3}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+\vspace{2ex}
+$^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+\setkeys{Gin}{width=0.8\textwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in setwd("{}/Users/CatherineChamberlain/Documents/git/chillfreeze/analyses/"{}): cannot change working directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in file(file, "{}rt"{}): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'chillfrz' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx"{}, summary = FALSE): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx"{}): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}chill1"{}, summary = FALSE): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}chill1"{}): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}chill2"{}, summary = FALSE): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}chill2"{}): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx:chill1"{}): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dvrtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(dvr.mod, pars = "{}tx:chill2"{}): object 'dvr.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'dvrtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx"{}, summary = FALSE): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx"{}): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}chill1"{}, summary = FALSE): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}chill1"{}): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}chill2"{}, summary = FALSE): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}chill2"{}): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx:chill1"{}, summary = FALSE): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx:chill1"{}): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'gslengthtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx:chill2"{}, summary = FALSE): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(gslength.modlo, pars = "{}tx:chill2"{}): object 'gslength.modlo' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'gslengthtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx"{}, summary = FALSE): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx"{}): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}chill1"{}, summary = FALSE): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}chill1"{}): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}chill2"{}, summary = FALSE): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}chill2"{}): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx:chill1"{}): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'meritx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(meri.mod, pars = "{}tx:chill2"{}): object 'meri.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'meritx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx"{}, summary = FALSE): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx"{}): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}chill1"{}, summary = FALSE): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}chill1"{}): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}chill2"{}, summary = FALSE): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}chill2"{}): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx:chill1"{}): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'chltx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(chl.mod, pars = "{}tx:chill2"{}): object 'chl.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'chltx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx"{}, summary = FALSE): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx"{}): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}chill1"{}, summary = FALSE): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}chill1"{}): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}chill2"{}, summary = FALSE): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}chill2"{}): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx:chill1"{}): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'toughtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(toughness.mod, pars = "{}tx:chill2"{}): object 'toughness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'toughtx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx"{}, summary = FALSE): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx"{}): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}chill1"{}, summary = FALSE): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}chill1"{}): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}chill2"{}, summary = FALSE): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}chill2"{}): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx:chill1"{}): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'thicktx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(thickness.mod, pars = "{}tx:chill2"{}): object 'thickness.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'thicktx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx"{}, summary = FALSE): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx"{}): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}chill1"{}, summary = FALSE): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}chill1"{}): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}chill2"{}, summary = FALSE): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}chill2"{}): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx:chill1"{}): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'httx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(htdiff.mod, pars = "{}tx:chill2"{}): object 'htdiff.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'httx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx"{}, summary = FALSE): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx"{}): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}chill1"{}, summary = FALSE): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}chill1"{}): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}chill2"{}, summary = FALSE): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}chill2"{}): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx:chill1"{}): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'totbiomasstx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(totbiomass.mod, pars = "{}tx:chill2"{}): object 'totbiomass.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'totbiomasstx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx"{}, summary = FALSE): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx"{}): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}chill1"{}, summary = FALSE): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}chill1"{}): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}chill2"{}, summary = FALSE): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}chill2"{}): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx:chill1"{}, summary = FALSE): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx:chill1"{}): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'roottoshoottx' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx:chill2"{}, summary = FALSE): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in fixef(roottoshoot.mod, pars = "{}tx:chill2"{}): object 'roottoshoot.mod' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'roottoshoottx' not found}}\end{kframe}
+
