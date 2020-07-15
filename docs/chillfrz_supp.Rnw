@@ -128,6 +128,46 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \end{enumerate}
 
 \section*{Supplemental tables and figures}
+
+<<label=simbbmod, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/chillfreeze/analyses")
+
+bbdat <- read.csv("output/clean_dvr_traits.csv")
+
+bb.mod <- lm(budburst ~ chill1 + chill2, data=bbdat)
+
+bb <- as.data.frame(tidy(bb.mod, prob=0.90))
+bb$term <- ifelse(bb$term=="(Intercept)", "Intercept", bb$term)
+bb$term <- gsub("chill1", "Chilling 6 Wks", bb$term)
+bb$term <- gsub("chill2", "Chilling 8 Wks", bb$term)
+bb$statistic<- NULL
+bb$p.value<- NULL
+
+colnames(bb) <- c("term", "mean", "std.err")
+print(xtable(bb, caption = "Summary of simple linear regression model of day of budburst across chilling treatments.", label="tab:simpbb",
+             align = c("l", "l", "r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+
+dvr.mod <- lm(dvr ~ chill1 + chill2, data=bbdat)
+
+dvr <- as.data.frame(tidy(dvr.mod, prob=0.90))
+dvr$term <- ifelse(dvr$term=="(Intercept)", "Intercept", dvr$term)
+dvr$term <- gsub("chill1", "Chilling 6 Wks", dvr$term)
+dvr$term <- gsub("chill2", "Chilling 8 Wks", dvr$term)
+dvr$statistic<- NULL
+dvr$p.value<- NULL
+
+colnames(dvr) <- c("term", "mean", "std.err")
+print(xtable(dvr, caption = "Summary of simple linear regression model of duration of vegetative across chilling treatments.", label="tab:simpdvr",
+             align = c("l", "l", "r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+
+@
+
   
 {\begin{figure} [H]
   -\begin{center}
