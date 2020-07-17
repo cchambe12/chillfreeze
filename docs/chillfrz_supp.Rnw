@@ -471,8 +471,8 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=18cm]{..//analyses/figures/htdiff_brms.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on shoot growth after 60 days. }\label{fig:muheight}
+  -\includegraphics[width=18cm]{..//analyses/figures/htfinal90_brms.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on total season growth. }\label{fig:muheight}
   -\end{center}
   -\end{figure}}
 

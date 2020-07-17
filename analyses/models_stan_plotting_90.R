@@ -62,7 +62,7 @@ chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "totbiomass90_brms" ### change based on model
+figpathmore <- "htfinal90_brms" ### change based on model
 
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)
@@ -96,7 +96,7 @@ if(FALSE){
 
 spp <- unique(chill.stan$species)
 
-modelhere <- totbiomass.mod
+modelhere <- htdiff.mod
 
 tx <- coef(modelhere, prob=c(0.10, 0.90))$species[, c(1, 3:4), 2] %>%
   as.data.frame() %>%
