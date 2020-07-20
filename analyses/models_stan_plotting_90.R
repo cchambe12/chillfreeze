@@ -27,9 +27,9 @@ setwd("~/Documents/git/chillfreeze/analyses")
 #load("stan/thickness_brms.Rdata")
 
 
-#load("stan/htfinal_brms.Rdata")
+load("stan/htfinal_brms.Rdata")
 #load("stan/htfinalrate_brms.Rdata")
-load("stan/totbiomass_brms.Rdata")
+#load("stan/totbiomass_brms.Rdata")
 #load("stan/biomassrate_brms.Rdata")
 #load("stan/roottoshoot_brms.Rdata")
 

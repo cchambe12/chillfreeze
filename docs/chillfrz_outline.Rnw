@@ -217,8 +217,7 @@ httxchill2sd<-round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=2) # 1.
 httxchill2 <- httx + htchill2 + httxchill2 # 0.68
 }
 
-### Ht final Model - Not intersting
-load("stan/htfinal_brms.Rdata")
+### Ht final Model 
 httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=2) ### 5.06
 httxsd<-round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=2) # 4.38
 #httxsd <- httxsd[2] - httxsd[1]
@@ -474,9 +473,9 @@ simpdvrchillsd2 <- round(summary(dvr.mod)$coef[3,2], digits=2)
   
 \item False springs impact seedling growth, regardless of chilling duration.
   \begin{enumerate}
-  \item Past studies suggest early-budburst species can withstand lower temperature thresholds \citep{Lenz2013, Muffler2016, Zohner2020}, our results suggest false springs consistently impair shoot apical meristem growth, regardless of phenological order. 
-  \item Damage to the shoot apical meristem can lead to reliance on lateral shoot growth, rendering inefficient growth patterns and, if damage is significant within a stand, it can lead to declines in recruitment \citep{Rhodes2018}. 
-  \item Though overall height increased with more over-winter chilling, false springs impacted all individuals similarly across all chilling treatments, thus further emphasizing the detrimental effects of meristem damage. 
+  \item Past studies suggest early-budburst species can withstand lower temperature thresholds \citep{Lenz2013, Muffler2016, Zohner2020} but our results suggest false springs consistently impair shoot apical meristem growth, regardless of phenological order. 
+  \item Damage to the shoot apical meristem can lead to reliance on lateral shoot growth, rendering inefficient growth patterns and---if damage is significant within a stand---it can lead to declines in recruitment \citep{Rhodes2018}. 
+  \item Though overall height increased with more over-winter chilling, false springs impacted all individuals similarly across all chilling treatments, suggesting an interplay between false spring damage to the meristem and overall plant height and thus further emphasizing the detrimental effects of meristem damage. 
   \end{enumerate}
   
 \item False springs greatly impact the physical characteristics of the leaf.
