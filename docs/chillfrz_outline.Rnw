@@ -313,7 +313,7 @@ simpdvrchillsd2 <- round(summary(dvr.mod)$coef[3,2], digits=2)
 
 \item Further false springs can increase the chance of additional false springs within a growing season by extending the period that plants are most at risk---the time between budburst and leafout (what we refer to as the `duration of vegetative risk'). 
   \begin{enumerate}
-  \item Observational studies suggest plants take longer to re-flush leaves after a false spring---up to 38 days \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}, which could lead to additional false springs in a season \citep{Augspurger2009}. % EMW21Jul: em dash is three hyphens in Tex (2 in word I think)
+  \item Observational studies suggest plants take longer to re-flush leaves after a false spring---up to 38 days \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}, which could lead to additional false springs in a season \citep{Augspurger2009}. 
   \item False springs are predicted to increase in certain regions as climate change progresses, thus understanding the impacts of false springs on forests is essential for forest management strategies and climate forecasting \citep{OBrien2019}.
   \end{enumerate}
   
