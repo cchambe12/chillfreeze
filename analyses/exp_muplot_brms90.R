@@ -21,6 +21,7 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
     pos.y<-(5:1)[i]
     pos.x<-modoutput[(modoutput$term==rownameshere[i]),"estimate"]
     lines(modoutput[(modoutput$term==rownameshere[i]),c("lower","upper")],rep(pos.y,2),col="darkgrey")
+    lines(modoutput[(modoutput$term==rownameshere[i]),c("low50","high50")],rep(pos.y,2),col="black", lwd=2)
     points(pos.x,pos.y,cex=1.5,pch=19,col="darkblue")
     for(spsi in 1:length(spnum)){#spsi=1
       pos.sps.i<-which(grepl(paste("[",spsi,"]",sep=""),mod.ranef$parameter,fixed=TRUE))
@@ -29,6 +30,8 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
       pos.x.sps.i<-mod.ranef[pos.sps.i[i],"mean"]
       lines(mod.ranef[pos.sps.i[i],c("10%","90%")],rep(pos.y.sps.i,2),
             col=alpha(my.pal[spsi], alphahere))
+      lines(mod.ranef[pos.sps.i[i],c("25%","75%")],rep(pos.y.sps.i,2),
+            col=alpha(my.pal[spsi], alphahere+0.5))
       points(pos.x.sps.i,pos.y.sps.i,cex=0.8, col=alpha(my.pal[spsi], alphahere))
       
     }
