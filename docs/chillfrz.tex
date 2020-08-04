@@ -71,10 +71,10 @@
 \textheight 21.94cm 
 %\pagestyle{empty} %comment if want page numbers
 \parskip 7.2pt
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{2}
 \parindent 0pt
-%\usepackage{lineno}
-%\linenumbers
+\usepackage{lineno}
+\linenumbers
 
 %cross referencing:
 \usepackage{xr}
@@ -90,7 +90,8 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
-\noindent \textbf{\Large{False spring damage on temperate tree seedlings is amplified with winter warming}}
+\noindent \textbf{\Large{False spring damage to temperate tree seedlings is amplified with winter warming}}
+%\noindent \textbf{\Large{False springs coupled and warming winters amplify temperate tree damage}}
 
 \noindent Authors:\\
 C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
@@ -110,6 +111,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section*{Abstract} % NEED TO FIX A LOT!!!
+With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout) is advancing. Temperate plants are at risk of cold snaps in the spring and reduced cool temperatures over the winter. Late spring freezing events that occur after trees initiate budburst---known as false springs---are very damaging and they are predicted to increase in certain regions as climate change progresses. Additionally, over-winter chilling temperatures are predicted to decrease as winter temperatures warm, potentially impacting phenology and, ultimately, growth. Here, we assessed the effects varying durations of over-winter chilling on seedling phenology and growth across eight temperate tree and shrub species. Half of the individuals were then exposed to false spring conditions. We found that false springs impacted phenology, growth and leaf characteristics but not phenological rank within a community. % NEED MORE RESULTS HERE!
+With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting crucial processes such as carbon uptake and nutrient cycling.
+
+\vspace{2ex}
+\textit{Keywords:} false spring, climate change, phenology, spring freeze, forest recruitment, risk, leafout, temperate tree
 
 \section*{Introduction}
 The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to forest management. With warming temperatures in the Northern Hemisphere, spring phenology (i.e., budburst and leafout, which  are strongly cued by temperature) is advancing causing longer growing seasons \citep{Chuine2001} and reshaping these services. In one major example, advancing spring phenology has lead to increased carbon uptake across temperate forests, which are essential carbon sinks that combat the negative effects of climate change \citep{Keenan2014}. But climate change has other important effects that could cause declines in these services: specifically cold snaps during the spring and reduced cool temperatures in the winter.
@@ -126,7 +133,7 @@ The combination of species- and lifestage-level differences in responses to fals
   
 Here, we assessed the effects of over-winter chilling length and false springs on seedling phenology and growth across eight temperate tree and shrub species. Individuals experienced different levels of over-winter chilling and then half of the individuals were exposed to a false spring event. We then observed individuals for the remainder of the growing season to ask: (1) How does the accumulation of over-winter chilling hours and (2) how do false spring events impact phenology, growth and physical leaf characteristics?
 
-\section*{Methods}
+\section*{Materials and Methods}
 \subsection*{Plant Selection and Material}
 We used 8 temperate woody plant tree and shrub species with varying phenologies, that were not used as crops or ornamental species: \textit{Acer saccharinum} L., \textit{Alnus incana rugosa} L., \textit{Betula papyrifera} Marsh., \textit{Betula populifolia} Marsh., \textit{Cornus racemosa} Lam., \textit{Salix purpurea} L., \textit{Sorbus americana} Marsh., and \textit{Viburnum dentatum} L. Two additional species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}---were originally included in the experimental design, but were not delivered in a usable condition and thus could not be used in the experiment. We received 48 dormant bare root seedlings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6' N -86$^{\circ}$12' W) for a total of 384 individuals. Upon receipt, plants were potted in POT INFO AND SOIL INFO HERE!! and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17' N -71$^{\circ}$8' W) at 4$^{\circ}$C to maintain dormancy. After all individuals had leafed out, all seedlings were up-potted to new pots (NEW POT SIZE HERE) and fertilized (FERTILIZER INFO HERE).
 
@@ -214,7 +221,12 @@ Despite large treatment effects on phenology, we found no major effects on pheno
   \end{enumerate} % EMW21Jul: One last question! Do you mean seedling or sapling? Should you define seedling somewhere quickly? My thought is that seedling can mean germinant to some people and I think 99% of those die, so it doesn't really matter if their false springs change a little for germinants. I'd just check and define your terminology somewhere (methods even would work).
 \end{enumerate}
 
+\section*{Acknowledgments}
 
+We would like to thank all of the growth facilities staff at the Weld Hill Research Building with a special thanks to Kea Woodruff for her continued dedication to the project and assistance in planting, experimental design and advice. We also want to thank Faye Rosin for her unceasing support in laboratory assistance and access as well as Wayne Daly for his invaluable dedication to the plants' health through the remainder of the experiece. We also thank D. Buonaiuto, A. Ettinger, J. Gersony, D. Loughnan, A. Manandhar and D. Sohdi for their continued feedback and insights that helped improved the experimental design, questions and manuscript.
+
+\section*{Data, Code \& Model Output:}
+Data and code from the analyses will be available via KNB upon publication and are available to all reviewers upon request. Raw data, {Stan} model code and output are available on github at \url{https://github.com/cchambe12/chillfreeze} and provided upon request.
 
 
 \bibliography{..//references/chillfreeze.bib}
@@ -252,7 +264,7 @@ Despite large treatment effects on phenology, we found no major effects on pheno
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness (N) and b) leaf thickness ($\\mu$m). Dots and lines show means and 90\% uncertainty intervals. }\label{fig:muleaf}
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness (N) and b) leaf thickness ($\mu$m). Dots and lines show means and 90\% uncertainty intervals. }\label{fig:muleaf}
   -\end{center}
   -\end{figure}}
   
