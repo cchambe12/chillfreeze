@@ -13,7 +13,7 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{natbib}
-\bibliographystyle{..//references/styles/gcb}
+\bibliographystyle{..//references/styles/besjournalsnew.bst}
 %\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
@@ -58,8 +58,8 @@ library(ggplot2)
 C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
-$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
-$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA 02131; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA 02138; \\
 $^{3}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
@@ -69,7 +69,6 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
-\section*{Supplemental Tables and Figures}
 
 <<echo=FALSE, warning==FALSE, message=FALSE>>=
 
@@ -78,13 +77,8 @@ library(broom)
 
 
 @
-\section*{Methods}
-
-Discuss here how the experiment was designed and how we needed three greenhouses to perfectly test our question about growing season length and end of season growth.
-
-\subsection*{Data analysis and model equations}
-\begin{enumerate}
-\item False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
+\section*{Supplemental Materials and Methods: Data analysis and model equations}
+False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
 \begin{align*}
 y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
@@ -94,7 +88,7 @@ y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{spec
 \epsilon_i & \sim N(0,\sigma_y) \\
 \end{align*}
 
-\item The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
+The $\alpha$ and each of the five $\beta$ coefficients are modeled at the species level, as follows:
 
 \begin{align*}
 \alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
@@ -105,8 +99,7 @@ y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{spec
 \beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
 \end{align*}
 
-\item where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
-\item For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
+where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
 
 \begin{align*}
  y_i & \sim Binomial(1,p) \tag{2} \\
@@ -114,7 +107,7 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 &+ \beta_{txchill1_{species[i]}}X_{txchill1} + \beta_{txchill2_{species[i]}}X_{txchill2} + \epsilon_i \nonumber\\,
 \end{align*}
 
-\item The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
+The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as the other models:
 
 \begin{align*}
 \alpha_{species} & \sim N(\mu_{\alpha}, \sigma_{\alpha}) \\
@@ -124,8 +117,6 @@ logit(p) &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_
 \beta_{txchill1_{species}} & \sim N(\mu_{txchill1}, \sigma_{txchill1}) \\
 \beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
 \end{align*}
-
-\end{enumerate}
 
 \section*{Supplemental tables and figures}
 
@@ -167,14 +158,6 @@ print(xtable(dvr, caption = "Summary of simple linear regression model of durati
       sanitize.text.function = function(x) {x}, table.placement="H")
 
 @
-
-  
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/budsetorder_byrank.pdf} 
-  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
-  -\end{center}
-  -\end{figure}}
 
 \newpage
 <<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
@@ -271,8 +254,156 @@ print(xtable(modoutput,
 
 @
 
+\newpage
+<<label=suppmodmeri, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/chillfreeze/analyses")
+
+modoutput <- read.csv("output/meristem_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(1:6, 29:76),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("r_species", "", modoutput$term)
+modoutput$term <- gsub("\\[", "", modoutput$term)
+modoutput$term <- gsub("\\]", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("tx", "Tx", modoutput$term)
+modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
+
+modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+
+modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
+
+print(xtable(modoutput, 
+             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.", label="tab:suppmodmeri",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      #sanitize.text.function = function(x) {x}, table.placement="H",
+      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
+      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
+      sanitize.text.function = identity
+    )
+
+
+
+@
 
 \newpage
+<<label=suppmodht, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/chillfreeze/analyses")
+
+modoutput <- read.csv("output/htfinal_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(1:6, 29:76),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("r_species", "", modoutput$term)
+modoutput$term <- gsub("\\[", "", modoutput$term)
+modoutput$term <- gsub("\\]", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("tx", "Tx", modoutput$term)
+modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
+
+modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+
+modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
+
+print(xtable(modoutput, 
+             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.", label="tab:suppmodht",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      #sanitize.text.function = function(x) {x}, table.placement="H",
+      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
+      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
+      sanitize.text.function = identity
+    )
+
+
+
+@
+
+
+\newpage
+<<label=suppmodtotbio, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/chillfreeze/analyses")
+
+modoutput <- read.csv("output/totbiomass_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(1:6, 29:76),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("r_species", "", modoutput$term)
+modoutput$term <- gsub("\\[", "", modoutput$term)
+modoutput$term <- gsub("\\]", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("tx", "Tx", modoutput$term)
+modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
+modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
+
+modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
+modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
+modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
+modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
+modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
+
+modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
+modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
+modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
+
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
+
+print(xtable(modoutput, 
+             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.", label="tab:suppmodtotbio",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      #sanitize.text.function = function(x) {x}, table.placement="H",
+      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
+      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
+      sanitize.text.function = identity
+    )
+
+
+
+@
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=14cm]{..//analyses/figures/totbiomass50and90_brms.pdf} 
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). }\label{fig:mutotbio}
+  -\end{center}
+  -\end{figure}}
+  
+  \newpage
 <<label=suppmodchl, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/chillfreeze/analyses")
 
@@ -421,156 +552,15 @@ print(xtable(modoutput,
 
 @
 
-
-\newpage
-<<label=suppmodht, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
-
-modoutput <- read.csv("output/htfinal_modeloutput.csv", header=TRUE)
-modoutput <- modoutput[c(1:6, 29:76),]
-#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-# add multicolumn later for BB and LO headers above these column names
-
-modoutput$term <- gsub("b_", "", modoutput$term)
-modoutput$term <- gsub("r_species", "", modoutput$term)
-modoutput$term <- gsub("\\[", "", modoutput$term)
-modoutput$term <- gsub("\\]", "", modoutput$term)
-modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("tx", "Tx", modoutput$term)
-modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
-
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
-
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
-
-colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
-
-print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.", label="tab:suppmodht",
-             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      #sanitize.text.function = function(x) {x}, table.placement="H",
-      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
-      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
-      sanitize.text.function = identity
-    )
-
-
-
-@
-
-\newpage
-<<label=suppmodmeri, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
-
-modoutput <- read.csv("output/meristem_modeloutput.csv", header=TRUE)
-modoutput <- modoutput[c(1:6, 29:76),]
-#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-# add multicolumn later for BB and LO headers above these column names
-
-modoutput$term <- gsub("b_", "", modoutput$term)
-modoutput$term <- gsub("r_species", "", modoutput$term)
-modoutput$term <- gsub("\\[", "", modoutput$term)
-modoutput$term <- gsub("\\]", "", modoutput$term)
-modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("tx", "Tx", modoutput$term)
-modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
-
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
-
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
-
-colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
-
-print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.", label="tab:suppmodmeri",
-             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      #sanitize.text.function = function(x) {x}, table.placement="H",
-      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
-      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
-      sanitize.text.function = identity
-    )
-
-
-
-@
-
-
-\newpage
-<<label=suppmodtotbio, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
-
-modoutput <- read.csv("output/totbiomass_modeloutput.csv", header=TRUE)
-modoutput <- modoutput[c(1:6, 29:76),]
-#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-# add multicolumn later for BB and LO headers above these column names
-
-modoutput$term <- gsub("b_", "", modoutput$term)
-modoutput$term <- gsub("r_species", "", modoutput$term)
-modoutput$term <- gsub("\\[", "", modoutput$term)
-modoutput$term <- gsub("\\]", "", modoutput$term)
-modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("tx", "Tx", modoutput$term)
-modoutput$term <- gsub("chill1", "Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("chill2", "Chill 8 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill1", "Tx x Chill 6 Wks", modoutput$term)
-modoutput$term <- gsub("tx:chill2", "Tx x Chill 8 Wks", modoutput$term)
-
-modoutput$term <- gsub("ACESAC", paste0("\\\\textit{", "Acer saccharinum","}"), modoutput$term)
-modoutput$term <- gsub("ALNRUG", paste0("\\\\textit{","Alnus incana rugosa","}"), modoutput$term)
-modoutput$term <- gsub("BETPAP", paste0("\\\\textit{","Betula papyrifera","}"), modoutput$term)
-modoutput$term <- gsub("BETPOP", paste0("\\\\textit{","Betula populifolia","}"), modoutput$term)
-modoutput$term <- gsub("CORRAC", paste0("\\\\textit{","Cornus racemosa","}"), modoutput$term)
-
-modoutput$term <- gsub("SALPUR", paste0("\\\\textit{","Salix purpurea","}"), modoutput$term)
-modoutput$term <- gsub("SORAME", paste0("\\\\textit{","Sorbus americana","}"), modoutput$term)
-modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), modoutput$term)
-
-colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
-
-print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.", label="tab:suppmodtotbio",
-             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      #sanitize.text.function = function(x) {x}, table.placement="H",
-      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
-      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
-      sanitize.text.function = identity
-    )
-
-
-
-@
-
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//analyses/figures/totbiomass50and90_brms.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). }\label{fig:mutotbio}
+  -\includegraphics[width=12cm]{..//analyses/figures/budsetorder_byrank.pdf} 
+  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
   -\end{center}
   -\end{figure}}
 
+
+%%%%% Removed for now
 %\newpage
 <<label=suppmodrtos, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 if(FALSE){
