@@ -13,7 +13,7 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
   par(mar=c(5,7,3,10))
   plot(x=NULL,y=NULL, xlim=xlim, yaxt='n', ylim=ylim,
        xlab=xlab, ylab="", main=nameforfig)
-  axis(2, at=1:5, labels=rev(c("Treatment", "Chilling \n(6 weeks)", "Chilling  \n(8 weeks)", "Treatment x \nChilling \n(6 weeks)", "Treatment x \nChilling \n(8 weeks)")), las=1)
+  axis(2, at=1:5, labels=rev(c("False Spring", "Chilling \n(6 weeks)", "Chilling  \n(8 weeks)", "False Spring x \nChilling \n(6 weeks)", "False Spring x \nChilling \n(8 weeks)")), las=1)
   abline(v=0, lty=2, col="darkgrey")
   rownameshere <- c("b_tx", "b_chill1", "b_chill2", "b_tx:chill1", "b_tx:chill2")
   ppeffects <- c("b_tx", "b_chill1", "b_chill2", "b_tx:chill1", "b_tx:chill2") # or 1:4 here...

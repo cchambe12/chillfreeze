@@ -78,7 +78,7 @@ library(broom)
 
 @
 \section*{Supplemental Materials and Methods: Data analysis and model equations}
-False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
+Using Bayesian hierarchicial models, we estimated the effects of chilling duration, false spring treatment and all two-way interactions as predictors with species modeled hierarchically as grouping factors. False spring treatment is written as `tx' in the equation below and chilling was split into two binary predictors: `chill1', which is denoted as `0' for 4 weeks of chilling or `1' for 6 weeks of chilling and `chill2' which is `1' for 8 weeks of chilling:
 
 \begin{align*}
 y_i &= \alpha_{species[i]} + \beta_{tx_{species[i]}}X_{tx} + \beta_{chill1_{species[i]}}X_{chill1} + \beta_{chill2_{species[i]}}X_{chill2}\\
@@ -99,7 +99,9 @@ The $\alpha$ and each of the five $\beta$ coefficients are modeled at the specie
 \beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
 \end{align*}
 
-where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
+where $i$ represents each unique observation, $species$ is the species, $\alpha$ represents the intercept, $\beta$ terms represent slope estimates, and $y$ is the phenology or growth measurement. 
+
+For the shoot apical meristem model, we used a Bernouilli distribution, which is modeled as:
 
 \begin{align*}
  y_i & \sim Binomial(1,p) \tag{2} \\
@@ -118,12 +120,16 @@ The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as t
 \beta_{txchill2_{species}} & \sim N(\mu_{txchill2}, \sigma_{txchill2}) \\
 \end{align*}
 
+Model estimates for the shoot apical meristem model were modeled on the logit scale (shown in all tables) and were converted to probability percentages in all figures for easier interpretation by following the `divide by four' rule \citep{Gelman2006}.
+
+\bibliography{..//references/chillfreeze.bib}
+
 \section*{Supplemental tables and figures}
 
 <<label=simbbmod, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-bbdat <- read.csv("output/clean_dvr_traits.csv")
+bbdat <- read.csv("..//analyses/output/clean_dvr_traits.csv")
 
 bb.mod <- lm(budburst ~ chill1 + chill2, data=bbdat)
 
@@ -161,9 +167,9 @@ print(xtable(dvr, caption = "Summary of simple linear regression model of durati
 
 \newpage
 <<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/dvr_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/dvr_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -209,9 +215,9 @@ print(xtable(modoutput,
 
 \newpage
 <<label=suppmodgs, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/gslength_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/gslength_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -256,9 +262,9 @@ print(xtable(modoutput,
 
 \newpage
 <<label=suppmodmeri, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/meristem_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/meristem_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -303,9 +309,9 @@ print(xtable(modoutput,
 
 \newpage
 <<label=suppmodht, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/htfinal_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/htfinal_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -351,9 +357,9 @@ print(xtable(modoutput,
 
 \newpage
 <<label=suppmodtotbio, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/totbiomass_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/totbiomass_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -405,9 +411,9 @@ print(xtable(modoutput,
   
   \newpage
 <<label=suppmodchl, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/chlavg_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/chlavg_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -452,16 +458,16 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//analyses/figures/chloro50and90_brms.pdf} 
+  -\includegraphics[width=14cm]{..//analyses/figures/chl50and90_brms.pdf} 
   -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on chlorophyll content. }\label{fig:muchl}
   -\end{center}
   -\end{figure}}
 
 \newpage
 <<label=suppmodtough, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/toughness_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/toughness_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -507,9 +513,9 @@ print(xtable(modoutput,
 
 \newpage
 <<label=suppmodthick, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/thickness_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/thickness_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -564,9 +570,9 @@ print(xtable(modoutput,
 %\newpage
 <<label=suppmodrtos, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 if(FALSE){
-setwd("~/Documents/git/chillfreeze/analyses")
+#setwd("~/Documents/git/chillfreeze/analyses")
 
-modoutput <- read.csv("output/roottoshoot_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("..//analyses/output/roottoshoot_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:6, 29:76),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
