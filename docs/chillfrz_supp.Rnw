@@ -198,7 +198,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on duration of vegetative risk.", label="tab:suppmoddvr",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on duration of vegetative risk (days between budburst to leafout).", label="tab:suppmoddvr",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -246,7 +246,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on growing season length.", label="tab:suppmodgs",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on growing season length.", label="tab:suppmodgs",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -293,7 +293,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.", label="tab:suppmodmeri",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on shoot apical meristem damage.", label="tab:suppmodmeri",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -340,7 +340,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.", label="tab:suppmodht",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total season growth.", label="tab:suppmodht",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -388,7 +388,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.", label="tab:suppmodtotbio",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total biomass.", label="tab:suppmodtotbio",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -405,7 +405,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=14cm]{..//analyses/figures/totbiomass50and90_brms.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). }\label{fig:mutotbio}
+  -\caption{Effects of false spring treatment (Tx), six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). }\label{fig:mutotbio}
   -\end{center}
   -\end{figure}}
   
@@ -442,7 +442,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on leaf chlorophyll content.", label="tab:suppmodchl",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf chlorophyll content.", label="tab:suppmodchl",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -496,7 +496,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on leaf toughness.", label="tab:suppmodtough",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf toughness.", label="tab:suppmodtough",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -544,7 +544,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on leaf thickness.", label="tab:suppmodthick",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf thickness.", label="tab:suppmodthick",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -561,7 +561,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/budsetorder_byrank.pdf} 
-  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
+  -\caption{Rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
   -\end{center}
   -\end{figure}}
 
@@ -601,7 +601,7 @@ modoutput$term <- gsub("VIBDEN", paste0("\\\\textit{","Viburnum dendatum","}"), 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of model with the effects of false spring treatment and chilling duration across species on belowground to aboveground biomass ratio.", label="tab:suppmodrtos",
+             caption = "Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on belowground to aboveground biomass ratio.", label="tab:suppmodrtos",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
