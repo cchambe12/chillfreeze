@@ -45,7 +45,7 @@
 %\noindent \textbf{\Large{False springs coupled with warming winters amplify temperate tree damage}}
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
+C. J. Chamberlain $^{1,2}$ \& E. M. Wolkovich $^{1,2,3}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
 $^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA 02131; \\
@@ -87,236 +87,245 @@ rmspp <- c("NYSSYL", "FAGGRA")
 chillfrz <- chillfrz[!(chillfrz$species%in%rmspp),]
 
 ### DVR Model - WITH ENOUGH CHILLING, CAN COMPENSATE FOR TX!!!
-dvrtx<-round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)), digits=1) ### 2.97
-dvrtxsd<-round(mean(fixef(dvr.mod, pars="tx")[2]), digits=1) 
-dvrchill1<-round(mean(fixef(dvr.mod, pars="chill1", summary=FALSE)), digits=1) # -0.53
-dvrchill1sd<-round(mean(fixef(dvr.mod, pars="chill1")[2]), digits=1)
-dvrchill2<-round(mean(fixef(dvr.mod, pars="chill2", summary=FALSE)), digits=1) ### -2.67
-dvrchill2sd<-round(mean(fixef(dvr.mod, pars="chill2")[2]), digits=1) # 1.14
+dvrtx<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### 2.97
+dvrtxsd<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx")[2]), digits=1), nsmall=1)) 
+dvrchill1<-as.numeric(format(round(mean(fixef(dvr.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) # -0.53
+dvrchill1sd<-as.numeric(format(round(mean(fixef(dvr.mod, pars="chill1")[2]), digits=1), nsmall=1))
+dvrchill2<-as.numeric(format(round(mean(fixef(dvr.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### -2.67
+dvrchill2sd<-as.numeric(format(round(mean(fixef(dvr.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 1.14
 
-dvrtxchill1<-round(mean(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=1) 
-dvrtxchill1sd<-round(mean(fixef(dvr.mod, pars="tx:chill1")[2]), digits=1) # 1.14
-dvrtxchill1 <- dvrtx + dvrchill1 + dvrtxchill1 ### 1.53
+dvrtxchill1<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1)) 
+dvrtxchill1sd<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 1.14
+dvrtxchill1 <- round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)) + mean(fixef(dvr.mod, pars="chill1", summary=FALSE)) + mean(fixef(dvr.mod, pars="tx:chill1", summary=FALSE)), digits=1) ### 1.53
 
-dvrtxchill2<-round(mean(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=1) 
-dvrtxchill2sd<-round(mean(fixef(dvr.mod, pars="tx:chill2")[2]), digits=1) # 1.08
-dvrtxchill2 <- dvrtx + dvrchill2 + dvrtxchill2 # 0.92
+dvrtxchill2<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1)) 
+dvrtxchill2sd<-as.numeric(format(round(mean(fixef(dvr.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 1.08
+dvrtxchill2 <- round(mean(fixef(dvr.mod, pars="tx", summary=FALSE)) + mean(fixef(dvr.mod, pars="chill2", summary=FALSE)) + mean(fixef(dvr.mod, pars="tx:chill2", summary=FALSE)), digits=1) # 0.92
 
 
 ### Gslength Model - CHILLING EXTENDS GS!!!! AND CAN COMPENSATE FOR TX!
-gslengthtx<-round(mean(fixef(gslength.modlo, pars="tx", summary=FALSE)), digits=1) # -2.9
-gslengthtxsd<-round(mean(fixef(gslength.modlo, pars="tx")[2]), digits=1) # 5.52
-gslengthchill1<-round(mean(fixef(gslength.modlo, pars="chill1", summary=FALSE)), digits=1) ### 3.11
-gslengthchill1sd<-round(mean(fixef(gslength.modlo, pars="chill1")[2]), digits=1) # 4.97
-gslengthchill2<-round(mean(fixef(gslength.modlo, pars="chill2", summary=FALSE)), digits=1) ### -6.82
-gslengthchill2sd<-round(mean(fixef(gslength.modlo, pars="chill2")[2]), digits=1) # 5.11
-gslengthtxchill1<-round(mean(fixef(gslength.modlo, pars="tx:chill1", summary=FALSE)), digits=1) 
-gslengthtxchill1sd<-round(mean(fixef(gslength.modlo, pars="tx:chill1")[2]), digits=1) # 6.63
-gslengthtxchill1 <- gslengthtx + gslengthchill1 + gslengthtxchill1 # -13.91
+gslengthtx<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx", summary=FALSE)), digits=1), nsmall=1)) # -2.9
+gslengthtxsd<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx")[2]), digits=1), nsmall=1)) # 5.52
+gslengthchill1<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) ### 3.11
+gslengthchill1sd<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="chill1")[2]), digits=1), nsmall=1)) # 4.97
+gslengthchill2<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### -6.82
+gslengthchill2sd<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="chill2")[2]), digits=1), nsmall=1)) # 5.11
+gslengthtxchill1<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1)) 
+gslengthtxchill1sd<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 6.63
+gslengthtxchill1 <- round(mean(fixef(gslength.mod, pars="tx", summary=FALSE)) + mean(fixef(gslength.mod, pars="chill1", summary=FALSE)) + mean(fixef(gslength.mod, pars="tx:chill1", summary=FALSE)), digits=1) # -13.91
 
-gslengthtxchill2<-round(mean(fixef(gslength.modlo, pars="tx:chill2", summary=FALSE)), digits=1)
-gslengthtxchill2sd<-round(mean(fixef(gslength.modlo, pars="tx:chill2")[2]), digits=1) # 6.97
-gslengthtxchill2 <- gslengthtx + gslengthchill2 + gslengthtxchill2 ### -19.08
+gslengthtxchill2<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+gslengthtxchill2sd<-as.numeric(format(round(mean(fixef(gslength.modlo, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 6.97
+gslengthtxchill2 <- round(mean(fixef(gslength.mod, pars="tx", summary=FALSE)) + mean(fixef(gslength.mod, pars="chill2", summary=FALSE)) + mean(fixef(gslength.mod, pars="tx:chill2", summary=FALSE)), digits=1) ### -19.08
 
 ### Meristem Model - MERISTEM DAMAGE ACROSS CHILL TXs!!
-meritx<-round(mean(fixef(meri.mod, pars="tx", summary=FALSE)), digits=1) ### 2.07
-meritx.perc <- round((meritx/4)*100, digits=1)
-meritxsd <- round(mean(fixef(meri.mod, pars="tx")[2]), digits=1) # 0.97
-merichill1<-round(mean(fixef(meri.mod, pars="chill1", summary=FALSE)), digits=1) # -0.53
-merichill1sd<-round(mean(fixef(meri.mod, pars="chill1")[2]), digits=1) # 1.88
-merichill2<-round(mean(fixef(meri.mod, pars="chill2", summary=FALSE)), digits=1) # -0.18
-merichill2sd<-round(mean(fixef(meri.mod, pars="chill2")[2]), digits=1) # 1.17
+meritx<-as.numeric(format(round(mean(fixef(meri.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### 2.07
+meritx.perc <- as.numeric(format(round((meritx/4)*100, digits=1), nsmall=1))
+meritxsd <- as.numeric(format(round(mean(fixef(meri.mod, pars="tx")[2]), digits=1), nsmall=1)) # 0.97
+merichill1<-as.numeric(format(round(mean(fixef(meri.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) # -0.53
+merichill1sd<-as.numeric(format(round(mean(fixef(meri.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 1.88
+merichill2<-as.numeric(format(round(mean(fixef(meri.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) # -0.18
+merichill2sd<-as.numeric(format(round(mean(fixef(meri.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 1.17
 #merichill2sd <- merichill2sd[2] - merichill2sd[1]
-meritxchill1<-round(mean(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=1) 
-meritxchill1sd<-round(mean(fixef(meri.mod, pars="tx:chill1")[2]), digits=1) # 1.42
+meritxchill1<-as.numeric(format(round(mean(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1)) 
+meritxchill1sd<-as.numeric(format(round(mean(fixef(meri.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 1.42
 #meritxchill1sd <- meritxchill1sd[2] - meritxchill1sd[1]
-meritxchill1 <- meritx + merichill1 + meritxchill1 # 1.33
-meritxchill1.perc <- round((meritxchill1/4)*100, digits=1)
+meritxchill1 <- round(mean(fixef(meri.mod, pars="tx", summary=FALSE)) + mean(fixef(meri.mod, pars="chill1", summary=FALSE)) + mean(fixef(meri.mod, pars="tx:chill1", summary=FALSE)), digits=1) # 1.33
+meritxchill1.perc <- as.numeric(format(round((meritxchill1/4)*100, digits=1), nsmall=1))
 
-meritxchill2<-round(mean(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=1) 
-meritxchill2sd<-round(mean(fixef(meri.mod, pars="tx:chill2")[2]), digits=1) # 1.31
+meritxchill2<-as.numeric(format(round(mean(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1)) 
+meritxchill2sd<-as.numeric(format(round(mean(fixef(meri.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 1.31
 #meritxchill2sd <- meritxchill2sd[2] - meritxchill2sd[1]
-meritxchill2 <- meritx + merichill2 + meritxchill2 ### 2.17
-meritxchill2.perc <- round((meritxchill2/4)*100, digits=1)
+meritxchill2 <- round(mean(fixef(meri.mod, pars="tx", summary=FALSE)) + mean(fixef(meri.mod, pars="chill2", summary=FALSE)) + mean(fixef(meri.mod, pars="tx:chill2", summary=FALSE)), digits=1) ### 2.17
+meritxchill2.perc <- as.numeric(format(round((meritxchill2/4)*100, digits=1), nsmall=1))
 
 ### Chlo Model ### PROBABLY MOVE TO SUPP!!! TX DECREASES CHLORO ESP WITH MORE CHILLING...
-chltx<-round(mean(fixef(chl.mod, pars="tx", summary=FALSE)), digits=1) # -0.35
-chltxsd<-round(mean(fixef(chl.mod, pars="tx")[2]), digits=1) # 0.77
+chltx<-as.numeric(format(round(mean(fixef(chl.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) # -0.35
+chltxsd<-as.numeric(format(round(mean(fixef(chl.mod, pars="tx")[2]), digits=1), nsmall=1)) # 0.77
 #chltxsd <- chltxsd[2] - chltxsd[1]
-chlchill1<-round(mean(fixef(chl.mod, pars="chill1", summary=FALSE)), digits=1) # -0.06
-chlchill1sd<-round(mean(fixef(chl.mod, pars="chill1")[2]), digits=1) # 0.84
+chlchill1<-as.numeric(format(round(mean(fixef(chl.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) # -0.06
+chlchill1sd<-as.numeric(format(round(mean(fixef(chl.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 0.84
 #chlchill1sd <- chlchill1sd[2] - chlchill1sd[1]
-chlchill2<-round(mean(fixef(chl.mod, pars="chill2", summary=FALSE)), digits=1) # 0.43
-chlchill2sd<-round(mean(fixef(chl.mod, pars="chill2")[2]), digits=1) # 0.91
-chltxchill1 <- round(mean(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-chltxchill1sd <-round(mean(fixef(chl.mod, pars="tx:chill1")[2]), digits=1) 
-chltxchill1 <- chltx + chlchill1 + chltxchill1  
+chlchill2<-as.numeric(format(round(mean(fixef(chl.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) # 0.43
+chlchill2sd<-as.numeric(format(round(mean(fixef(chl.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 0.91
+chltxchill1 <- as.numeric(format(round(mean(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+chltxchill1sd <-as.numeric(format(round(mean(fixef(chl.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) 
+chltxchill1 <- round(mean(fixef(chl.mod, pars="tx", summary=FALSE)) + mean(fixef(chl.mod, pars="chill1", summary=FALSE)) + mean(fixef(chl.mod, pars="tx:chill1", summary=FALSE)), digits=1)  
 
-chltxchill2<-round(mean(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-chltxchill2sd<-round(mean(fixef(chl.mod, pars="tx:chill2")[2]), digits=1) # 1.07
+chltxchill2<-as.numeric(format(round(mean(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+chltxchill2sd<-as.numeric(format(round(mean(fixef(chl.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 1.07
 #chltxchill2sd <- chltxchill2sd[2] - chltxchill2sd[1]
-chltxchill2 <- chltx + chlchill2 + chltxchill2 ### -2.03
+chltxchill2 <- round(mean(fixef(chl.mod, pars="tx", summary=FALSE)) + mean(fixef(chl.mod, pars="chill2", summary=FALSE)) + mean(fixef(chl.mod, pars="tx:chill2", summary=FALSE)), digits=1)   ### -2.03
 
 ### Tough Model - TOUGHNESS DECREASES ACROSS ALL CHILL TXs!!!!
-toughtx<-round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)), digits=1) ### -0.05
-toughtxsd<-round(mean(fixef(toughness.mod, pars="tx")[2]), digits=1) # 0.02
+toughtx<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### -0.05
+toughtxsd<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx")[2]), digits=1), nsmall=1)) # 0.02
 #toughtxsd <- toughtxsd[2] - toughtxsd[1]
-toughchill1<-round(mean(fixef(toughness.mod, pars="chill1", summary=FALSE)), digits=1) ### -0.06
-toughchill1sd<-round(mean(fixef(toughness.mod, pars="chill1")[2]), digits=1) # 0.02
+toughchill1<-as.numeric(format(round(mean(fixef(toughness.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) ### -0.06
+toughchill1sd<-as.numeric(format(round(mean(fixef(toughness.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 0.02
 #toughchill1sd <- toughchill1sd[2] - toughchill1sd[1]
-toughchill2<-round(mean(fixef(toughness.mod, pars="chill2", summary=FALSE)), digits=1) ### -0.05
-toughchill2sd<-round(mean(fixef(toughness.mod, pars="chill2")[2]), digits=1) # 0.02
+toughchill2<-as.numeric(format(round(mean(fixef(toughness.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### -0.05
+toughchill2sd<-as.numeric(format(round(mean(fixef(toughness.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 0.02
 #toughchill2sd <- toughchill2sd[2] - toughchill2sd[1]
-toughtxchill1<-round(mean(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=1) 
-toughtxchill1sd<-round(mean(fixef(toughness.mod, pars="tx:chill1")[2]), digits=1) # 0.03
+toughtxchill1<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1)) 
+toughtxchill1sd<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 0.03
 #toughtxchill1sd <- toughtxchill1sd[2] - toughtxchill1sd[1]
-toughtxchill1 <- toughtx + toughchill1 + toughtxchill1 ### -0.09
+toughtxchill1 <- round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)) + mean(fixef(toughness.mod, pars="chill1", summary=FALSE)) + mean(fixef(toughness.mod, pars="tx:chill1", summary=FALSE)), digits=1) ### -0.09
 
-toughtxchill2<-round(mean(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-toughtxchill2sd<-round(mean(fixef(toughness.mod, pars="tx:chill2")[2]), digits=1) # 0.03
+toughtxchill2<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+toughtxchill2sd<-as.numeric(format(round(mean(fixef(toughness.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 0.03
 #toughtxchill2sd <- toughtxchill2sd[2] - toughtxchill2sd[1]
-toughtxchill2 <- toughtx + toughchill2 + toughtxchill2 ### -0.08
+toughtxchill2 <- round(mean(fixef(toughness.mod, pars="tx", summary=FALSE)) + mean(fixef(toughness.mod, pars="chill2", summary=FALSE)) + mean(fixef(toughness.mod, pars="tx:chill2", summary=FALSE)), digits=1) ### -0.08
 
 ### Thick Model - THICKNESS DECREASES ACROSS ALL CHILL TXs, ESP 4 & 8 wks
-thicktx<-round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)), digits=1) ### -8.9
-thicktxsd<-round(mean(fixef(thickness.mod, pars="tx")[2]), digits=1) # 3.74
+thicktx<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### -8.9
+thicktxsd<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx")[2]), digits=1), nsmall=1)) # 3.74
 #thicktxsd <- thicktxsd[2] - thicktxsd[1]
-thickchill1<-round(mean(fixef(thickness.mod, pars="chill1", summary=FALSE)), digits=1) ### 7.21
-thickchill1sd<-round(mean(fixef(thickness.mod, pars="chill1")[2]), digits=1) # 6.55
+thickchill1<-as.numeric(format(round(mean(fixef(thickness.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) ### 7.21
+thickchill1sd<-as.numeric(format(round(mean(fixef(thickness.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 6.55
 #thickchill1sd <- thickchill1sd[2] - thickchill1sd[1]
-thickchill2<-round(mean(fixef(thickness.mod, pars="chill2", summary=FALSE)), digits=1) ### -8.38
-thickchill2sd<-round(mean(fixef(thickness.mod, pars="chill2")[2]), digits=1) # 7.48
+thickchill2<-as.numeric(format(round(mean(fixef(thickness.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### -8.38
+thickchill2sd<-as.numeric(format(round(mean(fixef(thickness.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 7.48
 #thickchill2sd <- thickchill2sd[2] - thickchill2sd[1]
-thicktxchill1<-round(mean(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-thicktxchill1sd<-round(mean(fixef(thickness.mod, pars="tx:chill1")[2]), digits=1) # 5.31
+thicktxchill1<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+thicktxchill1sd<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 5.31
 #thicktxchill1sd <- thicktxchill1sd[2] - thicktxchill1sd[1]
-thicktxchill1 <- thicktx + thickchill1 + thicktxchill1 # -3.5
+thicktxchill1 <- round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)) + mean(fixef(thickness.mod, pars="chill1", summary=FALSE)) + mean(fixef(thickness.mod, pars="tx:chill1", summary=FALSE)), digits=1) # -3.5
 
-thicktxchill2<-round(mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-thicktxchill2sd<-round(mean(fixef(thickness.mod, pars="tx:chill2")[2]), digits=1) # 5.25
+thicktxchill2<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+thicktxchill2sd<-as.numeric(format(round(mean(fixef(thickness.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 5.25
 #thicktxchill2sd <- thicktxchill2sd[2] - thicktxchill2sd[1]
-thicktxchill2 <- thicktx + thickchill2 + thicktxchill2 ### -15.78
+thicktxchill2 <- round(mean(fixef(thickness.mod, pars="tx", summary=FALSE)) + mean(fixef(thickness.mod, pars="chill2", summary=FALSE)) + mean(fixef(thickness.mod, pars="tx:chill2", summary=FALSE)), digits=1) ### -15.78
 
 if(FALSE){
 ### Ht 60 day Model - Not very intersting, chilling increases growth but nothing with TX
-httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=1) # -0.44
-httxsd<-round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=1) # 0.98
+httx<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) # -0.44
+httxsd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=1), nsmall=1)) # 0.98
 #httxsd<- httxsd[2] - httxsd[1]
-htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=1) ### 2.81
-htchill1sd<-round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=1) # 1.55
+htchill1<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) ### 2.81
+htchill1sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 1.55
 #htchill1sd<- htchill1sd[2] - htchill1sd[1]
-htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=1) ### 1.32
-htchill2sd<-round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=1) # 1.21
+htchill2<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### 1.32
+htchill2sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 1.21
 #htchill2sd<- htchill2sd[2] - htchill2sd[1]
-httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-httxchill1sd<-round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=1) # 1.48
+httxchill1<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+httxchill1sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 1.48
 #httxchill1sd<- httxchill1sd[2] - httxchill1sd[1]
 httxchill1 <- httx + htchill1 + httxchill1 # 0.36
 
-httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-httxchill2sd<-round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=1) # 1.46
+httxchill2<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+httxchill2sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 1.46
 #httxchill2sd<- httxchill2sd[2] - httxchill2sd[1]
 httxchill2 <- httx + htchill2 + httxchill2 # 0.68
 }
 
 ### Ht final Model 
-httx<-round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=1) ### 5.06
-httxsd<-round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=1) # 4.38
+httx<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### 5.06
+httxsd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx")[2]), digits=1), nsmall=1)) # 4.38
 #httxsd <- httxsd[2] - httxsd[1]
-htchill1<-round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=1) ### 2.81
-htchill1sd<-round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=1) # 1.55
+htchill1<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) ### 2.81
+htchill1sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 1.55
 #htchill1sd<- htchill1sd[2] - htchill1sd[1]
-htchill2<-round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=1) ### 1.32
-htchill2sd<-round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=1) # 1.21
+htchill2<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) ### 1.32
+htchill2sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 1.21
 #htchill2sd<- htchill2sd[2] - htchill2sd[1]
-httxchill1<-round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-httxchill1sd<-round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=1) # 1.48
+httxchill1<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+httxchill1sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 1.48
 #httxchill1sd<- httxchill1sd[2] - httxchill1sd[1]
-httxchill1 <- round(httx + htchill1 + httxchill1, digits=1) # 0.36
+httxchill1 <- round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)) + mean(fixef(htdiff.mod, pars="chill1", summary=FALSE)) + mean(fixef(htdiff.mod, pars="tx:chill1", summary=FALSE)), digits=1) # 0.36
 
-httxchill2<-round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-httxchill2sd<-round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=1) # 1.46
+httxchill2<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+httxchill2sd<-as.numeric(format(round(mean(fixef(htdiff.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 1.46
 #httxchill2sd<- httxchill2sd[2] - httxchill2sd[1]
-httxchill2 <- httx + htchill2 + httxchill2 # 0.68
+httxchill2 <- round(mean(fixef(htdiff.mod, pars="tx", summary=FALSE)) + mean(fixef(htdiff.mod, pars="chill2", summary=FALSE)) + mean(fixef(htdiff.mod, pars="tx:chill2", summary=FALSE)), digits=1)   # 0.68
 
 
 ### Total biomass Model - TX DECREASES BIOMASS BUT CHILLING CAN COMPENSATE!!!
-totbiomasstx<-round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)), digits=1) ### -3.45
-totbiomasstxsd<-round(mean(fixef(totbiomass.mod, pars="tx")[2]), digits=1)  # 2.78
+totbiomasstx<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### -3.45
+totbiomasstxsd<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx")[2]), digits=1), nsmall=1))  # 2.78
 #totbiomasstxsd <- totbiomasstxsd[2] - totbiomasstxsd[1]
-totbiomasschill1<-round(mean(fixef(totbiomass.mod, pars="chill1", summary=FALSE)), digits=1) # 0.38
-totbiomasschill1sd<-round(mean(fixef(totbiomass.mod, pars="chill1")[2]), digits=1) # 2.91
+totbiomasschill1<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) # 0.38
+totbiomasschill1sd<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 2.91
 #totbiomasschill1sd <- totbiomasschill1sd[2] - totbiomasschill1sd[1]
-totbiomasschill2<-round(mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)), digits=1) # 2.59
-totbiomasschill2sd<-round(mean(fixef(totbiomass.mod, pars="chill2")[2]), digits=1) # 3.04
+totbiomasschill2<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) # 2.59
+totbiomasschill2sd<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 3.04
 #totbiomasschill2sd <- totbiomasschill2sd[2] - totbiomasschill2sd[1]
-totbiomasstxchill1<-round(mean(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-totbiomasstxchill1sd<-round(mean(fixef(totbiomass.mod, pars="tx:chill1")[2]), digits=1) #  4.04
+totbiomasstxchill1<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+totbiomasstxchill1sd<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) #  4.04
 #totbiomasstxchill1sd <- totbiomasstxchill1sd[2] - totbiomasstxchill1sd[1]
-totbiomasstxchill1 <- totbiomasstx + totbiomasschill1 + totbiomasstxchill1 # -3.62
+totbiomasstxchill1 <- round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="chill1", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="tx:chill1", summary=FALSE)), digits=1) # -3.62
 
-totbiomasstxchill2<-round(mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-totbiomasstxchill2sd<-round(mean(fixef(totbiomass.mod, pars="tx:chill2")[2]), digits=1) #  3.97
+totbiomasstxchill2<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+totbiomasstxchill2sd<-as.numeric(format(round(mean(fixef(totbiomass.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) #  3.97
 #totbiomasstxchill2sd <- totbiomasstxchill2sd[2] - totbiomasstxchill2sd[1]
-totbiomasstxchill2 <- totbiomasstx + totbiomasschill2 + totbiomasstxchill2 # 2.88
+totbiomasstxchill2 <- round(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)), digits=1) # 2.88
 
 
 ### Root to Shoot Model - TX REDUCES ROOT MASS
-roottoshoottx<-round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)), digits=1) ### -0.18
-roottoshoottxsd<-round(mean(fixef(roottoshoot.mod, pars="tx")[2]), digits=1) # 0.15
+roottoshoottx<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)), digits=1), nsmall=1)) ### -0.18
+roottoshoottxsd<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx")[2]), digits=1), nsmall=1)) # 0.15
 #roottoshoottxsd <- roottoshoottxsd[2] - roottoshoottxsd[1]
-roottoshootchill1<-round(mean(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)), digits=1) #    -0.03
-roottoshootchill1sd<-round(mean(fixef(roottoshoot.mod, pars="chill1")[2]), digits=1) # 0.14
+roottoshootchill1<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)), digits=1), nsmall=1)) #    -0.03
+roottoshootchill1sd<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="chill1")[2]), digits=1), nsmall=1)) # 0.14
 #roottoshootchill1sd <- roottoshootchill1sd[2] - roottoshootchill1sd[1]
-roottoshootchill2<-round(mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)), digits=1) #    -0.16
-roottoshootchill2sd<-round(mean(fixef(roottoshoot.mod, pars="chill2")[2]), digits=1) # 0.17
+roottoshootchill2<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)), digits=1), nsmall=1)) #    -0.16
+roottoshootchill2sd<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="chill2")[2]), digits=1), nsmall=1)) # 0.17
 #roottoshootchill2sd <- roottoshootchill2sd[2] - roottoshootchill2sd[1]
-roottoshoottxchill1<-round(mean(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=1)
-roottoshoottxchill1sd<-round(mean(fixef(roottoshoot.mod, pars="tx:chill1")[2]), digits=1) # 0.31
+roottoshoottxchill1<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=1), nsmall=1))
+roottoshoottxchill1sd<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx:chill1")[2]), digits=1), nsmall=1)) # 0.31
 #roottoshoottxchill1sd <- roottoshoottxchill1sd[2] - roottoshoottxchill1sd[1]
-roottoshoottxchill1 <- roottoshoottx + roottoshootchill1 + roottoshoottxchill1 # -0.11
+roottoshoottxchill1 <- round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="chill1", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="tx:chill1", summary=FALSE)), digits=1) # -0.11
 
-roottoshoottxchill2<-round(mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=1)
-roottoshoottxchill2sd<-round(mean(fixef(roottoshoot.mod, pars="tx:chill2")[2]), digits=1) # 0.23
+roottoshoottxchill2<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=1), nsmall=1))
+roottoshoottxchill2sd<-as.numeric(format(round(mean(fixef(roottoshoot.mod, pars="tx:chill2")[2]), digits=1), nsmall=1)) # 0.23
 #roottoshoottxchill2sd <- roottoshoottxchill2sd[2] - roottoshoottxchill2sd[1]
-roottoshoottxchill2 <- roottoshoottx + roottoshootchill2 + roottoshoottxchill2 ### -0.29
+roottoshoottxchill2 <- round(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)), digits=1) ### -0.29
 
 ### Simple models
 bbdat <- read.csv("output/clean_dvr_traits.csv")
 bb.mod <- lm(budburst ~ chill1 + chill2, data=bbdat)
-simpbbchill1 <- round(summary(bb.mod)$coef[2,1], digits=1)
-simpbbchillsd1 <- round(summary(bb.mod)$coef[2,2], digits=1)
-simpbbchill2 <- round(summary(bb.mod)$coef[3,1], digits=1)
-simpbbchillsd2 <- round(summary(bb.mod)$coef[3,2], digits=1)
+simpbbchill1 <- as.numeric(format(round(summary(bb.mod)$coef[2,1], digits=1), nsmall=1))
+simpbbchillsd1 <- as.numeric(format(round(summary(bb.mod)$coef[2,2], digits=1), nsmall=1))
+simpbbchill2 <- as.numeric(format(round(summary(bb.mod)$coef[3,1], digits=1), nsmall=1))
+simpbbchillsd2 <- as.numeric(format(round(summary(bb.mod)$coef[3,2], digits=1), nsmall=1))
 
 dvr.mod <- lm(dvr ~ chill1 + chill2, data=bbdat)
-simpdvrchill1 <- round(summary(dvr.mod)$coef[2,1], digits=1)
-simpdvrchillsd1 <- round(summary(dvr.mod)$coef[2,2], digits=1)
-simpdvrchill2 <- round(summary(dvr.mod)$coef[3,1], digits=1)
-simpdvrchillsd2 <- round(summary(dvr.mod)$coef[3,2], digits=1)
+simpdvrchill1 <- as.numeric(format(round(summary(dvr.mod)$coef[2,1], digits=1), nsmall=1))
+simpdvrchillsd1 <- as.numeric(format(round(summary(dvr.mod)$coef[2,2], digits=1), nsmall=1))
+simpdvrchill2 <- as.numeric(format(round(summary(dvr.mod)$coef[3,1], digits=1), nsmall=1))
+simpdvrchillsd2 <- as.numeric(format(round(summary(dvr.mod)$coef[3,2], digits=1), nsmall=1))
 
 @
-\section*{Abstract}
-With warming temperatures, spring phenology (i.e., budburst and leafout) is advancing. Late spring freezes, however, may not advance at the same rate, leading to an increase in freezes that occur after trees initiate budburst---known as false springs---with continued warming. Understanding and predicting false springs with climate change requires understanding both how warming shifts budburst and the impacts of false springs on plant tissue. In particular, increasing research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, subsequently decreasing spring freeze tolerance and potentially lead to higher damage from false spring events. Here, we assessed the effects of over-winter chilling and false spring events on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment. We found that false springs slowed subsequent budburst and leafout---extending the period of greatest risk for freeze damage, increased damage to the shoot apical meristem, and decreased leaf toughness, leaf thickness and chlorophyll content. Longer chilling accelerated budburst and leafout, even under false spring conditions, thus chilling compensated for the adverse effects of false springs on phenology. Despite the effect of chilling on phenology, it did not cause any major re-ordering in the sequence of species leafout. We therefore expect climate change to reshape forest communities not through temporal reassembly but rather through impacts on growth and leaf traits from the coupled effects of false springs with decreases in over-winter chilling under future climate change scenarios. %EMW11Sep:  I don't think we mean Longer chilling led to decreased rates of budburst -- that suggests it slowed down how quickly budburst happened.... Also that doesn't really connect for a reader to "chilling compensated for the adverse effects of false springs on phenology" as you have not introduced DVR.  I tried to make some edits without adding too many words, see what you think. 
+\section*{Abstract} %% Word limit is 350, I have 300 words now.
+%% Using typically four simple, factual, numbered statements, it should:
+%%  1) give the conceptual context
+%%  2) state the methodological approach
+%%  3) report the main results and conclusions
+%%  4) include a final point headed ‘Synthesis’, which sums up the paper’s key message in generic terms that can be understood by non-specialists, indicating clearly how this study has advanced ecological understanding.
 
-\textbf{Synthesis:} With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting important processes such as carbon uptake and nutrient cycling. 
-%Understanding the intersection of warming winters and false spring risk is critical to predict how temperate forests will change in the future.
+\begin{enumerate}
+\item  With warming temperatures, spring phenology (i.e., budburst and leafout) is advancing. Late spring freezes, however, may not advance at the same rate, leading to an increase in freezes that occur after trees initiate budburst---known as false springs---with continued warming. Understanding and predicting false springs with climate change requires understanding both how warming shifts budburst and the impacts of false springs on plant tissue. In particular, increasing research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, subsequently decreasing spring freeze tolerance and potentially leading to higher damage from false spring events. 
+\item Here, we assessed the effects of over-winter chilling and false spring events on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment. 
+\item We found that false springs slowed subsequent budburst and leafout---extending the period of greatest risk for freeze damage, which increased damage to the shoot apical meristem, and decreased leaf toughness, leaf thickness and chlorophyll content. Longer chilling accelerated budburst and leafout, even under false spring conditions, thus chilling compensated for the adverse effects of false springs on phenology. Despite the effect of chilling on phenology, it did not cause any major re-ordering in the sequence of species leafout. We therefore expect climate change to reshape forest communities not through temporal reassembly but rather through impacts on growth and leaf traits from the coupled effects of false springs with decreases in over-winter chilling under future climate change scenarios. 
+
+\item \textbf{Synthesis:} With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. This combination could greatly impact plant performance, survival and shape species distributions, ultimately affecting important processes such as carbon uptake and nutrient cycling. 
+\end{enumerate}
 
 \vspace{2ex}
 \textit{Keywords:} false spring, climate change, phenology, spring freeze, forest recruitment, temporal reassembly, budburst, temperate
 
 \section*{Introduction}
-The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to forest management. With warming temperatures, spring phenology (i.e., budburst and leafout, which are strongly cued by temperature) is advancing, causing longer growing seasons \citep{Chuine2001} and reshaping ecosystem dynamics. In one major example, advancing spring phenology has led to increased carbon uptake across temperate forests, which are essential carbon sinks that combat the negative effects of climate change \citep{Keenan2014}. But climate change could diminish or reverse these positive effects on carbon storage: specifically through cold snaps during the spring and reduced cool temperatures in the winter.
+The timing of spring in temperate deciduous forests shapes plant and animal communities and influences ecosystem services from agriculture to forest management. With warming temperatures, spring phenology (i.e., budburst and leafout, which are strongly cued by temperature) is advancing, causing longer growing seasons \citep{Chuine2001} and reshaping ecosystem dynamics. In one major example, advancing spring phenology has led to increased carbon uptake across temperate forests, which are essential carbon sinks that combat the negative effects of climate change \citep{Keenan2014}. But climate change could diminish or reverse these positive effects on carbon storage: specifically through cold snaps during the spring and warming temperatures in the winter.
   
 While climate change has warmed the Northern Hemisphere, cold snaps and freezing events are still occurring. These weather events can have big impacts on plant development each spring. One such event is known as a `false spring', often defined as when temperatures drop below freezing \citep[][i.e., below -2.2$^{\circ}$C]{Schwartz2002} after budburst has initiated. Damage from false spring events can have cascading effects within a forest, from changes to nutrient cycling and carbon uptake to shifts in seedling recruitment \citep{Hufkens2012, Klosterman2018, Richardson2013}. Furthermore, false springs can increase the chance of additional freezes within a growing season by extending the period in which plants are most at risk---the time between budburst and leafout (what we refer to as the `duration of vegetative risk'), resulting in a positive feedback loop: observational studies suggest plants take longer to re-flush leaves after a false spring---up to 38 days \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}---which could lead to additional false springs in a season \citep{Augspurger2009}. As false springs are predicted to increase in certain regions with increased climate change \citep{Ault2015, Liu2018, Zohner2020} understanding their impacts is essential for robust forest management strategies and climate forecasting \citep{OBrien2019}. 
   
-Warmer winters may also play a critical role in the future of forests as they directly impact one of the  major cues plants use to time budburst: over-winter cold temperatures (chilling), in addition to warming spring temperatures (forcing) and longer daylengths. Many temperate plants have evolved chilling requirements to avoid leafout during warm snaps in the middle of the winter, but with climate change, chilling requirements may not be met. If chilling is not met, plants may leaf out much slower or incompletely, which can in turn affect freeze tolerance. Thus studies of how false springs, and their impacts on forests, may shift with climate change also need to understand the interplay of warming winters and false spring risk. %EMW11Sep: Add citation about cues after first sentence. 
+Warmer winters may also play a critical role in the future of forests as they directly impact one of the  major cues plants use to time budburst: over-winter cold temperatures (chilling), in addition to warming spring temperatures (forcing) and longer daylengths \citep{Chuine2016}. Many temperate plants have evolved chilling requirements to avoid leafout during warm snaps in the middle of the winter, but with climate change, chilling requirements may not be met. If chilling is not met, plants may leaf out much slower or incompletely, which can in turn affect freeze tolerance. Thus more studies are needed in the face of climate change to understand the interplay of warming winters and false spring risk and the resulting impact to our forests. 
   
-Understanding how the interplay between winter chilling and false springs may impact future forests requires knowing whether this interplay varies across species within a community. This is especially true if species have evolved along a trade-off of risking spring freezes for early access to resources. While a single-species perspective may predict all individuals to require high levels of chilling to delay budburst and ultimately diminish false spring risk, competition between species for nutrients, water and light resources in the early spring likely pushes some species---and some individuals within species---to leafout earlier \citep{Augspurger2013}. Young trees and understory species generally initiate budburst before canopy trees to benefit from higher light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts these species and individuals at higher risk of freeze damage \citep{Vitasse2014}. Thus, successful forest recruitment requires seedlings and saplings to minimize false spring risk while maximizing growth. 
+Understanding how winter chilling and false springs may affect future forests requires knowing whether this interaction varies across species within a community. This is especially true if species have evolved along a trade-off of risking spring freezes for early access to resources. While a single-species perspective may predict all individuals to require high levels of chilling to delay budburst and ultimately diminish false spring risk, competition between species for nutrients, water and light resources in the early spring likely pushes some species---and some individuals within species---to leafout earlier \citep{Augspurger2013}. Young trees and understory species generally initiate budburst before canopy trees to benefit from higher light levels \citep {Augspurger2008, Vitasse2013}, which potentially puts these species and individuals at higher risk of freeze damage \citep{Vitasse2014}. Thus, successful forest recruitment requires seedlings and saplings to minimize false spring risk while maximizing growth. 
  
-The combination of species- and lifestage-level differences in responses to false springs, chilling and climate change could reshape the temporal assembly of forest communities. Species typically leafout in a similar sequence, with understory species leafing out earlier and higher canopy trees leafing out last but many studies are predicting substantial shifts in chronological order and reassembly of species' leafout with climate change \citep{Roberts2015, Laube2014}. As warming increases winter temperatures and false spring prevalence, phenological cues and their interactions are anticipated to change, which could greatly alter competition and recruitment among forest species for early season resources and ultimately impact species diversity and carbon uptake in temperate forests.
+The combination of species- and lifestage-level differences in responses to false springs, chilling and climate change could reshape the temporal assembly of forest communities. Species typically leafout in a similar sequence, with understory species leafing out earlier and higher canopy trees leafing out last but many studies are predicting substantial shifts in chronological order and reassembly of species' leafout with climate change \citep{Roberts2015, Laube2014}. As warming increases winter temperatures and false spring prevalence, phenological cues and their interactions are anticipated to also change, which could greatly alter competition and recruitment among forest species for early season resources and ultimately impact species diversity and carbon uptake in temperate forests.
   
-Here, we assessed the effects of over-winter chilling length and false springs on sapling phenology and growth across eight temperate tree and shrub species. We exposed individuals to different levels of over-winter chilling crossed with a false spring event in growth chambers, following individuals for a growing season to ask: (1) How does over-winter chilling impact phenology, growth and physical leaf traits (2) how do false spring events impact phenology, growth and physical leaf traits and (3) how does the interaction between chilling and false springs impact community structure and phenological order?
+Here, we assessed the effects of over-winter chilling length and false springs on sapling phenology and growth across eight temperate tree and shrub species. We exposed individuals to different levels of over-winter chilling crossed with a false spring event in growth chambers, and then following individuals for a growing season we asked: (1) How does over-winter chilling impact phenology, growth and physical leaf traits (2) how do false spring events impact phenology, growth and physical leaf traits and (3) how does the interaction between chilling and false springs impact community structure and phenological order?
 
 \section*{Materials and Methods} 
 \subsection*{Plant Selection and Material}
@@ -327,14 +336,14 @@ Individuals were randomly selected for one of six experimental treatments from a
 
 Once each chilling treatment was completed, we moved individuals to a greenhouse with mean daytime temperature of 15$^{\circ}$C and a mean nighttime temperature of 10$^{\circ}$C, and a photoperiod of 12 hour days throughout the spring until all individuals reached full leaf expansion. After all individuals of all species reached full leaf expansion, greenhouse temperatures and photoperiods were kept ambient, and all individuals were up-potted to 983 ml deepots and fertilized with SCOTTS 15-9-12 Osmocote Plus 5-6. 
 
-\subsection*{Phenology and False Spring Treatment} %EMW11Sep: Add a citation for BBCH scale? So  then we're completely clear on which on we used?
-We recorded phenology (using the BBCH scale) every 2-3 days through full leaf expansion. Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk \citep{Chamberlain2019} for each individual \citep{Finn2007}. Individuals in the `false spring' treatment were placed in a growth chamber set to mimic a false spring event during budburst, defined as once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19 (that is, each sapling was exposed to a false spring based on its individual phenological timing). False spring treatments lasted approximately 14 hours, beginning at 18:00; temperatures were ramped down over 14 hours (Figure \ref{fig:gccond}). At approximately 08:00 the following day, we placed false spring individuals back in the greenhouse. Once all individuals reached full leaf expansion (BBCH stage 19), we recorded phenology weekly until August 1st, then every 2-3 days again to monitor fall phenology. We monitored all individuals until complete budset. 
+\subsection*{Phenology and False Spring Treatment} 
+We recorded phenology (using the BBCH scale \citep{Meier2001}) every 2-3 days through full leaf expansion. Budburst was denoted as BBCH stage 07, which is `beginning of sprouting or bud breaking' and monitored until full leaf expansion (BBCH stage 19) in order to evaluate the duration of vegetative risk \citep{Chamberlain2019} for each individual \citep{Finn2007}. Individuals in the `false spring' treatment were placed in a growth chamber set to mimic a false spring event during budburst, defined as once at least 50\% of the buds were at BBCH stage 07 but the individual had not yet reached BBCH stage 19 (that is, each sapling was exposed to a false spring based on its individual phenological timing). False spring treatments lasted approximately 14 hours, beginning at 18:00; temperatures were ramped down over 14 hours (Figure \ref{fig:gccond}). At approximately 08:00 the following day, we placed false spring individuals back in the greenhouse. Once all individuals reached full leaf expansion (BBCH stage 19), we recorded phenology weekly until August 1st, then every 2-3 days again to monitor fall phenology. We monitored all individuals until complete budset. 
 
 \subsection*{Growth measurements}
 We measured height three times throughout the growing season (the day an individual reached full leaf expansion, 60 days after full leaf out and when an individual reached complete budset). We measured the chlorophyll content of four leaves on each individual 60 days after full leaf out using an atLEAF CHL PLUS Chlorophyll meter, converting chlorophyll content to mg/cm\textsuperscript{2} using the atLEAF CHL PLUS conversion tool. We measured leaf thickness using a Shars Digital Micrometer (accurate to 0.001mm) and leaf toughness in Newtons using a Shimpo Digital Force Gauge on two leaves for each individual 60 days after full leaf out. Additionally, we visually monitored damage to the shoot apical meristem, which consisted of complete damage or disruption of growth in the main stem and resulted in early dormancy induction or reliance on lateral shoot growth. Finally, we harvested each plant after it reached complete budset to dry, separate and weigh belowground and aboveground biomass (including leaves). 
 
-\subsection*{Data analysis} %EMW11Sep: 4000 neff is oddly round given 6000 iterations -- are you sure that's correct?
-We used Bayesian hierarchical models \citep[with the brms package,][,version 2.3.1]{brms} in R \citep[][,version 3.3.1]{R} to estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) shoot apical meristem damage, (4) total growth in centimeters, (5) total biomass, (6) chlorophyll content, (7) leaf toughness and (8) leaf thickness. We modeled species hierarchically as grouping factors, which generated an estimate and posterior distribution for each species as well as an overall response across the eight species used in our experiment. We ran four chains, each with 4 000 iterations, of which 2 500 were warm-up iterations, for a total of 6 000 posterior samples for each predictor for each model using weakly informative priors (increasing priors three-fold did not impact our results). We evaluated our model performance based on $\hat{R}$ values that were close to one, checked chain convergence and posterior predictive checks visually \citep{BDA}, and made sure all models had 0 divergent transitions. Our models generally had high $n_{eff}$ (4000 for most parameters, but as low as 1400 for a couple of parameters in the shoot apical meristem model). All estimated values are reported in the text as means +/- standard errors relative to the no false spring under four weeks of chilling treatment.
+\subsection*{Data analysis} 
+We used Bayesian hierarchical models \citep[with the brms package,][,version 2.3.1]{brms} in R \citep[][,version 3.3.1]{R} to estimate the effects of chilling duration, false spring treatment and all two-way interactions as predictors on: (1) duration of vegetative risk, (2) growing season length, (3) shoot apical meristem damage, (4) total growth in centimeters, (5) total biomass, (6) chlorophyll content, (7) leaf toughness and (8) leaf thickness. We modeled species hierarchically as grouping factors, which generated an estimate and posterior distribution for each species as well as an overall response across the eight species used in our experiment. We ran four chains, each with 4 000 iterations, of which 2 500 were warm-up iterations, for a total of 6 000 posterior samples for each predictor for each model using weakly informative priors (increasing priors three-fold did not impact our results). We evaluated our model performance based on $\hat{R}$ values that were close to one, checked chain convergence and posterior predictive checks visually \citep{BDA}, and made sure all models had 0 divergent transitions. Our models generally had high $n_{eff}$ (6 000 for most parameters, but as low as 1 400 for a couple of parameters in the shoot apical meristem model). All estimated values are reported in the text as means +/- standard errors relative to the no false spring under four weeks of chilling treatment.
 
 
 \section*{Results} 
@@ -365,7 +374,7 @@ False springs greatly impacted physical leaf characteristics in our experiment: 
 \subsection*{False springs and chilling did not reshape temporal assembly}
 Climate model projections and experimental studies with very low chilling predict substantial shifts in species leafout order under future climate change conditions \citep{Roberts2015, Laube2014}; other studies using long-term phenology observations suggest leafout phenology order is consistent across years \citep{Wesolowski2006}. We did not find major shifts in species leafout order---thus consistent with observational studies \citep{Wesolowski2006}---except for \textit{Viburnum dentatum}, though it still leafed out within the late-leafout group of species across all treatments. Therefore, we do not predict major reassembly of forest communities due to winter warming or false spring incidence. Our results are also in line with some experimental studies, for example, in one full factorial growth chamber experiment, most treatments did not lead to substantial phenological reordering, except when individuals experienced little to no field chilling \citep{Laube2014}. Future climate projections suggest major shifts in chilling due to warmer winters, which our design may not fully capture, but chilling is also not well understood \citep{Nanninga2017}. Some regions may experience more chilling rather than less with warming \citep{Fraga2019}. Our findings that chilling has cascading effects on phenology, growth and leaf traits, suggests we need to better understand over-winter chilling in order to make accurate predictions. 
     
-Phenological rank remained consistent across all our false spring and chilling treatments---where all species were affected equally. In nature, however, not all of our study species are at equal risk of false springs, with early-budburst species (e.g., \textit{Salix americana} or \textit{Betula papyrifera}) generally more at risk than later-budburst species (e.g., \textit{Acer saccharinum} or \textit{Viburnum dentatum}). This suggests that climate change could reshape forest communities, though not directly through temporal assembly. Instead, our results suggest that change may come from physical damage and leaf trait impacts of false springs and decreases in chilling. Some temperate tree and shrub species utilize various leaf characteristics to lower their risk of false spring damage: increased `packability' of leaf primordia in winter buds, which allows for more rapid leafout \citep{Edwards2017}, increased trichome density on young leaves to protect leaf tissue against freezes \citep{Agrawal2004, Prozherina2003} and buds with decreased water content to increase freeze tolerance \citep{Beck2007, Hofmann2015, Kathke2011, Morin2007,  Muffler2016, Nielsen2009, Poirier2010}. Our study did not directly examine these traits, but our results suggest that the complex interplay of a changing climate and species-specific mosaics of traits, including their freeze-tolerance physiologies, could influence phenological rank and forest community structure.  % that understanding how these freeze tolerance physiologies differ among species and if they will shift with warming will help with predictions. Our results found
+Phenological rank remained consistent across all of our false spring and chilling treatments---where all species were affected equally. In nature, however, not all of our study species are at equal risk of false springs, with early-budburst species (e.g., \textit{Salix americana} or \textit{Betula papyrifera}) generally more at risk than later-budburst species (e.g., \textit{Acer saccharinum} or \textit{Viburnum dentatum}). This suggests that climate change could reshape forest communities, though not directly through temporal assembly. Instead, our results suggest that change may come from physical damage and leaf trait impacts of false springs and decreases in chilling. Some temperate tree and shrub species utilize various leaf characteristics to lower their risk of false spring damage: increased `packability' of leaf primordia in winter buds, which allows for more rapid leafout \citep{Edwards2017}, increased trichome density on young leaves to protect leaf tissue against freezes \citep{Agrawal2004, Prozherina2003} and buds with decreased water content to increase freeze tolerance \citep{Beck2007, Hofmann2015, Kathke2011, Morin2007,  Muffler2016, Nielsen2009, Poirier2010}. Our study did not directly examine these traits, but our results suggest that the complex interplay of a changing climate and species-specific mosaics of traits, including their freeze-tolerance physiologies, could influence phenological rank and forest community structure.  % that understanding how these freeze tolerance physiologies differ among species and if they will shift with warming will help with predictions. Our results found
 
 Our results suggest that predicting future forest recruitment will require integrating the effects of shifting false springs on inter- and intraspecific competition. With over-winter chilling decreasing with climate change, saplings---which generally leafout earlier than later lifestages to gain access to light \citep{Augspurger2009}---are likely more at risk of damage from false spring events. This could lead to dieback of saplings, most especially of early-budbursting species, in temperate forests with climate change. Thus, climate change could greatly impact early-budburst species, which will likely see increases in durations of vegetative risk from the dual effects of lower chilling and heightened false spring risk. Understanding how false springs are changing and how equally---or not---these effects impact different species, especially their seedlings and saplings, is crucial for future projections. By integrating the additive and adverse effects of decreasing over-winter chilling and increasing false spring risk---and how false springs are changing across various species, we can better predict shifts in forest communities and recruitment under climate change. 
 
@@ -393,28 +402,28 @@ Data and code from the analyses will be available via KNB upon publication and a
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=18cm]{..//analyses/figures/mu_phen.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) duration of vegetative risk (days) and b) growing season length (days). Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals.}\label{fig:muphen} %EMWAug14 -- for first figure add the baseline (4 weeks chill x no false spring) that they're all relative to?
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling relative to four weeks of chilling with no false spring on a) duration of vegetative risk (days) and b) growing season length (days). Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals.}\label{fig:muphen} %EMWAug14 -- for first figure add the baseline (4 weeks chill x no false spring) that they're all relative to?
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=18cm]{..//analyses/figures/mu_growth.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) shoot apical meristem damage and b) total shoot growth (cm). Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals. }\label{fig:mugrowth}
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) shoot apical meristem damage and b) total shoot growth (cm). Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals. }\label{fig:mugrowth}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=18cm]{..//analyses/figures/mu_leaftraits.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness (N) and b) leaf thickness ($\mu$m). Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals. }\label{fig:muleaf}
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on a) leaf toughness (N) and b) leaf thickness ($\mu$m). Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals. }\label{fig:muleaf}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/leafoutorder_byrank.pdf} 
-  -\caption{Rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:rank}
+  -\caption{Rank order of leafout across all species using mean trends. }\label{fig:rank}
   -\end{center}
   -\end{figure}}
   

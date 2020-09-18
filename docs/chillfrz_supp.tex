@@ -101,7 +101,7 @@
 \noindent \textbf{\Large{Supplemental materials: False spring damage on temperate tree seedlings is amplified with winter warming}}
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, K. Woodruff $^{1}$ \& E. M. Wolkovich $^{1,2,3}$
+C. J. Chamberlain $^{1,2}$ \& E. M. Wolkovich $^{1,2,3}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
 $^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA 02131; \\
@@ -167,7 +167,7 @@ Model estimates for the shoot apical meristem model were modeled on the logit sc
 \section*{Supplemental tables and figures}
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst across chilling treatments.} 
@@ -183,7 +183,7 @@ Intercept & 28.58 & 1.22 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of duration of vegetative across chilling treatments.} 
@@ -202,9 +202,9 @@ Intercept & 18.35 & 0.54 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on duration of vegetative risk.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on duration of vegetative risk (days between budburst to leafout).} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -270,9 +270,9 @@ Intercept & 16.02 & 12.46 & 13.60 & 15.08 & 16.90 & 18.52 & 20.23 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on growing season length.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on growing season length.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -338,9 +338,9 @@ Intercept & 283.95 & 249.62 & 263.13 & 276.95 & 291.73 & 302.64 & 310.98 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on shoot apical meristem damage.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on shoot apical meristem damage.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -406,9 +406,9 @@ Intercept & -1.68 & -4.65 & -3.49 & -2.25 & -1.03 & -0.13 & 0.68 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on total season growth.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total season growth.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -475,9 +475,9 @@ Intercept & 54.03 & 19.77 & 30.82 & 44.95 & 63.22 & 77.68 & 88.97 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:34 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on total biomass.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total biomass.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -544,15 +544,83 @@ Intercept & 49.26 & 27.73 & 34.80 & 43.68 & 55.16 & 63.02 & 69.20 \\
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=14cm]{..//analyses/figures/totbiomass50and90_brms.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). }\label{fig:mutotbio}
+  -\caption{Effects of false spring treatment (Tx), six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals.}\label{fig:mutotbio}
   -\end{center}
   -\end{figure}}
   
-  \newpage
+\newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:35 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf chlorophyll content.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf toughness.} \\ 
+  \hline
+ & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
+  \hline \endhead  \hline
+Intercept & 0.43 & 0.27 & 0.33 & 0.39 & 0.47 & 0.53 & 0.59 \\ 
+  Tx & -0.05 & -0.10 & -0.08 & -0.06 & -0.04 & -0.02 & -0.00 \\ 
+  Chill 6 Wks & -0.06 & -0.11 & -0.09 & -0.07 & -0.05 & -0.03 & -0.02 \\ 
+  Chill 8 Wks & -0.05 & -0.11 & -0.09 & -0.07 & -0.04 & -0.02 & -0.00 \\ 
+  Tx:Chill 6 Wks & 0.02 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 & 0.08 \\ 
+  Tx:Chill 8 Wks & 0.02 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 & 0.08 \\ 
+  Intercept & 0.37 & 0.22 & 0.27 & 0.34 & 0.41 & 0.47 & 0.53 \\ 
+  \textit{Acer saccharinum},Intercept & -0.06 & -0.22 & -0.16 & -0.10 & -0.02 & 0.04 & 0.10 \\ 
+  \textit{Alnus incana rugosa},Intercept & -0.05 & -0.21 & -0.15 & -0.09 & -0.01 & 0.05 & 0.11 \\ 
+  \textit{Betula papyrifera},Intercept & -0.11 & -0.28 & -0.22 & -0.15 & -0.07 & -0.01 & 0.05 \\ 
+  \textit{Betula populifolia},Intercept & -0.10 & -0.27 & -0.20 & -0.14 & -0.06 & 0.01 & 0.06 \\ 
+  \textit{Cornus racemosa},Intercept & -0.05 & -0.21 & -0.15 & -0.09 & -0.01 & 0.05 & 0.11 \\ 
+  \textit{Salix purpurea},Intercept & 0.15 & -0.01 & 0.05 & 0.11 & 0.19 & 0.26 & 0.32 \\ 
+  \textit{Sorbus americana},Intercept & -0.01 & -0.17 & -0.12 & -0.05 & 0.03 & 0.10 & 0.16 \\ 
+  \textit{Viburnum dendatum},Intercept & 0.25 & 0.08 & 0.14 & 0.21 & 0.29 & 0.35 & 0.41 \\ 
+  \textit{Acer saccharinum},Tx & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  \textit{Alnus incana rugosa},Tx & 0.01 & -0.03 & -0.02 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
+  \textit{Betula papyrifera},Tx & 0.01 & -0.05 & -0.03 & -0.00 & 0.02 & 0.04 & 0.06 \\ 
+  \textit{Betula populifolia},Tx & 0.01 & -0.05 & -0.03 & -0.01 & 0.02 & 0.04 & 0.06 \\ 
+  \textit{Cornus racemosa},Tx & 0.02 & -0.02 & -0.01 & 0.00 & 0.04 & 0.07 & 0.09 \\ 
+  \textit{Salix purpurea},Tx & -0.01 & -0.08 & -0.06 & -0.03 & -0.00 & 0.02 & 0.03 \\ 
+  \textit{Sorbus americana},Tx & -0.01 & -0.08 & -0.05 & -0.02 & 0.00 & 0.02 & 0.04 \\ 
+  \textit{Viburnum dendatum},Tx & -0.02 & -0.09 & -0.07 & -0.03 & -0.00 & 0.01 & 0.03 \\ 
+  \textit{Acer saccharinum},Chill 6 Wks & 0.01 & -0.03 & -0.01 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
+  \textit{Alnus incana rugosa},Chill 6 Wks & -0.01 & -0.06 & -0.04 & -0.01 & 0.00 & 0.02 & 0.04 \\ 
+  \textit{Betula papyrifera},Chill 6 Wks & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  \textit{Betula populifolia},Chill 6 Wks & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  \textit{Cornus racemosa},Chill 6 Wks & -0.01 & -0.07 & -0.04 & -0.02 & 0.00 & 0.02 & 0.04 \\ 
+  \textit{Salix purpurea},Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.01 & 0.04 & 0.07 \\ 
+  \textit{Sorbus americana},Chill 6 Wks & -0.01 & -0.07 & -0.05 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
+  \textit{Viburnum dendatum},Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.07 \\ 
+  \textit{Acer saccharinum},Chill 8 Wks & 0.02 & -0.03 & -0.01 & 0.00 & 0.04 & 0.07 & 0.10 \\ 
+  \textit{Alnus incana rugosa},Chill 8 Wks & -0.02 & -0.09 & -0.06 & -0.03 & 0.00 & 0.02 & 0.04 \\ 
+  \textit{Betula papyrifera},Chill 8 Wks & -0.02 & -0.09 & -0.06 & -0.03 & -0.00 & 0.02 & 0.04 \\ 
+  \textit{Betula populifolia},Chill 8 Wks & -0.01 & -0.08 & -0.06 & -0.03 & 0.00 & 0.02 & 0.05 \\ 
+  \textit{Cornus racemosa},Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 \\ 
+  \textit{Salix purpurea},Chill 8 Wks & 0.02 & -0.04 & -0.02 & 0.00 & 0.04 & 0.07 & 0.10 \\ 
+  \textit{Sorbus americana},Chill 8 Wks & -0.02 & -0.10 & -0.08 & -0.04 & -0.00 & 0.01 & 0.03 \\ 
+  \textit{Viburnum dendatum},Chill 8 Wks & 0.03 & -0.03 & -0.01 & 0.01 & 0.05 & 0.08 & 0.11 \\ 
+  \textit{Acer saccharinum},Tx:Chill 6 Wks & 0.01 & -0.05 & -0.03 & -0.00 & 0.01 & 0.05 & 0.08 \\ 
+  \textit{Alnus incana rugosa},Tx:Chill 6 Wks & -0.01 & -0.08 & -0.04 & -0.01 & 0.00 & 0.02 & 0.05 \\ 
+  \textit{Betula papyrifera},Tx:Chill 6 Wks & -0.00 & -0.08 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  \textit{Betula populifolia},Tx:Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
+  \textit{Cornus racemosa},Tx:Chill 6 Wks & 0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.04 & 0.08 \\ 
+  \textit{Salix purpurea},Tx:Chill 6 Wks & 0.00 & -0.06 & -0.03 & -0.01 & 0.01 & 0.04 & 0.07 \\ 
+  \textit{Sorbus americana},Tx:Chill 6 Wks & -0.01 & -0.10 & -0.06 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
+  \textit{Viburnum dendatum},Tx:Chill 6 Wks & 0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.04 & 0.07 \\ 
+  \textit{Acer saccharinum},Tx:Chill 8 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.09 \\ 
+  \textit{Alnus incana rugosa},Tx:Chill 8 Wks & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
+  \textit{Betula papyrifera},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.00 & 0.03 & 0.05 \\ 
+  \textit{Betula populifolia},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  \textit{Cornus racemosa},Tx:Chill 8 Wks & 0.00 & -0.06 & -0.03 & -0.01 & 0.01 & 0.04 & 0.06 \\ 
+  \textit{Salix purpurea},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
+  \textit{Sorbus americana},Tx:Chill 8 Wks & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
+   \hline
+\hline
+\label{tab:suppmodtough}
+\end{longtable}
+
+  
+\newpage
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Fri Sep 18 14:49:46 2020
+\begin{longtable}{lrrrrrrr}
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf chlorophyll content.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -619,84 +687,16 @@ Intercept & 30.96 & 24.38 & 26.36 & 29.21 & 32.74 & 35.50 & 37.89 \\
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=14cm]{..//analyses/figures/chl50and90_brms.pdf} 
-  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on chlorophyll content. }\label{fig:muchl}
+  -\caption{Effects of false spring treatment, six weeks of chilling and eight weeks of chilling on chlorophyll content. Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals. }\label{fig:muchl}
   -\end{center}
   -\end{figure}}
 
-\newpage
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:35 2020
-\begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf toughness.} \\ 
-  \hline
- & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
-  \hline \endhead  \hline
-Intercept & 0.43 & 0.27 & 0.33 & 0.39 & 0.47 & 0.53 & 0.59 \\ 
-  Tx & -0.05 & -0.10 & -0.08 & -0.06 & -0.04 & -0.02 & -0.00 \\ 
-  Chill 6 Wks & -0.06 & -0.11 & -0.09 & -0.07 & -0.05 & -0.03 & -0.02 \\ 
-  Chill 8 Wks & -0.05 & -0.11 & -0.09 & -0.07 & -0.04 & -0.02 & -0.00 \\ 
-  Tx:Chill 6 Wks & 0.02 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 & 0.08 \\ 
-  Tx:Chill 8 Wks & 0.02 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 & 0.08 \\ 
-  Intercept & 0.37 & 0.22 & 0.27 & 0.34 & 0.41 & 0.47 & 0.53 \\ 
-  \textit{Acer saccharinum},Intercept & -0.06 & -0.22 & -0.16 & -0.10 & -0.02 & 0.04 & 0.10 \\ 
-  \textit{Alnus incana rugosa},Intercept & -0.05 & -0.21 & -0.15 & -0.09 & -0.01 & 0.05 & 0.11 \\ 
-  \textit{Betula papyrifera},Intercept & -0.11 & -0.28 & -0.22 & -0.15 & -0.07 & -0.01 & 0.05 \\ 
-  \textit{Betula populifolia},Intercept & -0.10 & -0.27 & -0.20 & -0.14 & -0.06 & 0.01 & 0.06 \\ 
-  \textit{Cornus racemosa},Intercept & -0.05 & -0.21 & -0.15 & -0.09 & -0.01 & 0.05 & 0.11 \\ 
-  \textit{Salix purpurea},Intercept & 0.15 & -0.01 & 0.05 & 0.11 & 0.19 & 0.26 & 0.32 \\ 
-  \textit{Sorbus americana},Intercept & -0.01 & -0.17 & -0.12 & -0.05 & 0.03 & 0.10 & 0.16 \\ 
-  \textit{Viburnum dendatum},Intercept & 0.25 & 0.08 & 0.14 & 0.21 & 0.29 & 0.35 & 0.41 \\ 
-  \textit{Acer saccharinum},Tx & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
-  \textit{Alnus incana rugosa},Tx & 0.01 & -0.03 & -0.02 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
-  \textit{Betula papyrifera},Tx & 0.01 & -0.05 & -0.03 & -0.00 & 0.02 & 0.04 & 0.06 \\ 
-  \textit{Betula populifolia},Tx & 0.01 & -0.05 & -0.03 & -0.01 & 0.02 & 0.04 & 0.06 \\ 
-  \textit{Cornus racemosa},Tx & 0.02 & -0.02 & -0.01 & 0.00 & 0.04 & 0.07 & 0.09 \\ 
-  \textit{Salix purpurea},Tx & -0.01 & -0.08 & -0.06 & -0.03 & -0.00 & 0.02 & 0.03 \\ 
-  \textit{Sorbus americana},Tx & -0.01 & -0.08 & -0.05 & -0.02 & 0.00 & 0.02 & 0.04 \\ 
-  \textit{Viburnum dendatum},Tx & -0.02 & -0.09 & -0.07 & -0.03 & -0.00 & 0.01 & 0.03 \\ 
-  \textit{Acer saccharinum},Chill 6 Wks & 0.01 & -0.03 & -0.01 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
-  \textit{Alnus incana rugosa},Chill 6 Wks & -0.01 & -0.06 & -0.04 & -0.01 & 0.00 & 0.02 & 0.04 \\ 
-  \textit{Betula papyrifera},Chill 6 Wks & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
-  \textit{Betula populifolia},Chill 6 Wks & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
-  \textit{Cornus racemosa},Chill 6 Wks & -0.01 & -0.07 & -0.04 & -0.02 & 0.00 & 0.02 & 0.04 \\ 
-  \textit{Salix purpurea},Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.01 & 0.04 & 0.07 \\ 
-  \textit{Sorbus americana},Chill 6 Wks & -0.01 & -0.07 & -0.05 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
-  \textit{Viburnum dendatum},Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.07 \\ 
-  \textit{Acer saccharinum},Chill 8 Wks & 0.02 & -0.03 & -0.01 & 0.00 & 0.04 & 0.07 & 0.10 \\ 
-  \textit{Alnus incana rugosa},Chill 8 Wks & -0.02 & -0.09 & -0.06 & -0.03 & 0.00 & 0.02 & 0.04 \\ 
-  \textit{Betula papyrifera},Chill 8 Wks & -0.02 & -0.09 & -0.06 & -0.03 & -0.00 & 0.02 & 0.04 \\ 
-  \textit{Betula populifolia},Chill 8 Wks & -0.01 & -0.08 & -0.06 & -0.03 & 0.00 & 0.02 & 0.05 \\ 
-  \textit{Cornus racemosa},Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.02 & 0.01 & 0.04 & 0.06 \\ 
-  \textit{Salix purpurea},Chill 8 Wks & 0.02 & -0.04 & -0.02 & 0.00 & 0.04 & 0.07 & 0.10 \\ 
-  \textit{Sorbus americana},Chill 8 Wks & -0.02 & -0.10 & -0.08 & -0.04 & -0.00 & 0.01 & 0.03 \\ 
-  \textit{Viburnum dendatum},Chill 8 Wks & 0.03 & -0.03 & -0.01 & 0.01 & 0.05 & 0.08 & 0.11 \\ 
-  \textit{Acer saccharinum},Tx:Chill 6 Wks & 0.01 & -0.05 & -0.03 & -0.00 & 0.01 & 0.05 & 0.08 \\ 
-  \textit{Alnus incana rugosa},Tx:Chill 6 Wks & -0.01 & -0.08 & -0.04 & -0.01 & 0.00 & 0.02 & 0.05 \\ 
-  \textit{Betula papyrifera},Tx:Chill 6 Wks & -0.00 & -0.08 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
-  \textit{Betula populifolia},Tx:Chill 6 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.08 \\ 
-  \textit{Cornus racemosa},Tx:Chill 6 Wks & 0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.04 & 0.08 \\ 
-  \textit{Salix purpurea},Tx:Chill 6 Wks & 0.00 & -0.06 & -0.03 & -0.01 & 0.01 & 0.04 & 0.07 \\ 
-  \textit{Sorbus americana},Tx:Chill 6 Wks & -0.01 & -0.10 & -0.06 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
-  \textit{Viburnum dendatum},Tx:Chill 6 Wks & 0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.04 & 0.07 \\ 
-  \textit{Acer saccharinum},Tx:Chill 8 Wks & 0.01 & -0.04 & -0.02 & -0.00 & 0.02 & 0.05 & 0.09 \\ 
-  \textit{Alnus incana rugosa},Tx:Chill 8 Wks & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
-  \textit{Betula papyrifera},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.00 & 0.03 & 0.05 \\ 
-  \textit{Betula populifolia},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
-  \textit{Cornus racemosa},Tx:Chill 8 Wks & 0.00 & -0.06 & -0.03 & -0.01 & 0.01 & 0.04 & 0.06 \\ 
-  \textit{Salix purpurea},Tx:Chill 8 Wks & -0.00 & -0.07 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
-  \textit{Sorbus americana},Tx:Chill 8 Wks & -0.00 & -0.06 & -0.04 & -0.01 & 0.01 & 0.03 & 0.06 \\ 
-   \hline
-\hline
-\label{tab:suppmodtough}
-\end{longtable}
-
-
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Aug 18 10:33:35 2020
+% Fri Sep 18 14:49:46 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of model with the effects of false spring treatment and chilling duration across species on leaf thickness.} \\ 
+\caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf thickness.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -763,7 +763,7 @@ Intercept & 141.76 & 119.08 & 125.87 & 135.57 & 147.79 & 158.06 & 166.29 \\
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/budsetorder_byrank.pdf} 
-  -\caption{Understanding rank order of leafout across all species using (a) mean trends and (b) raw estimates. }\label{fig:bsetrank}
+  -\caption{Rank order of leafout across all species using mean trends. }\label{fig:bsetrank}
   -\end{center}
   -\end{figure}}
 
