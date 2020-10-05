@@ -8,6 +8,7 @@
 \usepackage{amsmath} % for aligning equations
 \usepackage{textcomp}
 \usepackage{mdframed}
+\usepackage[hyphens]{url}
 \usepackage[small]{caption}
 \setlength{\captionmargin}{30pt}
 \setlength{\abovecaptionskip}{0pt}
@@ -297,16 +298,15 @@ simpdvrchill2 <- format(summary(dvr.mod)$coef[3,1],  nsmall=1)
 simpdvrchillsd2 <- format(summary(dvr.mod)$coef[3,2],  nsmall=1)
 
 @
-%EMWSep21: Watch out for sad red error in PDF around here! 
 \section*{Abstract} %% Word limit is 350, I have 300 words now.
 %% Using typically four simple, factual, numbered statements, it should:
 %%  1) give the conceptual context
 %%  2) state the methodological approach
 %%  3) report the main results and conclusions
-%%  4) include a final point headed ‘Synthesis’, which sums up the paper’s key message in generic terms that can be understood by non-specialists, indicating clearly how this study has advanced ecological understanding. ... %EMWSep21: Hmm, I think the synthesis is supposed to be more about YOUR findings, while it feels more general just now. See what you think of my edits. 
+%%  4) include a final point headed ‘Synthesis’, which sums up the paper’s key message in generic terms that can be understood by non-specialists, indicating clearly how this study has advanced ecological understanding. ... 
 
 \begin{enumerate}
-\item  With warming temperatures, spring phenology (i.e., budburst and leafout) is advancing. Late spring freezes, however, may not advance at the same rate, leading to an increase in freezes that occur after trees initiate budburst---known as false springs---with continued warming. Through shifts in false springs, climate change may reshape forest plant communities, impacting the species and ecosystem services those communities support. Understanding and predicting false springs effects, however, requires understanding both how warming shifts spring phenology and how false springs impact plant performance. While generally spring warming advances budburst, increasing research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, decreasing spring freeze tolerance and potentially lead to higher damage from false spring events. 
+\item  With warming temperatures, spring phenology (i.e., budburst and leafout) is advancing. Late spring freezes, however, may not advance at the same rate, leading to an increase in freezes that occur after trees initiate budburst---known as false springs---with continued warming. Through shifts in false springs, climate change may reshape forest plant communities, impacting the species and ecosystem services those communities support. Predicting false spring effects requires understanding both how warming shifts spring phenology and how false springs impact plant performance. While generally spring warming advances budburst, increasing research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, decreasing spring freeze tolerance and potentially lead to higher damage from false spring events. 
 \item Here, we assessed the effects of over-winter chilling (generally associated with warming winters) and false spring events on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment. 
 \item We found that false springs slowed subsequent budburst and leafout---extending the period of greatest risk for freeze damage---and increased damage to the shoot apical meristem, decreased leaf toughness and leaf thickness. Longer chilling accelerated budburst and leafout, even under false spring conditions. Thus chilling compensated for the adverse effects of false springs on phenology. Despite the effects of false springs and chilling on phenology, we did not see any major re-ordering in the sequence of species leafout. Our results suggest climate change will reshape forest communities not through temporal reassembly, but rather through impacts on growth and leaf traits from the coupled effects of false springs with decreases in over-winter chilling under future climate change. 
 
@@ -331,7 +331,7 @@ Here, we assessed the effects of over-winter chilling length and false springs o
 
 \section*{Materials and Methods} 
 \subsection*{Plant Selection and Material}
-We selected eight temperate woody plant tree and shrub species that span varying spring phenologies (e.g., early to later leafout), that are not generally used as crops or ornamental species: \textit{Acer saccharinum}, \textit{Alnus incana rugosa}, \textit{Betula papyrifera}, \textit{Betula populifolia}, \textit{Cornus racemosa}, \textit{Salix purpurea}, \textit{Sorbus americana}, and \textit{Viburnum dentatum} (we originally included two additional species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}, but the plants were not delivered in a usable condition and thus we excluded them from the experiment). We used 48 dormant, one year old, bare root saplings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6' N -86$^{\circ}$12' W) for a total of 384 individuals. Upon receipt, plants were potted in 656 ml deepots with Fafard \#3B Metro Mix soil and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17' N -71$^{\circ}$8' W) at 4$^{\circ}$C for different durations depending on chilling treatment (explained below).   
+We selected eight temperate woody plant tree and shrub species that span varying spring phenologies (e.g., early to later leafout), that are not generally used as crops or ornamental species: \textit{Acer saccharinum}, \textit{Alnus incana rugosa}, \textit{Betula papyrifera}, \textit{Betula populifolia}, \textit{Cornus racemosa}, \textit{Salix purpurea}, \textit{Sorbus americana}, and \textit{Viburnum dentatum} (we originally included two additional species---\textit{Fagus grandifolia} and \textit{Nyssa sylvatica}, but the plants were not delivered in a usable condition and thus we excluded them from the experiment). We used 48 dormant, one year old, bare root saplings---each measuring 6-12 inches---for each species from Cold Stream Farm LLC (Freesoil, MI; 44$^{\circ}$6' N -86$^{\circ}$12' W) for a total of 384 individuals. Upon receipt---on 21 November 2018, plants were potted in 656 ml deepots with Fafard \#3B Metro Mix soil and placed in growth chambers at the Weld Hill Research Building of the Arnold Arboretum (Boston, MA; 42$^{\circ}$17' N -71$^{\circ}$8' W) at 4$^{\circ}$C for different durations depending on chilling treatment (explained below).   
 
 \subsection*{Growth Chamber and Greenhouse Conditions}
 Individuals were randomly selected for one of six experimental treatments from a full factorial design of false spring (two levels: presence or absence of false spring) x chilling (three levels: four, six or eight weeks of chilling at 4$^{\circ}$C with eight hour photoperiod, lighting was a combination of T5HO fluorescent lamps with halogen incandescent bulbs at roughly 250 $\mu mol/m^{2}/s$). Individuals were rotated within and among growth chambers every two weeks to minimize bias from possible growth chamber effects.
@@ -384,7 +384,7 @@ We would like to thank all of the growth facilities staff at the Weld Hill Resea
 \section*{Author Contribution} 
 C.J.C. and E.M.W. conceived of the study, identified species to use in the study and determined which phenological and growth measurements to observe. C.J.C. performed the analyses and produced all figures and tables. C.J.C. wrote the paper, and both authors edited it.
 
-\section*{Data Availability:}
+\section*{Data Availability}
 Data and code from the analyses will be available via KNB upon publication and are available to all reviewers upon request. Raw data, {Stan} model code and output are available on github at \url{https://github.com/cchambe12/chillfreeze} and provided upon request.
 
 

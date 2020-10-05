@@ -43,6 +43,6 @@ $^{3}$Forest \& Conservation Sciences, Faculty of Forestry, University of Britis
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
-\bibliography{..//..//references/chillfreeze.bib}
+%\bibliography{..//..//references/chillfreeze.bib}
 
 \end{document}
