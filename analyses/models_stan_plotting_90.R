@@ -22,7 +22,7 @@ setwd("~/Documents/git/chillfreeze/analyses")
 #load("stan/gslengthlo_brms_adjusted.Rdata")
 #load("stan/meristem_brms.Rdata")
 
-load("stan/chlavg_brms.Rdata")
+#load("stan/chlavg_brms.Rdata")
 #load("stan/toughness_brms.Rdata")
 #load("stan/thickness_brms.Rdata")
 
@@ -33,8 +33,8 @@ load("stan/chlavg_brms.Rdata")
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "chl50and90_brms" ### change based on model
-modelhere <- chl.mod
+figpathmore <- "totbiomass50and90_brms" ### change based on model
+modelhere <- totbiomass.mod
 
 #xlab <- "Model estimate of change in \nduration of vegetative risk (days)"
 #xlab <- "Model estimate of change in growing season length (days)"
@@ -80,6 +80,13 @@ chill.stan$species.name <- ifelse(chill.stan$species=="NYSSYL", "Nyssa sylvatica
 
 rmspp <- c("FAGGRA", "NYSSYL")
 chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
+
+chill.stan$chillnew <- ifelse(chill.stan$chill==1, 3, NA)
+chill.stan$chillnew <- ifelse(chill.stan$chill==2, 2, chill.stan$chillnew)
+chill.stan$chillnew <- ifelse(chill.stan$chill==3, 1, chill.stan$chillnew)
+
+chill.stan$chill1 = ifelse(chill.stan$chillnew == 2, 1, 0) 
+chill.stan$chill2 = ifelse(chill.stan$chillnew == 3, 1, 0) 
 
 cols <- adjustcolor("indianred3", alpha.f = 0.3) 
 my.pal <- rep(brewer.pal(n = 10, name = "Paired"), 8)

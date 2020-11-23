@@ -30,6 +30,15 @@ chill.stan <- chill.stan[!is.na(chill.stan$dvr),]
 rmspp <- c("FAGGRA", "NYSSYL")
 chill.stan <- chill.stan[!(chill.stan$species%in%rmspp),]
 
+chill.stan$chillnew <- ifelse(chill.stan$chill==1, 3, NA)
+chill.stan$chillnew <- ifelse(chill.stan$chill==2, 2, chill.stan$chillnew)
+chill.stan$chillnew <- ifelse(chill.stan$chill==3, 1, chill.stan$chillnew)
+
+chill.stan$chill1 = ifelse(chill.stan$chillnew == 2, 1, 0) 
+chill.stan$chill2 = ifelse(chill.stan$chillnew == 3, 1, 0) 
+
+with(chill.stan, table(chill1, chill2))
+
 get_prior(dvr ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
           data=chill.stan)
 
@@ -101,11 +110,11 @@ chill.stan.ht <- chill.stan[!is.na(chill.stan$ht.diff),]
 get_prior(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
           data=chill.stan.ht)
 
-htdiff.mod <- brm(ht.diff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
+htdiff.mod <- brm(finaldiff ~ tx*chill1 + tx*chill2 + (tx*chill1 + tx*chill2 | species),
                   data=chill.stan.ht, iter=4000, warmup=2500, 
                   control=list(max_treedepth=15, adapt_delta=0.99),
                   prior = prior(normal(5, 10), class=Intercept))
-save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htdiff_brms.Rdata")
+save(htdiff.mod, file="~/Documents/git/chillfreeze/analyses/stan/htfinal_brms.Rdata")
 
 chill.stan <- chill.stan[!is.na(chill.stan$mg.cm2),]
 chill.stan$mg.cm2 <- chill.stan$mg.cm2*100
