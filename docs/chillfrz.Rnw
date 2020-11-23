@@ -42,8 +42,9 @@
 
 \begin{document}
 
-\noindent \textbf{\Large{False spring damage to temperate tree saplings is amplified with winter warming}}
-%\noindent \textbf{\Large{False springs coupled with warming winters amplify temperate tree damage}}
+\noindent \textbf{\Large{False springs coupled with warming winters alter temperate tree growth}}
+%\noindent \textbf{\Large{False spring treatments coupled with warming winters alter temperate tree growth}}
+
 
 \noindent Authors:\\
 C. J. Chamberlain $^{1,2}$ \& E. M. Wolkovich $^{1,2,3}$
@@ -69,7 +70,7 @@ options(digits = 1)
 library(brms)
 
 ## Set Working Directory
-setwd("/Users/CatherineChamberlain/Documents/git/chillfreeze/analyses/")
+setwd("~/Documents/git/chillfreeze/analyses/")
 
 ## load the model
 load("stan/dvr_brms.Rdata")
@@ -80,9 +81,9 @@ load("stan/chlavg_brms.Rdata")
 load("stan/toughness_brms.Rdata")
 load("stan/thickness_brms.Rdata")
 
-load("stan/htfinal_brms.Rdata") ## need to download to compile
+load("stan/htfinal_brms.Rdata") 
 load("stan/totbiomass_brms.Rdata")
-load("stan/roottoshoot_brms.Rdata")
+#load("stan/roottoshoot_brms.Rdata")
 
 chillfrz <- read.csv("output/clean_dvr_traits.csv", header=TRUE)
 rmspp <- c("NYSSYL", "FAGGRA")
@@ -262,7 +263,7 @@ totbiomasstxchill2sd<-format(mean(fixef(totbiomass.mod, pars="tx:chill2")[2]),  
 #totbiomasstxchill2sd <- totbiomasstxchill2sd[2] - totbiomasstxchill2sd[1]
 totbiomasstxchill2 <- format(mean(fixef(totbiomass.mod, pars="tx", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="chill2", summary=FALSE)) + mean(fixef(totbiomass.mod, pars="tx:chill2", summary=FALSE)),  nsmall=1) # 2.88
 
-
+if(FALSE){
 ### Root to Shoot Model - TX REDUCES ROOT MASS
 roottoshoottx<-format(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)),  nsmall=1) ### -0.18
 roottoshoottxsd<-format(mean(fixef(roottoshoot.mod, pars="tx")[2]),  nsmall=1) # 0.15
@@ -282,6 +283,7 @@ roottoshoottxchill2<-format(mean(fixef(roottoshoot.mod, pars="tx:chill2", summar
 roottoshoottxchill2sd<-format(mean(fixef(roottoshoot.mod, pars="tx:chill2")[2]),  nsmall=1) # 0.23
 #roottoshoottxchill2sd <- roottoshoottxchill2sd[2] - roottoshoottxchill2sd[1]
 roottoshoottxchill2 <- format(mean(fixef(roottoshoot.mod, pars="tx", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="chill2", summary=FALSE)) + mean(fixef(roottoshoot.mod, pars="tx:chill2", summary=FALSE)),  nsmall=1) ### -0.29
+}
 
 ### Simple models
 bbdat <- read.csv("output/clean_dvr_traits.csv")
