@@ -13,7 +13,7 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{natbib}
-\bibliographystyle{..//references/styles/besjournalsnew.bst}
+\bibliographystyle{..//references/styles/gcb.bst}
 %\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
@@ -33,7 +33,7 @@
 
 %cross referencing:
 \usepackage{xr}
-\externaldocument{chillfrz_outline}
+\externaldocument{chillfrz}
 
 \newmdenv[
   topline=true,
@@ -130,6 +130,13 @@ Model estimates for the shoot apical meristem model were modeled on the logit sc
 #setwd("~/Documents/git/chillfreeze/analyses")
 
 bbdat <- read.csv("..//analyses/output/clean_dvr_traits.csv")
+
+bbdat$chillnew <- ifelse(bbdat$chill==1, 3, NA)
+bbdat$chillnew <- ifelse(bbdat$chill==2, 2, bbdat$chillnew)
+bbdat$chillnew <- ifelse(bbdat$chill==3, 1, bbdat$chillnew)
+
+bbdat$chill1 = ifelse(bbdat$chillnew == 2, 1, 0) 
+bbdat$chill2 = ifelse(bbdat$chillnew == 3, 1, 0)
 
 bb.mod <- lm(budburst ~ chill1 + chill2, data=bbdat)
 
