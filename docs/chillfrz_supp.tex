@@ -62,6 +62,7 @@
 \usepackage{textcomp}
 \usepackage{mdframed}
 \usepackage{longtable}
+\usepackage{blindtext, rotating}
 \usepackage{natbib}
 \bibliographystyle{..//references/styles/gcb.bst}
 %\usepackage[hyphens]{url}
@@ -83,7 +84,7 @@
 
 %cross referencing:
 \usepackage{xr}
-\externaldocument{chillfrz_outline}
+\externaldocument{chillfrz}
 
 \newmdenv[
   topline=true,
@@ -162,12 +163,35 @@ The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as t
 
 Model estimates for the shoot apical meristem model were modeled on the logit scale (shown in all tables) and were converted to probability percentages in all figures for easier interpretation by following the `divide by four' rule \citep{Gelman2006}.
 
+\section*{Supplemental Materials and Methods: Measuring shoot apical meristem damage}
+
+We monitored shoot apical meristem damage and quantified damage as 0, no damage, or 1, damage. Damage was determined if the shoot apical mersitem terminated growth, if the individual died or if the individual relied on lateral shoots for growth (see Figure \ref{fig:damage} for examples of damage). 
+
 \bibliography{..//references/chillfreeze.bib}
 
 \section*{Supplemental tables and figures}
 
+
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
+\begin{table}[H]
+\centering
+\caption{Chill units under growth chamber conditions.} 
+\label{tab:chillcalc}
+\begin{tabular}{lrrr}
+  \hline
+Duration & Chilling Hours & Utah Model & Chill Portions \\ 
+  \hline
+8 weeks & 1344.00 & 1344.00 & 40.47 \\ 
+  6 weeks & 1008.00 & 1008.00 & 30.35 \\ 
+  4 weeks & 672.00 & 672.00 & 19.73 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Thu Dec  3 14:58:22 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst across chilling treatments.} 
@@ -183,7 +207,7 @@ Intercept & 20.95 & 1.27 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of duration of vegetative across chilling treatments.} 
@@ -202,7 +226,7 @@ Intercept & 15.63 & 0.56 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on duration of vegetative risk (days between budburst to leafout).} \\ 
   \hline
@@ -270,7 +294,7 @@ Intercept & 13.37 & 10.74 & 11.67 & 12.69 & 14.02 & 15.09 & 16.13 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on growing season length.} \\ 
   \hline
@@ -338,7 +362,7 @@ Intercept & 258.78 & 223.40 & 236.81 & 251.16 & 267.25 & 278.06 & 287.72 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on shoot apical meristem damage.} \\ 
   \hline
@@ -406,7 +430,7 @@ Intercept & -1.68 & -4.65 & -3.49 & -2.25 & -1.03 & -0.13 & 0.68 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:22 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total season growth.} \\ 
   \hline
@@ -475,7 +499,7 @@ Intercept & 22.29 & -1.65 & 5.53 & 15.37 & 29.23 & 39.00 & 45.84 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:23 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on total biomass.} \\ 
   \hline
@@ -550,7 +574,7 @@ Intercept & 51.72 & 30.01 & 37.24 & 46.32 & 57.49 & 65.03 & 70.28 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:40 2020
+% Thu Dec  3 14:58:23 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf toughness.} \\ 
   \hline
@@ -618,7 +642,7 @@ Intercept & 0.38 & 0.19 & 0.27 & 0.34 & 0.42 & 0.48 & 0.54 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:41 2020
+% Thu Dec  3 14:58:23 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf chlorophyll content.} \\ 
   \hline
@@ -694,7 +718,7 @@ Intercept & 30.96 & 24.38 & 26.36 & 29.21 & 32.74 & 35.50 & 37.89 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Tue Dec  1 16:08:41 2020
+% Thu Dec  3 14:58:23 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of model with the effects of false spring treatment (Tx) and chilling duration across species on leaf thickness.} \\ 
   \hline
@@ -772,7 +796,18 @@ Intercept & 133.73 & 114.66 & 120.60 & 128.70 & 138.61 & 147.21 & 154.83 \\
 %\newpage
 
 
-
+{\begin{figure}[H]
+    \centering
+    \begin{turn}{90}
+    \subfloat{{\includegraphics[width=8cm]{IMG_0349.jpg} }}
+    \end{turn}
+    \qquad
+    \begin{turn}{90}
+    \subfloat{{\includegraphics[width=8cm]{IMG_0346.jpg} }}
+    \end{turn}
+    \caption{Evidence of shoot apical meristem damage, quantified as 1.}
+    \label{fig:damage}
+\end{figure}}
 
 
 

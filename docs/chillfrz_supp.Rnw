@@ -12,6 +12,7 @@
 \usepackage{textcomp}
 \usepackage{mdframed}
 \usepackage{longtable}
+\usepackage{blindtext, rotating}
 \usepackage{natbib}
 \bibliographystyle{..//references/styles/gcb.bst}
 %\usepackage[hyphens]{url}
@@ -122,9 +123,29 @@ The $\alpha$ and each of the five $\beta$ coefficients are modeled the same as t
 
 Model estimates for the shoot apical meristem model were modeled on the logit scale (shown in all tables) and were converted to probability percentages in all figures for easier interpretation by following the `divide by four' rule \citep{Gelman2006}.
 
+\section*{Supplemental Materials and Methods: Measuring shoot apical meristem damage}
+
+We monitored shoot apical meristem damage and quantified damage as 0, no damage, or 1, damage. Damage was determined if the shoot apical mersitem terminated growth, if the individual died or if the individual relied on lateral shoots for growth (see Figure \ref{fig:damage} for examples of damage). 
+
 \bibliography{..//references/chillfreeze.bib}
 
 \section*{Supplemental tables and figures}
+
+
+<<label=chillcalc, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+library(xtable)
+
+source("..//analyses/chill_table.R")
+
+colnames(allcalc) <- c("Duration", "Chilling Hours", "Utah Model", "Chill Portions")
+
+print(xtable(allcalc, caption = "Chill units under growth chamber conditions.", label="tab:chillcalc",
+             align = c("l", "l", "r", "r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+      
+@
 
 <<label=simbbmod, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 #setwd("~/Documents/git/chillfreeze/analyses")
@@ -622,7 +643,18 @@ print(xtable(modoutput,
 }
 @
 
-
+{\begin{figure}[H]
+    \centering
+    \begin{turn}{90}
+    \subfloat{{\includegraphics[width=8cm]{IMG_0349.jpg} }}
+    \end{turn}
+    \qquad
+    \begin{turn}{90}
+    \subfloat{{\includegraphics[width=8cm]{IMG_0346.jpg} }}
+    \end{turn}
+    \caption{Evidence of shoot apical meristem damage, quantified as 1.}
+    \label{fig:damage}
+\end{figure}}
 
 
 

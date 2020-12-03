@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{mdframed}
+\usepackage{natbib}
+\usepackage{bibentry}
+\bibliographystyle{..//..//references/styles/gcb.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+\begin{document}
+\nobibliography*
+\noindent \textbf{\Large{False springs coupled with warming winters alter temperate tree growth: Submission Questions}}\\
+\vspace{3ex}
+
+\noindent \textbf{What is the scientific question you are addressing?} \\
+
+\noindent With recent climate change, there is growing interest in false springs and decreasing over-winter chilling, which---combined---could reshape forest plant communities. We assess the effects of false springs and decreased chilling on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment.  \\ % 50 words
+\noindent 
+
+
+\noindent \textbf{What is/are the key finding(s) that answers this question?} \\
+
+\noindent We found that false springs increased tissue damage, decreased leaf toughness and leaf thickness, and slowed budburst to leafout timing---extending the period of maximum freezing risk. Decreased over-winter chilling further increased this period of maximum risk, thus aggravating the detrimental effects of false springs. \\ % 45 words
+
+\noindent \textbf{Why is this work important and timely?}\\
+
+\noindent We found that false springs and reduced chilling impact sapling phenology, growth and tissue traits across eight common forest tree species. This suggests that the combination of increased false springs and warmer winters could be detrimental to forest communities, ultimately affecting important processes such as carbon storage and nutrient cycling. \\ % 50 words
+
+\noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
+
+\noindent Our findings contribute to knowledge on how chilling and freeze events shape tree growth across species, and suggest climate change could deminish or reverse carbon storage in temperate forests. Further, our focus on interactive effects of warmer winters and springs applies widely to a diversity of plant and animal taxa. \\ % 50 words
+
+\noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
+
+\bibentry{Zohner2020}\\
+\bibentry{Chuine2016}\\ 
+\bibentry{Liu2018}\\  
+
+\noindent \textbf{ If you listed non-preferred reviewers, please provide a justification for each.} \\
+
+\noindent N/A \\
+
+\noindent \textbf{ If your manuscript does not conform to author or formatting guidelines (e.g. exceeding word limit), please provide a justification.} \\
+
+\noindent N/A \\
+
+
+\bibliography{..//..//references/chillfreeze.bib}
+
+\end{document}

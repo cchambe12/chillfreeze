@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: submissionquestions_gcb.aux
+The style file: ..//..//references/styles/gcb.bst.bst
+Database file #1: ..//..//references/chillfreeze.bib.bib
+You've used 3 entries,
+            2914 wiz_defined-function locations,
+            631 strings with 6927 characters,
+and the built_in function-call counts, 4024 in all, are:
+= -- 370
+> -- 163
+< -- 0
++ -- 84
+- -- 45
+* -- 360
+:= -- 548
+add.period$ -- 11
+call.type$ -- 3
+change.case$ -- 28
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 312
+empty$ -- 327
+format.name$ -- 54
+if$ -- 837
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 35
+newline$ -- 26
+num.names$ -- 12
+pop$ -- 80
+preamble$ -- 1
+purify$ -- 25
+quote$ -- 0
+skip$ -- 87
+stack$ -- 0
+substring$ -- 411
+swap$ -- 88
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 27
+warning$ -- 0
+while$ -- 28
+width$ -- 0
+write$ -- 54
