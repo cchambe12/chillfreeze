@@ -53,7 +53,7 @@ library(ggplot2)
 
 \begin{document}
 
-\noindent \textbf{\Large{Supplemental materials: False spring damage on temperate tree seedlings is amplified with winter warming}}
+\noindent \textbf{\Large{Supplemental materials: False springs coupled with warming winters alter temperate tree growth}}
 
 \noindent Authors:\\
 C. J. Chamberlain $^{1,2}$ \& E. M. Wolkovich $^{1,2,3}$
