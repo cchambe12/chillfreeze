@@ -45,7 +45,7 @@
 
 \noindent \textbf{What is/are the key finding(s) that answers this question?} \\
 
-\noindent We found that false springs increased tissue damage, decreased leaf toughness and leaf thickness, and slowed budburst to leafout timing---extending the period of maximum freezing risk. Decreased over-winter chilling further increased this period of maximum risk, thus aggravating the detrimental effects of false springs. \\ % 45 words
+\noindent We found that false springs increased tissue damage, decreased leaf toughness and leaf thickness, and slowed budburst to leafout timing---extending the period of maximum freezing risk. Decreased over-winter chilling further increased this period of maximum risk, thus increasing the detrimental effects of false springs. \\ % 45 words
 
 \noindent \textbf{Why is this work important and timely?}\\
 
@@ -53,7 +53,7 @@
 
 \noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
 
-\noindent Our findings contribute to knowledge on how chilling and freeze events shape tree growth across species, and suggest climate change could deminish or reverse carbon storage in temperate forests. Further, our focus on interactive effects of warmer winters and springs applies widely to a diversity of plant and animal taxa. \\ % 50 words
+\noindent Our findings disentangle how winter chilling and spring freeze events shape tree growth across species, and suggest climate change could deminish or reverse carbon storage in temperate forests. Further, our focus on interactive effects of warmer winters and springs applies widely to a diversity of plant and animal taxa. \\ % 50 words
 
 \noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
 
