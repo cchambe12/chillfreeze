@@ -429,13 +429,6 @@ print(xtable(modoutput,
 
 
 @
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=14cm]{..//analyses/figures/totbiomass50and90_brms.pdf} 
-  -\caption{Effects of false spring treatment (Tx), six weeks of chilling and eight weeks of chilling on total aboveground and belowground biomass (g). Larger, blue dots represent overall estimates across all species, while smaller dots are estimates for each species. Dots and thin lines show means and 90\% uncertainty intervals and thicker lines show 50\% uncertainty intervals.}\label{fig:mutotbio}
-  -\end{center}
-  -\end{figure}}
   
 \newpage
 <<label=suppmodtough, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
