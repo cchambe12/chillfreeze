@@ -25,7 +25,7 @@
 \usepackage{lineno}
 \linenumbers
 \usepackage{natbib}
-\bibliographystyle{..//references/styles/gcb.bst}
+\bibliographystyle{..//references/styles/newphyto.bst}
 
 %cross referencing:
 \usepackage{xr}
@@ -55,6 +55,17 @@ $^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, 
 $^{3}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+
+Total word count: 4047 \\
+Introduction: 761 \\
+Methods and Materials: 1035\\
+Results: 888\\
+Discussion: 1363 \\
+
+No. of figures: 5\\
+No of tables: 0 \\
+No. of supporting information files: 14 (Fig S1-S3; Table S1-S11)\\ 
 
 \renewcommand{\thetable}{\arabic{table}}
 \renewcommand{\thefigure}{\arabic{figure}}
@@ -307,8 +318,12 @@ simpdvrchill2 <- format(summary(dvr.mod)$coef[3,1],  nsmall=1)
 simpdvrchillsd2 <- format(summary(dvr.mod)$coef[3,2],  nsmall=1)
 
 @
-\section*{Abstract} %% Word limit is 300
-With warming temperatures, spring phenology (i.e., budburst and leafout) is advancing. Late spring freezes, however, may not advance at the same rate, leading to an increase in freezes that occur after trees initiate budburst---known as false springs---with continued warming. Through shifts in false springs, climate change may reshape forest plant communities, impacting the species and ecosystem services those communities support. Predicting false spring effects requires understanding both how warming shifts spring phenology and how false springs impact plant performance. While generally spring warming advances budburst, increasing research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, decreasing spring freeze tolerance and potentially lead to higher damage from false spring events. Here, we assessed the effects of a reduction in over-winter chilling (generally associated with warming winters) and false spring events on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment. We found that false springs slowed subsequent budburst and leafout---extending the period of greatest risk for freeze damage---and increased damage to the shoot apical meristem, decreased leaf toughness and leaf thickness. Longer chilling accelerated budburst and leafout, even under false spring conditions. Thus chilling compensated for the adverse effects of false springs on phenology. Despite the effects of false springs and chilling on phenology, we did not see any major re-ordering in the sequence of species leafout. Our results suggest climate change will reshape forest communities not through temporal reassembly, but rather through impacts on growth and leaf traits from the coupled effects of false springs and decreased over-winter chilling under future climate change. 
+\section*{Summary} %% Word limit is 200
+\begin{enumerate}
+\item Spring phenology is advancing with warming but late spring freezes may not advance at the same rate, leading to an increase in freezes after trees initiate budburst---known as false springs. Research suggests warming winters may delay budburst through reduced chilling, which may also cause plants to leaf out slower or incompletely, thus decreasing spring freeze tolerance. 
+\item Here, we assessed the effects false springs and reduced over-winter chilling on sapling phenology, growth and tissue traits, across eight temperate tree and shrub species in a lab experiment. 
+\item We found that false springs slowed budburst and leafout---extending the period of greatest risk for freeze damage---and increased damage to the shoot apical meristem, decreased leaf toughness and leaf thickness. Longer chilling accelerated budburst and leafout, even under false spring conditions. Thus chilling compensated for the adverse effects of false springs on phenology. Despite the effects of false springs and chilling on phenology, we did not see any major re-ordering in the sequence of species leafout.
+\item Our results suggest climate change will reshape forest communities not through temporal reassembly, but rather through impacts on growth and leaf traits from the coupled effects of false springs and decreased over-winter chilling under climate change.
 
 %Keep this for letter! \item \textbf{Synthesis:} With climate change and warming temperatures, over-winter chilling is anticipated to decrease and false springs are predicted to increase in certain regions. We found that false springs and reduced chilling both impact sapling phenology, growth and tissue traits across eight common forest tree species. This suggests that the combination of increased false springs and warmer winters could be especially detrimental to forest communities, ultimately affecting important processes such as carbon storage and nutrient cycling. % Alt ending sentence: Thus, the combination of warming across the winter (through reduced chilling) and spring (through increased false springs) could impact plant performance, survival and shape species distributions in the future, ultimately affecting important processes such as carbon uptake and nutrient cycling. 
 
