@@ -7,3 +7,4 @@
 *.synctex.gz
 *-concordance.tex
 *.Rhistory
+*docs/
