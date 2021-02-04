@@ -10,12 +10,12 @@ muplotfx <- function(modelhere, nameforfig, width, height, ylim, xlim, leg1, leg
   pdf(file.path(figpath, paste("", nameforfig, figpathmore, ".pdf", sep="")),
       width = width, height = height)
   par(xpd=FALSE)
-  par(mar=c(5,7,3,10))
+  par(mar=c(5,8,3,10))
   plot(x=NULL,y=NULL, xlim=xlim, yaxt='n', ylim=ylim,
        xlab=xlab, ylab="", main=nameforfig)
-  axis(2, at=1:5, labels=rev(c("False Spring", "Chilling \n(6 weeks)", "Chilling  \n(4 weeks)", "False Spring x \nChilling \n(6 weeks)", "False Spring x \nChilling \n(4 weeks)")), las=1)
+  axis(2, at=1:5, labels=rev(c("Spring Freeze", "Chilling \n(6 weeks)", "Chilling  \n(4 weeks)", "Spring Freeze x \nChilling \n(6 weeks)", "Spring Freeze x \nChilling \n(4 weeks)")), las=1)
   abline(v=0, lty=2, col="darkgrey")
-  rownameshere <- c("b_tx", "b_chill1", "b_chill2", "b_tx:chill1", "b_tx:chill2")
+  rownameshere <- c("tx", "chill1", "chill2", "tx:chill1", "tx:chill2")
   ppeffects <- c("b_tx", "b_chill1", "b_chill2", "b_tx:chill1", "b_tx:chill2") # or 1:4 here...
   for(i in 1:5){#i=1
     pos.y<-(5:1)[i]
