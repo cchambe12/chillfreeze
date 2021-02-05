@@ -228,11 +228,11 @@ bsetrankbytx <- ggplot(bbandgs, aes(y=rankbset, x=txchill, col=species)) +
   geom_line(aes(group=species)) + 
   theme(panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.text.align = 0,
-        legend.position = "none",
+        #legend.position = "none",
         legend.key = element_rect(colour = "transparent", fill = "white"),
         legend.text = element_text(face="italic")) +
   xlab("") + 
-  ylab("Order of budset") +  
+  ylab("Order/rank of budset") +  
   scale_color_manual(name="Species", values=cols,
                      labels=c("ACESAC"="Acer saccharinum",
                               "ALNRUG"="Alnus rugosa",
@@ -287,7 +287,7 @@ g_legend<-function(a.gplot){
 mylegend<-g_legend(bsetbytx)
 
 png("figures/budset_orderandraw.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=12,
+    width=7,
     height=4.5, units="in", res = 350 )
 
 grid.arrange(bsetrankbytx, bsetbytx, mylegend, ncol=3, widths=c(1.2,1.2,0.42))
