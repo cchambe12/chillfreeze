@@ -9,7 +9,7 @@ graphics.off()
 library(RColorBrewer)
 library(rstan)
 library(dplyr)
-library(broom)
+library(broom.mixed)
 
 # Set Working Directory
 setwd("~/Documents/git/chillfreeze/analyses")
@@ -33,18 +33,21 @@ load("stan/totbiomass_brms.Rdata")
 load("stan/biomassrate100_brms.Rdata")
 load("stan/roottoshoot_brms.Rdata")
 
-mod <- thickness.mod
+mod <- totbiomass.mod
 
-mod90<-as.data.frame(tidy(mod, prob=0.9))
-names(mod90)<-c("term", "estimate", "error", "10%", "90%")
-mod50<-as.data.frame(tidy(mod, prob=0.5))
-names(mod50)<-c("term", "estimate", "error", "25%", "75%")
-modfull <- full_join(mod90, mod50)
-mod98<-as.data.frame(tidy(mod, prob=0.98))
-names(mod98)<-c("term", "estimate", "error", "2%", "98%")
-modfull <- full_join(modfull, mod98)
-modfull <- subset(modfull, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
-write.csv(modfull, file="output/thickness_modeloutput.csv", row.names=FALSE)
+mod90<-as.data.frame(tidy(mod, conf.level=0.9, effects = c("fixed", "ran_vals")))
+mod90 <- mod90[,-(1:3)]
+names(mod90)<-c("species", "term", "estimate", "error", "10%", "90%")
+mod50<-as.data.frame(tidy(mod, conf.level=0.5, effects = c("fixed", "ran_vals")))
+mod50 <- mod50[,-(1:3)]
+names(mod50)<-c("species", "term", "estimate", "error", "25%", "75%")
+modfull <- dplyr::full_join(mod90, mod50)
+mod98<-as.data.frame(tidy(mod, conf.level=0.98, effects = c("fixed", "ran_vals")))
+mod98 <- mod98[,-(1:3)]
+names(mod98)<-c("species", "term", "estimate", "error", "2%", "98%")
+modfull <- dplyr::full_join(modfull, mod98)
+modfull <- subset(modfull, select=c("term", "species", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(modfull, file="output/totbiomass_modeloutput.csv", row.names=FALSE)
 
 
 
