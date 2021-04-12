@@ -21,7 +21,7 @@ options(mc.cores = parallel::detectCores())
 setwd("~/Documents/git/chillfreeze/analyses")
 
 ## load the model
-#load("stan/dvr_brms.Rdata")
+load("stan/dvr_brms.Rdata")
 #load("stan/gslengthlo_brms_adjusted.Rdata")
 #load("stan/meristem_brms.Rdata")
 
@@ -31,15 +31,15 @@ setwd("~/Documents/git/chillfreeze/analyses")
 
 
 #load("stan/htfinal_brms.Rdata")
-load("stan/totbiomass_brms.Rdata")
+#load("stan/totbiomass_brms.Rdata")
 #load("stan/roottoshoot_brms.Rdata")
 
 #### Now for mu plots based of bb_analysis/models_stan_plotting.R ###
 figpath <- "figures"
-figpathmore <- "totbiomass50and90_brms" ### change based on model
-modelhere <- totbiomass.mod
+figpathmore <- "dvr50and90_brms" ### change based on model
+modelhere <- dvr.mod
 
-#xlab <- "Model estimate of change in \nduration of vegetative risk (days)"
+xlab <- "Model estimate of change in \nduration of vegetative risk (days)"
 #xlab <- "Model estimate of change in growing season length (days)"
 #xlab <- "Model estimate of change in shoot apical meristem damage"
 
@@ -49,7 +49,7 @@ modelhere <- totbiomass.mod
 #xlab <- expression(paste("Model estimate of change in leaf thickness (", mu, "m)", sep="")) ## change based on model
 
 #xlab <- "Model estimate of change in shoot growth (cm)"
-xlab <- "Model estimate of change in total biomass (g)"
+#xlab <- "Model estimate of change in total biomass (g)"
 #xlab <- "Model estimate of change in belowground \nto aboveground biomass ratio (g)"
 
 if(FALSE){
