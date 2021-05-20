@@ -42,6 +42,9 @@ growthchamber <- ggplot(df, aes(x=factor(df$time,levels = c("8:00", "9:00", "10:
   #annotate("text", x=8, y=-4.3, label = expression(paste(italic("Fagus sylvatica"),  " (Lenz et al., 2016)"))) +
   xlab("Time (hr)") + ylab("Temperature (°C)")
 
-quartz()
+pdf(file.path("~/Documents/git/chillfreeze/analyses/figures/", "growthchamber.pdf"),
+    width = 8, height = 6, onefile=FALSE)
 growthchamber
+dev.off()
+
 
